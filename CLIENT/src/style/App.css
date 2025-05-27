@@ -1,0 +1,192 @@
+* {
+  font-weight: bold;
+}
+
+body {
+  overflow: auto;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 8vh;
+  background-color: #3390ad;
+  padding: 0 2vw;
+  z-index: 1000;
+}
+
+.header ul {
+  display: flex;
+  list-style-type: none;
+  gap: 2vw;
+  padding: 0;
+  margin: 0;
+}
+
+.header ul a {
+  font-size: 1.5vw;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: #1b3c60;
+}
+
+.header ul a:hover {
+  color: rgb(56, 56, 56);
+}
+
+.userName {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: #1b3c60;
+}
+
+.header .left {
+  display: flex;
+  gap: 2vw;
+}
+
+.header .right {
+  display: flex;
+  /* position: absolute; */
+  right: 2vw;
+  gap: 2vw;
+}
+
+.container {
+  margin-top: 13vh;
+}
+
+.addBtn {
+  background-color: rgba(255, 255, 255, 0);
+  margin-left: 1vw;
+}
+
+.addBtn:hover {
+  border: none;
+  font-weight: bolder;
+}
+
+.control {
+  width: 58vw;
+  right: 21.4vw;
+  position: fixed;
+  top: 8vh;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.control button,
+.control select,
+.control input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.2vw;
+}
+
+.control button:hover,
+.control select:hover,
+.control input:hover {
+  background-color: #f0f0f0;
+  border-color: #aaa;
+}
+
+.control input {
+  flex: 1;
+  min-width: 150px;
+
+}
+
+.info {
+  position: fixed;
+  top: 8vh;
+  left: 0vw;
+  width: 20vw;
+  background-color: #e0e0e0;
+  border-right: black solid 1px;
+  height: 92vh;
+  padding: 1vh 1vw 1vw 1vw;
+  text-align: start;
+}
+
+.info button:hover {
+  border: 1px solid black;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+input {
+  flex: 1;
+  min-width: 150px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.2vw;
+}
+
+.todo-checkbox {
+  flex: 1;
+  min-width: 30px;
+  padding: 8px 12px;
+  font-size: 14px;
+  margin: 0.2vw;
+}
+
+.info-title {
+  justify-content: center;
+  color: #0097b2;
+  font-weight: bold;
+  position: relative;
+  text-align: start;
+  font-family: 'Kaushan Script', cursive;
+  z-index: 2;
+  margin-top: 15vh;
+  font-size: 1.75vw;
+}
