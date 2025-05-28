@@ -1,12 +1,111 @@
-import React from 'react';
 import Programmer from './Programmer';
-function Programmers(props) {
-    const progremmer = props;
+import React, { useState, useEffect, useContext } from 'react';
+import { CurrentUser } from './App';
+import { fetchData } from './fetchData';
+function Programmers() {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [sortBy, setSortBy] = useState('name');
+    const [filterBy, setFilterBy] = useState('all');
+    const [programmers, setProgrammers] = useState([]); // This will be populated from API
+
+    // TODO: Implement these functions
+    // - fetchProgrammers() - fetch programmers from API
+    // - handleSearch() - filter programmers by search term
+    // - handleSort() - sort programmers by selected criteria
+    // - handleFilter() - filter programmers by experience/rating
+
+    const [projects, setProjects] = useState([]);
+        const [displayData, setDisplayData] = useState("programmers");
+        const [isChange, setIsChange] = useState(0);
+        const { currentUser } = useContext(CurrentUser);
+        const [amountPerPage, setAmountPerPage] = useState(10);
+        const [endPagesLoaded, setEndPagesLoaded] = useState(0);
+        const [page, setPage] = useState(1);
+    
+    
+        useEffect(() => {
+            if (amountPerPage[page] && isChange == 0) {
+                return;
+            }
+            setIsChange(0);
+            fetchData({
+                type: "users",
+                params: { _page: page, _per_page: amountPerPage, role: "programmer" },
+                method: "GET",
+                onSuccess: (data) => {
+                    setProjects(data);
+                    setEndPagesLoaded(photos.next == null ? 1 : 0);
+                },
+                onError: (err) => setError(`Failed to fetch programers: ${err}`),
+            });
+        }, [currentUser, isChange, page, amountPerPage]);
+
     return (
-        <>
-            <h2>Programmers page</h2>
-        </>
-    )
+        <div className="programmers-container">
+            {/* Search and Filter Section */}
+            <div className="programmers-header">
+                <h1>Developers Community</h1>
+                <p className="subtitle">Discover talented developers and their amazing projects</p>
+
+                <div className="controls-section">
+                    <div className="search-box">
+                        <input
+                            type="text"
+                            placeholder="Search developers..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="search-input"
+                        />
+                        <button className="search-btn">🔍</button>
+                    </div>
+
+                    <div className="filters">
+                        <select
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value)}
+                            className="filter-select"
+                        >
+                            <option value="name">Sort by Name</option>
+                            <option value="rating">Sort by Rating</option>
+                            <option value="experience">Sort by Experience</option>
+                            <option value="projects">Sort by Projects</option>
+                        </select>
+
+                        <select
+                            value={filterBy}
+                            onChange={(e) => setFilterBy(e.target.value)}
+                            className="filter-select"
+                        >
+                            <option value="all">All Experience</option>
+                            <option value="junior">Junior (0-2 years)</option>
+                            <option value="mid">Mid Level (3-5 years)</option>
+                            <option value="senior">Senior (6+ years)</option>
+                        </select>
+
+                        <div className="rating-filter">
+                            <label>Min Rating:</label>
+                            <select className="filter-select">
+                                <option value="0">All Ratings</option>
+                                <option value="4">4+ Stars</option>
+                                <option value="4.5">4.5+ Stars</option>
+                                <option value="4.8">4.8+ Stars</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Programmers Grid */}
+            <div className="programmers-grid">
+                {programmers.map(programmer => (
+                    <Programmer
+                        key={programmer.id}
+                        programmerData={programmer}
+                    />
+                ))}
+            </div>
+        </div>
+    );
 }
 
 export default Programmers;

@@ -1,0 +1,212 @@
+.project-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+    border-radius: 20px 20px 0 0;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.project-header {
+    margin-bottom: 1.5rem;
+}
+
+.project-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.project-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-around;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f6f9fc, #e9f4ff);
+    border-radius: 15px;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.stat:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #e9f4ff, #dbeafe);
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #4f46e5;
+    margin-bottom: 0.2rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.project-languages {
+    margin-bottom: 2rem;
+}
+
+.project-languages h4 {
+    font-size: 1rem;
+    color: #374151;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.languages-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.language-tag {
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.language-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.project-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+.btn-admin {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-admin:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-card {
+        padding: 1.5rem;
+    }
+    
+    .project-stats {
+        gap: 1rem;
+    }
+    
+    .stat {
+        padding: 0.8rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .project-actions {
+        flex-direction: column;
+    }
+    
+    .btn-primary, .btn-admin {
+        flex: none;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-stats {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .languages-list {
+        justify-content: center;
+    }
+    
+    .language-tag {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+}

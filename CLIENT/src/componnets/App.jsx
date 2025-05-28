@@ -1,12 +1,13 @@
 import { useState, createContext, useMemo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './Navigation.jsx';
-import LogIn from './LogIn';
-import Register from './Register';
-import Home from './Home';
-import Programmers from './Programmers';
+import LogIn from './LogIn.jsx';
+import Register from './Register.jsx';
+import Home from './Home.jsx';
+import Programmers from './Programmers.jsx';
 import Jobs from './Jobs.jsx';
-import ErrorPage from './ErrorPage'
+import Projects from './Projects.jsx';
+import ErrorPage from './ErrorPage.jsx'
 import '../style/App.css'
 
 export const CurrentUser = createContext([]);
@@ -26,12 +27,14 @@ function App() {
                     <Route path="/home" element={<Home />} />
                     <Route path="/login" element={<LogIn />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path='/Programmers' element={<Programmers />} />
+                    <Route path='/programmers' element={<Programmers />} />
                     <Route path='/jobs' element={<Jobs />} />
-                    <Route path='/userName'>
+                    <Route path='/projects' element={<Projects />} />
+                    <Route path='/:gitName'>
                         <Route path="home" element={<Home />} />
-                        <Route path='Programmers' element={<Programmers />} />
+                        <Route path='programmers' element={<Programmers />} />
                         <Route path='jobs' element={<Jobs />} />
+                        <Route path='projects' element={< Projects />} />
                     </Route>
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>

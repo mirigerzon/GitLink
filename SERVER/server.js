@@ -17,11 +17,11 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-app.use(verifyToken);
+// app.use(verifyToken);
 app.use('/', getRoutes);
-app.use('/', postRoutes);
-app.use('/', putRoutes);
-app.use('/', deleteRoutes);
+// app.use('/', postRoutes);
+// app.use('/', putRoutes);
+// app.use('/', deleteRoutes);
 
 app.listen(PORT, () => {
   console.log(`The server runs on port: ${PORT}`);

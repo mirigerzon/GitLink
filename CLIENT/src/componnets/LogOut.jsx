@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { CurrentUser } from './App';
 import { fetchData } from './fetchData';
 
-export function useLogOut() {
+function logOut() {
     const { setCurrentUser } = useContext(CurrentUser);
     const navigate = useNavigate();
     const logOut = () => {
@@ -24,3 +24,4 @@ export function useLogOut() {
     };
     return logOut;
 }
+export default logOut;

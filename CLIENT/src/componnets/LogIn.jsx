@@ -1,29 +1,33 @@
-import { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { fetchData } from './fetchData.jsx';
-import { CurrentUser } from './App';
-import '../style/LogIn.css';
+import { CurrentUser } from './App.jsx';
 import Cookies from 'js-cookie';
+import '../style/Login.css';
 
-function LogIn() {
+function Login() {
     const { register, handleSubmit, reset } = useForm();
     const { setCurrentUser } = useContext(CurrentUser);
-    const [responsText, setResponstText] = useState("Fill the form and click the login button");
+    const [responseText, setResponseText] = useState("Enter your credentials to access your account");
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
+        setIsLoading(true);
         const userDetails = {
             name: data.username,
             password: data.password,
         };
-        await checkIfExsist(userDetails);
+        await checkIfExists(userDetails);
         reset();
+        setIsLoading(false);
     };
 
-    async function checkIfExsist(userDetails) {
+    async function checkIfExists(userDetails) {
         const username = userDetails.name;
         const password = userDetails.password;
+
         await fetchData({
             type: "login",
             method: "POST",
@@ -36,45 +40,69 @@ function LogIn() {
                         sameSite: 'Strict',
                     });
                     localStorage.setItem("currentUser", JSON.stringify(res.user));
-                    setResponstText("Login successful");
+                    setResponseText("Login successful! Redirecting...");
                     setCurrentUser(res.user);
                     navigate(`/users/${res.user.id}/home`);
                 } else {
-                    setResponstText('Incorrect username or password');
+                    setResponseText('Incorrect username or password');
                 }
             },
             onError: () => {
-                setResponstText('ERROR');
+                setResponseText('Connection error. Please try again.');
             },
         });
-        setTimeout(() => setResponstText("Fill the form and click the login button"), 2000);
+
+        setTimeout(() => setResponseText("Enter your credentials to access your account"), 3000);
     }
 
     return (
-        <>
-            <div className="back-ground-img">
-                <h2>Login</h2>
-                <div className="entryContainer">
-                    <form onSubmit={handleSubmit(onSubmit)} className="entryForm">
+        <div className="login-container">
+            <div className="login-card">
+                <div className="login-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your GitLink account</p>
+                </div>
+
+                <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+                    <div className="form-group">
                         <input
                             type="text"
-                            placeholder="Name"
-                            required
+                            placeholder="GitHub Username"
+                            className="form-input"
                             {...register("username", { required: true })}
+                            required
                         />
+                    </div>
+
+                    <div className="form-group">
                         <input
                             type="password"
                             placeholder="Password"
-                            required
+                            className="form-input"
                             {...register("password", { required: true })}
+                            required
                         />
-                        <button type="submit">log in</button>
-                        <h4>{responsText}</h4>
-                    </form>
+                    </div>
+
+                    <button
+                        type="submit"
+                        className={`login-btn ${isLoading ? 'loading' : ''}`}
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Signing In...' : 'Sign In'}
+                    </button>
+
+                    <div className="response-message">
+                        {responseText}
+                    </div>
+                </form>
+
+                <div className="login-footer">
+                    <p>Don't have an account? <a href="/register">Register here</a></p>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
-export default LogIn;
+export default Login;
