@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/ErrorPage.css';
 
@@ -15,15 +14,15 @@ function ErrorPage() {
                 <div className="error-icon">
                     <span className="error-number">404</span>
                 </div>
-                
+
                 <h1 className="error-title">Oops! Something went wrong</h1>
-                
+
                 <p className="error-message">
                     The page you're looking for doesn't exist or an unexpected error occurred.
                 </p>
-                
+
                 <div className="error-actions">
-                    <button 
+                    <button
                         onClick={handleGoBack}
                         className="back-btn"
                     >
@@ -31,7 +30,7 @@ function ErrorPage() {
                     </button>
                 </div>
             </div>
-            
+
             <div className="error-animation">
                 <div className="floating-shapes">
                     <div className="shape shape-1"></div>

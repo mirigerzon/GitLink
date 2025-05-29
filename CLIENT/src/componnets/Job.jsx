@@ -3,7 +3,7 @@ import '../style/Job.css';
 
 function Job({ jobData }) {
     // jobData should contain: companyName, logo, title, requirements, experienceYears, programmingLanguages
-    
+
     const handleApply = () => {
         // TODO: Implement job application logic
         console.log('Apply to job:', jobData.title);
@@ -25,19 +25,19 @@ function Job({ jobData }) {
                     <p className="company-name">{jobData.companyName}</p>
                 </div>
             </div>
-            
+
             <div className="job-content">
                 <div className="job-requirements">
                     <h4>Requirements</h4>
                     <p>{jobData.requirements}</p>
                 </div>
-                
+
                 <div className="job-details">
                     <div className="experience-badge">
                         <span className="detail-label">Experience:</span>
                         <span className="detail-value">{jobData.experienceYears} years</span>
                     </div>
-                    
+
                     <div className="languages-section">
                         <span className="detail-label">Technologies:</span>
                         <div className="languages-tags">
@@ -48,7 +48,7 @@ function Job({ jobData }) {
                     </div>
                 </div>
             </div>
-            
+
             <div className="job-actions">
                 <button className="apply-btn" onClick={handleApply}>
                     Apply Now

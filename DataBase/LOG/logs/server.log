@@ -20,3 +20,90 @@
 [2025-05-28T17:34:07.818Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
 [2025-05-28T17:34:08.081Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
 [2025-05-28T17:34:08.092Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:27:35.348Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:27:35.358Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:37:08.807Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:37:08.816Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:37:13.901Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:37:13.913Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:51:13.271Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:51:13.277Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:51:21.298Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:51:21.304Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:51:31.146Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:51:31.152Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:51:43.941Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:51:43.950Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:55:46.382Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T18:55:46.387Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T19:00:17.103Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T19:00:17.109Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T19:00:17.704Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T19:00:17.713Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T19:00:18.473Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T19:00:18.481Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T19:01:18.622Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-28T19:01:18.628Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T08:06:13.205Z] [ERROR] ERROR fetching from login - Table 'gitlink.login' doesn't exist
+[2025-05-29T08:06:13.336Z] [ERROR] ERROR fetching from favicon.ico - Unknown database 'favicon'
+[2025-05-29T08:15:40.440Z] [WARN] Failed login attempt for username=undefined
+[2025-05-29T08:16:09.090Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:16:17.896Z] [WARN] Refresh token missing in request
+[2025-05-29T08:16:47.456Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:18:31.611Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:19:12.495Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:21:51.590Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:24:57.757Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:29:18.301Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:29:24.497Z] [WARN] Refresh token missing in request
+[2025-05-29T08:31:17.855Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:31:52.467Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:31:52.472Z] [WARN] Refresh token missing in request
+[2025-05-29T08:33:44.154Z] [ERROR] Login error for username=aliceGH - Unknown column 'aliceGH' in 'where clause'
+[2025-05-29T08:36:56.328Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:36:56.335Z] [WARN] Refresh token missing in request
+[2025-05-29T08:41:22.077Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:41:22.082Z] [WARN] Refresh token missing in request
+[2025-05-29T08:43:05.757Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:43:05.767Z] [WARN] Refresh token missing in request
+[2025-05-29T08:44:06.920Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:44:06.926Z] [WARN] Refresh token missing in request
+[2025-05-29T08:46:23.779Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:46:23.783Z] [WARN] Refresh token missing in request
+[2025-05-29T08:48:08.386Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:48:08.395Z] [WARN] Refresh token missing in request
+[2025-05-29T08:49:12.502Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T08:49:12.507Z] [WARN] Refresh token missing in request
+[2025-05-29T08:49:44.368Z] [INFO] Fetched from users with conditions=[]
+[2025-05-29T08:50:12.533Z] [INFO] Fetched from users with conditions=[]
+[2025-05-29T08:51:14.696Z] [INFO] Fetched from users with conditions=[]
+[2025-05-29T08:51:47.002Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T08:53:01.520Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T08:53:02.452Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T08:53:51.447Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T08:54:32.505Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T08:55:44.101Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T09:04:22.304Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:13:29.916Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:13:29.925Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:13:29.926Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:13:29.935Z] [WARN] Refresh token missing in request
+[2025-05-29T09:13:29.941Z] [WARN] Refresh token missing in request
+[2025-05-29T09:14:00.964Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:14:00.970Z] [WARN] Refresh token missing in request
+[2025-05-29T09:15:41.837Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:15:41.843Z] [WARN] Refresh token missing in request
+[2025-05-29T09:16:58.556Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:16:58.561Z] [WARN] Refresh token missing in request
+[2025-05-29T09:17:25.049Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:17:25.055Z] [WARN] Refresh token missing in request
+[2025-05-29T09:17:45.385Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:17:45.390Z] [WARN] Refresh token missing in request
+[2025-05-29T09:18:27.602Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:18:27.608Z] [WARN] Refresh token missing in request
+[2025-05-29T09:18:53.447Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:18:53.452Z] [WARN] Refresh token missing in request
+[2025-05-29T09:22:08.157Z] [WARN] Failed login attempt for username=aliceGH
+[2025-05-29T09:22:08.163Z] [WARN] Refresh token missing in request
+[2025-05-29T09:25:25.107Z] [ERROR] Login error for username=undefined - username is not defined
+[2025-05-29T09:28:35.152Z] [INFO] User logged in successfully: git_name=aliceGH, ip=::1

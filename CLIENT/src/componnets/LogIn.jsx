@@ -16,7 +16,7 @@ function Login() {
     const onSubmit = async (data) => {
         setIsLoading(true);
         const userDetails = {
-            name: data.username,
+            git_name: data.name,
             password: data.password,
         };
         await checkIfExists(userDetails);
@@ -25,13 +25,13 @@ function Login() {
     };
 
     async function checkIfExists(userDetails) {
-        const username = userDetails.name;
+        const git_name = userDetails.git_name;
         const password = userDetails.password;
 
         await fetchData({
             type: "login",
             method: "POST",
-            body: { username, password },
+            body: { git_name, password },
             onSuccess: (res) => {
                 if (res && res.token) {
                     Cookies.set('accessToken', res.token, {
@@ -42,7 +42,7 @@ function Login() {
                     localStorage.setItem("currentUser", JSON.stringify(res.user));
                     setResponseText("Login successful! Redirecting...");
                     setCurrentUser(res.user);
-                    navigate(`/users/${res.user.id}/home`);
+                    navigate(`/${git_name}/home`);
                 } else {
                     setResponseText('Incorrect username or password');
                 }
@@ -67,9 +67,11 @@ function Login() {
                     <div className="form-group">
                         <input
                             type="text"
-                            placeholder="GitHub Username"
+                            placeholder="Git name"
                             className="form-input"
-                            {...register("username", { required: true })}
+                            // delete this 
+                            value="aliceGH"
+                            {...register("name", { required: true })}
                             required
                         />
                     </div>
@@ -79,6 +81,8 @@ function Login() {
                             type="password"
                             placeholder="Password"
                             className="form-input"
+                            // delete this 
+                            value="user1"
                             {...register("password", { required: true })}
                             required
                         />

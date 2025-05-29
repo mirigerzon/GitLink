@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 // app.use(verifyToken);
 app.use('/', getRoutes);
-// app.use('/', postRoutes);
+app.use('/', postRoutes);
 // app.use('/', putRoutes);
 // app.use('/', deleteRoutes);
 

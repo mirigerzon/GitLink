@@ -19,9 +19,9 @@ const updateItem = async (table, data, conditions = []) => {
   return await dal.PUT(table, data, conditions);
 };
 
-const verifyLogin = async (username, password) => {
+const verifyLogin = async (git_name, password) => {
   const users = await dal.GET('users', [
-    { field: 'username', value: username }
+    { field: 'git_name', value: git_name }
   ]);
   if (!users || users.length === 0)
     return null;
@@ -38,20 +38,20 @@ const verifyLogin = async (username, password) => {
 };
 
 const registerNewUser = async (userData) => {
-  const { username, email, phone, name, password } = userData;
+  const { git_name, email, phone, name, password } = userData;
   const existingUsers = await dal.GET('users', [
-    { field: 'username', value: username }
+    { field: 'git_name', value: git_name }
   ]);
-  if (existingUsers.length > 0) throw new Error('Username already exists');
+  if (existingUsers.length > 0) throw new Error('git_name already exists');
   const hashedPassword = await hashPassword(password);
   const newUser = await dal.POST('users', {
-    username, name, email, phone
+    git_name, name, email, phone
   });
   await dal.POST('passwords', {
     user_id: newUser.insertId,
     hashed_password: hashedPassword
   });
-  return { id: newUser.insertId, username, name, email, phone };
+  return { id: newUser.insertId, git_name, name, email, phone };
 };
 
 const hashPassword = async (plainPassword) => {

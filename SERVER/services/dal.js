@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 });
 
 const GET = async (table, conditions = []) => {
-  let query = `SELECT * FROM ${table} WHERE is_active = 1`;
+  let query = `SELECT * FROM gitlink.${table} WHERE is_active = 1`;
   const values = [];
   if (conditions.length > 0) {
     const whereClauses = conditions.map(cond => {
@@ -21,6 +21,7 @@ const GET = async (table, conditions = []) => {
     });
     query += ` AND ${whereClauses.join(' AND ')}`;
   }
+
   const [results] = await pool.query(query, values);
   return results;
 };

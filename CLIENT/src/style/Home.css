@@ -9,7 +9,7 @@
 }
 
 .welcome-section {
-    padding: 4rem 2rem;
+    padding: 1rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +21,7 @@
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-radius: 32px;
-    padding: 4rem 3rem;
+    padding: 2rem 3rem;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     animation: fadeInUp 1s ease-out;
@@ -46,7 +46,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 1.5rem;
     line-height: 1.2;
     animation: slideInLeft 1s ease-out 0.3s both;
 }
@@ -66,7 +65,6 @@
 .welcome-subtitle {
     font-size: 1.5rem;
     color: #4a5568;
-    margin-bottom: 3rem;
     line-height: 1.6;
     opacity: 0.9;
     animation: slideInRight 1s ease-out 0.6s both;
@@ -88,7 +86,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    margin-top: 3rem;
 }
 
 .feature-card {
@@ -189,7 +186,7 @@
     }
 
     .welcome-title {
-        font-size: 3.5rem;
+        font-size: 2.5rem;
     }
 
     .welcome-subtitle {
@@ -204,7 +201,7 @@
 
 @media (max-width: 768px) {
     .welcome-section {
-        padding: 2rem 1rem;
+        padding: 1rem 1rem;
         min-height: 70vh;
     }
 
