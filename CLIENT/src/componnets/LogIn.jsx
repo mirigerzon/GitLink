@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { fetchData } from './fetchData.jsx';
+import { fetchData } from './FetchData.jsx';
 import { CurrentUser } from './App.jsx';
 import Cookies from 'js-cookie';
 import '../style/Login.css';
@@ -69,8 +69,6 @@ function Login() {
                             type="text"
                             placeholder="Git name"
                             className="form-input"
-                            // delete this 
-                            value="aliceGH"
                             {...register("name", { required: true })}
                             required
                         />
@@ -81,8 +79,6 @@ function Login() {
                             type="password"
                             placeholder="Password"
                             className="form-input"
-                            // delete this 
-                            value="user1"
                             {...register("password", { required: true })}
                             required
                         />

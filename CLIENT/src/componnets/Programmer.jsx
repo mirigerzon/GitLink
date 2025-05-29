@@ -3,8 +3,7 @@ function Programmer({ programmerData }) {
     // TODO: Implement these functions
     // - handleShowProfile() - navigate to programmer's full profile
     // - handleShowProjects() - navigate to programmer's projects
-    // - generateStars() - display rating as stars
-
+    
     const generateStars = (rating) => {
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 !== 0;

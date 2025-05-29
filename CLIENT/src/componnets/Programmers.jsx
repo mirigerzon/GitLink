@@ -1,48 +1,52 @@
 import Programmer from './Programmer';
 import React, { useState, useEffect, useContext } from 'react';
 import { CurrentUser } from './App';
-import { fetchData } from './fetchData';
+import { fetchData } from './FetchData';
 function Programmers() {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState('name');
     const [filterBy, setFilterBy] = useState('all');
     const [programmers, setProgrammers] = useState([]); // This will be populated from API
 
+    const [displayData, setDisplayData] = useState("programmers");
+    const [isChange, setIsChange] = useState(0);
+    const { currentUser } = useContext(CurrentUser);
+    const [error, setError] = useState(null);
+
     // TODO: Implement these functions
-    // - fetchProgrammers() - fetch programmers from API
     // - handleSearch() - filter programmers by search term
     // - handleSort() - sort programmers by selected criteria
     // - handleFilter() - filter programmers by experience/rating
+    
+    useEffect(() => {
+        setIsChange(0);
+        fetchData({
+            role: currentUser.role,
+            type: "users",
+            method: "GET",
+            onSuccess: (data) => {
+                setProjects(data);
+            },
+            onError: (err) => setError(`Failed to fetch programers: ${err}`),
+        });
+    }, [currentUser, isChange,]);
 
-    const [projects, setProjects] = useState([]);
-        const [displayData, setDisplayData] = useState("programmers");
-        const [isChange, setIsChange] = useState(0);
-        const { currentUser } = useContext(CurrentUser);
-        const [amountPerPage, setAmountPerPage] = useState(10);
-        const [endPagesLoaded, setEndPagesLoaded] = useState(0);
-        const [page, setPage] = useState(1);
-    
-    
-        useEffect(() => {
-            if (amountPerPage[page] && isChange == 0) {
-                return;
-            }
-            setIsChange(0);
-            fetchData({
-                type: "users",
-                params: { _page: page, _per_page: amountPerPage, role: "programmer" },
-                method: "GET",
-                onSuccess: (data) => {
-                    setProjects(data);
-                    setEndPagesLoaded(photos.next == null ? 1 : 0);
-                },
-                onError: (err) => setError(`Failed to fetch programers: ${err}`),
-            });
-        }, [currentUser, isChange, page, amountPerPage]);
+    // useEffect(() => {
+    //     setIsChange(0);
+    //     fetchData({
+    //         role: currentUser.role,
+    //         type: "users",
+    //         params: { role: "programmer" },
+    //         method: "GET",
+    //         onSuccess: (data) => {
+    //             setProjects(data);
+    //         },
+    //         onError: (err) => setError(`Failed to fetch programers: ${err}`),
+    //     });
+    // }, [currentUser, isChange,]);
 
     return (
         <div className="programmers-container">
-            {/* Search and Filter Section */}
             <div className="programmers-header">
                 <h1>Developers Community</h1>
                 <p className="subtitle">Discover talented developers and their amazing projects</p>
@@ -94,8 +98,6 @@ function Programmers() {
                     </div>
                 </div>
             </div>
-
-            {/* Programmers Grid */}
             <div className="programmers-grid">
                 {programmers.map(programmer => (
                     <Programmer

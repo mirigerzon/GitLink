@@ -31,28 +31,36 @@ const verifyLogin = async (git_name, password) => {
   ]);
   if (!hashedPasswords || hashedPasswords.length === 0) return null;
   const hashedPassword = hashedPasswords[0].hashed_password;
-  const isMatch = await bcrypt.compare( password,hashedPassword);
+  const isMatch = await bcrypt.compare(password, hashedPassword);
   if (!isMatch) return null;
   delete user.hashed_password;
   return user;
 };
 
 const registerNewUser = async (userData) => {
-  const { git_name, email, phone, name, password } = userData;
+  const { git_name, email, phone, username, password, experience, languages, role } = userData;
+
   const existingUsers = await dal.GET('users', [
     { field: 'git_name', value: git_name }
   ]);
   if (existingUsers.length > 0) throw new Error('git_name already exists');
+
   const hashedPassword = await hashPassword(password);
+
   const newUser = await dal.POST('users', {
-    git_name, name, email, phone
+    git_name, username, email, phone, experience, languages, role
   });
+
   await dal.POST('passwords', {
     user_id: newUser.insertId,
     hashed_password: hashedPassword
   });
-  return { id: newUser.insertId, git_name, name, email, phone };
+
+  return {
+    id: newUser.insertId, git_name, username, email, phone, experience, languages, role
+  };
 };
+
 
 const hashPassword = async (plainPassword) => {
   const saltRounds = 10;

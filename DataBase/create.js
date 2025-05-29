@@ -24,8 +24,8 @@ async function createTables(connection) {
         CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
             is_active BOOLEAN DEFAULT TRUE,
-            username VARCHAR(100) UNIQUE NOT NULL,
-            git_name VARCHAR(100) NOT NULL,
+            username VARCHAR(100) NOT NULL,
+            git_name VARCHAR(100) UNIQUE NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
             phone INT NOT NULL,
             experience INT NOT NULL,

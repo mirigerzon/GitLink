@@ -107,3 +107,180 @@
 [2025-05-29T09:22:08.163Z] [WARN] Refresh token missing in request
 [2025-05-29T09:25:25.107Z] [ERROR] Login error for username=undefined - username is not defined
 [2025-05-29T09:28:35.152Z] [INFO] User logged in successfully: git_name=aliceGH, ip=::1
+[2025-05-29T09:35:52.061Z] [ERROR] Login error for git_name=aliceGH - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:36:58.854Z] [ERROR] Login error for git_name=aliceGH - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:37:44.511Z] [ERROR] Login error for git_name=aliceGH - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:38:19.451Z] [ERROR] Login error for git_name=aliceGH - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:41:14.206Z] [ERROR] Login error for git_name=aliceGH - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:41:14.223Z] [ERROR] Login error for git_name=aliceGH - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:41:47.713Z] [ERROR] Login error for git_name=aliceGH - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:42:14.332Z] [ERROR] ERROR fetching from users - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:43:22.814Z] [ERROR] ERROR fetching from users - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-05-29T09:44:57.367Z] [INFO] User logged in successfully: git_name=aliceGH, ip=::1
+[2025-05-29T09:45:01.558Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T09:45:01.572Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T09:50:47.227Z] [INFO] User logged out
+[2025-05-29T09:50:54.275Z] [INFO] User logged in successfully: git_name=aliceGH, ip=::1
+[2025-05-29T09:51:09.067Z] [INFO] User logged out
+[2025-05-29T10:03:59.425Z] [ERROR] Registration error for git_name=mirigerzon - Field 'experience' doesn't have a default value
+[2025-05-29T10:16:11.336Z] [ERROR] Registration error for git_name=mirigerzon - Column 'experience' cannot be null
+[2025-05-29T10:16:51.608Z] [ERROR] Registration error for git_name=mirigerzon - Column 'experience' cannot be null
+[2025-05-29T10:19:09.364Z] [ERROR] Registration error for git_name=mirigerzon - Column 'experience' cannot be null
+[2025-05-29T10:19:09.664Z] [ERROR] Registration error for git_name=mirigerzon - Incorrect integer value: '' for column 'experience' at row 1
+[2025-05-29T10:21:29.350Z] [INFO] User registered successfully: git_name=mirigerzon, ip=::1
+[2025-05-29T10:28:35.622Z] [INFO] User logged out
+[2025-05-29T10:29:24.930Z] [WARN] Failed login attempt for git_name=mirigerzon
+[2025-05-29T10:29:25.003Z] [WARN] Refresh token missing in request
+[2025-05-29T10:32:08.496Z] [INFO] User registered successfully: git_name=mirigerzon, ip=::1
+[2025-05-29T10:32:32.785Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T10:32:32.803Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:11:57.142Z] [INFO] User logged in successfully: git_name=mirigerzon, ip=::1
+[2025-05-29T11:12:00.645Z] [INFO] User logged out
+[2025-05-29T11:12:08.446Z] [INFO] User logged in successfully: git_name=mirigerzon, ip=::1
+[2025-05-29T11:12:17.358Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:12:17.368Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:23:22.687Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:23:22.692Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:23:28.376Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:23:28.383Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:23:39.937Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:23:39.941Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:23:42.926Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:23:42.931Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:24:07.840Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:24:07.847Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:25:54.935Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:25:54.940Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:26:16.931Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:26:16.936Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:26:17.927Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:26:17.932Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:26:26.927Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:26:26.932Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:27:24.933Z] [INFO] Access token refreshed for userId=4, ip=::1
+[2025-05-29T11:27:24.935Z] [INFO] Access token refreshed for userId=4, ip=::1
+[2025-05-29T11:27:24.942Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:27:24.946Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:29:28.940Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:29:28.945Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:29:29.941Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:29:29.947Z] [ERROR] ERROR fetching from users - Unknown column '_page' in 'where clause'
+[2025-05-29T11:31:29.927Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:31:29.931Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:31:34.932Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:31:34.936Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:31:36.920Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:31:36.923Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:31:38.918Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:31:38.921Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:32:39.946Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:32:39.950Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:33:12.542Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:33:12.550Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:34:40.941Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:34:40.945Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:34:45.926Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:34:45.929Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:34:58.926Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:34:58.929Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:35:03.927Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:35:03.931Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:36:18.934Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:36:18.940Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:36:22.929Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:36:22.932Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:36:28.925Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:36:28.929Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:36:31.920Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:36:31.925Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:39:41.518Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T11:39:41.524Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:02:26.979Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:02:26.990Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:02:37.943Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:02:37.949Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:02:38.936Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:02:38.940Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:05:16.619Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:05:16.624Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:05:23.282Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:05:23.295Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:07:29.517Z] [INFO] User logged out
+[2025-05-29T12:07:44.484Z] [INFO] User logged in successfully: git_name=mirigerzon, ip=::1
+[2025-05-29T12:07:46.918Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:07:46.928Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:07:52.930Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:07:52.940Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:08:14.588Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:08:14.595Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:08:55.197Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:08:55.203Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:08:56.933Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:08:56.937Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:09:07.688Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:09:07.694Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:09:10.920Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:09:10.926Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:10:07.810Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:10:07.817Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:10:10.290Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:10:10.295Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:10:12.961Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:10:12.969Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:10:57.882Z] [INFO] User logged out
+[2025-05-29T12:11:06.970Z] [INFO] User logged in successfully: git_name=mirigerzon, ip=::1
+[2025-05-29T12:11:11.854Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:11:11.860Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:11:35.937Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:11:35.943Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:11:36.923Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:11:36.928Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:07.948Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:07.954Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:10.927Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:10.931Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:13.943Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:13.947Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:16.930Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:16.935Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:27.977Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:28.151Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:32.936Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:32.941Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:35.940Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:35.945Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:37.919Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:37.923Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:42.933Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:42.938Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:47.931Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:47.936Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:51.932Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:51.935Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:53.933Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:53.938Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:56.943Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:12:56.948Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:01.932Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:01.938Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:03.945Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:03.952Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:08.050Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:08.054Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:08.941Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:08.951Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:12.903Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:13:12.909Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:14:30.213Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:14:30.219Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:14:50.941Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:14:50.946Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:14:53.940Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:14:53.946Z] [INFO] Fetched from users with conditions=[{"field":"role","value":"programmer"}]
+[2025-05-29T12:38:55.753Z] [INFO] Fetched from jobs with conditions=[]
+[2025-05-29T12:52:14.010Z] [INFO] Access token refreshed for userId=4, ip=::1
+[2025-05-29T12:52:14.021Z] [INFO] Access token refreshed for userId=4, ip=::1
+[2025-05-29T12:52:14.033Z] [INFO] Fetched from users with conditions=[]
+[2025-05-29T12:52:14.041Z] [INFO] Fetched from users with conditions=[]
+[2025-05-29T12:52:42.873Z] [INFO] Fetched from users with conditions=[]
+[2025-05-29T12:52:42.887Z] [INFO] Fetched from users with conditions=[]

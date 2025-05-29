@@ -1,12 +1,14 @@
+// useLogout.js
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { CurrentUser } from './App';
-import { fetchData } from './fetchData';
+import { fetchData } from './FetchData';
 
-function logOut() {
+export function useLogout() {
     const { setCurrentUser } = useContext(CurrentUser);
     const navigate = useNavigate();
+
     const logOut = () => {
         fetchData({
             type: 'logout',
@@ -22,6 +24,6 @@ function logOut() {
             }
         });
     };
+
     return logOut;
 }
-export default logOut;

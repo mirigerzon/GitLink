@@ -1,70 +1,60 @@
 import { useForm } from 'react-hook-form';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchData } from './fetchData.jsx';
+import { fetchData } from './FetchData.jsx';
 import { CurrentUser } from './App.jsx';
 import Cookies from 'js-cookie';
 import '../style/Register.css';
 
 function Register() {
-    const { register, handleSubmit: handleFirstSubmit, reset: resetFirstForm } = useForm();
+    // useForm לשני השלבים
+    const { register: registerFirst, handleSubmit: handleFirstSubmit, reset: resetFirstForm } = useForm();
     const { register: registerSecond, handleSubmit: handleSecondSubmit, reset: resetSecondForm } = useForm();
+
     const [registerIsCompleted, setRegisterIsCompleted] = useState(0);
     const [responsText, setResponstText] = useState("Fill the form and click the sign up button");
     const { setCurrentUser } = useContext(CurrentUser);
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
+
+    const [userData, setUserData] = useState({
+        username: '',
+        password: '',
         name: '',
-        gitUsername: '',
-        phone: '',
+        git_name: '',
         email: '',
-        password: ''
+        phone: '',
+        role: '',
+        experience: '',
     });
-    const [errors, setErrors] = useState({});
 
-    const validateForm = () => {
-        const newErrors = {};
-
-        if (!formData.name.trim()) newErrors.name = 'Name is required';
-        if (!formData.gitUsername.trim()) newErrors.gitUsername = 'Git username is required';
-        if (!formData.email.trim()) newErrors.email = 'Email is required';
-        if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
-        if (!formData.password.trim()) newErrors.password = 'Password is required';
-        if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+    const validateInitialForm = (data) => {
+        const { username, password, verifyPassword } = data;
+        if (password !== verifyPassword) {
+            setResponstText("Password and verify password do not match");
+            return;
+        }
+        if (password.length < 6) {
+            setResponstText("Password must be at least 6 characters");
+            return;
+        }
+        setUserData(prev => ({
+            ...prev,
+            username,
+            password
+        }));
+        setRegisterIsCompleted(1);
+        resetFirstForm();
+        setResponstText("");
     };
-
-    // const validateInitialForm = async (data) => {
-    //     const userDetails = {
-    //         name: data.username,
-    //         password: data.password,
-    //         verifyPassword: data.verifyPassword,
-    //     };
-    //     if (userDetails.password !== userDetails.verifyPassword) {
-    //         setResponstText("Password and verifyPassword are not the same");
-    //         return;
-    //     }
-    //     if (userDetails.password.length < 6) {
-    //         setResponstText("Password must contain at least 6 characters.");
-    //         return;
-    //     }
-    //     setUserData((prevData) => ({
-    //         ...prevData,
-    //         username: userDetails.name,
-    //         password: userDetails.password
-    //     }));
-    //     setRegisterIsCompleted(1);
-    //     resetFirstForm();
-    // };
 
     const onSecondSubmit = async (data) => {
         const updatedUserData = {
             ...userData,
-            name: data.name,
+            git_name: data.git_name,
             email: data.email,
-            phone: data.phone
+            phone: data.phone,
+            role: data.role,
+            experience: data.experience,
         };
         setUserData(updatedUserData);
         await signUpFunc(updatedUserData);
@@ -78,7 +68,7 @@ function Register() {
             body: createdUserData,
             onSuccess: ({ user, token }) => {
                 console.log("User registered successfully:", user);
-                navigate(`/users/${user.id}/home`);
+                navigate(`/${user.git_name}/home`);
                 setCurrentUser(user);
                 localStorage.setItem("currentUser", JSON.stringify(user));
                 Cookies.set('accessToken', token, {
@@ -95,99 +85,109 @@ function Register() {
         });
     }
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (validateForm()) {
-            // TODO: Implement registration API call
-            console.log('Registration data:', formData);
-            // navigate('/login');
-        }
-    };
-
     return (
         <div className="register-container">
             <div className="register-card">
-                <div className="register-header">
-                    <h2 className="register-title">Create Account</h2>
-                    <p className="register-subtitle">Join our developer community</p>
-                </div>
+                {registerIsCompleted === 0 && (
+                    <>
+                        <div className="register-header">
+                            <h2 className="register-title">Create Account - Step 1</h2>
+                            <p className="register-subtitle">Set your username and password</p>
+                        </div>
+                        <form onSubmit={handleFirstSubmit(validateInitialForm)} className="register-form">
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    {...registerFirst("username", { required: true })}
+                                    className="form-input"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    {...registerFirst("password", { required: true })}
+                                    className="form-input"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="password"
+                                    placeholder="Verify Password"
+                                    {...registerFirst("verifyPassword", { required: true })}
+                                    className="form-input"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="register-btn">Next</button>
+                            {responsText && <p className="error-text">{responsText}</p>}
+                        </form>
+                    </>
+                )}
 
-                <form onSubmit={handleSubmit} className="register-form">
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Full Name"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            className={`form-input ${errors.name ? 'error' : ''}`}
-                        />
-                        {errors.name && <span className="error-text">{errors.name}</span>}
-                    </div>
-
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            name="gitUsername"
-                            placeholder="Git Username"
-                            value={formData.gitUsername}
-                            onChange={handleInputChange}
-                            className={`form-input ${errors.gitUsername ? 'error' : ''}`}
-                        />
-                        {errors.gitUsername && <span className="error-text">{errors.gitUsername}</span>}
-                    </div>
-
-                    <div className="form-group">
-                        <input
-                            type="tel"
-                            name="phone"
-                            placeholder="Phone Number"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            className={`form-input ${errors.phone ? 'error' : ''}`}
-                        />
-                        {errors.phone && <span className="error-text">{errors.phone}</span>}
-                    </div>
-
-                    <div className="form-group">
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email Address"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            className={`form-input ${errors.email ? 'error' : ''}`}
-                        />
-                        {errors.email && <span className="error-text">{errors.email}</span>}
-                    </div>
-
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                            className={`form-input ${errors.password ? 'error' : ''}`}
-                        />
-                        {errors.password && <span className="error-text">{errors.password}</span>}
-                    </div>
-
-                    <button type="submit" className="register-btn">
-                        Create Account
-                    </button>
-                </form>
-                <div className="register-footer">
-                    <p> <a href="/login">Log in here</a></p>
-                </div>
+                {registerIsCompleted === 1 && (
+                    <>
+                        <div className="register-header">
+                            <h2 className="register-title">Create Account - Step 2</h2>
+                            <p className="register-subtitle">Fill in your details</p>
+                        </div>
+                        <form onSubmit={handleSecondSubmit(onSecondSubmit)} className="register-form">
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    placeholder="Git Username"
+                                    {...registerSecond("git_name", { required: true })}
+                                    className="form-input"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    {...registerSecond("email", { required: true })}
+                                    className="form-input"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="tel"
+                                    placeholder="Phone"
+                                    {...registerSecond("phone", { required: true })}
+                                    className="form-input"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <select
+                                    {...registerSecond("role", { required: true })}
+                                    className="form-input"
+                                    defaultValue=""
+                                    required
+                                >
+                                    <option value="" disabled>בחר תפקיד</option>
+                                    <option value="developer">מתכנת</option>
+                                    <option value="recruiter">מגייס</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="number"
+                                    placeholder="experience"
+                                    {...registerSecond("experience", { required: true })}
+                                    className="form-input"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="register-btn">Submit</button>
+                            {responsText && <p className="error-text">{responsText}</p>}
+                        </form>
+                    </>
+                )}
             </div>
         </div>
     );

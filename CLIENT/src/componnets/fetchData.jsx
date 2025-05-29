@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
-export const fetchData = ({ type, params = {}, method = "GET", body = null, onSuccess, onError, logOut = null }) => {
+export const fetchData = ({role = "guest", type, params = {}, method = "GET", body = null, onSuccess, onError, logOut = null }) => {
     const query = method === "GET" ? `?${new URLSearchParams(params).toString()}` : "";
-    const url = `http://localhost:3001/${type}${query}`;
+    const url = `http://localhost:3001/${role}/${type}${query}`;
     const token = Cookies.get('accessToken');
     const options = (tokenToUse) => ({
         method,

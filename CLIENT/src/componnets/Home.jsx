@@ -19,27 +19,26 @@ function Home() {
                             Connect developers, showcase projects, and discover opportunities
                         </p>
                         <div className="welcome-features">
-                            <ul className="feature-card">
-                                <Link to="/programmers" >
-                                    <div className="feature-icon">👨‍💻</div>
+                            <div className="feature-card">
+                                <Link to={currentUser ? `/${currentUser.git_name}/programmers` : "/programmers"}>                                    <div className="feature-icon">👨‍💻</div>
                                     <h3>Find Developers</h3>
                                     <p>Connect with talented programmers worldwide</p>
                                 </Link>
-                            </ul>
-                            <ul className="feature-card">
-                                <Link to="/projects" >
+                            </div>
+                            <div className="feature-card">
+                                <Link to={currentUser ? `/${currentUser.git_name}/projects` : "/projects"} >
                                     <div className="feature-icon">🚀</div>
                                     <h3>Showcase Projects</h3>
                                     <p>Display your best work and get recognized</p>
                                 </Link>
-                            </ul>
-                            <ul className="feature-card">
-                                <Link to="/jobs" >
+                            </div>
+                            <div className="feature-card">
+                                <Link to={currentUser ? `/${currentUser.git_name}/jobs` : "/jobs"} >
                                     <div className="feature-icon">💼</div>
                                     <h3>Discover Jobs</h3>
                                     <p>Find your next career opportunity</p>
                                 </Link>
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

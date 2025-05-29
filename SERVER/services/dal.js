@@ -21,12 +21,20 @@ const GET = async (table, conditions = []) => {
     });
     query += ` AND ${whereClauses.join(' AND ')}`;
   }
-
   const [results] = await pool.query(query, values);
   return results;
 };
 
+const POST = async (table, data) => {
+  const fields = Object.keys(data);
+  const values = Object.values(data);
+  const placeholders = fields.map(() => '?');
+  const sql = `INSERT INTO ${table} (${fields.join(', ')}) VALUES (${placeholders.join(', ')})`;
+  const [result] = await pool.query(sql, values); 
+  return result;
+};
 
 module.exports = {
   GET,
+  POST,
 };

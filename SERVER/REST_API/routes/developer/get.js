@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const dataService = require('../../controllers/bl.js');
-const { writeLog } = require('../../../DataBase/LOG/log.js');
+const dataService = require('../../../controllers/bl.js');
+const { writeLog } = require('../../../../DataBase/LOG/log.js');
 
 const createConditions = (req) => {
     const query = { ...req.query };

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const dataService = require('../../controllers/bl');
 const jwt = require('jsonwebtoken');
-const { writeLog } = require('../../../DataBase/LOG/log');
+const dataService = require('../../../controllers/bl.js');
+const { writeLog } = require('../../../../DataBase/LOG/log.js');
 
 const ACCESS_SECRET = process.env.ACCESS_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
