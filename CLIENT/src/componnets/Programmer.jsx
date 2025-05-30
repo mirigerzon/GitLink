@@ -1,9 +1,14 @@
 import '../style/Programmer.css'
+import { Link, useNavigate, Outlet } from 'react-router-dom';
+import { CurrentUser } from './App';
+import { useContext } from 'react';
+
 function Programmer({ programmerData }) {
     // TODO: Implement these functions
     // - handleShowProfile() - navigate to programmer's full profile
     // - handleShowProjects() - navigate to programmer's projects
-    
+    const navigate = useNavigate();
+    const { currentUser } = useContext(CurrentUser);
     const generateStars = (rating) => {
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 !== 0;
@@ -40,7 +45,7 @@ function Programmer({ programmerData }) {
 
                 <div className="programmer-info">
                     <h3 className="programmer-name">{programmerData.name}</h3>
-                    <p className="git-name">@{programmerData.gitName}</p>
+                    <p className="git-name">@{programmerData.git_name}</p>
 
                     <div className="experience-badge" style={{ backgroundColor: experienceInfo.color }}>
                         <span>{experienceInfo.level}</span>
@@ -70,20 +75,18 @@ function Programmer({ programmerData }) {
             </div>
 
             <div className="skills-section">
-                <h4>Tech Stack</h4>
                 <div className="skills-list">
-                    {programmerData.languages.map((skill, index) => (
-                        <span key={index} className="skill-tag">
-                            {skill}
-                        </span>
-                    ))}
+                    {(programmerData.languages ?? "")
+                        .split(',').map(skill => skill.trim()).filter(skill => skill)
+                        .map((skill, index) => (
+                            <span key={index} className="skill-tag">{skill}</span>))}
                 </div>
             </div>
 
             <div className="programmer-actions">
                 <button
                     className="btn-profile"
-                    onClick={() => console.log(`View ${programmerData.name} profile`)}
+                    onClick={() => navigate(currentUser ? `/${currentUser.git_name}/profile` : "/profile")}
                 >
                     <span className="btn-icon">👤</span>
                     View Profile
@@ -91,7 +94,7 @@ function Programmer({ programmerData }) {
 
                 <button
                     className="btn-projects"
-                    onClick={() => console.log(`View ${programmerData.name} projects`)}
+                    onClick={() => navigate(currentUser ? `/${currentUser.git_name}/projects` : "/projects")}
                 >
                     <span className="btn-icon">📁</span>
                     View Projects

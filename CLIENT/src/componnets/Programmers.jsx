@@ -2,12 +2,12 @@ import Programmer from './Programmer';
 import React, { useState, useEffect, useContext } from 'react';
 import { CurrentUser } from './App';
 import { fetchData } from './FetchData';
+import '../style/programmers.css';
 function Programmers() {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState('name');
     const [filterBy, setFilterBy] = useState('all');
-    const [programmers, setProgrammers] = useState([]); // This will be populated from API
-
+    const [programmers, setProgrammers] = useState([]);
     const [displayData, setDisplayData] = useState("programmers");
     const [isChange, setIsChange] = useState(0);
     const { currentUser } = useContext(CurrentUser);
@@ -17,7 +17,7 @@ function Programmers() {
     // - handleSearch() - filter programmers by search term
     // - handleSort() - sort programmers by selected criteria
     // - handleFilter() - filter programmers by experience/rating
-    
+
     useEffect(() => {
         setIsChange(0);
         fetchData({
@@ -25,32 +25,17 @@ function Programmers() {
             type: "users",
             method: "GET",
             onSuccess: (data) => {
-                setProjects(data);
+                setProgrammers(data);
             },
             onError: (err) => setError(`Failed to fetch programers: ${err}`),
         });
     }, [currentUser, isChange,]);
-
-    // useEffect(() => {
-    //     setIsChange(0);
-    //     fetchData({
-    //         role: currentUser.role,
-    //         type: "users",
-    //         params: { role: "programmer" },
-    //         method: "GET",
-    //         onSuccess: (data) => {
-    //             setProjects(data);
-    //         },
-    //         onError: (err) => setError(`Failed to fetch programers: ${err}`),
-    //     });
-    // }, [currentUser, isChange,]);
 
     return (
         <div className="programmers-container">
             <div className="programmers-header">
                 <h1>Developers Community</h1>
                 <p className="subtitle">Discover talented developers and their amazing projects</p>
-
                 <div className="controls-section">
                     <div className="search-box">
                         <input
@@ -62,7 +47,6 @@ function Programmers() {
                         />
                         <button className="search-btn">🔍</button>
                     </div>
-
                     <div className="filters">
                         <select
                             value={sortBy}
@@ -74,7 +58,6 @@ function Programmers() {
                             <option value="experience">Sort by Experience</option>
                             <option value="projects">Sort by Projects</option>
                         </select>
-
                         <select
                             value={filterBy}
                             onChange={(e) => setFilterBy(e.target.value)}
@@ -85,7 +68,6 @@ function Programmers() {
                             <option value="mid">Mid Level (3-5 years)</option>
                             <option value="senior">Senior (6+ years)</option>
                         </select>
-
                         <div className="rating-filter">
                             <label>Min Rating:</label>
                             <select className="filter-select">
@@ -99,7 +81,7 @@ function Programmers() {
                 </div>
             </div>
             <div className="programmers-grid">
-                {programmers.map(programmer => (
+                {programmers.length > 0 && programmers.map(programmer => (
                     <Programmer
                         key={programmer.id}
                         programmerData={programmer}
