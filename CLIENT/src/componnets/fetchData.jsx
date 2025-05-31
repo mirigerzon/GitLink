@@ -22,7 +22,7 @@ export const fetchData = ({role = "guest", type, params = {}, method = "GET", bo
                 })
                     .then(refreshRes => {
                         if (!refreshRes.ok) {
-                            logOut();
+                            logOut && logOut();
                             throw new Error('Session expired. Please login again.');
                         }
                         return refreshRes.json();

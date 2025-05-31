@@ -25,6 +25,8 @@ function Register() {
         phone: '',
         role: '',
         experience: '',
+        about: '',
+        profile_image: '',
     });
 
     const validateInitialForm = (data) => {
@@ -55,6 +57,8 @@ function Register() {
             phone: data.phone,
             role: data.role,
             experience: data.experience,
+            about: data.about,
+            profile_image: data.profile_image,
         };
         setUserData(updatedUserData);
         await signUpFunc(updatedUserData);
@@ -181,6 +185,22 @@ function Register() {
                                     {...registerSecond("experience", { required: true })}
                                     className="form-input"
                                     required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    placeholder="about yourself"
+                                    {...registerSecond("about", { required: true })}
+                                    className="form-input"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    {...registerSecond("profile_image", { required: true })}
+                                    className="form-input"
                                 />
                             </div>
                             <button type="submit" className="register-btn">Submit</button>

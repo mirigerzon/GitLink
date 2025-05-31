@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext, use } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { CurrentUser } from './App.jsx';
-import { fetchData } from './fetchData.jsx';
-import logOut from './LogOut.jsx';
+import { fetchData } from './FetchData';
 import '../style/Profile.css';
 
 function Profile() {
@@ -12,34 +11,22 @@ function Profile() {
     const [programmerData, setProgrammerData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-
     useEffect(() => {
         setIsChange(0);
         setLoading(true);
         fetchData({
-            type: "programmers",
-            params: { gitname: gitName },
+            type: "users",
+            params: { git_name: gitName },
             onSuccess: (data) => {
-                setProgrammerData(data);
+                setProgrammerData(data[0]);
                 setLoading(false);
             },
             onError: (err) => {
                 setError(`Failed to fetch programmer data: ${err}`);
                 setLoading(false);
             },
-            logOut,
         });
     }, [gitName, isChange]);
-
-    const handleAddProject = () => {
-        // TODO: Implement add project functionality
-        console.log("Add project clicked");
-    };
-
-    const handleDeleteProject = () => {
-        // TODO: Implement delete project functionality
-        console.log("Delete project clicked");
-    };
 
     if (loading) return <div className="profile-loading">Loading profile...</div>;
     if (error) return <div className="profile-error">{error}</div>;
@@ -59,8 +46,12 @@ function Profile() {
                 </div>
 
                 <div className="profile-info">
-                    <h1 className="profile-name">{programmerData.name}</h1>
+                    <h1 className="profile-name">{programmerData.username}</h1>
                     <div className="profile-details">
+                        <div className="detail-item">
+                            <span className="detail-label">Role:</span>
+                            <span className="detail-value">{programmerData.role}</span>
+                        </div>
                         <div className="detail-item">
                             <span className="detail-label">Email:</span>
                             <span className="detail-value">{programmerData.email}</span>
@@ -71,7 +62,7 @@ function Profile() {
                         </div>
                         <div className="detail-item">
                             <span className="detail-label">Experience:</span>
-                            <span className="detail-value">{programmerData.yearsOfExperience} years</span>
+                            <span className="detail-value">{programmerData.experience} years</span>
                         </div>
                         <div className="detail-item">
                             <span className="detail-label">Rating:</span>
@@ -85,22 +76,25 @@ function Profile() {
                 <div className="profile-section">
                     <h2>About</h2>
                     <p className="profile-description">
-                        {programmerData.skillsDescription || "No description available"}
+                        {programmerData.about || "No description available"}
                     </p>
                 </div>
 
                 <div className="profile-section">
                     <h2>Programming Languages</h2>
                     <div className="languages-container">
-                        {programmerData.programmingLanguages && programmerData.programmingLanguages.length > 0 ? (
-                            programmerData.programmingLanguages.map((language, index) => (
-                                <span key={index} className="language-tag">
-                                    {language}
-                                </span>
-                            ))
+                        {programmerData.languages && programmerData.languages.length > 0 ? (
+                            programmerData.languages
+                                .split(',')
+                                .map(skill => skill.trim())
+                                .filter(skill => skill)
+                                .map((skill, index) => (
+                                    <span key={index} className="skill-tag">{skill}</span>
+                                ))
                         ) : (
                             <p>No programming languages specified</p>
                         )}
+
                     </div>
                 </div>
 
@@ -109,13 +103,11 @@ function Profile() {
                         <h2>Project Management</h2>
                         <div className="project-actions">
                             <button
-                                onClick={handleAddProject}
                                 className="action-btn add-btn"
                             >
                                 Add Project
                             </button>
                             <button
-                                onClick={handleDeleteProject}
                                 className="action-btn delete-btn"
                             >
                                 Delete Project

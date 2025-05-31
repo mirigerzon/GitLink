@@ -1,37 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import Project from './Project';
-import '../style/Project.css'
-
+import '../style/Projects.css'
+import { CurrentUser } from './App';
+import { fetchData } from './FetchData';
+import { useLogout } from './LogOut';
 function Projects() {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState('name');
     const [filterBy, setFilterBy] = useState('all');
-    const [projects, setProjects] = useState([]); // This will be populated from API
-
+    const [projects, setProjects] = useState([]);
+    const [error, setError] = useState(null);
+    const currentUser = useContext(CurrentUser);;
+    const [isChange, setIsChange] = useState(0);
+    const logOut = useLogout();
+    const { gitName } = useParams();
     // TODO: Implement these functions
     // - fetchProjects() - fetch projects from API
     // - handleSearch() - filter projects by search term
     // - handleSort() - sort projects by selected criteria
     // - handleFilter() - filter projects by programming language
 
-    const mockProjects = [
-        {
-            id: 1,
-            name: "E-commerce Platform",
-            commits: 156,
-            views: 2341,
-            languages: ["React", "Node.js", "MongoDB"],
-            programmerId: 1
-        },
-        {
-            id: 2,
-            name: "Task Management App",
-            commits: 89,
-            views: 1567,
-            languages: ["Vue.js", "Python", "PostgreSQL"],
-            programmerId: 2
-        }
-    ];
+    useEffect(() => {
+        setIsChange(0);
+        fetchData({
+            type: "projects",
+            params: gitName ? { git_name: gitName } : {},
+            method: "GET",
+            onSuccess: (data) => {
+                setProjects(data);
+            },
+            onError: (err) => setError(`Failed to fetch programers: ${err}`),
+            logOut,
+        });
+    }, [currentUser, isChange]);
 
     return (
         <div className="projects-container">
@@ -79,7 +81,7 @@ function Projects() {
 
             {/* Projects Grid */}
             <div className="projects-grid">
-                {mockProjects.map(project => (
+                {projects.map(project => (
                     <Project
                         key={project.id}
                         projectData={project}

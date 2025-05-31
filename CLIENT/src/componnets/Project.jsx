@@ -1,12 +1,13 @@
 import React from 'react';
 import '../style/Project.css'
+import { useNavigate } from 'react-router-dom';
 
 function Project({ projectData }) {
     // TODO: Implement these functions
     // - handleShowProgrammerDetails() - navigate to programmer profile
     // - handleHideProject() - admin function to hide project
     // - checkIfAdmin() - check if current user is admin
-
+    const navigate = useNavigate();
     const isAdmin = false; // TODO: Replace with actual admin check
 
     return (
@@ -26,28 +27,29 @@ function Project({ projectData }) {
                     </div>
                 </div>
             </div>
-
+            <div>
+                <p>ling to GitHub → <a href={projectData.url}>{projectData.url}</a></p>
+            </div>
             <div className="project-languages">
                 <h4>Technologies:</h4>
                 <div className="languages-list">
-                    {projectData.languages.map((language, index) => (
-                        <span key={index} className="language-tag">
-                            {language}
-                        </span>
-                    ))}
+                    {(projectData.languages ?? "")
+                        .split(',').map(skill => skill.trim()).filter(skill => skill)
+                        .map((skill, index) => (
+                            <span key={index} className="skill-tag">{skill}</span>))}
                 </div>
             </div>
 
             <div className="project-actions">
-                <button 
+                <button
                     className="btn-primary"
-                    onClick={() => console.log('Show programmer details')}
+                    onClick={() => navigate(`/${projectData.git_name}/profile`)}
                 >
                     View Developer
                 </button>
-                
+
                 {isAdmin && (
-                    <button 
+                    <button
                         className="btn-admin"
                         onClick={() => console.log('Hide project')}
                     >

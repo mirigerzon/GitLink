@@ -16,10 +16,10 @@ function Navigation() {
                 </div>
 
                 <div className="nav-links">
-                    <Link to={currentUser ? `/${currentUser.git_name}/home` : "/home"} className="nav-link">Home</Link>
-                    <Link to={currentUser ? `/${currentUser.git_name}/jobs` : "/jobs"} className="nav-link">Jobs</Link>
-                    <Link to={currentUser ? `/${currentUser.git_name}/programmers` : "/programmers"} className="nav-link">Programmers</Link>
-                    <Link to={currentUser ? `/${currentUser.git_name}/projects` : "/projects"} className="nav-link">Projects</Link>
+                    <Link to={"/home"} className="nav-link">Home</Link>
+                    <Link to={"/jobs"} className="nav-link">Jobs</Link>
+                    <Link to={"/programmers"} className="nav-link">Programmers</Link>
+                    <Link to={"/projects"} className="nav-link">Projects</Link>
 
                     {!currentUser && (
                         <>

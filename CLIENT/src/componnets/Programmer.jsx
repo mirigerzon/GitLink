@@ -86,7 +86,7 @@ function Programmer({ programmerData }) {
             <div className="programmer-actions">
                 <button
                     className="btn-profile"
-                    onClick={() => navigate(currentUser ? `/${currentUser.git_name}/profile` : "/profile")}
+                    onClick={() => navigate(`/${programmerData.git_name}/profile`)}
                 >
                     <span className="btn-icon">👤</span>
                     View Profile
@@ -94,7 +94,7 @@ function Programmer({ programmerData }) {
 
                 <button
                     className="btn-projects"
-                    onClick={() => navigate(currentUser ? `/${currentUser.git_name}/projects` : "/projects")}
+                    onClick={() => navigate(`/${programmerData.git_name}/projects`)}
                 >
                     <span className="btn-icon">📁</span>
                     View Projects

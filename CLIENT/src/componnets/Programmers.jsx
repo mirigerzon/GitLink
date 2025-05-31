@@ -1,7 +1,8 @@
 import Programmer from './Programmer';
-import React, { useState, useEffect, useContext } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import { CurrentUser } from './App';
 import { fetchData } from './FetchData';
+import { useLogout } from './LogOut';
 import '../style/programmers.css';
 function Programmers() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -12,7 +13,7 @@ function Programmers() {
     const [isChange, setIsChange] = useState(0);
     const { currentUser } = useContext(CurrentUser);
     const [error, setError] = useState(null);
-
+    const logOut = useLogout();
     // TODO: Implement these functions
     // - handleSearch() - filter programmers by search term
     // - handleSort() - sort programmers by selected criteria
@@ -21,13 +22,14 @@ function Programmers() {
     useEffect(() => {
         setIsChange(0);
         fetchData({
-            role: currentUser.role,
+            role: currentUser ? currentUser.role : "guest",
             type: "users",
             method: "GET",
             onSuccess: (data) => {
                 setProgrammers(data);
             },
             onError: (err) => setError(`Failed to fetch programers: ${err}`),
+            logOut,
         });
     }, [currentUser, isChange,]);
 

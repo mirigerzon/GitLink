@@ -38,7 +38,7 @@ const verifyLogin = async (git_name, password) => {
 };
 
 const registerNewUser = async (userData) => {
-  const { git_name, email, phone, username, password, experience, languages, role } = userData;
+  const { git_name, email, phone, username, password, experience, languages, role, about, profile_image } = userData;
 
   const existingUsers = await dal.GET('users', [
     { field: 'git_name', value: git_name }
@@ -48,7 +48,7 @@ const registerNewUser = async (userData) => {
   const hashedPassword = await hashPassword(password);
 
   const newUser = await dal.POST('users', {
-    git_name, username, email, phone, experience, languages, role
+    git_name, username, email, phone, experience, languages, role, about, profile_image
   });
 
   await dal.POST('passwords', {
@@ -57,7 +57,7 @@ const registerNewUser = async (userData) => {
   });
 
   return {
-    id: newUser.insertId, git_name, username, email, phone, experience, languages, role
+    id: newUser.insertId, git_name, username, email, phone, experience, languages, role, about, profile_image
   };
 };
 

@@ -8,6 +8,7 @@ import Programmers from './Programmers.jsx';
 import Jobs from './Jobs.jsx';
 import Projects from './Projects.jsx';
 import ErrorPage from './ErrorPage.jsx'
+import Profile from './Profile.jsx';
 import '../style/App.css'
 
 export const CurrentUser = createContext([]);
@@ -35,6 +36,7 @@ function App() {
                         <Route path='programmers' element={<Programmers />} />
                         <Route path='jobs' element={<Jobs />} />
                         <Route path='projects' element={< Projects />} />
+                        <Route path='profile' element={< Profile />} />
                     </Route>
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>

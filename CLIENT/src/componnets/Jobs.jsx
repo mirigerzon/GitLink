@@ -1,34 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
+import { CurrentUser } from './App';
+import { fetchData } from './FetchData';
+import { useLogout } from './LogOut';
 import Job from './Job.jsx';
 import '../style/jobs.css';
 
 function Jobs() {
     const [jobs, setJobs] = useState([]);
-    const [filteredJobs, setFilteredJobs] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [experienceFilter, setExperienceFilter] = useState('');
     const [languageFilter, setLanguageFilter] = useState('');
     const [sortBy, setSortBy] = useState('latest');
+    const [filterBy, setFilterBy] = useState('all');
+    const [programmers, setProgrammers] = useState([]);
+    const [displayData, setDisplayData] = useState("programmers");
+    const [isChange, setIsChange] = useState(0);
+    const { currentUser } = useContext(CurrentUser);
+    const [error, setError] = useState(null);
+    const logOut = useLogout();
+    // TODO: Implement these functions
+    // - handleSearch() - filter programmers by search term
+    // - handleSort() - sort programmers by selected criteria
+    // - handleFilter() - filter programmers by experience/rating
 
-    // TODO: Implement fetchJobs function to get jobs from API
-    // useEffect(() => {
-    //     fetchJobs();
-    // }, []);
+    useEffect(() => {
+        setIsChange(0);
+        fetchData({
+            role: currentUser ? currentUser.role : "guest",
+            type: "jobs",
+            method: "GET",
+            onSuccess: (data) => {
+                setJobs(data);
+            },
+            onError: (err) => setError(`Failed to fetch programers: ${err}`),
+            logOut,
+        });
+    }, [currentUser, isChange,]);
 
-    // TODO: Implement filtering and sorting logic
-    const handleSearch = (term) => {
-        setSearchTerm(term);
-        // Implement search functionality
-    };
 
-    const handleFilter = () => {
-        // Implement filtering logic based on experience and language
-    };
 
-    const handleSort = (sortType) => {
-        setSortBy(sortType);
-        // Implement sorting logic
-    };
 
     return (
         <div className="jobs-container">
@@ -89,17 +99,13 @@ function Jobs() {
                 </div>
             </div>
 
-            <div className="jobs-grid">
-                {/* TODO: Map through jobs array and render Job components */}
-                {/* {filteredJobs.map(job => (
-                    <Job key={job.id} jobData={job} />
-                ))} */}
-
-                {/* Placeholder for demonstration */}
-                <div className="no-jobs">
-                    <h3>No jobs available at the moment</h3>
-                    <p>Check back later for new opportunities</p>
-                </div>
+             <div className="jobs-grid">
+                {programmers.length > 0 && jobs.map(job => (
+                    <Job
+                        key={job.id}
+                        jobData={job}
+                    />
+                ))}
             </div>
         </div>
     );
