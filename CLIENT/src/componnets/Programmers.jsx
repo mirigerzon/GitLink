@@ -22,7 +22,7 @@ function Programmers() {
     useEffect(() => {
         setIsChange(0);
         fetchData({
-            role: currentUser ? currentUser.role : "guest",
+            role: currentUser ? `/${currentUser.role}` : "/guest",
             type: "users",
             method: "GET",
             onSuccess: (data) => {

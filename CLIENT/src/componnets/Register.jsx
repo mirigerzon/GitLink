@@ -7,7 +7,6 @@ import Cookies from 'js-cookie';
 import '../style/Register.css';
 
 function Register() {
-    // useForm לשני השלבים
     const { register: registerFirst, handleSubmit: handleFirstSubmit, reset: resetFirstForm } = useForm();
     const { register: registerSecond, handleSubmit: handleSecondSubmit, reset: resetSecondForm } = useForm();
 
@@ -26,6 +25,7 @@ function Register() {
         role: '',
         experience: '',
         about: '',
+        languages: '',
         profile_image: '',
     });
 
@@ -50,28 +50,38 @@ function Register() {
     };
 
     const onSecondSubmit = async (data) => {
-        const updatedUserData = {
-            ...userData,
-            git_name: data.git_name,
-            email: data.email,
-            phone: data.phone,
-            role: data.role,
-            experience: data.experience,
-            about: data.about,
-            profile_image: data.profile_image,
-        };
-        setUserData(updatedUserData);
-        await signUpFunc(updatedUserData);
-        resetSecondForm();
+        try {
+            const formData = new FormData();
+
+            formData.append('username', userData.username);
+            formData.append('password', userData.password);
+            formData.append('git_name', data.git_name);
+            formData.append('email', data.email);
+            formData.append('phone', data.phone);
+            formData.append('role', data.role);
+            formData.append('experience', data.experience);
+            formData.append('about', data.about || '');
+            formData.append('languages', data.languages  || '');
+
+            if (data.profile_image && data.profile_image.length > 0) {
+                formData.append('profile_image', data.profile_image[0]);
+            }
+
+            await signUpFunc(formData);
+            resetSecondForm();
+        } catch (err) {
+            setResponstText("Registration failed. Please try again.");
+            console.error(err);
+        }
     };
 
-    async function signUpFunc(createdUserData) {
+    async function signUpFunc(formData) {
         fetchData({
             type: "register",
             method: "POST",
-            body: createdUserData,
+            role: '',
+            body: formData,
             onSuccess: ({ user, token }) => {
-                console.log("User registered successfully:", user);
                 navigate(`/${user.git_name}/home`);
                 setCurrentUser(user);
                 localStorage.setItem("currentUser", JSON.stringify(user));
@@ -83,8 +93,8 @@ function Register() {
                 setResponstText("Registration successful! Redirecting to home page...");
             },
             onError: (errorMessage) => {
-                console.error("Failed to register user:", errorMessage);
                 setResponstText("Registration failed. Please try again.");
+                console.error("Failed to register user:", errorMessage);
             },
         });
     }
@@ -191,7 +201,15 @@ function Register() {
                                 <input
                                     type="text"
                                     placeholder="about yourself"
-                                    {...registerSecond("about", { required: true })}
+                                    {...registerSecond("about", { required: false })}
+                                    className="form-input"
+                                />
+                            </div>
+                             <div className="form-group">
+                                <input
+                                    type="text"
+                                    placeholder="languages (c++, JAVA ...)"
+                                    {...registerSecond("languages", { required: false })}
                                     className="form-input"
                                 />
                             </div>

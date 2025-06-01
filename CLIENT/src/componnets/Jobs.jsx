@@ -26,7 +26,7 @@ function Jobs() {
     useEffect(() => {
         setIsChange(0);
         fetchData({
-            role: currentUser ? currentUser.role : "guest",
+            role: currentUser ? `/${currentUser.role}` : "/guest",
             type: "jobs",
             method: "GET",
             onSuccess: (data) => {
@@ -36,9 +36,6 @@ function Jobs() {
             logOut,
         });
     }, [currentUser, isChange,]);
-
-
-
 
     return (
         <div className="jobs-container">
@@ -99,8 +96,8 @@ function Jobs() {
                 </div>
             </div>
 
-             <div className="jobs-grid">
-                {programmers.length > 0 && jobs.map(job => (
+            <div className="jobs-grid">
+                {jobs.length > 0 && jobs.map(job => (
                     <Job
                         key={job.id}
                         jobData={job}

@@ -20,20 +20,20 @@ function Home() {
                         </p>
                         <div className="welcome-features">
                             <div className="feature-card">
-                                <Link to={currentUser ? `/${currentUser.git_name}/programmers` : "/programmers"}>                                    <div className="feature-icon">👨‍💻</div>
+                                <Link to={"/programmers"}>                                    <div className="feature-icon">👨‍💻</div>
                                     <h3>Find Developers</h3>
                                     <p>Connect with talented programmers worldwide</p>
                                 </Link>
                             </div>
                             <div className="feature-card">
-                                <Link to={currentUser ? `/${currentUser.git_name}/projects` : "/projects"} >
+                                <Link to={"/projects"} >
                                     <div className="feature-icon">🚀</div>
                                     <h3>Showcase Projects</h3>
                                     <p>Display your best work and get recognized</p>
                                 </Link>
                             </div>
                             <div className="feature-card">
-                                <Link to={currentUser ? `/${currentUser.git_name}/jobs` : "/jobs"} >
+                                <Link to={"/jobs"} >
                                     <div className="feature-icon">💼</div>
                                     <h3>Discover Jobs</h3>
                                     <p>Find your next career opportunity</p>

@@ -30,7 +30,7 @@ function Project({ projectData }) {
             <div>
                 <p>ling to GitHub → <a href={projectData.url}>{projectData.url}</a></p>
             </div>
-            <div className="project-languages">
+            <div className="project-data">
                 <h4>Technologies:</h4>
                 <div className="languages-list">
                     {(projectData.languages ?? "")
@@ -38,6 +38,8 @@ function Project({ projectData }) {
                         .map((skill, index) => (
                             <span key={index} className="skill-tag">{skill}</span>))}
                 </div>
+                <h4>description:</h4>
+                <p>{projectData.details}</p>
             </div>
 
             <div className="project-actions">

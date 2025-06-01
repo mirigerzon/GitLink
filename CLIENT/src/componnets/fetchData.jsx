@@ -1,17 +1,23 @@
 import Cookies from 'js-cookie';
-export const fetchData = ({role = "guest", type, params = {}, method = "GET", body = null, onSuccess, onError, logOut = null }) => {
+export const fetchData = ({ role = "/guest", type, params = {}, method = "GET", body = null, onSuccess, onError, logOut = null }) => {
     const query = method === "GET" ? `?${new URLSearchParams(params).toString()}` : "";
-    const url = `http://localhost:3001/${role}/${type}${query}`;
+    const url = `http://localhost:3001${role}/${type}${query}`;
     const token = Cookies.get('accessToken');
-    const options = (tokenToUse) => ({
-        method,
-        credentials: 'include',
-        headers: {
-            "Content-Type": "application/json",
+
+    const options = (tokenToUse) => {
+        const headers = {
             ...(tokenToUse && { Authorization: `Bearer ${tokenToUse}` }),
-        },
-        ...(body && { body: JSON.stringify(body) }),
-    });
+        };
+        if (!(body instanceof FormData)) {
+            headers['Content-Type'] = 'application/json';
+        }
+        return {
+            method,
+            credentials: 'include',
+            headers,
+            ...(body && { body: body instanceof FormData ? body : JSON.stringify(body) }),
+        };
+    };
 
     fetch(url, options(token))
         .then(response => {

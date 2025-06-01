@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "js-cookie": "^3.0.5",
+    "multer": "^2.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.4",
@@ -27,5 +28,4 @@
     "globals": "^16.0.0",
     "vite": "^6.3.5"
   }
-  
 }

@@ -16,6 +16,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use('/uploads', express.static('uploads'));
 app.use('/', authRoutes);
 
 const guestGetRoutes = require('./REST_API/routes/guest/get.js');

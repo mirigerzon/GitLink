@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUser } from './App';
-import {useLogout} from './LogOut';
+import { useLogout } from './LogOut';
 import '../style/Navigation.css';
 
 function Navigation() {
@@ -17,9 +17,9 @@ function Navigation() {
 
                 <div className="nav-links">
                     <Link to={"/home"} className="nav-link">Home</Link>
-                    <Link to={"/jobs"} className="nav-link">Jobs</Link>
                     <Link to={"/programmers"} className="nav-link">Programmers</Link>
                     <Link to={"/projects"} className="nav-link">Projects</Link>
+                    <Link to={"/jobs"} className="nav-link">Jobs</Link>
 
                     {!currentUser && (
                         <>

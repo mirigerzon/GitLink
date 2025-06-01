@@ -7,6 +7,21 @@ const { writeLog } = require('../../../../DataBase/LOG/log.js');
 const ACCESS_SECRET = process.env.ACCESS_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../../uploads/profile_images'));
+    },
+    filename: function (req, file, cb) {
+        const ext = path.extname(file.originalname);
+        cb(null, `${Date.now()}-${file.fieldname}${ext}`);
+    }
+});
+
+const upload = multer({ storage });
+
 router.post('/login', async (req, res) => {
     const { git_name, password } = req.body;
     try {
@@ -34,7 +49,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', upload.single('profile_image'), async (req, res) => {
     try {
         const user = await dataService.registerNewUser(req.body);
         const ip = req.ip;
