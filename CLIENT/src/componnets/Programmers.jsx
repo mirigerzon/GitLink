@@ -63,15 +63,13 @@ function Programmers() {
                         <select
                             value={filterBy}
                             onChange={(e) => setFilterBy(e.target.value)}
-                            className="filter-select"
-                        >
+                            className="filter-select">
                             <option value="all">All Experience</option>
                             <option value="junior">Junior (0-2 years)</option>
                             <option value="mid">Mid Level (3-5 years)</option>
                             <option value="senior">Senior (6+ years)</option>
                         </select>
                         <div className="rating-filter">
-                            <label>Min Rating:</label>
                             <select className="filter-select">
                                 <option value="0">All Ratings</option>
                                 <option value="4">4+ Stars</option>

@@ -20,6 +20,7 @@ function Navigation() {
                     <Link to={"/programmers"} className="nav-link">Programmers</Link>
                     <Link to={"/projects"} className="nav-link">Projects</Link>
                     <Link to={"/jobs"} className="nav-link">Jobs</Link>
+                    {currentUser && <Link to={`${currentUser.git_name}/profile`} className="nav-link">Profile</Link>}
 
                     {!currentUser && (
                         <>
