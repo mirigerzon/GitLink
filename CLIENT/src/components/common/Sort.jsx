@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 const Sort = ({
   data,
@@ -12,13 +12,24 @@ const Sort = ({
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedFilters, setSelectedFilters] = useState({});
 
-  useEffect(() => {
+  // Memoize the arrays to prevent infinite re-renders
+  const memoizedSortOptions = useMemo(
+    () => sortOptions,
+    [JSON.stringify(sortOptions)]
+  );
+  const memoizedFilterOptions = useMemo(
+    () => filterOptions,
+    [JSON.stringify(filterOptions)]
+  );
+
+  // Memoize the filtering and sorting logic
+  const filteredAndSortedData = useMemo(() => {
     let result = [...data];
 
     // Apply filters first
-    if (filterOptions.length > 0) {
+    if (memoizedFilterOptions.length > 0) {
       result = result.filter((item) => {
-        return filterOptions.every((filterOption) => {
+        return memoizedFilterOptions.every((filterOption) => {
           const selectedValues = selectedFilters[filterOption.key];
           if (!selectedValues || selectedValues.length === 0) {
             return true; // No filter applied
@@ -74,10 +85,22 @@ const Sort = ({
       });
     }
 
-    setFilteredData(result);
-  }, [data, sortBy, sortOrder, selectedFilters, sortOptions, filterOptions]);
+    return result;
+  }, [
+    // data,
+    sortBy,
+    sortOrder,
+    selectedFilters,
+    memoizedSortOptions,
+    memoizedFilterOptions,
+  ]);
 
-  const handleFilterChange = (filterKey, value, isChecked) => {
+  // Update filtered data when the memoized result changes
+  useEffect(() => {
+    setFilteredData(filteredAndSortedData);
+  }, [filteredAndSortedData, setFilteredData]);
+
+  const handleFilterChange = useCallback((filterKey, value, isChecked) => {
     setSelectedFilters((prev) => {
       const currentValues = prev[filterKey] || [];
       let newValues;
@@ -93,30 +116,33 @@ const Sort = ({
         [filterKey]: newValues,
       };
     });
-  };
+  }, []);
 
-  const clearFilters = () => {
+  const clearFilters = useCallback(() => {
     setSelectedFilters({});
     setSortBy("");
-  };
+  }, []);
 
-  // Get unique values for filter options
-  const getFilterValues = (filterOption) => {
-    const values = new Set();
-    data.forEach((item) => {
-      const value = item[filterOption.key];
-      if (filterOption.type === "multiSelect" && typeof value === "string") {
-        // For languages, split by comma
-        value.split(",").forEach((lang) => {
-          const trimmed = lang.trim();
-          if (trimmed) values.add(trimmed);
-        });
-      } else if (value !== undefined && value !== null) {
-        values.add(value);
-      }
-    });
-    return Array.from(values).sort();
-  };
+  // Get unique values for filter options - memoized
+  const getFilterValues = useCallback(
+    (filterOption) => {
+      const values = new Set();
+      data.forEach((item) => {
+        const value = item[filterOption.key];
+        if (filterOption.type === "multiSelect" && typeof value === "string") {
+          // For languages, split by comma
+          value.split(",").forEach((lang) => {
+            const trimmed = lang.trim();
+            if (trimmed) values.add(trimmed);
+          });
+        } else if (value !== undefined && value !== null) {
+          values.add(value);
+        }
+      });
+      return Array.from(values).sort();
+    },
+    [data]
+  );
 
   return (
     <div className={`sort-container ${className}`}>

@@ -37,7 +37,7 @@ function Programmers() {
           searchFields={["git_name"]}
           placeholder="Search by gitName."
         />
-        {/* <Sort
+        <Sort
           data={filteredProgrammers}
           setFilteredData={setFilteredProgrammers}
           sortOptions={[
@@ -45,7 +45,7 @@ function Programmers() {
             { key: "rating", label: "rating" },
             { key: "experience", label: "experience" },
           ]}
-        /> */}
+        />
       </div>
       <div className="programmers-grid">
         {filteredProgrammers.length > 0 ? (

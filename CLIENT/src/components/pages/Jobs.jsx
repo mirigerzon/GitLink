@@ -38,7 +38,7 @@ function Jobs() {
           searchFields={["name"]}
           placeholder="Search jobs..."
         />
-        {/* <Sort
+        <Sort
           data={filteredJobs}
           setFilteredData={setFilteredJobs}
           sortOptions={[
@@ -52,7 +52,7 @@ function Jobs() {
               type: "multiSelect",
             },
           ]}
-        /> */}
+        />
       </div>
       <div className="jobs-grid">
         {filteredJobs.length > 0 &&

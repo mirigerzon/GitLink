@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const Search = ({
   data,
@@ -10,14 +10,20 @@ const Search = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
+  // Memoize searchFields to prevent infinite re-renders
+  const memoizedSearchFields = useMemo(
+    () => searchFields,
+    [JSON.stringify(searchFields)]
+  );
+
+  // Memoize the filtered data
+  const filteredData = useMemo(() => {
     if (!searchTerm.trim()) {
-      setFilteredData(data);
-      return;
+      return data;
     }
 
-    const filtered = data.filter((item) => {
-      return searchFields.some((field) => {
+    return data.filter((item) => {
+      return memoizedSearchFields.some((field) => {
         const value = item[field];
         if (typeof value === "string") {
           return value.toLowerCase().includes(searchTerm.toLowerCase());
@@ -25,9 +31,12 @@ const Search = ({
         return false;
       });
     });
+  }, [searchTerm, data, memoizedSearchFields]);
 
-    setFilteredData(filtered);
-  }, [searchTerm, data, searchFields]);
+  // Update filtered data when the memoized result changes
+  useEffect(() => {
+    setFilteredData(filteredData);
+  }, [filteredData, setFilteredData]);
 
   return (
     <div className={`search-container ${className}`}>
@@ -54,14 +63,12 @@ const Search = ({
         .search-container {
           margin-bottom: 20px;
         }
-
         .search-input-wrapper {
           position: relative;
           display: inline-block;
           width: 100%;
           max-width: 400px;
         }
-
         .search-input {
           width: 100%;
           padding: 10px 40px 10px 12px;
@@ -71,12 +78,10 @@ const Search = ({
           outline: none;
           transition: border-color 0.3s ease;
         }
-
         .search-input:focus {
           border-color: #007bff;
           box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
         }
-
         .clear-button {
           position: absolute;
           right: 8px;
@@ -91,7 +96,6 @@ const Search = ({
           border-radius: 50%;
           transition: background-color 0.2s ease;
         }
-
         .clear-button:hover {
           background-color: #f0f0f0;
           color: #333;

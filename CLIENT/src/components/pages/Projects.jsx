@@ -39,7 +39,7 @@ function Projects() {
         searchFields={["git_name", "details", "name"]}
         placeholder="Search projects..."
       />
-      {/* <Sort
+      <Sort
         data={filteredProjects}
         setFilteredData={setFilteredProjects}
         sortOptions={[
@@ -47,7 +47,7 @@ function Projects() {
           { key: "views", label: "views" },
           { key: "name", label: "project name" },
         ]}
-      /> */}
+      />
 
       <div className="projects-grid">
         {filteredProjects.map((project) => (

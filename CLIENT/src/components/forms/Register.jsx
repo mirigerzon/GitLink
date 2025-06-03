@@ -221,7 +221,7 @@ function Register() {
                 />
               </div>
               <div className="form-group">
-                <input
+                <textarea
                   type="text"
                   placeholder="about yourself"
                   {...registerSecond("about", { required: false })}
