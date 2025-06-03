@@ -1,4 +1,3 @@
-// BL/dataService.js
 const dal = require('../services/dal.js');
 const bcrypt = require('bcrypt');
 
