@@ -25,23 +25,17 @@
     margin-bottom: 0.5rem;
 }
 
-/* אזור הבקרה: חיפוש וסינונים */
 .controls-section {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
 
-/* חיפוש */
-.search-box {
-    position: relative;
-    max-width: 400px;
-    width: 100%;
-}
 
-.search-input {
+/* .search-input {
     width: 100%;
     padding: 0.9rem 1.5rem;
     font-size: 1rem;
@@ -57,7 +51,6 @@
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
 }
 
-/* כפתור חיפוש */
 .search-btn {
     position: absolute;
     right: 10px;
@@ -76,10 +69,10 @@
 
 .search-btn:hover {
     background: #564ecf;
-}
+} */
 
 /* סינונים */
-.filters {
+/* .filters {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -106,7 +99,7 @@
 
 .filter-select:hover {
     border-color: #cbd5e0;
-}
+} */
 
 /* תצוגת רשימה מימין - כל כרטיס שורה נפרדת */
 .projects-grid {

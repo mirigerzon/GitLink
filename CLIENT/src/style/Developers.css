@@ -1,0 +1,264 @@
+.conrolels-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    
+}
+
+.developers-container {
+    width: 92vw;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.developers-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.developers-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.developers-header .subtitle {
+    font-size: 1.25rem;
+    color: #4a5568;
+    margin-top: 0;
+}
+
+/* אזור הבקרה: חיפוש וסינונים */
+.controls-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* חיפוש */
+.search-box {
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 25px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* כפתור חיפוש */
+.search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #667eea;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+    background: #564ecf;
+}
+
+/* סינונים */
+.filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 300px;
+}
+
+.filter-select {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.filter-select:hover {
+    border-color: #cbd5e0;
+}
+
+/* סינון דירוג */
+.rating-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #4a5568;
+}
+
+/* רשת התצוגה של המתכנתים */
+.developers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* כרטיסי המתכנתים - height: 70vh + עיצוב */
+.developer-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 280px;
+    margin: auto;
+}
+
+/* מבנה פנימי בכרטיס */
+.developer-card .card-top,
+.developer-card .card-middle,
+.developer-card .card-bottom {
+    padding: 0.5rem 0;
+}
+
+.developer-card .card-bottom {
+    margin-top: auto;
+}
+
+/* טקסט בתוך הכרטיס */
+.developer-card h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #333;
+}
+
+.developer-card p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0.25rem 0;
+}
+
+/* כפתורים ותגיות בכרטיס */
+.developer-card button {
+    background: #667eea;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.developer-card button:hover {
+    background: #564ecf;
+}
+
+/* רספונסיביות */
+@media (max-width: 1024px) {
+    .developers-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .developers-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .developers-header .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .filters {
+        min-width: 100%;
+        justify-content: space-around;
+    }
+
+    .developers-grid {
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 1rem;
+    }
+
+    .developer-card {
+        max-width: 230px;
+        height: 65vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .developers-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .developers-header .subtitle {
+        font-size: 1rem;
+    }
+
+    .controls-section {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .filters {
+        flex-direction: column;
+        min-width: auto;
+        gap: 0.75rem;
+    }
+
+    .search-box {
+        max-width: 100%;
+    }
+
+    .developers-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .developer-card {
+        max-width: 100%;
+        height: auto;
+        min-height: 400px;
+    }
+}

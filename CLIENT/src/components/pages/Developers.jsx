@@ -1,0 +1,53 @@
+import Developer from "./Developer";
+import { React, useState, useEffect, useContext } from "react";
+import { CurrentUser } from "../../../App";
+import { fetchData } from "../../hooks/fetchData";
+import { useLogout } from "../../hooks/LogOut";
+import "../../style/developers.css";
+import Search from "../common/Search";
+import Sort from "../common/Sort";
+
+function Developers() {
+  const { currentUser } = useContext(CurrentUser);
+  const logOut = useLogout();
+  const [developers, setDevelopers] = useState([]);
+  const [filteredDevelopers, setFilteredDevelopers] = useState(developers);
+  const [isChange, setIsChange] = useState(0);
+
+  useEffect(() => {
+    setIsChange(0);
+    fetchData({
+      role: currentUser ? `/${currentUser.role}` : "/guest",
+      type: "users",
+      method: "GET",
+      onSuccess: (data) => {
+        setDevelopers(data);
+      },
+      onError: (err) => console.error(`Failed to fetch programers: ${err}`),
+      logOut,
+    });
+  }, [currentUser, isChange]);
+
+  return (
+    <div className="developers-container">
+      <div className="developers-header">
+        <h1>Developers comumunity</h1>
+        <div className="conrolels-section">
+          <Search data={developers} setFilteredData={setFilteredDevelopers} searchFields={["git_name"]} placeholder="Search by gitName." />
+          <Sort data={filteredDevelopers} setFilteredData={setFilteredDevelopers} sortOptions={[{ key: "languages", label: "languages" }, { key: "rating", label: "rating" }, { key: "experience", label: "experience" },]} />
+        </div>
+      </div>
+      <div className="developers-grid">
+        {filteredDevelopers.length > 0 ? (
+          filteredDevelopers.map((developer) => (
+            <Developer key={developer.id} developerData={developer} />
+          ))
+        ) : (
+          <div></div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Developers;

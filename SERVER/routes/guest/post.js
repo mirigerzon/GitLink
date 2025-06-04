@@ -22,56 +22,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/login', async (req, res) => {
-    const { git_name, password } = req.body;
-    try {
-        const user = await dataService.verifyLogin(git_name, password);
-        if (!user) {
-            writeLog(`Failed login attempt for git_name=${git_name}`, 'warn');
-            return res.status(401).json({ error: 'Invalid git_name or password' });
-        }
-        const ip = req.ip;
-        const accessToken = jwt.sign({ id: user.id, git_name: user.git_name, ip }, ACCESS_SECRET, { expiresIn: '15m' });
-        const refreshToken = jwt.sign({ id: user.id }, REFRESH_SECRET, { expiresIn: '1d' });
-        writeLog(`User logged in successfully: git_name=${git_name}, ip=${ip}`, 'info');
-        res
-            .cookie('refreshToken', refreshToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'Strict',
-                maxAge: 1 * 24 * 60 * 60 * 1000
-            })
-            .json({ user, token: accessToken });
-    } catch (err) {
-        console.error(err);
-        writeLog(`Login error for git_name=${req.body.git_name} - ${err.message}`, 'error');
-        res.status(500).json({ error: 'Login error' });
-    }
-});
-
-router.post('/register', upload.single('profile_image'), async (req, res) => {
-    try {
-        const user = await dataService.registerNewUser(req.body);
-        const ip = req.ip;
-        const accessToken = jwt.sign({ id: user.id, git_name: user.git_name, ip }, ACCESS_SECRET, { expiresIn: '15m' });
-        const refreshToken = jwt.sign({ id: user.id }, REFRESH_SECRET, { expiresIn: '1d' });
-        writeLog(`User registered successfully: git_name=${user.git_name}, ip=${ip}`, 'info');
-        res
-            .cookie('refreshToken', refreshToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'Strict',
-                maxAge: 1 * 24 * 60 * 60 * 1000
-            })
-            .status(201)
-            .json({ user, token: accessToken });
-    } catch (err) {
-        console.error(err);
-        writeLog(`Registration error for git_name=${req.body.git_name} - ${err.message}`, 'error');
-        res.status(400).json({ error: err.message });
-    }
-});
-
 router.post('/refresh', (req, res) => {
     const refreshToken = req.cookies?.refreshToken;
     if (!refreshToken) {

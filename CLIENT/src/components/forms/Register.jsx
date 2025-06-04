@@ -77,7 +77,7 @@ function Register() {
       if (useGitAvatar) {
         const gitAvatarUrl = await fetchGitHubAvatar(data.git_name);
         if (gitAvatarUrl) {
-          formData.append("profile_image_url", gitAvatarUrl);
+          formData.append("profile_image", `${gitAvatarUrl}`);
         }
       } else if (data.profile_image && data.profile_image.length > 0) {
         formData.append("profile_image", data.profile_image[0]);
@@ -90,7 +90,6 @@ function Register() {
     }
   };
 
-  // 🔥 פונקציה חדשה להבאת תמונת גיטהאב
   const fetchGitHubAvatar = async (gitUsername) => {
     try {
       const response = await fetch(

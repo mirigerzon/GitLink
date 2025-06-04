@@ -28,12 +28,12 @@ function Navigation() {
             Home
           </Link>
           <Link
-            to={"/programmers"}
+            to={"/developers"}
             className={`nav-link ${
-              location.pathname.includes("programmers") ? "active" : ""
+              location.pathname.includes("developers") ? "active" : ""
             }`}
           >
-            Programmers
+            Developers
           </Link>
           <Link
             to={"/projects"}

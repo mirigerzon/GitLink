@@ -5,13 +5,14 @@ import { CurrentUser } from "../../App";
 import { fetchData } from "./fetchData";
 
 export function useLogout() {
-  const { setCurrentUser } = useContext(CurrentUser);
+  const { currentUser, setCurrentUser } = useContext(CurrentUser);
   const navigate = useNavigate();
 
   const logOut = () => {
     fetchData({
       type: "logout",
       method: "POST",
+      role: currentUser ? `/${currentUser.role}` : "/guest",
       onSuccess: () => {
         Cookies.remove("accessToken");
         localStorage.removeItem("currentUser");
@@ -23,6 +24,5 @@ export function useLogout() {
       },
     });
   };
-
   return logOut;
 }

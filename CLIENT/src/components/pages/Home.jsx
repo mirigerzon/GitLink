@@ -14,14 +14,14 @@ function Home() {
           <div className="welcome-content">
             <h1 className="welcome-title">Welcome to GitLink</h1>
             <p className="welcome-subtitle">
-              Connect Programmers, showcase projects, and discover opportunities
+              Connect Developers, showcase projects, and discover opportunities
             </p>
             <div className="welcome-features">
               <div className="feature-card">
-                <Link to={"/programmers"}>
+                <Link to={"/developers"}>
                   <div className="feature-icon">👨‍💻</div>{" "}
-                  <h3>Find Programmers</h3>
-                  <p>Connect with talented programmers worldwide</p>
+                  <h3>Find Developers</h3>
+                  <p>Connect with talented developers worldwide</p>
                 </Link>
               </div>
               <div className="feature-card">

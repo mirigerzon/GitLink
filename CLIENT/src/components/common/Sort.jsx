@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useCallback, useMemo } from "react";
-
+import '../../style/Sort.css'
 const Sort = ({
   data,
   setFilteredData,
@@ -29,7 +29,7 @@ const Sort = ({
         return memoizedFilterOptions.every((filterOption) => {
           const selectedValues = selectedFilters[filterOption.key];
           if (!selectedValues || selectedValues.length === 0) {
-            return true; 
+            return true;
           }
 
           const itemValue = item[filterOption.key];
@@ -137,14 +137,14 @@ const Sort = ({
     <div className={`sort-container ${className}`}>
       {sortOptions.length > 0 && (
         <div className="sort-section">
-          <h4>מיון</h4>
+          <h4>sort</h4>
           <div className="sort-controls">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
               className="sort-select"
             >
-              <option value="">בחר מיון</option>
+              <option value=""> type</option>
               {sortOptions.map((option) => (
                 <option key={option.key} value={option.key}>
                   {option.label}
@@ -201,104 +201,10 @@ const Sort = ({
         Object.keys(selectedFilters).some(
           (key) => selectedFilters[key]?.length > 0
         )) && (
-        <button onClick={clearFilters} className="clear-filters-btn">
-          נקה הכל
-        </button>
-      )}
-
-      <style jsx>{`
-        .sort-container {
-          background: #f8f9fa;
-          padding: 20px;
-          border-radius: 8px;
-          margin-bottom: 20px;
-          border: 1px solid #e9ecef;
-        }
-
-        .sort-section,
-        .filter-section {
-          margin-bottom: 20px;
-        }
-
-        .sort-section h4,
-        .filter-section h4 {
-          margin: 0 0 10px 0;
-          color: #333;
-          font-size: 16px;
-        }
-
-        .sort-controls {
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-        }
-
-        .sort-select,
-        .order-select {
-          padding: 8px 12px;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-size: 14px;
-          background: white;
-        }
-
-        .filter-group {
-          margin-bottom: 15px;
-        }
-
-        .filter-label {
-          display: block;
-          font-weight: 500;
-          margin-bottom: 8px;
-          color: #555;
-        }
-
-        .filter-options {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-        }
-
-        .checkbox-label {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          padding: 5px 10px;
-          background: white;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background-color 0.2s ease;
-        }
-
-        .checkbox-label:hover {
-          background-color: #f0f0f0;
-        }
-
-        .checkbox-label input[type="checkbox"] {
-          margin: 0;
-        }
-
-        .checkbox-text {
-          font-size: 14px;
-          color: #333;
-        }
-
-        .clear-filters-btn {
-          background-color: #dc3545;
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 4px;
-          cursor: pointer;
-          font-size: 14px;
-          transition: background-color 0.2s ease;
-        }
-
-        .clear-filters-btn:hover {
-          background-color: #c82333;
-        }
-      `}</style>
+          <button onClick={clearFilters} className="clear-filters-btn">
+            clear
+          </button>
+        )}
     </div>
   );
 };

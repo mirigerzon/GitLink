@@ -2,12 +2,9 @@ import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
 
 function Project({ projectData }) {
-  // TODO: Implement these functions
-  // - handleShowProgrammerDetails() - navigate to programmer profile
-  // - handleHideProject() - admin function to hide project
-  // - checkIfAdmin() - check if current user is admin
+
   const navigate = useNavigate();
-  const isAdmin = false; // TODO: Replace with actual admin check
+  const isAdmin = false;
 
   return (
     <div className="project-card">
@@ -28,7 +25,7 @@ function Project({ projectData }) {
       </div>
       <div>
         <p>
-          link to GitHub → <a href={projectData.url}>{projectData.url}</a>
+          link to GitHub → <a target="_blank" href={projectData.url}>{projectData.url}</a>
         </p>
       </div>
       <div className="project-data">

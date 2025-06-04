@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./.env" });
 const verifyToken = require("./middleware/verifyToken.js");
 const authRoutes = require("./routes/auth.js");
+
 const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
@@ -12,16 +13,16 @@ const corsOptions = {
   credentials: true,
 };
 
+app.use("", authRoutes);
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
 app.use("/uploads", express.static("uploads"));
-app.use("/", authRoutes);
 
 const guestGetRoutes = require("./routes/guest/get.js");
 const guestPostRoutes = require("./routes/guest/post.js");
-
 app.use("/guest", guestGetRoutes);
 app.use("/guest", guestPostRoutes);
 

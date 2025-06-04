@@ -11,7 +11,7 @@ import Sort from "../common/Sort";
 function Projects() {
   const { gitName, id } = useParams();
   const logOut = useLogout();
-  const currentUser = useContext(CurrentUser);
+  const { currentUser } = useContext(CurrentUser);
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [isChange, setIsChange] = useState(0);
@@ -24,6 +24,7 @@ function Projects() {
         ...(gitName && { git_name: gitName }),
         ...(id && { id: id }),
       },
+      role: currentUser ? `/${currentUser.role}` : "/guest",
       method: "GET",
       onSuccess: (data) => {
         setProjects(data);
@@ -37,8 +38,7 @@ function Projects() {
   return (
     <div className="projects-container">
       {!id && (
-        <>
-          {" "}
+        <div className="controls-section">
           <Search
             data={projects}
             setFilteredData={setFilteredProjects}
@@ -54,7 +54,7 @@ function Projects() {
               { key: "name", label: "project name" },
             ]}
           />
-        </>
+        </div>
       )}
 
       <div className="projects-grid">

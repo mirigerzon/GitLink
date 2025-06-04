@@ -4,7 +4,7 @@ import Navigation from "./src/components/common/Navigation";
 import LogIn from "./src/components/forms/LogIn";
 import Register from "./src/components/forms/Register";
 import Home from "./src/components/pages/Home";
-import Programmers from "./src/components/pages/Programmers";
+import Developers from "./src/components/pages/Developers";
 import Jobs from "./src/components/pages/Jobs";
 import Projects from "./src/components/pages/Projects";
 import Error from "./src/components/pages/Error";
@@ -28,12 +28,12 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/programmers" element={<Programmers />} />
+          <Route path="/developers" element={<Developers />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/:gitName">
             <Route path="home" element={<Home />} />
-            <Route path="programmers" element={<Programmers />} />
+            <Route path="developers" element={<Developers />} />
             <Route path="jobs" element={<Jobs />} />
             <Route path="projects" element={<Projects />}>
               <Route path=":id" element={<Projects />} />

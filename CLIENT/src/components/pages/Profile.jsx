@@ -14,7 +14,7 @@ function Profile() {
   const [isChange, setIsChange] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [programmerData, setProgrammerData] = useState(null);
+  const [developerData, setDeveloperData] = useState(null);
   const [projectsToAdd, setProjectToAdd] = useState(null);
   const [existingProjects, setExistingProjects] = useState(null);
   const [openRepo, setOpenRepo] = useState(null);
@@ -28,12 +28,13 @@ function Profile() {
     fetchData({
       type: "users",
       params: { git_name: gitName },
+      role: currentUser ? `/${currentUser.role}` : "/guest",
       onSuccess: (data) => {
-        setProgrammerData(data[0]);
+        setDeveloperData(data[0]);
         setLoading(false);
       },
       onError: (err) => {
-        setError(`Failed to fetch programmer data: ${err}`);
+        setError(`Failed to fetch developer data: ${err}`);
         setLoading(false);
       },
     });
@@ -45,12 +46,13 @@ function Profile() {
     fetchData({
       type: "projects",
       params: { git_name: gitName },
+      role: currentUser ? `/${currentUser.role}` : "/guest",
       onSuccess: (data) => {
         setExistingProjects(data);
         setLoading(false);
       },
       onError: (err) => {
-        setError(`Failed to fetch programmer data: ${err}`);
+        setError(`Failed to fetch developer data: ${err}`);
         setLoading(false);
       },
     });
@@ -58,8 +60,8 @@ function Profile() {
 
   if (loading) return <div className="profile-loading">Loading profile...</div>;
   if (error) return <div className="profile-error">{error}</div>;
-  if (!programmerData)
-    return <div className="profile-error">Programmer not found</div>;
+  if (!developerData)
+    return <div className="profile-error">Developer not found</div>;
 
   const isOwnProfile = currentUser && gitName === currentUser.git_name;
 
@@ -118,39 +120,39 @@ function Profile() {
       <div className="profile-header">
         <div className="profile-section">
           <img
-            src={programmerData.profileImage || "/default-avatar.png"}
-            alt={`${programmerData.name}'s profile`}
+            src={developerData.profile_image || "/default-avatar.png"}
+            alt={`${developerData.name}'s profile`}
             className="profile-image"
           />
-          <button onClick={() => nuvigate(`/${currentUser.git_name}/projects`)}>
+          <button onClick={() => nuvigate(`/${gitName}/projects`)}>
             view all projects
           </button>
         </div>
 
         <div className="profile-info">
-          <h1 className="profile-name">{programmerData.username}</h1>
+          <h1 className="profile-name">{developerData.username}</h1>
           <div className="profile-details">
             <div className="detail-item">
               <span className="detail-label">Role:</span>
-              <span className="detail-value">{programmerData.role}</span>
+              <span className="detail-value">{developerData.role}</span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Email:</span>
-              <span className="detail-value">{programmerData.email}</span>
+              <span className="detail-value">{developerData.email}</span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Phone:</span>
-              <span className="detail-value">{programmerData.phone}</span>
+              <span className="detail-value">{developerData.phone}</span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Experience:</span>
               <span className="detail-value">
-                {programmerData.experience} years
+                {developerData.experience} years
               </span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Rating:</span>
-              <span className="detail-value">{programmerData.rating}/5 ⭐</span>
+              <span className="detail-value">{developerData.rating}/5 ⭐</span>
             </div>
           </div>
         </div>
@@ -160,12 +162,12 @@ function Profile() {
         <div className="profile-section">
           <h2>About</h2>
           <p className="profile-description">
-            {programmerData.about || "No description available"}
+            {developerData.about || "No description available"}
           </p>
           <h2>Programming Languages</h2>
           <div className="languages-container">
-            {programmerData.languages && programmerData.languages.length > 0 ? (
-              programmerData.languages
+            {developerData.languages && developerData.languages.length > 0 ? (
+              developerData.languages
                 .split(",")
                 .map((skill) => skill.trim())
                 .filter((skill) => skill)

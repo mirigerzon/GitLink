@@ -1,0 +1,8 @@
+.sort-container{
+    display: flex;
+    gap:  1vw;
+}
+.sort-section{
+    display: flex;
+    gap:  1vw;
+}

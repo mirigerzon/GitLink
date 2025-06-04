@@ -16,9 +16,9 @@ async function seed() {
       username, git_name, email, phone, experience, languages, role, rating, about, profile_image
     )
     VALUES 
-      ('alice', 'aliceGH', 'alice@example.com', 123456789, 3, 'JavaScript,Python', 'developer', 5, 'Full-stack developer', 'alice.jpg'),
-      ('bob', 'bobGH', 'bob@example.com', 234567891, 2, 'C++,C#', 'developer', 4, 'Backend enthusiast', 'bob.jpg'),
-      ('charlie', 'charlieGH', 'charlie@example.com', 345678912, 5, 'Java,Go', 'recruiter', 3, 'Java expert', 'charlie.jpg');
+      ('alice', 'aliceGH', 'alice@example.com', 123456789, 3, 'JavaScript,Python', 'developer', 5, 'Full-stack developer', 'https://hahacanvas.co.il/wp-content/uploads/2021/11/%D7%AA%D7%9E%D7%95%D7%A0%D7%95%D7%AA-%D7%99%D7%A4%D7%95%D7%AA-%D7%9C%D7%94%D7%93%D7%A4%D7%A1%D7%94-12.jpg'),
+      ('bob', 'bobGH', 'bob@example.com', 234567891, 2, 'C++,C#', 'developer', 4, 'Backend enthusiast', 'https://hahacanvas.co.il/wp-content/uploads/2021/11/%D7%AA%D7%9E%D7%95%D7%A0%D7%95%D7%AA-%D7%99%D7%A4%D7%95%D7%AA-%D7%9C%D7%94%D7%93%D7%A4%D7%A1%D7%94-12.jpg'),
+      ('charlie', 'charlieGH', 'charlie@example.com', 345678912, 5, 'Java,Go', 'recruiter', 3, 'Java expert', 'https://hahacanvas.co.il/wp-content/uploads/2021/11/%D7%AA%D7%9E%D7%95%D7%A0%D7%95%D7%AA-%D7%99%D7%A4%D7%95%D7%AA-%D7%9C%D7%94%D7%93%D7%A4%D7%A1%D7%94-12.jpg');
   `);
   
 
