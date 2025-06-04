@@ -13,12 +13,12 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use("", authRoutes);
 
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("", authRoutes);
 app.use("/uploads", express.static("uploads"));
 
 const guestGetRoutes = require("./routes/guest/get.js");
