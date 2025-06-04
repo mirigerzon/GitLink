@@ -39,6 +39,8 @@ function Register() {
     profile_image: "",
   });
 
+  const [useGitAvatar, setUseGitAvatar] = useState(false);
+
   const validateInitialForm = (data) => {
     const { username, password, verifyPassword } = data;
     if (password !== verifyPassword) {
@@ -72,11 +74,14 @@ function Register() {
       formData.append("experience", data.experience);
       formData.append("about", data.about || "");
       formData.append("languages", data.languages || "");
-
-      if (data.profile_image && data.profile_image.length > 0) {
+      if (useGitAvatar) {
+        const gitAvatarUrl = await fetchGitHubAvatar(data.git_name);
+        if (gitAvatarUrl) {
+          formData.append("profile_image_url", gitAvatarUrl);
+        }
+      } else if (data.profile_image && data.profile_image.length > 0) {
         formData.append("profile_image", data.profile_image[0]);
       }
-
       await signUpFunc(formData);
       resetSecondForm();
     } catch (err) {
@@ -85,11 +90,28 @@ function Register() {
     }
   };
 
+  // 🔥 פונקציה חדשה להבאת תמונת גיטהאב
+  const fetchGitHubAvatar = async (gitUsername) => {
+    try {
+      const response = await fetch(
+        `https://api.github.com/users/${gitUsername}`
+      );
+      if (!response.ok) throw new Error("GitHub user not found");
+      const data = await response.json();
+      return data.avatar_url;
+    } catch (err) {
+      console.error("Failed to fetch GitHub avatar:", err);
+      setResponseText(
+        "Failed to fetch GitHub avatar. Please upload an image manually."
+      );
+      return "";
+    }
+  };
+
   async function signUpFunc(formData) {
     fetchData({
       type: "register",
       method: "POST",
-      role: "",
       body: formData,
       onSuccess: ({ user, token }) => {
         navigate(`/${user.git_name}/home`);
@@ -158,7 +180,6 @@ function Register() {
             </form>
           </>
         )}
-
         {registerIsCompleted === 1 && (
           <>
             <div className="register-header">
@@ -204,10 +225,10 @@ function Register() {
                   required
                 >
                   <option value="" disabled>
-                    בחר תפקיד
+                    check role
                   </option>
-                  <option value="developer">מתכנת</option>
-                  <option value="recruiter">מגייס</option>
+                  <option value="developer">developer</option>
+                  <option value="recruiter">recruiter</option>
                 </select>
               </div>
               <div className="form-group">
@@ -237,13 +258,25 @@ function Register() {
                 />
               </div>
               <div className="form-group">
-                <input
-                  type="file"
-                  accept="image/*"
-                  {...registerSecond("profile_image", { required: true })}
-                  className="form-input"
-                />
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={useGitAvatar}
+                    onChange={(e) => setUseGitAvatar(e.target.checked)}
+                  />{" "}
+                  Use GitHub profile image
+                </label>
               </div>
+              {!useGitAvatar && (
+                <div className="form-group">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    {...registerSecond("profile_image", { required: true })}
+                    className="form-input"
+                  />
+                </div>
+              )}
               <button type="submit" className="register-btn">
                 Submit
               </button>

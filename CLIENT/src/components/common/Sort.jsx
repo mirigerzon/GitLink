@@ -12,7 +12,6 @@ const Sort = ({
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedFilters, setSelectedFilters] = useState({});
 
-  // Memoize the arrays to prevent infinite re-renders
   const memoizedSortOptions = useMemo(
     () => sortOptions,
     [JSON.stringify(sortOptions)]
@@ -22,23 +21,20 @@ const Sort = ({
     [JSON.stringify(filterOptions)]
   );
 
-  // Memoize the filtering and sorting logic
   const filteredAndSortedData = useMemo(() => {
     let result = [...data];
 
-    // Apply filters first
     if (memoizedFilterOptions.length > 0) {
       result = result.filter((item) => {
         return memoizedFilterOptions.every((filterOption) => {
           const selectedValues = selectedFilters[filterOption.key];
           if (!selectedValues || selectedValues.length === 0) {
-            return true; // No filter applied
+            return true; 
           }
 
           const itemValue = item[filterOption.key];
 
           if (filterOption.type === "multiSelect") {
-            // For multi-select (like languages), check if any selected language exists in item
             if (typeof itemValue === "string") {
               const itemLanguages = itemValue
                 .split(",")
@@ -50,7 +46,6 @@ const Sort = ({
               );
             }
           } else if (filterOption.type === "select") {
-            // For single select
             return selectedValues.includes(itemValue);
           }
 
@@ -59,18 +54,15 @@ const Sort = ({
       });
     }
 
-    // Apply sorting
     if (sortBy) {
       result.sort((a, b) => {
         let aValue = a[sortBy];
         let bValue = b[sortBy];
 
-        // Handle numeric values
         if (typeof aValue === "number" && typeof bValue === "number") {
           return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
         }
 
-        // Handle string values
         if (typeof aValue === "string" && typeof bValue === "string") {
           aValue = aValue.toLowerCase();
           bValue = bValue.toLowerCase();
@@ -95,7 +87,6 @@ const Sort = ({
     memoizedFilterOptions,
   ]);
 
-  // Update filtered data when the memoized result changes
   useEffect(() => {
     setFilteredData(filteredAndSortedData);
   }, [filteredAndSortedData, setFilteredData]);
@@ -123,14 +114,12 @@ const Sort = ({
     setSortBy("");
   }, []);
 
-  // Get unique values for filter options - memoized
   const getFilterValues = useCallback(
     (filterOption) => {
       const values = new Set();
       data.forEach((item) => {
         const value = item[filterOption.key];
         if (filterOption.type === "multiSelect" && typeof value === "string") {
-          // For languages, split by comma
           value.split(",").forEach((lang) => {
             const trimmed = lang.trim();
             if (trimmed) values.add(trimmed);
@@ -146,7 +135,6 @@ const Sort = ({
 
   return (
     <div className={`sort-container ${className}`}>
-      {/* Sort Controls */}
       {sortOptions.length > 0 && (
         <div className="sort-section">
           <h4>מיון</h4>
@@ -178,7 +166,6 @@ const Sort = ({
         </div>
       )}
 
-      {/* Filter Controls */}
       {filterOptions.length > 0 && (
         <div className="filter-section">
           <h4>Sort</h4>
@@ -210,7 +197,6 @@ const Sort = ({
         </div>
       )}
 
-      {/* Clear Filters Button */}
       {(sortBy ||
         Object.keys(selectedFilters).some(
           (key) => selectedFilters[key]?.length > 0

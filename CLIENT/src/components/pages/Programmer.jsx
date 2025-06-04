@@ -5,7 +5,7 @@ import { Link, useNavigate, Outlet } from "react-router-dom";
 
 function Programmer({ programmerData }) {
   const navigate = useNavigate();
-//   const { currentUser } = useContext(CurrentUser);
+  //   const { currentUser } = useContext(CurrentUser);
 
   const generateStars = (rating) => {
     const fullStars = Math.floor(rating);

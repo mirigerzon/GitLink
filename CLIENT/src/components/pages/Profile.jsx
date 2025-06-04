@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { CurrentUser } from "../../../App";
 import { fetchData } from "../../hooks/fetchData";
 import { useLogout } from "../../hooks/LogOut";
+import Update from "../common/Update";
+import Delete from "../common/Delete";
 import "../../style/Profile.css";
 
 function Profile() {
@@ -18,6 +20,7 @@ function Profile() {
   const [openRepo, setOpenRepo] = useState(null);
   const logOut = useLogout();
   const { register, handleSubmit, reset } = useForm();
+  const nuvigate = useNavigate();
 
   useEffect(() => {
     setIsChange(0);
@@ -110,31 +113,18 @@ function Profile() {
     });
   }
 
-  function deleteProject(project) {
-    fetchData({
-      type: "projects",
-      role: "/developer",
-      method: "DELETE",
-      params: { id: project.id },
-      onSuccess: () => {
-        setIsChange(1);
-      },
-      onError: (error) => {
-        console.log("Delete failed", error);
-      },
-      logOut,
-    });
-  }
-
   return (
     <div className="profile-container">
       <div className="profile-header">
-        <div className="profile-image-section">
+        <div className="profile-section">
           <img
             src={programmerData.profileImage || "/default-avatar.png"}
             alt={`${programmerData.name}'s profile`}
             className="profile-image"
           />
+          <button onClick={() => nuvigate(`/${currentUser.git_name}/projects`)}>
+            view all projects
+          </button>
         </div>
 
         <div className="profile-info">
@@ -198,9 +188,29 @@ function Profile() {
                 existingProjects.map((project) => (
                   <li key={project.id}>
                     {project.name}
-                    <button onClick={() => deleteProject(project)}>
-                      delete
+                    <button
+                      onClick={() =>
+                        nuvigate(
+                          `/${currentUser.git_name}/projects/${project.id}`
+                        )
+                      }
+                    >
+                      view
                     </button>
+                    <Delete
+                      className="delete_btn"
+                      type={"projects"}
+                      itemId={project.id}
+                      setIsChange={setIsChange}
+                      role={currentUser ? `/${currentUser.role}` : null}
+                    />
+                    <Update
+                      type={"projects"}
+                      itemId={project.id}
+                      setIsChange={setIsChange}
+                      inputs={["name"]}
+                      role={currentUser ? `/${currentUser.role}` : null}
+                    />
                   </li>
                 ))
               ) : (

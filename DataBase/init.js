@@ -12,13 +12,15 @@ async function seed() {
 
   // --- Users
   await db.query(`
-  INSERT INTO users (
-  username, git_name, email, phone, experience, languages, role, rating, about, profile_image)
-  VALUES 
-    ('alice', 'aliceGH', 'alice@example.com', 123456789, 3, 'JavaScript,Python', 'admin', 5, 'Full-stack developer', 'alice.jpg'),
-    ('bob', 'bobGH', 'bob@example.com', 234567891, 2, 'C++,C#', 'user', 4, 'Backend enthusiast', 'bob.jpg'),
-    ('charlie', 'charlieGH', 'charlie@example.com', 345678912, 5, 'Java,Go', 'user', 3, 'Java expert', 'charlie.jpg')
-`);
+    INSERT INTO users (
+      username, git_name, email, phone, experience, languages, role, rating, about, profile_image
+    )
+    VALUES 
+      ('alice', 'aliceGH', 'alice@example.com', 123456789, 3, 'JavaScript,Python', 'developer', 5, 'Full-stack developer', 'alice.jpg'),
+      ('bob', 'bobGH', 'bob@example.com', 234567891, 2, 'C++,C#', 'developer', 4, 'Backend enthusiast', 'bob.jpg'),
+      ('charlie', 'charlieGH', 'charlie@example.com', 345678912, 5, 'Java,Go', 'recruiter', 3, 'Java expert', 'charlie.jpg');
+  `);
+  
 
 
   // --- Passwords (pre-hashed)

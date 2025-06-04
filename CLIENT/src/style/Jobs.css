@@ -1,7 +1,9 @@
 .jobs-container {
     margin: 0 auto;
-    padding: 2rem;
-    /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    width: 92vw;
+    max-width: 92vw ;
 }
 
 .jobs-header {

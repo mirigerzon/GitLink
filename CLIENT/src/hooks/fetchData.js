@@ -3,8 +3,8 @@ import Cookies from 'js-cookie';
 export const fetchData = (props) => {
 const { role = "/guest", type, params = {}, method = "GET", body = null, onSuccess, onError, logOut = null }=props;
 
-    const query = method === "GET" ? `?${new URLSearchParams(params).toString()}` : "";
-    const url = `http://localhost:3001${role}/${type}${query}`;
+const query = method === "GET" ? `?${new URLSearchParams(params).toString()}` : "";
+const url = `http://localhost:3001${role}/${type}${query}`;
     const token = Cookies.get('accessToken');
 
     const options = (tokenToUse) => {

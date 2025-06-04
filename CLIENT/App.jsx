@@ -1,5 +1,5 @@
 import { useState, createContext, useMemo } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import Navigation from "./src/components/common/Navigation";
 import LogIn from "./src/components/forms/LogIn";
 import Register from "./src/components/forms/Register";
@@ -35,11 +35,14 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="programmers" element={<Programmers />} />
             <Route path="jobs" element={<Jobs />} />
-            <Route path="projects" element={<Projects />} />
+            <Route path="projects" element={<Projects />}>
+              <Route path=":id" element={<Projects />} />
+            </Route>
             <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>
+        <Outlet />
       </CurrentUser.Provider>
     </>
   );

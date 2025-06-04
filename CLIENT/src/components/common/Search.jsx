@@ -10,13 +10,11 @@ const Search = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Memoize searchFields to prevent infinite re-renders
   const memoizedSearchFields = useMemo(
     () => searchFields,
     [JSON.stringify(searchFields)]
   );
 
-  // Memoize the filtered data
   const filteredData = useMemo(() => {
     if (!searchTerm.trim()) {
       return data;
@@ -33,7 +31,6 @@ const Search = ({
     });
   }, [searchTerm, data, memoizedSearchFields]);
 
-  // Update filtered data when the memoized result changes
   useEffect(() => {
     setFilteredData(filteredData);
   }, [filteredData, setFilteredData]);

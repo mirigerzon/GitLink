@@ -112,7 +112,7 @@
 }
 
 .detail-value {
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    /* background: linear-gradient(135deg, #3b82f6, #1d4ed8); */
     color: white;
     padding: 4px 12px;
     border-radius: 20px;

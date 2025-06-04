@@ -1,5 +1,6 @@
 import React from "react";
 import "../../style/Job.css";
+import Update from "../common/Update";
 
 function Job({ jobData }) {
   const handleApply = () => {
@@ -13,6 +14,12 @@ function Job({ jobData }) {
   };
   return (
     <div className="job-card">
+      {/* <Update
+        type={"todos"}
+        itemId={todo.id}
+        setIsChange={setIsChange}
+        inputs={["title"]}
+      /> */}
       <div className="job-header">
         <div className="company-logo">
           <img
