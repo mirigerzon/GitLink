@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const dataService = require('../controllers/bl.js');
+const dataService = require('../controllers/autoBl.js');
 const { writeLog } = require('../../dataBase/LOG/log.js');
 
 const ACCESS_SECRET = process.env.ACCESS_SECRET;

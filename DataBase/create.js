@@ -8,7 +8,6 @@ app.use(express.json());
 require('dotenv').config({ path: '../SERVER/.env' });
 
 async function main() {
-    // התחברות למסד ברירת מחדל
     const rootConnection = await mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -16,11 +15,9 @@ async function main() {
         port: process.env.DB_PORT || 3306,
     });
 
-    // יצירת הדאטהבייס אם לא קיים
     await rootConnection.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME}\``);
     await rootConnection.end();
 
-    // התחברות למסד הנתונים עצמו
     const db = await mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -34,7 +31,7 @@ async function main() {
 }
 
 async function createTables(connection) {
-    // בדיוק כמו בקוד שלך – נשאר ללא שינוי
+    //users
     await connection.query(`
         CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,6 +48,7 @@ async function createTables(connection) {
             profile_image VARCHAR(255)
         )
     `);
+    //passwords
     await connection.query(`
         CREATE TABLE IF NOT EXISTS passwords (
             is_active BOOLEAN DEFAULT TRUE,
@@ -59,6 +57,7 @@ async function createTables(connection) {
             FOREIGN KEY (user_id) REFERENCES users(id)
         )
     `);
+    //projects
     await connection.query(`
         CREATE TABLE IF NOT EXISTS projects (
             is_active BOOLEAN DEFAULT TRUE,
@@ -69,9 +68,24 @@ async function createTables(connection) {
             languages VARCHAR(255),
             details VARCHAR(255),
             views INT NOT NULL DEFAULT 0,
+            rating DOUBLE DEFAULT 0,
+            rating_count  INT DEFAULT 0,
             FOREIGN KEY (git_name) REFERENCES users(git_name)
         )
     `);
+    //project_ratings
+    await connection.query(`
+        CREATE TABLE IF NOT EXISTS project_ratings (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        git_name VARCHAR(100) NOT NULL,
+        project_id INT NOT NULL,
+        rating TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+        UNIQUE (git_name, project_id),
+        FOREIGN KEY (git_name) REFERENCES users(git_name),
+        FOREIGN KEY (project_id) REFERENCES projects(id)
+        );
+    `)
+    //jobs
     await connection.query(`
         CREATE TABLE IF NOT EXISTS jobs (
             is_active BOOLEAN DEFAULT TRUE,
@@ -84,8 +98,9 @@ async function createTables(connection) {
             FOREIGN KEY (user_id) REFERENCES users(id)
         )
     `);
+    //messages
     await connection.query(`
-        CREATE TABLE IF NOT EXISTS massages (
+        CREATE TABLE IF NOT EXISTS messages (
             is_active BOOLEAN DEFAULT TRUE,
             id INT AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL,

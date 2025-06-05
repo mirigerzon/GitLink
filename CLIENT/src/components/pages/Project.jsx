@@ -1,10 +1,37 @@
 import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { CurrentUser } from "../../../App";
+import { fetchData } from "../../hooks/fetchData";
 
 function Project({ projectData }) {
-
   const navigate = useNavigate();
-  const isAdmin = false;
+  const { currentUser } = useContext(CurrentUser);
+  const [hasRated, setHasRated] = useState(false);
+
+  const isOwner = currentUser?.git_name === projectData.git_name;
+  const canRate = currentUser && !isOwner && !hasRated;
+
+  const handleRate = (rating) => {
+    fetchData({
+      type: "projects/rate",
+      role: currentUser ? `/${currentUser.role}` : "gousts",
+      method: "POST",
+      body: {
+        project_id: projectData.id,
+        rating,
+      },
+      onSuccess: () => {
+        setHasRated(true);
+        alert("Thanks for rating!");
+      },
+      onError: (err) => {
+        console.error("Rating failed", err);
+        alert("Rating failed");
+      },
+    });
+
+  };
 
   return (
     <div className="project-card">
@@ -53,7 +80,7 @@ function Project({ projectData }) {
           View Developer
         </button>
 
-        {isAdmin && (
+        {false && (
           <button
             className="btn-admin"
             onClick={() => console.log("Hide project")}
@@ -62,6 +89,17 @@ function Project({ projectData }) {
           </button>
         )}
       </div>
+
+      {canRate && (
+        <div className="rating-section">
+          <p>Rate this project:</p>
+          {[1, 2, 3, 4, 5].map((num) => (
+            <button key={num} onClick={() => handleRate(num)}>
+              {num}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

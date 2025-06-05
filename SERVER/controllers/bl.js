@@ -18,60 +18,36 @@ const updateItem = async (table, data, conditions = []) => {
   return await dal.PUT(table, data, conditions);
 };
 
-const verifyLogin = async (git_name, password) => {
-  const users = await dal.GET('users', [
-    { field: 'git_name', value: git_name }
+async function rateProject(userGitName, projectId, rating) {
+  const existing = await dal.GET("project_ratings", [
+    { field: "git_name", value: userGitName },
+    { field: "project_id", value: projectId }
   ]);
-  if (!users || users.length === 0)
-    return null;
-  const user = users[0];
-  const hashedPasswords = await dal.GET('passwords', [
-    { field: 'user_id', value: user.id }
-  ]);
-  if (!hashedPasswords || hashedPasswords.length === 0) return null;
-  const hashedPassword = hashedPasswords[0].hashed_password;
-  const isMatch = await bcrypt.compare(password, hashedPassword);
-  if (!isMatch) return null;
-  delete user.hashed_password;
-  return user;
-};
+  if (existing.length > 0) throw new Error("User has already rated this project.");
 
-const registerNewUser = async (userData) => {
-  const { git_name, email, phone, username, password, experience, languages, role, about, profile_image } = userData;
-
-  const existingUsers = await dal.GET('users', [
-    { field: 'git_name', value: git_name }
-  ]);
-  if (existingUsers.length > 0) throw new Error('git_name already exists');
-
-  const hashedPassword = await hashPassword(password);
-
-  const newUser = await dal.POST('users', {
-    git_name, username, email, phone, experience, languages, role, about, profile_image
+  await dal.POST("project_ratings", {
+    git_name: userGitName,
+    project_id: projectId,
+    rating
   });
 
-  await dal.POST('passwords', {
-    user_id: newUser.insertId,
-    hashed_password: hashedPassword
-  });
+  const project = (await dal.GET("projects", [{ field: "id", value: projectId }]))[0];
+  const newRating =
+    ((project.rating || 0) * (project.numOfRatings || 0) + rating) /
+    ((project.numOfRatings || 0) + 1);
 
-  return {
-    id: newUser.insertId, git_name, username, email, phone, experience, languages, role, about, profile_image
-  };
-};
+  return await dal.PUT("projects", {
+    rating: newRating,
+    numOfRatings: (project.numOfRatings || 0) + 1
+  }, [{ field: "id", value: projectId }]);
+}
 
 
-const hashPassword = async (plainPassword) => {
-  const saltRounds = 10;
-  const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
-  return hashedPassword;
-};
 
 module.exports = {
   getItemByConditions,
   deleteItem,
   createItem,
   updateItem,
-  verifyLogin,
-  registerNewUser
+  rateProject,
 };

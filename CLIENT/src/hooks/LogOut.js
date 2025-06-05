@@ -12,7 +12,6 @@ export function useLogout() {
     fetchData({
       type: "logout",
       method: "POST",
-      role: currentUser ? `/${currentUser.role}` : "/guest",
       onSuccess: () => {
         Cookies.remove("accessToken");
         localStorage.removeItem("currentUser");
