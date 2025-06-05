@@ -37,15 +37,17 @@ function Projects() {
 
   return (
     <div className="projects-container">
-      {!id && (
-        <div className="controls-section">
-          <Search
-            data={projects}
-            setFilteredData={setFilteredProjects}
-            searchFields={["git_name", "details", "name"]}
-            placeholder="Search projects..."
-          />
-          <Sort
+      <h1>Projects community</h1>
+      <div className="controllers-section">
+        {!id && (
+          <div className="controls-section">
+            <Search
+              data={projects}
+              setFilteredData={setFilteredProjects}
+              searchFields={["git_name", "details", "name"]}
+              placeholder="Search projects..."
+            />
+            {/* <Sort
             data={filteredProjects}
             setFilteredData={setFilteredProjects}
             sortOptions={[
@@ -53,10 +55,11 @@ function Projects() {
               { key: "views", label: "views" },
               { key: "name", label: "project name" },
             ]}
-          />
-        </div>
-      )}
-
+          /> */}
+          </div>
+        )}
+      </div>
+      
       <div className="projects-grid">
         {filteredProjects.map((project) => (
           <Project key={project.id} projectData={project} />

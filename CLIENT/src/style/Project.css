@@ -1,122 +1,257 @@
-/* כרטיס פרויקט בודד */
+/* Project.css */
 .project-card {
-    width: 60%;
-    background: rgba(255, 255, 255, 0.96);
-    border-radius: 18px;
-    padding: 1.5rem;
-    border: 1px solid rgba(226, 232, 240, 0.6);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
-/* כותרת */
 .project-header {
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 1rem;
-    margin-bottom: 1.2rem;
-    text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
 }
 
 .project-name {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #2d3748;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex: 1;
 }
 
-/* סטטיסטיקות */
 .project-stats {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    margin-top: 0.7rem;
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 
 .stat {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  min-width: 80px;
 }
 
 .stat-icon {
-    font-size: 1.2rem;
-    color: #667eea;
+  font-size: 1.25rem;
 }
 
 .stat-value {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #2d3748;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1e293b;
 }
 
 .stat-label {
-    font-size: 0.75rem;
-    color: #718096;
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* טכנולוגיות */
+.project-card > div:nth-child(2) {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+}
+
+.project-card > div:nth-child(2) p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.project-card > div:nth-child(2) a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.project-card > div:nth-child(2) a:hover {
+  color: #5a67d8;
+  text-decoration: underline;
+}
+
 .project-data {
-    margin-bottom: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .project-data h4 {
-    font-size: 0.9rem;
-    color: #4a5568;
-    margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+.project-data h4:first-child {
+  margin-top: 0;
 }
 
 .languages-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .skill-tag {
-    background: #f7fafc;
-    color: #2d3748;
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 10px;
-    transition: background-color 0.2s ease;
+  background: #667eea;
+  color: rgb(0, 0, 0);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .skill-tag:hover {
-    background-color: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
-/* כפתורים */
+.project-data p {
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
 .project-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
 }
 
-.btn-primary,
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
 .btn-admin {
-    background: linear-gradient(to right, #667eea, #764ba2);
-    color: white;
-    font-size: 0.85rem;
-    padding: 0.4rem 1rem;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.btn-primary:hover,
 .btn-admin:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  background: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
 }
 
-/* רספונסיביות */
-@media (max-width: 800px) {
-    .project-card {
-        width: 90%;
-    }
+/* Responsive Design */
+@media (max-width: 768px) {
+  .project-card {
+    padding: 1.5rem;
+  }
+
+  .project-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .project-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stat {
+    flex: 1;
+    min-width: auto;
+  }
+
+  .project-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .btn-primary,
+  .btn-admin {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    padding: 1rem;
+  }
+
+  .project-name {
+    font-size: 1.25rem;
+  }
+
+  .project-stats {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .stat {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .stat-value {
+    font-size: 1rem;
+  }
 }

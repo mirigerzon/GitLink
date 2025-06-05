@@ -1,6 +1,4 @@
-/* Home Component Styles */
 .home-container {
-    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
     position: relative;
 }
 
@@ -26,7 +24,7 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     animation: fadeInUp 1s ease-out;
-    height: 60vh;
+    /* height: 70vh; */
 }
 
 @keyframes fadeInUp {
@@ -70,6 +68,7 @@
     line-height: 1.6;
     opacity: 0.9;
     animation: slideInRight 1s ease-out 0.6s both;
+    margin: 1em;
 }
 
 @keyframes slideInRight {

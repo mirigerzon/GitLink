@@ -31,10 +31,15 @@ function Developers() {
   return (
     <div className="developers-container">
       <div className="developers-header">
-        <h1>Developers comumunity</h1>
-        <div className="conrolels-section">
-          <Search data={developers} setFilteredData={setFilteredDevelopers} searchFields={["git_name"]} placeholder="Search by gitName." />
-          <Sort data={filteredDevelopers} setFilteredData={setFilteredDevelopers} sortOptions={[{ key: "languages", label: "languages" }, { key: "rating", label: "rating" }, { key: "experience", label: "experience" },]} />
+        <h1>Developers community</h1>
+        <div className="controllers-section">
+          <Search
+            data={developers}
+            setFilteredData={setFilteredDevelopers}
+            searchFields={["git_name"]}
+            placeholder="Search by gitName."
+          />
+          {/* <Sort data={filteredDevelopers} setFilteredData={setFilteredDevelopers} sortOptions={[{ key: "languages", label: "languages" }, { key: "rating", label: "rating" }, { key: "experience", label: "experience" },]} /> */}
         </div>
       </div>
       <div className="developers-grid">

@@ -31,14 +31,16 @@ function Jobs() {
 
   return (
     <div className="jobs-container">
-      <div className="jobs-filters">
-        <Search
-          data={jobs}
-          setFilteredData={setFilteredJobs}
-          searchFields={["name"]}
-          placeholder="Search jobs..."
-        />
-        <Sort
+      <h1>Jobs community</h1>
+      <div className="controllers-section">
+        <div className="jobs-filters">
+          <Search
+            data={jobs}
+            setFilteredData={setFilteredJobs}
+            searchFields={["name"]}
+            placeholder="Search jobs..."
+          />
+          {/* <Sort
           data={filteredJobs}
           setFilteredData={setFilteredJobs}
           sortOptions={[
@@ -52,7 +54,8 @@ function Jobs() {
               type: "multiSelect",
             },
           ]}
-        />
+        /> */}
+        </div>
       </div>
       <div className="jobs-grid">
         {filteredJobs.length > 0 &&

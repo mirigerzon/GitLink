@@ -64,8 +64,8 @@ function Login() {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h2>Welcome Back</h2>
-          <p>Sign in to your GitLink account</p>
+          <h2 className="login-title">Welcome Back</h2>
+          <p className="login-subtitle">Sign in to your GitLink account</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="login-form">

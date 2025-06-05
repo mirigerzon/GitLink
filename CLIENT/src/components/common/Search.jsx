@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import '../../style/Search.css';
 
 const Search = ({ data, setFilteredData, searchFields = [], placeholder = "search...", className = "" }) => {
   const [searchTerm, setSearchTerm] = useState("");
