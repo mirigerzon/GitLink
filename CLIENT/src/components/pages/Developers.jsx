@@ -36,10 +36,14 @@ function Developers() {
           <Search
             data={developers}
             setFilteredData={setFilteredDevelopers}
-            searchFields={["git_name"]}
-            placeholder="Search by gitName."
+            searchFields={["git_name", "email", "languages"]}
+            placeholder="Search by GitHub name, email or programming languages..."
           />
-          {/* <Sort data={filteredDevelopers} setFilteredData={setFilteredDevelopers} sortOptions={[{ key: "languages", label: "languages" }, { key: "rating", label: "rating" }, { key: "experience", label: "experience" },]} /> */}
+          <Sort
+            type="developers"
+            setUserData={setFilteredDevelopers}
+            originalData={developers}
+          />
         </div>
       </div>
       <div className="developers-grid">

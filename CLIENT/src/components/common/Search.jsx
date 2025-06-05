@@ -1,7 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
-import '../../style/Search.css';
+import "../../style/Search.css";
 
-const Search = ({ data, setFilteredData, searchFields = [], placeholder = "search...", className = "" }) => {
+const Search = ({
+  data,
+  setFilteredData,
+  searchFields = [],
+  placeholder = "search...",
+  className = "",
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const memoizedSearchFields = useMemo(
@@ -39,15 +45,6 @@ const Search = ({ data, setFilteredData, searchFields = [], placeholder = "searc
           placeholder={placeholder}
           className="search-input"
         />
-        {searchTerm && (
-          <button
-            onClick={() => setSearchTerm("")}
-            className="clear-button"
-            type="button"
-          >
-            ×
-          </button>
-        )}
       </div>
     </div>
   );

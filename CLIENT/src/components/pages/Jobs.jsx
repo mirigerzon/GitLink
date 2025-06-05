@@ -24,7 +24,7 @@ function Jobs() {
       onSuccess: (data) => {
         setJobs(data);
       },
-      onError: (err) => console.error(`Failed to fetch programers: ${err}`),
+      onError: (err) => console.error(`Failed to fetch developers: ${err}`),
       logOut,
     });
   }, [isChange, currentUser]);
@@ -33,29 +33,13 @@ function Jobs() {
     <div className="jobs-container">
       <h1>Jobs community</h1>
       <div className="controllers-section">
-        <div className="jobs-filters">
-          <Search
-            data={jobs}
-            setFilteredData={setFilteredJobs}
-            searchFields={["name"]}
-            placeholder="Search jobs..."
-          />
-          {/* <Sort
-          data={filteredJobs}
+        <Search
+          data={jobs}
           setFilteredData={setFilteredJobs}
-          sortOptions={[
-            { key: "experience", label: "experience" },
-            { key: "views", label: "views" },
-          ]}
-          filterOptions={[
-            {
-              key: "languages",
-              label: "languages",
-              type: "multiSelect",
-            },
-          ]}
-        /> */}
-        </div>
+          searchFields={["name", "languages"]}
+          placeholder="Search by job title or required technologies..."
+        />
+        <Sort type="jobs" setUserData={setFilteredJobs} originalData={jobs} />
       </div>
       <div className="jobs-grid">
         {filteredJobs.length > 0 &&

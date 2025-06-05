@@ -5,6 +5,19 @@
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
+.controllers-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  align-items: center;
+  justify-content: center;
+}
+
 .projects-container h1 {
   font-size: 4rem;
   background: linear-gradient(135deg, #667eea, #764ba2);
