@@ -109,6 +109,7 @@ function Profile() {
     reset({
       git_name: gitName,
       name: repo.name,
+      forks_count: repo.forks_count,
       url: repo.html_url,
       languages: repo.languages,
       details: repo.details || "",

@@ -25,6 +25,75 @@
 [2025-06-05T14:03:12.472Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"charlieGH"}]
 [2025-06-05T14:03:14.685Z] [INFO] Fetched from projects with conditions=[]
 [2025-06-05T14:03:14.938Z] [INFO] Fetched from projects with conditions=[]
+<<<<<<< HEAD
+[2025-06-05T18:33:37.648Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T18:33:37.653Z] [ERROR] ERROR fetching from users - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T18:33:37.672Z] [ERROR] ERROR fetching from users - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T18:33:37.675Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T18:33:41.414Z] [INFO] User logged out
+[2025-06-05T18:33:49.031Z] [ERROR] Login error for git_name=mirigerzon - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T18:34:16.789Z] [ERROR] Login error for git_name=mirigerzon - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T18:34:28.487Z] [ERROR] Login error for git_name=mirigerzon - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T18:35:12.391Z] [ERROR] Login error for git_name=mirigerzon - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T18:36:19.999Z] [INFO] User logged in successfully: git_name=mirigerzon, ip=::1
+[2025-06-05T18:36:27.250Z] [INFO] Fetched from users with conditions=[]
+[2025-06-05T18:36:27.258Z] [INFO] Fetched from users with conditions=[]
+[2025-06-05T18:36:32.460Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T18:36:32.467Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T18:36:35.527Z] [INFO] Fetched from jobs with conditions=[]
+[2025-06-05T18:36:35.533Z] [INFO] Fetched from jobs with conditions=[]
+[2025-06-05T18:36:37.562Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:36:37.570Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:36:37.571Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:36:37.576Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:36:45.103Z] [INFO] Fetched from jobs with conditions=[]
+[2025-06-05T18:36:45.107Z] [INFO] Fetched from jobs with conditions=[]
+[2025-06-05T18:36:46.785Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T18:36:46.789Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T18:37:53.263Z] [INFO] Fetched from users with conditions=[]
+[2025-06-05T18:37:53.271Z] [INFO] Fetched from users with conditions=[]
+[2025-06-05T18:38:09.028Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:38:09.031Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:38:09.043Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:38:09.045Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:49:55.228Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:49:55.231Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:49:55.241Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:49:55.243Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:52:39.122Z] [INFO] User logged out
+[2025-06-05T18:53:11.835Z] [INFO] User registered successfully: git_name=mirigerzon, ip=::1
+[2025-06-05T18:53:19.628Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:53:19.631Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:53:19.643Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:53:19.645Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:53:37.498Z] [ERROR] ERROR creating item in table=projects - Data too long for column 'details' at row 1
+[2025-06-05T18:55:12.249Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:12.249Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:12.255Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:12.256Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:14.636Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:14.634Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:14.643Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:14.644Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:24.362Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:24.370Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:24.371Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:55:24.378Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:56:25.090Z] [ERROR] ERROR creating item in table=projects - Data too long for column 'details' at row 1
+[2025-06-05T18:59:39.731Z] [INFO] Created new item in table=projects with data={"git_name":"mirigerzon","name":"first-year-project-4-Simulation-of-AND-TO-AND-system","forks_count":0,"url":"https://github.com/mirigerzon/first-year-project-4-Simulation-of-AND-TO-AND-system","languages":"c++, java, html, css, react","details":"h h h h h"}
+[2025-06-05T18:59:47.373Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:59:47.376Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:59:47.510Z] [INFO] Fetched from users with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:59:47.514Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"}]
+[2025-06-05T18:59:52.671Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"},{"field":"id","value":5}]
+[2025-06-05T18:59:52.742Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"},{"field":"id","value":5}]
+[2025-06-05T19:00:04.999Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"},{"field":"id","value":5}]
+[2025-06-05T19:00:05.146Z] [INFO] Fetched from projects with conditions=[{"field":"git_name","value":"mirigerzon"},{"field":"id","value":5}]
+[2025-06-05T19:00:10.335Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:00:10.499Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:00:16.822Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:00:16.972Z] [INFO] Fetched from projects with conditions=[]
+=======
 [2025-06-05T15:59:52.989Z] [INFO] Fetched from users with conditions=[]
 [2025-06-05T15:59:52.998Z] [INFO] Fetched from users with conditions=[]
 [2025-06-05T15:59:55.413Z] [INFO] Fetched from projects with conditions=[]
@@ -742,3 +811,62 @@
 [2025-06-05T18:38:55.142Z] [INFO] Fetched from users with conditions=[]
 [2025-06-05T18:39:00.493Z] [INFO] Fetched from users with conditions=[]
 [2025-06-05T18:39:00.497Z] [INFO] Fetched from users with conditions=[]
+>>>>>>> 38888c82ae564f42709d1d5fd9767372a6d980ac
+[2025-06-05T19:11:44.159Z] [INFO] Access token refreshed for userId=4, ip=::1
+[2025-06-05T19:11:44.163Z] [INFO] Access token refreshed for userId=4, ip=::1
+[2025-06-05T19:11:44.199Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:11:44.205Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:11:45.282Z] [INFO] User logged out
+[2025-06-05T19:11:45.308Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:13:13.300Z] [INFO] User logged in successfully: git_name=mirigerzon, ip=::1
+[2025-06-05T19:41:50.768Z] [ERROR] ERROR fetching from jobs - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:41:50.792Z] [ERROR] ERROR fetching from jobs - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:41:56.769Z] [ERROR] ERROR fetching from jobs - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:41:56.796Z] [ERROR] ERROR fetching from jobs - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:42:13.804Z] [ERROR] ERROR fetching from users - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:42:13.823Z] [ERROR] ERROR fetching from users - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:42:14.490Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:42:14.508Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:42:15.299Z] [ERROR] ERROR fetching from jobs - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:42:15.320Z] [ERROR] ERROR fetching from jobs - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:46:05.186Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:46:05.203Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:46:26.840Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:46:26.855Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:46:44.862Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:46:44.885Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:46:46.840Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:46:46.857Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:14.026Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:14.042Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:14.829Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:14.843Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:21.818Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:21.833Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:41.832Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:41.847Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:47.835Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:47.850Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:51.836Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:51.852Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:53.824Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:53.878Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:58.834Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:58.857Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:59.842Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:47:59.860Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:48:12.185Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:48:12.201Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:48:36.080Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:48:36.095Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:48:49.069Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:48:49.087Z] [ERROR] ERROR fetching from projects - Access denied for user 'root'@'localhost' (using password: YES)
+[2025-06-05T19:49:12.697Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:49:12.771Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:49:54.754Z] [INFO] User logged in successfully: git_name=aliceGH, ip=::1
+[2025-06-05T19:49:56.328Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:49:56.340Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:50:52.032Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:50:52.042Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:51:37.657Z] [INFO] Fetched from projects with conditions=[]
+[2025-06-05T19:51:37.666Z] [INFO] Fetched from projects with conditions=[]

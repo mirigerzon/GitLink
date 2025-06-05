@@ -32,7 +32,7 @@ async function seed() {
 
   // --- Projects
   await db.query(`
-    INSERT INTO projects (git_name, name, url, languages, details, views, rating, rating_count)
+    INSERT INTO projects (git_name, name, url, languages, details, forks_count, rating, rating_count)
     VALUES 
       ('aliceGH', 'Portfolio', 'https://github.com/alice/portfolio', 'HTML,CSS,JS', 'Personal site', 10, 0, 0),
       ('aliceGH', 'Blog Engine', 'https://github.com/alice/blog', 'Node.js', 'Blog backend', 5, 0, 0),

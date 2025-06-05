@@ -5,7 +5,7 @@ import { CurrentUser } from "../../App";
 import { fetchData } from "./fetchData";
 
 export function useLogout() {
-  const { currentUser, setCurrentUser } = useContext(CurrentUser);
+  const { setCurrentUser } = useContext(CurrentUser);
   const navigate = useNavigate();
 
   const logOut = () => {

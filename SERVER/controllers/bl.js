@@ -32,17 +32,32 @@ async function rateProject(userGitName, projectId, rating) {
   });
 
   const project = (await dal.GET("projects", [{ field: "id", value: projectId }]))[0];
-  const newRating =
-    ((project.rating || 0) * (project.numOfRatings || 0) + rating) /
-    ((project.numOfRatings || 0) + 1);
+  const newProjectRating = Math.round((
+    ((project.rating || 0) * (project.rating_count || 0) + rating) /
+    ((project.rating_count || 0) + 1)
+  ) * 100) / 100;
 
-  return await dal.PUT("projects", {
-    rating: newRating,
-    numOfRatings: (project.numOfRatings || 0) + 1
+  await dal.PUT("projects", {
+    rating: newProjectRating,
+    rating_count: (project.rating_count || 0) + 1
   }, [{ field: "id", value: projectId }]);
+
+  await updateUserRating(project.git_name);
 }
 
+async function updateUserRating(gitName) {
+  const creatorProjects = await dal.GET("projects", [
+    { field: "git_name", value: gitName }
+  ]);
+  const ratedProjects = creatorProjects.filter(p => p.rating_count > 0);
+  const totalRatings = ratedProjects.reduce((sum, p) => sum + p.rating * p.rating_count, 0);
+  const totalCount = ratedProjects.reduce((sum, p) => sum + p.rating_count, 0);
+  const userRating = totalCount > 0 ? Math.round((totalRatings / totalCount) * 100) / 100 : null;
 
+  await dal.PUT("users", {
+    rating: userRating
+  }, [{ field: "git_name", value: gitName }]);
+}
 
 module.exports = {
   getItemByConditions,

@@ -4,33 +4,43 @@ import { useContext, useState } from "react";
 import { CurrentUser } from "../../../App";
 import { fetchData } from "../../hooks/fetchData";
 
-function Project({ projectData }) {
+function Project({ projectData, setIsChange }) {
   const navigate = useNavigate();
   const { currentUser } = useContext(CurrentUser);
-  const [hasRated, setHasRated] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(0);
 
   const isOwner = currentUser?.git_name === projectData.git_name;
-  const canRate = currentUser && !isOwner && !hasRated;
+  // allow slider visible always, but rating only allowed if connected, not owner, and not rated yet
+  const canRate = currentUser && !isOwner;
 
-  const handleRate = (rating) => {
+  const handleRate = () => {
+    if (!currentUser) {
+      alert("You must be logged in to rate this project.");
+      return;
+    }
+    if (selectedRating < 1) {
+      alert("Please select a rating before submitting.");
+      return;
+    }
     fetchData({
       type: "projects/rate",
-      role: currentUser ? `/${currentUser.role}` : "gousts",
+      role: currentUser ? `/${currentUser.role}` : "guests",
       method: "POST",
       body: {
         project_id: projectData.id,
-        rating,
+        rating: selectedRating,
       },
-      onSuccess: () => {
-        setHasRated(true);
-        alert("Thanks for rating!");
+      onSuccess: (res) => {
+        setIsChange(1);
+        alert(`${res.message}`);
+        setSelectedRating(0);
       },
       onError: (err) => {
         console.error("Rating failed", err);
-        alert("Rating failed");
+        alert(`${err}`);
+        setSelectedRating(0);
       },
     });
-
   };
 
   return (
@@ -90,17 +100,25 @@ function Project({ projectData }) {
         )}
       </div>
 
-      {canRate && (
-        <div className="rating-section">
-          <p>Rate this project:</p>
-          {[1, 2, 3, 4, 5].map((num) => (
-            <button key={num} onClick={() => handleRate(num)}>
-              {num}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+      <div className="rating-section">
+        <p>Rate this project: {selectedRating}</p>
+        <input
+          type="range"
+          min="1"
+          max="5"
+          step="1"
+          value={selectedRating}
+          onChange={(e) => setSelectedRating(Number(e.target.value))}
+          className="rating-slider"
+        />
+        <button
+          onClick={handleRate}
+          className="btn-primary"
+        >
+          Submit Rating
+        </button>
+      </div>
+      </div>
   );
 }
 

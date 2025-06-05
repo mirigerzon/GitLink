@@ -1,11 +1,11 @@
 import Cookies from 'js-cookie';
 
 export const fetchData = (props) => {
-const { role = "", type, params = {}, method = "GET", body = null, onSuccess, onError, logOut = null }=props;
+    const { role = "", type, params = {}, method = "GET", body = null, onSuccess, onError, logOut = null } = props;
 
-const query = method === "GET" ? `?${new URLSearchParams(params).toString()}` : "";
-const url = `http://localhost:3001${role}/${type}${query}`;
-    const token = Cookies.get('accessToken'); 
+    const query = method === "GET" ? `?${new URLSearchParams(params).toString()}` : "";
+    const url = `http://localhost:3001${role}/${type}${query}`;
+    const token = Cookies.get('accessToken');
 
     const options = (tokenToUse) => {
         const headers = {
@@ -43,15 +43,16 @@ const url = `http://localhost:3001${role}/${type}${query}`;
             }
             return response;
         })
-        .then(response => {
-            if (!response.ok) throw new Error(`Error: ${response.status}`);
-            return response.json();
+        .then(async response => {
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw data;
+            return data;
         })
         .then(data => {
             if (onSuccess) onSuccess(data);
         })
         .catch(error => {
             console.error(error);
-            if (onError) onError(error.message);
+            if (onError) onError(error.message || error.error || JSON.stringify(error));
         });
 };

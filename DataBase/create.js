@@ -60,14 +60,14 @@ async function createTables(connection) {
     //projects
     await connection.query(`
         CREATE TABLE IF NOT EXISTS projects (
-            is_active BOOLEAN DEFAULT TRUE,
             id INT AUTO_INCREMENT PRIMARY KEY,
+            is_active BOOLEAN DEFAULT TRUE,
             git_name VARCHAR(100) NOT NULL,
             name VARCHAR(100) NOT NULL,
             url VARCHAR(255) NOT NULL,
             languages VARCHAR(255),
             details VARCHAR(255),
-            views INT NOT NULL DEFAULT 0,
+            forks_count INT NOT NULL DEFAULT 0,
             rating DOUBLE DEFAULT 0,
             rating_count  INT DEFAULT 0,
             FOREIGN KEY (git_name) REFERENCES users(git_name)
@@ -77,6 +77,7 @@ async function createTables(connection) {
     await connection.query(`
         CREATE TABLE IF NOT EXISTS project_ratings (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        is_active BOOLEAN DEFAULT TRUE,
         git_name VARCHAR(100) NOT NULL,
         project_id INT NOT NULL,
         rating TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
@@ -88,8 +89,8 @@ async function createTables(connection) {
     //jobs
     await connection.query(`
         CREATE TABLE IF NOT EXISTS jobs (
-            is_active BOOLEAN DEFAULT TRUE,
             id INT AUTO_INCREMENT PRIMARY KEY,
+            is_active BOOLEAN DEFAULT TRUE,
             user_id INT NOT NULL,
             name VARCHAR(100) NOT NULL,
             experience INT NOT NULL,
@@ -101,8 +102,8 @@ async function createTables(connection) {
     //messages
     await connection.query(`
         CREATE TABLE IF NOT EXISTS messages (
-            is_active BOOLEAN DEFAULT TRUE,
             id INT AUTO_INCREMENT PRIMARY KEY,
+            is_active BOOLEAN DEFAULT TRUE,
             user_id INT NOT NULL,
             title VARCHAR(100) NOT NULL,
             content VARCHAR(100),
