@@ -1,0 +1,273 @@
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { CurrentUser } from './App.jsx';
+import { fetchData } from './FetchData';
+import { useLogout } from './LogOut.jsx';
+import '../style/Profile.css';
+
+function Profile() {
+    const { gitName } = useParams();
+    const { currentUser } = useContext(CurrentUser);
+    const [isChange, setIsChange] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [programmerData, setProgrammerData] = useState(null);
+    const [projectsToAdd, setProjectToAdd] = useState(null);
+    const [existingProjects, setExistingProjects] = useState(null);
+    const [openRepo, setOpenRepo] = useState(null);
+    const logOut = useLogout();
+    const { register, handleSubmit, reset } = useForm();
+
+    useEffect(() => {
+        setIsChange(0);
+        setLoading(true);
+        fetchData({
+            type: "users",
+            params: { git_name: gitName },
+            onSuccess: (data) => {
+                setProgrammerData(data[0]);
+                setLoading(false);
+            },
+            onError: (err) => {
+                setError(`Failed to fetch programmer data: ${err}`);
+                setLoading(false);
+            },
+        });
+    }, [gitName, isChange]);
+
+    useEffect(() => {
+        setIsChange(0);
+        setLoading(true);
+        fetchData({
+            type: "projects",
+            params: { git_name: gitName },
+            onSuccess: (data) => {
+                setExistingProjects(data);
+                setLoading(false);
+            },
+            onError: (err) => {
+                setError(`Failed to fetch programmer data: ${err}`);
+                setLoading(false);
+            },
+        });
+    }, [gitName, isChange]);
+
+
+    if (loading) return <div className="profile-loading">Loading profile...</div>;
+    if (error) return <div className="profile-error">{error}</div>;
+    if (!programmerData) return <div className="profile-error">Programmer not found</div>;
+
+    const isOwnProfile = currentUser && gitName === currentUser.git_name;
+
+    async function getGithubRepoNames() {
+        const url = `https://api.github.com/users/${gitName}/repos?per_page=100`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+            const repos = await response.json();
+            setProjectToAdd(repos);
+        } catch (error) {
+            console.error('Error fetching repositories:', error);
+        }
+    }
+
+    async function onSubmit(data) {
+        console.log('Adding project with data:', data);
+        try {
+            await fetchData({
+                type: "projects",
+                role: "/developer",
+                method: "POST",
+                body: data,
+                onSuccess: (result) => {
+                    console.log("add successful:", result);
+                    setIsChange(1);
+                    setOpenRepo(null);
+                    reset();
+                },
+                onError: (error) => {
+                    console.log("add was unsuccessful", error);
+                },
+                logOut,
+            });
+        } catch (error) {
+            console.log("Unexpected error:", error);
+        }
+        reset();
+    }
+
+    function openAddForm(repo) {
+        setOpenRepo(repo);
+        reset({
+            git_name: gitName,
+            name: repo.name,
+            url: repo.html_url,
+            languages: repo.languages,
+            details: repo.details || ''
+        });
+    }
+
+    function deleteProject(project) {
+        fetchData({
+            type: "projects",
+            role: "/developer",
+            method: "DELETE",
+            params: { id: project.id },
+            onSuccess: () => {
+                setIsChange(1);
+            },
+            onError: (error) => {
+                console.log("Delete failed", error);
+            },
+            logOut,
+        });
+    }
+
+    return (
+        <div className="profile-container">
+            <div className="profile-header">
+                <div className="profile-image-section">
+                    <img
+                        src={programmerData.profileImage || "/default-avatar.png"}
+                        alt={`${programmerData.name}'s profile`}
+                        className="profile-image"
+                    />
+                </div>
+
+                <div className="profile-info">
+                    <h1 className="profile-name">{programmerData.username}</h1>
+                    <div className="profile-details">
+                        <div className="detail-item">
+                            <span className="detail-label">Role:</span>
+                            <span className="detail-value">{programmerData.role}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Email:</span>
+                            <span className="detail-value">{programmerData.email}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Phone:</span>
+                            <span className="detail-value">{programmerData.phone}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Experience:</span>
+                            <span className="detail-value">{programmerData.experience} years</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Rating:</span>
+                            <span className="detail-value">{programmerData.rating}/5 ⭐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="profile-content">
+                <div className="profile-section">
+                    <h2>About</h2>
+                    <p className="profile-description">
+                        {programmerData.about || "No description available"}
+                    </p>
+                    <h2>Programming Languages</h2>
+                    <div className="languages-container">
+                        {programmerData.languages && programmerData.languages.length > 0 ? (
+                            programmerData.languages
+                                .split(',')
+                                .map(skill => skill.trim())
+                                .filter(skill => skill)
+                                .map((skill, index) => (
+                                    <h3 key={index} className="skill-tag">{skill}</h3>
+                                ))
+                        ) : (
+                            <p>No programming languages specified</p>
+                        )}
+                    </div>
+                </div>
+
+                {isOwnProfile && (
+                    <div className="profile-section">
+                        <h2>Existing Projects</h2>
+                        <ul>
+                            {existingProjects ? existingProjects.map(project => (
+                                <li key={project.id}>
+                                    {project.name}
+                                    <button onClick={() => deleteProject(project)}>delete</button>
+                                </li>
+                            ))
+                                :
+                                <p>no projects found</p>}
+                        </ul>
+                        <h2>Project Management</h2>
+                        <div className="project-actions">
+                            <button
+                                className="action-btn add-btn" onClick={getGithubRepoNames} >
+                                Add Projects
+                            </button>
+                        </div>
+
+                        {projectsToAdd && (
+                            <div className='projectsToAdd'>
+                                <div className='projectsName'>
+                                    <h3>Projects can be added:</h3>
+                                    <ul>
+                                        {projectsToAdd.map(repo => {
+                                            const alreadyExists = existingProjects?.some(
+                                                project => project.name === repo.name);
+                                            return (
+                                                <li key={repo.id}>
+                                                    {repo.name}
+                                                    <button disabled={alreadyExists} onClick={() => openAddForm(repo)}>add</button>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                                {openRepo && (
+                                    <form onSubmit={handleSubmit(onSubmit)} className="project-form">
+                                        <div className="form-group">
+                                            <input
+                                                type="text"
+                                                placeholder="Project name"
+                                                className="form-input"
+                                                {...register("name", { required: true })}
+                                                required
+                                            />
+                                        </div>
+
+                                        <div className="form-group">
+                                            <input
+                                                type="text"
+                                                placeholder="Languages used"
+                                                className="form-input"
+                                                {...register("languages", { required: true })}
+                                                required
+                                            />
+                                        </div>
+
+                                        <div className="form-group">
+                                            <textarea
+                                                placeholder="Description"
+                                                className="form-input textarea"
+                                                {...register("details")}
+                                            />
+                                        </div>
+
+                                        <div className="form-buttons">
+                                            <button type="submit" className="submit-btn">Add</button>
+                                            <button type="button" className="cancel-btn" onClick={() => setOpenRepo(null)}>Cancel</button>
+                                        </div>
+                                    </form>
+
+                                )}
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default Profile;

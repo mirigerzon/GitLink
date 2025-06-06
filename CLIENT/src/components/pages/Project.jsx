@@ -49,14 +49,14 @@ function Project({ projectData, setIsChange }) {
         <h3 className="project-name">{projectData.name}</h3>
         <div className="project-stats">
           <div className="stat">
-            <span className="stat-icon">📊</span>
-            <span className="stat-value">{projectData.commits}</span>
-            <span className="stat-label">Commits</span>
+            {/* <span className="stat-icon">📊</span> */}
+            <span className="stat-value">{projectData.rating}</span>
+            <span className="stat-label">⭐ Rating</span>
           </div>
           <div className="stat">
-            <span className="stat-icon">👀</span>
-            <span className="stat-value">{projectData.views}</span>
-            <span className="stat-label">Views</span>
+            {/* <span className="stat-icon">👀</span> */}
+            <span className="stat-value">{projectData.forks_count}</span>
+            <span className="stat-label">👀 Forks</span>
           </div>
         </div>
       </div>
@@ -83,6 +83,26 @@ function Project({ projectData, setIsChange }) {
       </div>
 
       <div className="project-actions">
+        <div className="rating-section">
+          <h4>Rate this project: {selectedRating}</h4>
+          <input
+            type="range"
+            min="1"
+            max="5"
+            step="1"
+            value={selectedRating}
+            disabled={isOwner}
+            onChange={(e) => setSelectedRating(Number(e.target.value))}
+            className="rating-slider"
+          />{selectedRating !=0 &&
+            <button
+              onClick={isOwner ? () => { alert("Sorry - you cannot rate your own project.") } : handleRate}
+              className="btn-rating"
+            >
+              Rate
+            </button>
+          }
+        </div>
         <button
           className="btn-primary"
           onClick={() => navigate(`/${projectData.git_name}/profile`)}
@@ -99,26 +119,7 @@ function Project({ projectData, setIsChange }) {
           </button>
         )}
       </div>
-
-      <div className="rating-section">
-        <p>Rate this project: {selectedRating}</p>
-        <input
-          type="range"
-          min="1"
-          max="5"
-          step="1"
-          value={selectedRating}
-          onChange={(e) => setSelectedRating(Number(e.target.value))}
-          className="rating-slider"
-        />
-        <button
-          onClick={handleRate}
-          className="btn-primary"
-        >
-          Submit Rating
-        </button>
-      </div>
-      </div>
+    </div>
   );
 }
 

@@ -56,7 +56,7 @@ function Projects() {
 
       <div className="projects-grid">
         {filteredProjects.map((project) => (
-          <Project key={project.id} projectData={project} />
+          <Project key={project.id} projectData={project} setIsChange={setIsChange} />
         ))}
       </div>
     </div>

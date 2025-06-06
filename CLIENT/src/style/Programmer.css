@@ -1,0 +1,200 @@
+/* Programmer Card Styling */
+.programmer-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    max-width: 300px;
+    margin: auto;
+}
+
+/* Grid wrapper suggestion - outside this card */
+.programmers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem 1rem;
+}
+
+/* Hover effect for inviting interaction */
+.programmer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    background: white;
+}
+
+/* Header section */
+.programmer-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.avatar {
+    position: relative;
+}
+
+.avatar-img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.online-indicator {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 10px;
+    height: 10px;
+    background-color: #38a169;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+/* Info section */
+.programmer-info {
+    margin-top: 0.8rem;
+    text-align: center;
+}
+
+.programmer-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.3rem;
+}
+
+.git-name {
+    font-size: 0.9rem;
+    color: #718096;
+    margin: 0;
+}
+
+.experience-badge {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 15px;
+    background: #667eea;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Stats section */
+.programmer-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.2rem 0;
+    gap: 0.5rem;
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 1.2rem;
+    color: #667eea;
+    margin-bottom: 0.2rem;
+}
+
+.stat-number {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #718096;
+}
+
+/* Skills */
+.skills-section {
+    margin-bottom: 1.2rem;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.skill-tag {
+    background: #edf2f7;
+    color: #2d3748;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    transition: background-color 0.2s;
+}
+
+.skill-tag:hover {
+    background-color: #e2e8f0;
+}
+
+/* Actions */
+.programmer-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-profile,
+.btn-projects {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-profile:hover,
+.btn-projects:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+/* Overlay */
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.03), rgba(118, 75, 162, 0.04));
+    border-radius: inherit;
+    z-index: -1;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .programmer-card {
+        padding: 1rem;
+        max-width: 90%;
+    }
+
+    .programmer-stats {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    .programmer-actions {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+}

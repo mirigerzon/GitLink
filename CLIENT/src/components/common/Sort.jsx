@@ -46,7 +46,6 @@ function Sort({ type, setUserData, originalData }) {
     setUserData(filteredData);
   }
 
-  // User filters
   if (type === "developers") {
     return (
       <div className="filter-container">
@@ -173,7 +172,7 @@ function Sort({ type, setUserData, originalData }) {
         </div>
 
         <div className="filter-group">
-          <label>Filter by Views:</label>
+          <label>Filter by forks:</label>
           <select
             onChange={(e) => {
               if (e.target.value === "all") {
@@ -181,16 +180,16 @@ function Sort({ type, setUserData, originalData }) {
                 return;
               }
               const filtered = originalData.filter((item) => {
-                const views = Number(item.views);
-                if (e.target.value === "high") return views >= 50;
+                const forks_count = Number(item.forks_count);
+                if (e.target.value === "high") return forks_count >= 50;
                 if (e.target.value === "medium")
-                  return views >= 10 && views < 50;
-                if (e.target.value === "low") return views < 10;
+                  return forks_count >= 10 && forks_count < 50;
+                if (e.target.value === "low") return forks_count < 10;
               });
               setUserData(filtered);
             }}
           >
-            <option value="all">All Views</option>
+            <option value="all">All forks</option>
             <option value="high">High (50+)</option>
             <option value="medium">Medium (10-49)</option>
             <option value="low">Low (0-9)</option>
