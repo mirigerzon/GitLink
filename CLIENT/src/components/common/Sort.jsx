@@ -1,4 +1,4 @@
-import '../../style/Sort.css'
+import '../../style/Sort.css';
 
 function Sort({ type, setUserData, originalData }) {
   function filterByField(field, value) {
@@ -26,14 +26,10 @@ function Sort({ type, setUserData, originalData }) {
         if (value === "medium") return rating >= 2 && rating < 4;
         if (value === "low") return rating < 2;
       }
-      if (field === "languages") {
-        return (
-          fieldValue && fieldValue.toLowerCase().includes(value.toLowerCase())
-        );
-      }
       if (field === "role") {
         return (
-          fieldValue && fieldValue.toLowerCase().includes(value.toLowerCase())
+          fieldValue &&
+          fieldValue.toLowerCase().includes(value.toLowerCase())
         );
       }
 
@@ -78,17 +74,6 @@ function Sort({ type, setUserData, originalData }) {
             <option value="low">Low (0-1)</option>
           </select>
         </div>
-
-        <div className="filter-group">
-          <label>Filter by Language:</label>
-          <select onChange={(e) => filterByField("languages", e.target.value)}>
-            <option value="all">All Languages</option>
-            <option value="javascript">JavaScript</option>
-            <option value="python">Python</option>
-            <option value="react">React</option>
-            <option value="typescript">TypeScript</option>
-          </select>
-        </div>
       </div>
     );
   }
@@ -104,17 +89,6 @@ function Sort({ type, setUserData, originalData }) {
             <option value="junior">Junior (0-2 years)</option>
             <option value="mid">Mid (3-5 years)</option>
             <option value="senior">Senior (6+ years)</option>
-          </select>
-        </div>
-
-        <div className="filter-group">
-          <label>Filter by Technology:</label>
-          <select onChange={(e) => filterByField("languages", e.target.value)}>
-            <option value="all">All Technologies</option>
-            <option value="react">React</option>
-            <option value="typescript">TypeScript</option>
-            <option value="javascript">JavaScript</option>
-            <option value="python">Python</option>
           </select>
         </div>
 
@@ -150,17 +124,6 @@ function Sort({ type, setUserData, originalData }) {
   if (type === "projects") {
     return (
       <div className="filter-container">
-        <div className="filter-group">
-          <label>Filter by Technology:</label>
-          <select onChange={(e) => filterByField("languages", e.target.value)}>
-            <option value="all">All Technologies</option>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="javascript">JavaScript</option>
-            <option value="react">React</option>
-          </select>
-        </div>
-
         <div className="filter-group">
           <label>Filter by Rating:</label>
           <select onChange={(e) => filterByField("rating", e.target.value)}>

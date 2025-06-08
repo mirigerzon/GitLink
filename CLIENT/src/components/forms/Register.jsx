@@ -64,7 +64,7 @@ function Register() {
   const onSecondSubmit = async (data) => {
     try {
       const formData = new FormData();
-
+  
       formData.append("username", userData.username);
       formData.append("password", userData.password);
       formData.append("git_name", data.git_name);
@@ -74,36 +74,20 @@ function Register() {
       formData.append("experience", data.experience);
       formData.append("about", data.about || "");
       formData.append("languages", data.languages || "");
+  
       if (useGitAvatar) {
-        const gitAvatarUrl = await fetchGitHubAvatar(data.git_name);
-        if (gitAvatarUrl) {
-          formData.append("profile_image", `${gitAvatarUrl}`);
-        }
+        // שימוש ישיר בכתובת התמונה:
+        const gitAvatarUrl = `https://github.com/${data.git_name}.png`;
+        formData.append("profile_image", gitAvatarUrl);
       } else if (data.profile_image && data.profile_image.length > 0) {
         formData.append("profile_image", data.profile_image[0]);
       }
+  
       await signUpFunc(formData);
       resetSecondForm();
     } catch (err) {
       setResponseText("Registration failed. Please try again.");
       console.error(err);
-    }
-  };
-
-  const fetchGitHubAvatar = async (gitUsername) => {
-    try {
-      const response = await fetch(
-        `https://api.github.com/users/${gitUsername}`
-      );
-      if (!response.ok) throw new Error("GitHub user not found");
-      const data = await response.json();
-      return data.avatar_url;
-    } catch (err) {
-      console.error("Failed to fetch GitHub avatar:", err);
-      setResponseText(
-        "Failed to fetch GitHub avatar. Please upload an image manually."
-      );
-      return "";
     }
   };
 

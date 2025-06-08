@@ -20,7 +20,7 @@ function Profile() {
   const [openRepo, setOpenRepo] = useState(null);
   const logOut = useLogout();
   const { register, handleSubmit, reset } = useForm();
-  const nuvigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsChange(0);
@@ -125,7 +125,7 @@ function Profile() {
             alt={`${developerData.name}'s profile`}
             className="profile-image"
           />
-          <button onClick={() => nuvigate(`/${gitName}/projects`)}>
+          <button onClick={() => navigate(`/${gitName}/projects`)}>
             view all projects
           </button>
         </div>
@@ -193,7 +193,7 @@ function Profile() {
                     {project.name}
                     <button
                       onClick={() =>
-                        nuvigate(
+                        navigate(
                           `/${currentUser.git_name}/projects/${project.id}`
                         )
                       }
