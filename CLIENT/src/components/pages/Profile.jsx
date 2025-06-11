@@ -2,7 +2,7 @@ import { React, useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { CurrentUser } from "../../../App";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import Update from "../common/Update";
 import Delete from "../common/Delete";
@@ -21,6 +21,7 @@ function Profile() {
   const [openRepo, setOpenRepo] = useState(null);
   const [userItemsType, setUserItemsType] = useState(null)
   const logOut = useLogout();
+  const fetchData = useFetchData();
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
 

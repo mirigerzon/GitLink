@@ -1,0 +1,107 @@
+.messages-container {
+    position: relative;
+}
+
+.messages-btn {
+    background: none;
+    font-size: 1.3rem;
+    width: 2vw;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.messages-icon-btn {
+    background: none;
+    border: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.messages-icon {
+    font-size: 1.5rem;
+    color: #444;
+}
+
+.messages-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    color: red;
+    font-size: 1.2rem;
+}
+
+.messages-panel {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.messages-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.mark-read-btn {
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.messages-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.message-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.message-item.unread {
+    background-color: #f5faff;
+    font-weight: bold;
+}
+
+.message-item.read {
+    background-color: #fafafa;
+}
+
+.messages-popup {
+    position: fixed;
+    left: 0vw;
+    top: 11.5vh;
+    height: 88.5vh;
+    background: rgb(233, 236, 249);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(102, 126, 234, 0.2);
+    width: 20vw;
+    padding: 1vw;
+}
+
+.messages-content{
+    background-color: #fafafa;
+    height: 84.2vh;
+    padding: 0.5vw;
+}
+
+.close-btn{
+    bottom: 3vh;
+    position: absolute;
+}

@@ -2,12 +2,13 @@ import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CurrentUser } from "../../../App";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 
 function Project({ projectData, setIsChange }) {
   const navigate = useNavigate();
   const { currentUser } = useContext(CurrentUser);
   const [selectedRating, setSelectedRating] = useState(0);
+  const fetchData = useFetchData();
 
   const isOwner = currentUser?.username === projectData.username;
   // allow slider visible always, but rating only allowed if connected, not owner, and not rated yet

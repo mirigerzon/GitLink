@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CurrentUser } from "./App";
-import { fetchData } from "./fetchData";
+import { useFetchData } from "./FetchData.js";
 
 function Add({ type, setIsChange, inputs, defaultValue, name = "Add" }) {
     const { currentUser } = useContext(CurrentUser);
     const [isScreen, setIsScreen] = useState(0);
+    const fetchData = useFetchData();
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
             ...defaultValue,

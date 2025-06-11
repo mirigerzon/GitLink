@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 // import { FaEdit } from "react-icons/fa"
 import { useLogout } from "../../hooks/LogOut";
 
 function Update({ type, itemId, setIsChange, inputs, role = null }) {
   const logOut = useLogout();
+  const fetchData = useFetchData();
   const [screen, setScreen] = useState(0);
   const [formData, setFormData] = useState({});
 

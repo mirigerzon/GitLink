@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { CurrentUser } from "../../../App";
 import Cookies from "js-cookie";
 import "../../style/Register.css";
 
 function Register() {
+  const fetchData = useFetchData();
   const {
     register: registerFirst,
     handleSubmit: handleFirstSubmit,

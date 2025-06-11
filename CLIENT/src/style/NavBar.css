@@ -45,12 +45,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 11.5vh;
   position: relative;
 }
 
 .nav-brand {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 1vw;
 }
 
 .brand-link {

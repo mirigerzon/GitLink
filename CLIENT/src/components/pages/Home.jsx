@@ -1,13 +1,8 @@
-
 import { useContext } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
-import { CurrentUser } from "../../../App";
 import "../../style/Home.css";
 
 function Home() {
-  const { currentUser } = useContext(CurrentUser);
-  const navigate = useNavigate();
-
   return (
     <div className="home-container">
       <main className="home-content">
@@ -42,9 +37,6 @@ function Home() {
             </div>
           </div>
         </div>
-        {/* <div className="outlet-section">
-          <Outlet />
-        </div> */}
       </main>
     </div>
   );

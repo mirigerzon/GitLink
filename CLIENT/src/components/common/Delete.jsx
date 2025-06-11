@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 function Delete({ type, itemId, setIsChange, role = null }) {
   const logOut = useLogout();

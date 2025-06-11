@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { CurrentUser } from "../../../App";
 import Cookies from "js-cookie";
 import "../../style/Login.css";
@@ -14,6 +14,7 @@ function Login() {
   );
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const fetchData = useFetchData();
 
   const onSubmit = async (data) => {
     setIsLoading(true);

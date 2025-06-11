@@ -3275,3 +3275,115 @@
 [2025-06-11T13:48:39.176Z] [INFO] Fetched data from table = developers 
 [2025-06-11T14:43:58.555Z] [INFO] Fetched data from table = developers 
 [2025-06-11T14:43:58.576Z] [INFO] Fetched data from table = developers 
+[2025-06-11T14:55:10.312Z] [INFO] Fetched data from table = developers 
+[2025-06-11T14:55:10.327Z] [INFO] Fetched data from table = developers 
+[2025-06-11T14:55:11.807Z] [INFO] Fetched data from table=users 
+[2025-06-11T14:55:11.822Z] [INFO] Fetched data from table=users 
+[2025-06-11T14:55:11.871Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"mirigerzon"}]
+[2025-06-11T15:13:17.013Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:13:17.020Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:13:17.036Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"mirigerzon"}]
+[2025-06-11T15:14:19.007Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:14:19.016Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:14:19.033Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"mirigerzon"}]
+[2025-06-11T15:14:25.009Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:14:25.020Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:14:25.039Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"mirigerzon"}]
+[2025-06-11T15:14:27.898Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:14:27.915Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:14:27.998Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"mirigerzon"}]
+[2025-06-11T15:14:30.027Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:14:30.040Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:14:30.068Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"mirigerzon"}]
+[2025-06-11T15:20:32.064Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:20:32.086Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:20:32.133Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"mirigerzon"}]
+[2025-06-11T15:20:34.029Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:20:34.043Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:20:34.069Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"mirigerzon"}]
+[2025-06-11T15:30:27.506Z] [INFO] Fetched data from table = developers 
+[2025-06-11T15:30:27.511Z] [INFO] Fetched data from table = developers 
+[2025-06-11T15:30:30.517Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:30:30.526Z] [INFO] Fetched data from table=users 
+[2025-06-11T15:30:30.546Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-11T16:11:41.944Z] [INFO] Fetched data from table = developers 
+[2025-06-11T16:11:41.954Z] [INFO] Fetched data from table = developers 
+[2025-06-11T16:11:55.549Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-11T16:11:55.559Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-11T16:44:11.297Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:44:18.103Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:48:45.156Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:48:45.170Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:48:59.991Z] [INFO] Access token refreshed for userId=4, ip=::1
+[2025-06-11T16:50:46.430Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:50:46.441Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:50:50.001Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:50:50.009Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:50:58.015Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:50:58.023Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:02.223Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:02.239Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:09.014Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:09.023Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:27.023Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:27.029Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:29.001Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:29.006Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:39.540Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:39.554Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:41.009Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:41.015Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:45.011Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:45.017Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:47.011Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:47.023Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:58.019Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:52:58.025Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:00.013Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:00.028Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:01.004Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:01.011Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:06.229Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:06.239Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:13.012Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:13.021Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:17.015Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:17.026Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:21.010Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:21.016Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:27.019Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:27.028Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:33.017Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:33.027Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:35.880Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:35.898Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:53:39.323Z] [INFO] Deleted itemId=10 from table=messages
+[2025-06-11T16:55:16.619Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:55:16.639Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:59:54.070Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T16:59:54.082Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:00:00.786Z] [INFO] Deleted itemId=12 from table=messages
+[2025-06-11T17:00:03.017Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:00:03.037Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:04:09.013Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:04:09.020Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:04:22.100Z] [INFO] Deleted itemId=11 from table=messages
+[2025-06-11T17:04:44.479Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:05:09.260Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:05:09.277Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:05:28.209Z] [INFO] Deleted itemId=13 from table=messages
+[2025-06-11T17:09:37.011Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:09:37.218Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:09:54.313Z] [INFO] Deleted itemId=14 from table=messages
+[2025-06-11T17:10:29.558Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:10:29.565Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:10:32.589Z] [INFO] Deleted itemId=15 from table=messages
+[2025-06-11T17:10:32.604Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T17:14:06.550Z] [INFO] User logged out
+[2025-06-11T17:16:31.525Z] [ERROR] Registration error for email=sara3280624@gmail.com - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'read, timestamp) VALUES (5, '? - Welcome to our platform, sara! We\'re excited t' at line 1
+[2025-06-11T17:20:55.836Z] [ERROR] Registration error for email=miri@gmail.com - Unknown column 'user_id' in 'field list'
+[2025-06-11T17:23:42.368Z] [ERROR] Registration error for email=fmnvlkm@gmail.com - Out of range value for column 'phone' at row 1
+[2025-06-11T17:24:41.202Z] [ERROR] Registration error for email=M0583216525@gmail.com - Column 'email' cannot be null
+[2025-06-11T17:26:08.859Z] [INFO] User registered successfully: email=y@y, ip=::1
+[2025-06-11T17:26:08.994Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"y@y"}]
+[2025-06-11T17:26:09.015Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"y@y"}]

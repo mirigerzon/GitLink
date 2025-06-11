@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CurrentUser } from "../../../App";
 import { useLogout } from "../../hooks/LogOut";
+import { Messages } from "../pages/Messages";
 import "../../style/NavBar.css";
 
 function Navigation() {
@@ -16,6 +17,9 @@ function Navigation() {
           <Link to="/home" className="brand-link">
             GitLink
           </Link>
+          {currentUser && <div>
+            <Messages />
+          </div>}
         </div>
         <div className="nav-links">
           <Link to={"/home"} className={`nav-link ${location.pathname.includes("home") ? "active" : ""}`}  >

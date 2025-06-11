@@ -134,13 +134,18 @@ async function createTables(connection) {
     // messages
     await connection.query(`
         CREATE TABLE IF NOT EXISTS messages (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
-            title VARCHAR(100) NOT NULL,
-            content VARCHAR(100),
-            is_active BOOLEAN DEFAULT TRUE,
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-        )
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(100) NOT NULL,
+        title VARCHAR(50) NOT NULL,
+        content VARCHAR(200),
+        is_read BOOLEAN DEFAULT FALSE,
+        important BOOLEAN DEFAULT FALSE,
+        type VARCHAR(20) DEFAULT 'info',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        action_url VARCHAR(255),
+        is_active BOOLEAN DEFAULT TRUE,
+        FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
+    );
     `);
 }
 

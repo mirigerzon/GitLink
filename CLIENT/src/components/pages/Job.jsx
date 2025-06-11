@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 function Job({ jobData }) {
   const navigate = useNavigate();
   const handleApply = () => {
-    // TODO: Implement job application logic
     console.log("Apply to job:", jobData.title);
   };
 

@@ -20,11 +20,13 @@ app.use(cookieParser());
 app.use("", authRoutes);
 app.use('/upload', express.static('./upload'));
 
+const messagesRoutes = require("./REST API/routes/messages.js");
 const projectsRoutes = require("./REST API/routes/projects.js");
 const developersRoutes = require("./REST API/routes/developers.js");
 const recruitersRoutes = require("./REST API/routes/recruiters.js");
 const jobsRoutes = require("./REST API/routes/jobs.js");
 const usersRoutes = require("./REST API/routes/users.js");
+app.use("/:role/messages", verifyToken, messagesRoutes);
 app.use("/:role/jobs", verifyToken, jobsRoutes);
 app.use("/:role/projects", verifyToken, projectsRoutes);
 app.use("/:role/developers", verifyToken, developersRoutes);

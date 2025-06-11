@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CurrentUser } from "../../../App";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import Job from "./Job";
 import "../../style/jobs.css";
@@ -14,6 +14,7 @@ function Jobs() {
   const { currentUser } = useContext(CurrentUser);
   const [isChange, setIsChange] = useState(0);
   const logOut = useLogout();
+  const fetchData = useFetchData();
 
   const [filteredJobs, setFilteredJobs] = useState(jobs);
 

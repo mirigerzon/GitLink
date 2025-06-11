@@ -1,7 +1,7 @@
 import Developer from "./Developer";
 import { React, useState, useEffect, useContext } from "react";
 import { CurrentUser } from "../../../App";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import "../../style/developers.css";
 import Search from "../common/Search";
@@ -10,6 +10,7 @@ import Sort from "../common/Sort";
 function Developers() {
   const { currentUser } = useContext(CurrentUser);
   const logOut = useLogout();
+  const fetchData = useFetchData();
   const [developers, setDevelopers] = useState([]);
   const [filteredDevelopers, setFilteredDevelopers] = useState(developers);
   const [isChange, setIsChange] = useState(0);

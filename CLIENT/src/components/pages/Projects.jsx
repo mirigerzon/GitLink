@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Project from "./Project";
 import "../../style/Projects.css";
 import { CurrentUser } from "../../../App";
-import { fetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import Search from "../common/Search";
 import Sort from "../common/Sort";
@@ -11,6 +11,7 @@ import Sort from "../common/Sort";
 function Projects() {
   const { username, id } = useParams();
   const logOut = useLogout();
+  const fetchData = useFetchData();
   const { currentUser } = useContext(CurrentUser);
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState(projects);

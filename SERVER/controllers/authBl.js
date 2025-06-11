@@ -51,6 +51,12 @@ const registerNewUser = async (userData) => {
         await genericDal.POST("recruiters", recruiterData);
     }
 
+    await genericDal.POST("messages", {
+        email: email,
+        title: 'WELCOME!',
+        content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
+    });
+
     return {
         id: newUser.insertId,
         ...generalUser,
