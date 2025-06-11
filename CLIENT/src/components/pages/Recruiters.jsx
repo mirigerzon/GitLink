@@ -1,27 +1,28 @@
-import Developer from "./Developer";
+import Recruiter from "./Recruiter";
 import { React, useState, useEffect, useContext } from "react";
 import { CurrentUser } from "../../../App";
 import { fetchData } from "../../hooks/fetchData";
 import { useLogout } from "../../hooks/LogOut";
-import "../../style/developers.css";
+import "../../style/recruiters.css";
 import Search from "../common/Search";
 import Sort from "../common/Sort";
 
-function Developers() {
+function Recruiters() {
   const { currentUser } = useContext(CurrentUser);
   const logOut = useLogout();
-  const [developers, setDevelopers] = useState([]);
-  const [filteredDevelopers, setFilteredDevelopers] = useState(developers);
+  const [recruiters, setRecruiters] = useState([]);
+  const [filteredRecruiters, setFilteredRecruiters] = useState(recruiters);
   const [isChange, setIsChange] = useState(0);
 
   useEffect(() => {
     setIsChange(0);
     fetchData({
       role: currentUser ? `/${currentUser.role}` : "/guest",
-      type: "developers",
+      type: "recruiters",
+      params: { role: "recruiter" },
       method: "GET",
       onSuccess: (data) => {
-        setDevelopers(data);
+        setRecruiters(data);
       },
       onError: (err) => console.error(`Failed to fetch programers: ${err}`),
       logOut,
@@ -29,27 +30,27 @@ function Developers() {
   }, [currentUser, isChange]);
 
   return (
-    <div className="developers-container">
-      <div className="developers-header">
-        <h1>Developers community</h1>
+    <div className="recruiters-container">
+      <div className="recruiters-header">
+        <h1>Recruiters community</h1>
         <div className="controllers-section">
           <Search
-            data={developers}
-            setFilteredData={setFilteredDevelopers}
+            data={recruiters}
+            setFilteredData={setFilteredRecruiters}
             searchFields={["git_name", "email", "languages"]}
             placeholder="Search by GitHub name, email or programming languages..."
           />
           <Sort
-            type="developers"
-            setUserData={setFilteredDevelopers}
-            originalData={developers}
+            type="recruiters"
+            setUserData={setFilteredRecruiters}
+            originalData={recruiters}
           />
         </div>
       </div>
-      <div className="developers-grid">
-        {filteredDevelopers.length > 0 ? (
-          filteredDevelopers.map((developer) => (
-            <Developer key={developer.id} developerData={developer} />
+      <div className="recruiters-grid">
+        {filteredRecruiters.length > 0 ? (
+          filteredRecruiters.map((recruiter) => (
+            <Recruiter key={recruiter.id} recruiterData={recruiter} />
           ))
         ) : (
           <div></div>
@@ -59,4 +60,4 @@ function Developers() {
   );
 }
 
-export default Developers;
+export default Recruiters;

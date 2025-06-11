@@ -31,83 +31,115 @@ async function main() {
 }
 
 async function createTables(connection) {
-    //users
+    // users (general)
     await connection.query(`
         CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            is_active BOOLEAN DEFAULT TRUE,
-            username VARCHAR(100) NOT NULL,
-            git_name VARCHAR(100) UNIQUE NOT NULL,
+            username VARCHAR(100) UNIQUE NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
             phone INT NOT NULL,
+            role VARCHAR(100) NOT NULL,
+            about VARCHAR(2000),
+            profile_image VARCHAR(255),
+            is_active BOOLEAN DEFAULT TRUE
+        )
+    `);
+    // developers (specific fields)
+    await connection.query(`
+        CREATE TABLE IF NOT EXISTS developers (
+            user_id INT PRIMARY KEY,
+            git_name VARCHAR(100) UNIQUE NOT NULL,
             experience INT NOT NULL,
             languages VARCHAR(255),
-            role VARCHAR(100) NOT NULL,
             rating INT,
-            about VARCHAR(2000),
-            profile_image VARCHAR(255)
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
-    //passwords
+    // recruiters (specific fields)
+    await connection.query(`
+        CREATE TABLE IF NOT EXISTS recruiters (
+            user_id INT PRIMARY KEY,
+            company_name VARCHAR(100) NOT NULL,
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    `);
+    // passwords
     await connection.query(`
         CREATE TABLE IF NOT EXISTS passwords (
-            is_active BOOLEAN DEFAULT TRUE,
             user_id INT PRIMARY KEY,
             hashed_password VARCHAR(255) NOT NULL,
-            FOREIGN KEY (user_id) REFERENCES users(id)
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
-    //projects
+    // projects
     await connection.query(`
         CREATE TABLE IF NOT EXISTS projects (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            is_active BOOLEAN DEFAULT TRUE,
+            username VARCHAR(100) NOT NULL,
             git_name VARCHAR(100) NOT NULL,
             name VARCHAR(100) NOT NULL,
             url VARCHAR(255) NOT NULL,
-            languages VARCHAR(255),
+            languages VARCHAR(1000),
             details VARCHAR(255),
             forks_count INT NOT NULL DEFAULT 0,
             rating DOUBLE DEFAULT 0,
-            rating_count  INT DEFAULT 0,
-            FOREIGN KEY (git_name) REFERENCES users(git_name)
+            rating_count INT DEFAULT 0,
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (git_name) REFERENCES developers(git_name) ON DELETE CASCADE,
+            FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
         )
     `);
-    //project_ratings
+    // project ratings,
     await connection.query(`
         CREATE TABLE IF NOT EXISTS project_ratings (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        is_active BOOLEAN DEFAULT TRUE,
-        git_name VARCHAR(100) NOT NULL,
-        project_id INT NOT NULL,
-        rating TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
-        UNIQUE (git_name, project_id),
-        FOREIGN KEY (git_name) REFERENCES users(git_name),
-        FOREIGN KEY (project_id) REFERENCES projects(id)
-        );
-    `)
-    //jobs
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(100) NOT NULL,
+            project_id INT NOT NULL,
+            rating TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+            is_active BOOLEAN DEFAULT TRUE,
+            UNIQUE (username, project_id),
+            FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE,
+            FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )
+    `);
+    // jobs
     await connection.query(`
         CREATE TABLE IF NOT EXISTS jobs (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            is_active BOOLEAN DEFAULT TRUE,
-            user_id INT NOT NULL,
-            name VARCHAR(100) NOT NULL,
+            username VARCHAR(100) NOT NULL,
+            company_name VARCHAR(100) NOT NULL,
+            requirements VARCHAR(2000),
             experience INT NOT NULL,
             languages VARCHAR(255),
             views INT NOT NULL DEFAULT 0,
-            FOREIGN KEY (user_id) REFERENCES users(id)
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
         )
     `);
-    //messages
+    // job_applications
+    await connection.query(`
+        CREATE TABLE IF NOT EXISTS job_applications (
+        user_id INT NOT NULL,
+        job_id INT NOT NULL,
+        remark VARCHAR(500),
+        is_active BOOLEAN DEFAULT TRUE,
+        PRIMARY KEY (user_id, job_id),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
+    )
+    `);
+    // messages
     await connection.query(`
         CREATE TABLE IF NOT EXISTS messages (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            is_active BOOLEAN DEFAULT TRUE,
             user_id INT NOT NULL,
             title VARCHAR(100) NOT NULL,
             content VARCHAR(100),
-            FOREIGN KEY (user_id) REFERENCES users(id)
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
 }

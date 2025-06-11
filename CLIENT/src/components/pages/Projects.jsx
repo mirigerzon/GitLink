@@ -9,7 +9,7 @@ import Search from "../common/Search";
 import Sort from "../common/Sort";
 
 function Projects() {
-  const { gitName, id } = useParams();
+  const { username, id } = useParams();
   const logOut = useLogout();
   const { currentUser } = useContext(CurrentUser);
   const [projects, setProjects] = useState([]);
@@ -21,7 +21,7 @@ function Projects() {
     fetchData({
       type: "projects",
       params: {
-        ...(gitName && { git_name: gitName }),
+        ...(username && { username: username }),
         ...(id && { id: id }),
       },
       role: currentUser ? `/${currentUser.role}` : "/guest",
@@ -55,9 +55,9 @@ function Projects() {
       )}
 
       <div className="projects-grid">
-        {filteredProjects.map((project) => (
+        {filteredProjects.length > 0 ? filteredProjects.map((project) => (
           <Project key={project.id} projectData={project} setIsChange={setIsChange} />
-        ))}
+        )) : <h4>no projects found</h4>}
       </div>
     </div>
   );

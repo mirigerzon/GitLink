@@ -1,17 +1,15 @@
 import React from "react";
 import "../../style/Job.css";
 import Update from "../common/Update";
+import { useNavigate } from "react-router-dom";
 
 function Job({ jobData }) {
+  const navigate = useNavigate();
   const handleApply = () => {
     // TODO: Implement job application logic
     console.log("Apply to job:", jobData.title);
   };
 
-  const handleViewCompany = () => {
-    // TODO: Implement company details navigation
-    console.log("View company:", jobData.companyName);
-  };
   return (
     <div className="job-card">
       {/* <Update
@@ -21,15 +19,8 @@ function Job({ jobData }) {
         inputs={["title"]}
       /> */}
       <div className="job-header">
-        <div className="company-logo">
-          <img
-            src={jobData.logo || "/default-company-logo.png"}
-            alt={`${jobData.companyName} logo`}
-          />
-        </div>
         <div className="job-title-section">
-          <h3 className="job-title">{jobData.name}</h3>
-          {/* <p className="company-name">{jobData.companyName}</p> */}
+          <p className="company-name">{jobData.company_name}</p>
         </div>
       </div>
 
@@ -41,32 +32,34 @@ function Job({ jobData }) {
 
         <div className="job-details">
           <div className="experience-badge">
-            <span className="detail-label">Experience:</span>
+            <p className="detail-label">Experience:</p>
             <span className="detail-value">{jobData.experience} years</span>
           </div>
-
-          <div className="languages-section">
-            <span className="detail-label">Technologies:</span>
-            {(jobData.languages ?? "")
-              .split(",")
-              .map((skill) => skill.trim())
-              .filter((skill) => skill)
-              .map((skill, index) => (
-                <span key={index} className="skill-tag">
-                  {skill}
-                </span>
-              ))}
+          <p className="detail-label">Languages:</p>
+          <div className="languages-container">
+            {jobData.languages && (
+              jobData.languages
+                .split(",")
+                .map((skill) => skill.trim())
+                .filter((skill) => skill)
+                .map((skill, index) => (
+                  <h3 key={index} className="skill-tag">
+                    {skill}
+                  </h3>
+                )))}
           </div>
+          <p>views:</p>
+          <span>{jobData.views}</span>
         </div>
-      </div>
 
-      <div className="job-actions">
-        <button className="apply-btn" onClick={handleApply}>
-          Apply Now
-        </button>
-        <button className="view-company-btn" onClick={handleViewCompany}>
-          View Company
-        </button>
+        <div className="job-actions">
+          <button className="apply-btn" onClick={handleApply}>
+            Apply Now
+          </button>
+          <button className="view-company-btn" onClick={() => navigate(`/${jobData.username}/profile`)}>
+            View recruiter
+          </button>
+        </div>
       </div>
     </div>
   );

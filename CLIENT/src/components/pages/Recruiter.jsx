@@ -1,7 +1,7 @@
-import "../../style/Developer.css";
+import "../../style/Recruiter.css";
 import { useNavigate } from "react-router-dom";
 
-function Developer({ developerData }) {
+function Recruiter({ recruiterData }) {
   const navigate = useNavigate();
 
   const generateStars = (rating) => {
@@ -24,57 +24,37 @@ function Developer({ developerData }) {
     return { level: "Senior", color: "#ef4444" };
   };
 
-  const experienceInfo = getExperienceLevel(developerData.experience);
+  const experienceInfo = getExperienceLevel(recruiterData.experience);
 
   return (
-    <div className="developer-card">
-      <div className="developer-header">
+    <div className="recruiter-card">
+      <div className="recruiter-header">
         <div className="avatar">
           <img
-            src={developerData.profile_image}
-            alt={`${developerData.name} avatar`}
+            src={recruiterData.profile_image}
+            alt={`${recruiterData.name} avatar`}
             className="avatar-img"
           />
           <div className="online-indicator"></div>
         </div>
 
-        <div className="developer-info">
-          <h3 className="developer-name">{developerData.name}</h3>
-          <p className="git-name">@{developerData.git_name}</p>
+        <div className="recruiter-info">
+          <h3 className="recruiter-name">{recruiterData.name}</h3>
+          <p className="git-name">@{recruiterData.git_name}</p>
 
           <div
             className="experience-badge"
             style={{ backgroundColor: experienceInfo.color }}
           >
             <span>{experienceInfo.level}</span>
-            <span>{developerData.experience} years</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="developer-stats">
-        <div className="stat-item">
-          <div className="stat-icon">🚀</div>
-          <div className="stat-content">
-            <span className="stat-number">{developerData.projectsCount}</span>
-            <span className="stat-label">Projects</span>
-          </div>
-        </div>
-
-        <div className="stat-item">
-          <div className="stat-icon">⭐</div>
-          <div className="stat-content">
-            <span className="stat-number">{developerData.rating}</span>
-            <div className="rating-stars">
-              {generateStars(developerData.rating)}
-            </div>
+            <span>{recruiterData.experience} years</span>
           </div>
         </div>
       </div>
 
       <div className="skills-section">
         <div className="skills-list">
-          {(developerData.languages ?? "")
+          {(recruiterData.languages ?? "")
             .split(",")
             .map((skill) => skill.trim())
             .filter((skill) => skill)
@@ -86,21 +66,21 @@ function Developer({ developerData }) {
         </div>
       </div>
 
-      <div className="developer-actions">
+      <div className="recruiter-actions">
         <button
           className="btn-profile"
-          onClick={() => navigate(`/${developerData.username}/profile`)}
+          onClick={() => navigate(`/${recruiterData.username}/profile`)}
         >
           <span className="btn-icon">👤</span>
           View Profile
         </button>
 
         <button
-          className="btn-projects"
-          onClick={() => navigate(`/${developerData.username}/projects`)}
+          className="btn-jobs"
+          onClick={() => navigate(`/${recruiterData.username}/jobs`)}
         >
           <span className="btn-icon">📁</span>
-          View Projects
+          View Jobs
         </button>
       </div>
 
@@ -109,4 +89,4 @@ function Developer({ developerData }) {
   );
 }
 
-export default Developer;
+export default Recruiter;

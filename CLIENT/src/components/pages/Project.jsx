@@ -9,7 +9,7 @@ function Project({ projectData, setIsChange }) {
   const { currentUser } = useContext(CurrentUser);
   const [selectedRating, setSelectedRating] = useState(0);
 
-  const isOwner = currentUser?.git_name === projectData.git_name;
+  const isOwner = currentUser?.username === projectData.username;
   // allow slider visible always, but rating only allowed if connected, not owner, and not rated yet
   const canRate = currentUser && !isOwner;
 
@@ -49,12 +49,10 @@ function Project({ projectData, setIsChange }) {
         <h3 className="project-name">{projectData.name}</h3>
         <div className="project-stats">
           <div className="stat">
-            {/* <span className="stat-icon">📊</span> */}
             <span className="stat-value">{projectData.rating}</span>
             <span className="stat-label">⭐ Rating</span>
           </div>
           <div className="stat">
-            {/* <span className="stat-icon">👀</span> */}
             <span className="stat-value">{projectData.forks_count}</span>
             <span className="stat-label">👀 Forks</span>
           </div>
@@ -94,7 +92,7 @@ function Project({ projectData, setIsChange }) {
             disabled={isOwner}
             onChange={(e) => setSelectedRating(Number(e.target.value))}
             className="rating-slider"
-          />{selectedRating !=0 &&
+          />{selectedRating != 0 &&
             <button
               onClick={isOwner ? () => { alert("Sorry - you cannot rate your own project.") } : handleRate}
               className="btn-rating"
@@ -105,7 +103,7 @@ function Project({ projectData, setIsChange }) {
         </div>
         <button
           className="btn-primary"
-          onClick={() => navigate(`/${projectData.git_name}/profile`)}
+          onClick={() => navigate(`/${projectData.username}/profile`)}
         >
           View Developer
         </button>

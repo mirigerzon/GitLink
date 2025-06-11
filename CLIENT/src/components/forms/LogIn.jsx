@@ -18,7 +18,7 @@ function Login() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     const userDetails = {
-      git_name: data.name,
+      username: data.username,
       password: data.password,
     };
     await checkIfExists(userDetails);
@@ -27,13 +27,13 @@ function Login() {
   };
 
   async function checkIfExists(userDetails) {
-    const git_name = userDetails.git_name;
+    const username = userDetails.username;
     const password = userDetails.password;
 
     await fetchData({
       type: "login",
       method: "POST",
-      body: { git_name, password },
+      body: { username, password },
       onSuccess: (res) => {
         if (res && res.token) {
           Cookies.set("accessToken", res.token, {
@@ -44,9 +44,9 @@ function Login() {
           localStorage.setItem("currentUser", JSON.stringify(res.user));
           setResponseText("Login successful! Redirecting...");
           setCurrentUser(res.user);
-          navigate(`/${git_name}/home`);
+          navigate(`/${username}/home`);
         } else {
-          setResponseText("Incorrect username or password");
+          setResponseText("Incorrect user name or password");
         }
       },
       onError: () => {
@@ -72,9 +72,9 @@ function Login() {
           <div className="form-group">
             <input
               type="text"
-              placeholder="Git name"
+              placeholder="user name"
               className="form-input"
-              {...register("name", { required: true })}
+              {...register("username", { required: true })}
               required
             />
           </div>

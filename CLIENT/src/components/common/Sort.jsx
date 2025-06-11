@@ -32,7 +32,6 @@ function Sort({ type, setUserData, originalData }) {
           fieldValue.toLowerCase().includes(value.toLowerCase())
         );
       }
-
       return (
         fieldValue &&
         fieldValue.toString().toLowerCase().includes(value.toLowerCase())
@@ -41,7 +40,6 @@ function Sort({ type, setUserData, originalData }) {
 
     setUserData(filteredData);
   }
-
   if (type === "developers") {
     return (
       <div className="filter-container">

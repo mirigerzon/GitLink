@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 const ACCESS_SECRET = process.env.ACCESS_SECRET;
 
 function verifyToken(req, res, next) {
-  const openPaths = ['/login', '/register','/logout','/refresh'];
-  if (openPaths.includes(req.path)) {
+  const openPaths = ['/login', '/register', '/logout', '/refresh'];
+  if (openPaths.includes(req.path) || req.method == 'GET') {
     return next();
   }
   const authHeader = req.headers['authorization'];

@@ -28,19 +28,13 @@ function Register() {
   const [userData, setUserData] = useState({
     username: "",
     password: "",
-    name: "",
-    git_name: "",
-    email: "",
-    phone: "",
     role: "",
-    experience: "",
-    about: "",
-    languages: "",
-    profile_image: "",
   });
 
+  const [selectedRole, setSelectedRole] = useState("");
   const [useGitAvatar, setUseGitAvatar] = useState(false);
 
+  // שלב 1 - אימות בסיסי
   const validateInitialForm = (data) => {
     const { username, password, verifyPassword } = data;
     if (password !== verifyPassword) {
@@ -51,38 +45,51 @@ function Register() {
       setResponseText("Password must be at least 6 characters");
       return;
     }
+    if (!selectedRole) {
+      setResponseText("Please select a role (Developer or Recruiter)");
+      return;
+    }
     setUserData((prev) => ({
       ...prev,
       username,
       password,
+      role: selectedRole,
     }));
     setRegisterIsCompleted(1);
     resetFirstForm();
     setResponseText("");
   };
 
+  // שלב 2 - שליחת הנתונים לפי תפקיד
   const onSecondSubmit = async (data) => {
     try {
       const formData = new FormData();
-  
+
       formData.append("username", userData.username);
       formData.append("password", userData.password);
-      formData.append("git_name", data.git_name);
+      formData.append("role", userData.role);
       formData.append("email", data.email);
       formData.append("phone", data.phone);
-      formData.append("role", data.role);
-      formData.append("experience", data.experience);
-      formData.append("about", data.about || "");
-      formData.append("languages", data.languages || "");
-  
-      if (useGitAvatar) {
-        // שימוש ישיר בכתובת התמונה:
-        const gitAvatarUrl = `https://github.com/${data.git_name}.png`;
-        formData.append("profile_image", gitAvatarUrl);
-      } else if (data.profile_image && data.profile_image.length > 0) {
-        formData.append("profile_image", data.profile_image[0]);
+
+      if (userData.role === "developer") {
+        formData.append("git_name", data.git_name);
+        formData.append("experience", data.experience);
+        formData.append("languages", data.languages || "");
+        formData.append("about", data.about || "");
+
+        if (useGitAvatar) {
+          const gitAvatarUrl = `https://github.com/${data.git_name}.png`;
+          formData.append("profile_image", gitAvatarUrl);
+        } else if (data.profile_image?.length > 0) {
+          formData.append("profile_image", data.profile_image[0]);
+        }
+      } else if (userData.role === "recruiter") {
+        formData.append("company_name", data.company_name || "");
+        if (data.profile_image?.length > 0) {
+          formData.append("profile_image", data.profile_image[0]);
+        }
       }
-  
+
       await signUpFunc(formData);
       resetSecondForm();
     } catch (err) {
@@ -97,7 +104,7 @@ function Register() {
       method: "POST",
       body: formData,
       onSuccess: ({ user, token }) => {
-        navigate(`/${user.git_name}/home`);
+        navigate(`/${user.git_name || user.username}/home`);
         setCurrentUser(user);
         localStorage.setItem("currentUser", JSON.stringify(user));
         Cookies.set("accessToken", token, {
@@ -121,9 +128,30 @@ function Register() {
           <>
             <div className="register-header">
               <h2 className="register-title">Create Account - Step 1</h2>
-              <p className="register-subtitle">
-                Set your username and password
-              </p>
+              <p className="register-subtitle">Set your username and password</p>
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <button
+                type="button"
+                onClick={() => setSelectedRole("developer")}
+                style={{
+                  marginRight: "1rem",
+                  backgroundColor: selectedRole === "developer" ? "#4caf50" : "",
+                  color: selectedRole === "developer" ? "white" : "",
+                }}
+              >
+                Register as Developer
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedRole("recruiter")}
+                style={{
+                  backgroundColor: selectedRole === "recruiter" ? "#4caf50" : "",
+                  color: selectedRole === "recruiter" ? "white" : "",
+                }}
+              >
+                Register as Recruiter
+              </button>
             </div>
             <form
               onSubmit={handleFirstSubmit(validateInitialForm)}
@@ -173,15 +201,18 @@ function Register() {
               onSubmit={handleSecondSubmit(onSecondSubmit)}
               className="register-form"
             >
-              <div className="form-group">
-                <input
-                  type="text"
-                  placeholder="Git Username"
-                  {...registerSecond("git_name", { required: true })}
-                  className="form-input"
-                  required
-                />
-              </div>
+              {userData.role === "developer" && (
+                <div className="form-group">
+                  <input
+                    type="text"
+                    placeholder="Git Username"
+                    {...registerSecond("git_name", { required: true })}
+                    className="form-input"
+                    required
+                  />
+                </div>
+              )}
+
               <div className="form-group">
                 <input
                   type="email"
@@ -200,66 +231,71 @@ function Register() {
                   required
                 />
               </div>
-              <div className="form-group">
-                <select
-                  {...registerSecond("role", { required: true })}
-                  className="form-input"
-                  defaultValue=""
-                  required
-                >
-                  <option value="" disabled>
-                    check role
-                  </option>
-                  <option value="developer">developer</option>
-                  <option value="recruiter">recruiter</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <input
-                  type="number"
-                  placeholder="experience"
-                  {...registerSecond("experience", { required: true })}
-                  className="form-input"
-                  min={0}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <textarea
-                  type="text"
-                  placeholder="about yourself"
-                  {...registerSecond("about", { required: false })}
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  placeholder="languages (c++, JAVA ...)"
-                  {...registerSecond("languages", { required: false })}
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label>
+
+              {userData.role === "developer" && (
+                <>
+                  <div className="form-group">
+                    <input
+                      type="number"
+                      placeholder="Experience (years)"
+                      {...registerSecond("experience", { required: true })}
+                      className="form-input"
+                      min={0}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      placeholder="Languages (e.g. C++, Java...)"
+                      {...registerSecond("languages")}
+                      className="form-input"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <textarea
+                      placeholder="About yourself"
+                      {...registerSecond("about")}
+                      className="form-input"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={useGitAvatar}
+                        onChange={(e) => setUseGitAvatar(e.target.checked)}
+                      />{" "}
+                      Use GitHub profile image
+                    </label>
+                  </div>
+                </>
+              )}
+
+              {userData.role === "recruiter" && (
+                <div className="form-group">
                   <input
-                    type="checkbox"
-                    checked={useGitAvatar}
-                    onChange={(e) => setUseGitAvatar(e.target.checked)}
-                  />{" "}
-                  Use GitHub profile image
-                </label>
-              </div>
-              {!useGitAvatar && (
+                    type="text"
+                    placeholder="Company Name"
+                    {...registerSecond("company_name", { required: true })}
+                    className="form-input"
+                    required
+                  />
+                </div>
+              )}
+
+              {(!useGitAvatar || userData.role === "recruiter") && (
                 <div className="form-group">
                   <input
                     type="file"
                     accept="image/*"
-                    {...registerSecond("profile_image", { required: true })}
+                    {...registerSecond("profile_image")}
                     className="form-input"
                   />
                 </div>
               )}
+
               <button type="submit" className="register-btn">
                 Submit
               </button>

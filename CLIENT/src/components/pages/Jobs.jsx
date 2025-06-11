@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { CurrentUser } from "../../../App";
 import { fetchData } from "../../hooks/fetchData";
 import { useLogout } from "../../hooks/LogOut";
@@ -8,6 +9,7 @@ import Search from "../common/Search";
 import Sort from "../common/Sort";
 
 function Jobs() {
+  const { username, id } = useParams();
   const [jobs, setJobs] = useState([]);
   const { currentUser } = useContext(CurrentUser);
   const [isChange, setIsChange] = useState(0);
@@ -20,6 +22,10 @@ function Jobs() {
     fetchData({
       role: currentUser ? `/${currentUser.role}` : "/guest",
       type: "jobs",
+      params: {
+        ...(username && { username: username }),
+        ...(id && { id: id }),
+      },
       method: "GET",
       onSuccess: (data) => {
         setJobs(data);
