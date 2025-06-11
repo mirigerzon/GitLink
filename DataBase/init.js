@@ -79,24 +79,12 @@ async function seed() {
 
   // --- Messages
   await db.query(`
-  INSERT INTO messages (email, title, content, is_read, important, type, action_url)
-  VALUES
-    -- Messages for Alice
-    ('alice@example.com', 'Welcome to the Platform', 'We\'re happy to have you, Alice!', FALSE, FALSE, 'info', NULL),
-    ('alice@example.com', 'Project Approved', 'Your project "Portfolio" was approved.', TRUE, TRUE, 'success', 'https://github.com/alice/portfolio'),
-    ('alice@example.com', 'Rating Update', 'Your project received a new rating.', FALSE, FALSE, 'info', NULL),
-
-    -- Messages for Bob
-    ('bob@example.com', 'Welcome to the Platform', 'We\'re happy to have you, Bob!', FALSE, FALSE, 'info', NULL),
-    ('bob@example.com', 'Application Received', 'We received your application for Tech Corp.', TRUE, FALSE, 'success', NULL),
-    ('bob@example.com', 'New Job Posted', 'A new job requiring C++ was posted.', FALSE, TRUE, 'alert', '/jobs'),
-
-    -- Messages for Charlie
-    ('charlie@example.com', 'Welcome to the Platform', 'We\'re happy to have you, Charlie!', FALSE, FALSE, 'info', NULL),
-    ('charlie@example.com', 'New Applicant', 'Bob applied to your job posting.', TRUE, FALSE, 'info', '/recruiter/applications'),
-    ('charlie@example.com', 'Reminder', 'Update your company profile.', FALSE, TRUE, 'warning', '/profile/edit');
+  INSERT INTO messages (user_id, email, title, content)
+  VALUES 
+    (1, 'alice@example.com', 'Welcome!', 'Welcome to the platform!'),
+    (2, 'bob@example.com', 'Tip', 'Do not forget to update your profile.'),
+    (3, 'charlie@example.com', 'Alert', 'New job posted in your field.');
 `);
-
 
   console.log("✅ Database seeded successfully.");
   await db.end();

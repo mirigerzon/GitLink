@@ -2,6 +2,43 @@ const genericDal = require('../services/genericDal.js');
 const dal = require('../services/dal.js');
 
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'sara3280624@gmail.com',//להעביר לקובץ ENV
+        pass: 'ojoj bcch hqdc chst'
+    }
+});
+async function sendEmailAndSave(userDetails) {
+    const { user_id, email, title, content, username } = userDetails;
+
+    try {
+        await genericDal.POST("messages", {
+            user_id,
+            email,
+            title,
+            content
+        });
+
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: title,
+            html: content
+        });
+
+        console.log('Email sent and saved successfully');
+
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+
+
+
 
 const verifyLogin = async (username, password) => {
     const users = await dal.getUser(username);
@@ -31,7 +68,6 @@ const registerNewUser = async (userData) => {
         if (existingDevs.length > 0) throw new Error("git_name already exists");
     }
 
-    //register to rusers and passwords
     const hashedPassword = await hashPassword(password);
     const generalUser = { username, email, phone, role, about, profile_image };
     const newUser = await genericDal.POST("users", generalUser);
@@ -51,11 +87,22 @@ const registerNewUser = async (userData) => {
         await genericDal.POST("recruiters", recruiterData);
     }
 
-    await genericDal.POST("messages", {
+
+    await sendEmailAndSave({
+        user_id: newUser.insertId,
         email: email,
         title: 'WELCOME!',
         content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
+        username: username
     });
+
+
+    // await genericDal.POST("messages", {
+    //     user_id: newUser.insertId,
+    //     email: email,
+    //     title: 'WELCOME!',
+    //     content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
+    // });
 
     return {
         id: newUser.insertId,

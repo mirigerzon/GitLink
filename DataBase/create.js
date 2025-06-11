@@ -110,7 +110,9 @@ async function createTables(connection) {
         CREATE TABLE IF NOT EXISTS jobs (
             id INT AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(100) NOT NULL,
+            title VARCHAR(100),
             company_name VARCHAR(100) NOT NULL,
+            details VARCHAR(2000),
             requirements VARCHAR(2000),
             experience INT NOT NULL,
             languages VARCHAR(255),
@@ -133,20 +135,16 @@ async function createTables(connection) {
     `);
     // messages
     await connection.query(`
-        CREATE TABLE IF NOT EXISTS messages (
+    CREATE TABLE IF NOT EXISTS messages (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
         email VARCHAR(100) NOT NULL,
-        title VARCHAR(50) NOT NULL,
-        content VARCHAR(200),
-        is_read BOOLEAN DEFAULT FALSE,
-        important BOOLEAN DEFAULT FALSE,
-        type VARCHAR(20) DEFAULT 'info',
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        action_url VARCHAR(255),
+        title VARCHAR(100) NOT NULL,
+        content VARCHAR(100),
         is_active BOOLEAN DEFAULT TRUE,
-        FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
-    );
-    `);
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+`);
 }
 
 main();

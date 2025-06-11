@@ -30,18 +30,29 @@ export function useFetchData() {
             let response = await fetch(url, options(token));
 
             if (response.status === 401) {
-                const refreshRes = await fetch(`${BASE_URL}/refresh`, {
-                    method: 'POST',
-                    credentials: 'include',
-                });
-
-                if (!refreshRes.ok) {
+                try {
+                    const refreshRes = await fetch(`${BASE_URL}/refresh`, {
+                        method: 'POST',
+                        credentials: 'include',
+                    });
+                    if (!refreshRes.ok) {
+                        logOut?.();
+                        throw new Error('Session expired. Please login again.');
+                    }
+                    const { token: newToken } = await refreshRes.json();
+                    Cookies.set('accessToken', newToken);
+                    const newOptions = {
+                        ...options(newToken),
+                        headers: {
+                            ...options(newToken).headers,
+                            'Authorization': `Bearer ${newToken}`
+                        }
+                    };
+                    response = await fetch(url, newOptions);
+                } catch (error) {
                     logOut?.();
-                    throw new Error('Session expired. Please login again.');
+                    throw error;
                 }
-                const { token: newToken } = await refreshRes.json();
-                Cookies.set('accessToken', newToken);
-                response = await fetch(url, options(newToken));
             }
 
             const data = await response.json().catch(() => ({}));

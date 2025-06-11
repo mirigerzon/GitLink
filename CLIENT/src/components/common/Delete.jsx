@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useState } from "react";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 function Delete({ type, itemId, setIsChange, role = null }) {
   const logOut = useLogout();
   const [process, setProcess] = useState(0);
+  const fetchData = useFetchData();
 
   async function deleteFunc(e) {
     e.preventDefault();

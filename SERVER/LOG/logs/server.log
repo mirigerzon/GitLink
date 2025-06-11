@@ -3387,3 +3387,148 @@
 [2025-06-11T17:26:08.859Z] [INFO] User registered successfully: email=y@y, ip=::1
 [2025-06-11T17:26:08.994Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"y@y"}]
 [2025-06-11T17:26:09.015Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"y@y"}]
+[2025-06-11T19:20:44.307Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:20:44.347Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:20:48.794Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:20:48.804Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:21:20.727Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:21:20.734Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:21:20.768Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-11T19:21:20.778Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-11T19:21:21.304Z] [INFO] User logged out
+[2025-06-11T19:22:11.606Z] [ERROR] Registration error for email=sara@sara - Unknown column 'email' in 'field list'
+[2025-06-11T19:25:39.483Z] [ERROR] Registration error for email=sara@sara - Unknown column 'email' in 'field list'
+[2025-06-11T19:26:40.639Z] [ERROR] Registration error for email=sara@sara - Duplicate entry 'sara' for key 'users.username'
+[2025-06-11T19:28:20.286Z] [INFO] User logged in successfully: user name=alice, ip=::1
+[2025-06-11T19:28:20.332Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:28:20.341Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:28:46.887Z] [INFO] Fetched data from table = developers 
+[2025-06-11T19:28:46.893Z] [INFO] Fetched data from table = developers 
+[2025-06-11T19:28:48.080Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:28:48.090Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:28:48.113Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:28:48.121Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:29:00.796Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:29:00.801Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:29:00.812Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:29:00.818Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:29:01.074Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:29:45.423Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:29:45.426Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:29:45.430Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:29:45.437Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:29:45.600Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:29:45.611Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:29:55.291Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:29:55.294Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:29:55.299Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:29:55.304Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:29:55.509Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:29:55.521Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:29:56.280Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T19:29:56.287Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T19:29:56.951Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:29:56.957Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:29:56.972Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:29:56.993Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:30:42.104Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:30:42.107Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:30:42.112Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:30:42.117Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:30:42.340Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:30:42.344Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:32:02.975Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:32:02.983Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:32:02.989Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:32:02.996Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:32:03.423Z] [INFO] User logged out
+[2025-06-11T19:32:03.495Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-11T19:33:40.877Z] [ERROR] Registration error for email=sara@sara - Duplicate entry 'sara' for key 'users.username'
+[2025-06-11T19:34:35.795Z] [ERROR] Registration error for email=sara@sara - Duplicate entry 'sara' for key 'users.username'
+[2025-06-11T19:37:03.120Z] [ERROR] Registration error for email=miri@miri - Unknown column 'email' in 'field list'
+[2025-06-11T19:40:02.580Z] [ERROR] Registration error for email=mirimiri@mirimiri - Incorrect integer value: 'mirimiri' for column 'phone' at row 1
+[2025-06-11T19:41:41.148Z] [ERROR] Registration error for email=miri@miri - Duplicate entry 'miri' for key 'users.username'
+[2025-06-11T19:42:42.412Z] [ERROR] Registration error for email=qwertyuiop@qwe - dal.POST is not a function
+[2025-06-11T19:45:12.001Z] [ERROR] Registration error for email=sara@sara - dal.POST is not a function
+[2025-06-11T19:48:24.463Z] [INFO] User registered successfully: email=sara@sara, ip=::1
+[2025-06-11T19:48:24.595Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:48:24.611Z] [ERROR] ERROR fetching data from table=messages - Unknown column 'email' in 'where clause'
+[2025-06-11T19:48:31.496Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-11T19:48:31.509Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-11T19:48:35.792Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:48:35.803Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:48:35.813Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-11T19:48:35.820Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-11T19:48:47.833Z] [INFO] Created new item in table=projects with data={"git_name":"sara6310472","username":"sara","name":"Fifth_project_-get_the_100-_game_99-","forks_count":0,"url":"https://github.com/sara6310472/Fifth_project_-get_the_100-_game_99-","languages":"CC++","details":"nhbgvfcds"}
+[2025-06-11T19:48:47.864Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-11T19:48:47.867Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:48:47.876Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-11T19:48:47.882Z] [INFO] Fetched data from table=users 
+[2025-06-11T19:48:47.890Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-11T19:48:47.907Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-11T19:48:52.668Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T19:48:52.677Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T19:51:51.800Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T19:51:51.806Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T19:51:51.808Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T19:51:51.813Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T19:51:53.155Z] [INFO] User logged out
+[2025-06-11T19:51:53.186Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T19:52:33.885Z] [INFO] User registered successfully: email=sara3280624@gmail.com, ip=::1
+[2025-06-11T19:52:33.950Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-11T19:52:33.959Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-11T19:54:22.753Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-11T19:54:22.766Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-11T19:54:23.272Z] [INFO] User logged out
+[2025-06-11T19:54:57.377Z] [ERROR] Registration error for email=sara3280624@gmail.com - Field 'user_id' doesn't have a default value
+[2025-06-11T19:57:14.577Z] [INFO] User registered successfully: email=sara@sara, ip=::1
+[2025-06-11T19:57:14.670Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T19:57:14.682Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:39.233Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:39.243Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:42.179Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:42.188Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:44.164Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:44.174Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:45.164Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:45.172Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:47.180Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:47.192Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:49.156Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:49.165Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:50.166Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:50.174Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:52.164Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:01:52.172Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:01.173Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:01.183Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:05.162Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:05.170Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:07.149Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:07.154Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:15.176Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:15.182Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:19.164Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:19.176Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:24.158Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:24.163Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:35.293Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T20:02:35.299Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-11T20:02:38.389Z] [INFO] Fetched data from table=users 
+[2025-06-11T20:02:38.400Z] [INFO] Fetched data from table=users 
+[2025-06-11T20:02:38.419Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-11T20:02:38.427Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-11T20:02:51.767Z] [INFO] User logged out
+[2025-06-11T20:02:59.512Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-11T20:02:59.546Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:02:59.551Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara@sara"}]
+[2025-06-11T20:18:14.390Z] [INFO] User logged out
+[2025-06-11T20:19:06.884Z] [ERROR] Registration error for email=sara3280624@gmail.com - Duplicate entry 'sara' for key 'users.username'
+[2025-06-11T20:19:32.055Z] [ERROR] Registration error for email=sara3280624@gmail.com - Incorrect integer value: 'cgvhbjnk' for column 'phone' at row 1
+[2025-06-11T20:20:23.422Z] [INFO] User registered successfully: email=sara3280624@gmail.com, ip=::1
+[2025-06-11T20:20:23.481Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-11T20:20:23.489Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-11T20:20:38.969Z] [INFO] User logged out
+[2025-06-11T20:21:16.164Z] [INFO] User registered successfully: email=a0583286530@gmail.com, ip=::1
+[2025-06-11T20:21:16.234Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-11T20:21:16.247Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]

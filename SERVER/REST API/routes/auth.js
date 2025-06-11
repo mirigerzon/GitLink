@@ -78,13 +78,21 @@ router.post('/refresh', (req, res) => {
         writeLog('Refresh token missing in request', 'warn');
         return res.sendStatus(401);
     }
-    jwt.verify(refreshToken, REFRESH_SECRET, (err, decoded) => {
+    jwt.verify(refreshToken, REFRESH_SECRET, async (err, decoded) => {
         if (err) {
             writeLog('Invalid refresh token', 'warn');
             return res.sendStatus(403);
         }
+        const user = await dataService.getUserById(decoded.id);
+        if (!user) {
+            return res.sendStatus(403);
+        }
         const ip = req.ip;
-        const newAccessToken = jwt.sign({ id: decoded.id, ip }, ACCESS_SECRET, { expiresIn: '1d' });
+        const newAccessToken = jwt.sign(
+            { id: decoded.id, username: user.username, ip },
+            ACCESS_SECRET,
+            { expiresIn: '15m' }
+        );
         writeLog(`Access token refreshed for userId=${decoded.id}, ip=${ip}`, 'info');
         res.json({ token: newAccessToken });
     });

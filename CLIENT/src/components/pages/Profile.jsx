@@ -1,12 +1,11 @@
 import { React, useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { CurrentUser } from "../../../App";
-import { useFetchData } from "../../hooks/FetchData.js";
-import { useLogout } from "../../hooks/LogOut";
+import { useFetchData } from "../../hooks/fetchData.js";
+import { useDeveloperProfile } from "../../hooks/DeveloperProfile.jsx";
+import { useRecruiterProfile } from "../../hooks/RecruiterProfile.jsx";
 import Update from "../common/Update";
 import Delete from "../common/Delete";
-// import Add from "../common/Add";
 import "../../style/Profile.css";
 
 function Profile() {
@@ -16,14 +15,15 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [userData, setUserData] = useState(null);
-  const [projectsToAdd, setProjectToAdd] = useState(null);
   const [existingDeliverables, setExistingDeliverables] = useState(null);
-  const [openRepo, setOpenRepo] = useState(null);
-  const [userItemsType, setUserItemsType] = useState(null)
-  const logOut = useLogout();
   const fetchData = useFetchData();
-  const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
+
+  const developerHook = useDeveloperProfile(currentUser, username, setIsChange);
+  const recruiterHook = useRecruiterProfile(currentUser, username, setIsChange);
+
+  const currentHook = userData?.role === "developer" ? developerHook : recruiterHook;
+  const userItemsType = currentHook?.userItemsType;
 
   useEffect(() => {
     setIsChange(0);
@@ -35,21 +35,22 @@ function Profile() {
       onSuccess: (data) => {
         setUserData(data);
         setLoading(false);
-        setUserItemsType(data.role == "developer" ? "projects" : "jobs");
       },
       onError: (err) => {
-        setError(`Failed to fetch ${userItemsType} data: ${err}`);
+        setError(`Failed to fetch user data: ${err}`);
         setLoading(false);
       },
     });
   }, [username, isChange]);
 
   useEffect(() => {
-    if (!userItemsType) return;
+    if (!userData) return;
+    const itemsType = userData.role === "developer" ? "projects" : "jobs";
+
     setIsChange(0);
     setLoading(true);
     fetchData({
-      type: userItemsType,
+      type: itemsType,
       params: { "username": username },
       role: currentUser ? `/${currentUser.role}` : "/guest",
       onSuccess: (data) => {
@@ -57,81 +58,17 @@ function Profile() {
         setLoading(false);
       },
       onError: (err) => {
-        setError(`Failed to fetch developer data: ${err}`);
+        setError(`Failed to fetch ${itemsType} data: ${err}`);
         setLoading(false);
       },
     });
-  }, [username, isChange, userItemsType]);
+  }, [username, isChange, userData]);
 
   if (loading) return <div className="profile-loading">Loading profile...</div>;
   if (error) return <div className="profile-error">{error}</div>;
-  if (!userData)
-    return <div className="profile-error">Developer not found</div>;
+  if (!userData) return <div className="profile-error">User not found</div>;
 
   const isOwnProfile = currentUser && username === currentUser.username;
-
-  async function getGithubRepoNames() {
-    const url = `https://api.github.com/users/${userData.git_name}/repos?per_page=100`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`GitHub API error: ${response.status}`);
-      }
-      const repos = await response.json();
-      setProjectToAdd(repos);
-    } catch (error) {
-      console.error("Error fetching repositories:", error);
-    }
-  }
-
-  async function onSubmit(data) {
-    console.log("Adding project with data:", data);
-    try {
-      await fetchData({
-        type: "projects",
-        role: "/developer",
-        method: "POST",
-        body: data,
-        onSuccess: (result) => {
-          console.log("add successful:", result);
-          setOpenRepo(null);
-          reset();
-          setIsChange(1);
-        },
-        onError: (error) => {
-          console.log("add was unsuccessful", error);
-          alert(error);
-        },
-        logOut,
-      });
-    } catch (error) {
-      console.log("Unexpected error:", error);
-    }
-    reset();
-  }
-
-  function openAddForm(repo) {
-    setOpenRepo(repo);
-    {
-      userItemsType == 'developer' ?
-        reset({
-          git_name: currentUser.git_name,
-          username: currentUser.username,
-          name: repo.name,
-          forks_count: repo.forks_count,
-          url: repo.html_url,
-          languages: repo.languages,
-          details: repo.details || "",
-        }) : (reset({
-          username: currentUser.username,
-          company_name: currentUser.company_name,
-          requirements: repo.requirements,
-          experience: repo.experience,
-          languages: repo.languages,
-          details: repo.details || "",
-        }) && setOpenRepo(1));
-    }
-  }
 
   return (
     <div className="profile-container">
@@ -172,6 +109,14 @@ function Profile() {
           <p className="profile-description">
             {userData.about || "No description available"}
           </p>
+
+          {userData.role === "recruiter" && userData.company_name && (
+            <>
+              <h2>Company</h2>
+              <p className="profile-description">{userData.company_name}</p>
+            </>
+          )}
+
           <h2>Programming Languages</h2>
           <div className="languages-container">
             {userData.languages && userData.languages.length > 0 ? (
@@ -189,6 +134,7 @@ function Profile() {
             )}
           </div>
         </div>
+
         <div className="profile-section">
           <h2>Existing {userItemsType}</h2>
           <ul>
@@ -198,115 +144,41 @@ function Profile() {
                   {item.name}
                   <button
                     onClick={() =>
-                      navigate(
-                        `/${item.username}/${userItemsType}/${item.id}`)}> view
+                      navigate(`/${item.username}/${userItemsType}/${item.id}`)
+                    }
+                  >
+                    view
                   </button>
                   {isOwnProfile && (
-                    <><Delete
-                      className="delete_btn"
-                      type={userItemsType}
-                      itemId={item.id}
-                      setIsChange={setIsChange}
-                      role={currentUser ? `/${currentUser.role}` : null}
-                    />
+                    <>
+                      <Delete
+                        className="delete_btn"
+                        type={userItemsType}
+                        itemId={item.id}
+                        setIsChange={setIsChange}
+                        role={currentUser ? `/${currentUser.role}` : null}
+                      />
                       <Update
                         type={userItemsType}
                         itemId={item.id}
                         setIsChange={setIsChange}
                         inputs={["name", "details"]}
                         role={currentUser ? `/${currentUser.role}` : null}
-                      /></>)}
+                      />
+                    </>
+                  )}
                 </li>
               ))
             ) : (
               <p>no {userItemsType} found</p>
             )}
           </ul>
-          {isOwnProfile && (<>
-            <h2>{userItemsType} Management</h2>
-            <div className="project-actions">
-              <button
-                className="action-btn add-btn"
-                onClick={getGithubRepoNames}
-              >
-                Add {userItemsType}
-              </button>
-            </div>
 
-            {projectsToAdd && (
-              <div className="projectsToAdd">
-                <div className="projectsName">
-                  <h3>Projects can be added:</h3>
-                  <ul>
-                    {projectsToAdd.map((repo) => {
-                      const alreadyExists = existingDeliverables?.some(
-                        (project) => project.name === repo.name
-                      );
-                      return (
-                        <li key={repo.id}>
-                          {repo.name}
-                          <button
-                            disabled={alreadyExists}
-                            onClick={() => openAddForm(repo)}
-                          >
-                            add
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-                {openRepo && (
-                  <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="project-form"
-                  >
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        placeholder="Project name"
-                        className="form-input"
-                        {...register("name", { required: true })}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        placeholder="Languages used"
-                        className="form-input"
-                        {...register("languages", { required: true })}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <textarea
-                        placeholder="Description"
-                        className="form-input textarea"
-                        {...register("details")}
-                      />
-                    </div>
-                    <div className="form-buttons">
-                      <button type="submit" className="submit-btn">
-                        Add
-                      </button>
-                      <button
-                        type="button"
-                        className="cancel-btn"
-                        onClick={() => setOpenRepo(null)}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                )}
-              </div>
-            )}
-          </>)}
+          {isOwnProfile && currentHook && currentHook.renderManagementSection(existingDeliverables, userData)}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Profile;
