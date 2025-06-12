@@ -42,9 +42,13 @@ function Login() {
             secure: true,
             sameSite: "Strict",
           });
+          const enHancedUser = {
+            ...res.user,
+            initiatedAction: false,
+          };
           localStorage.setItem("currentUser", JSON.stringify(res.user));
           setResponseText("Login successful! Redirecting...");
-          setCurrentUser(res.user);
+          setCurrentUser(enHancedUser);
           navigate(`/${username}/home`);
         } else {
           setResponseText("Incorrect user name or password");

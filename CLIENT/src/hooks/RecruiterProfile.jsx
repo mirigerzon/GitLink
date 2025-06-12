@@ -70,7 +70,7 @@ export function useRecruiterProfile(currentUser, username, setIsChange) {
                                 type="text"
                                 placeholder="Job title"
                                 className="form-input"
-                                {...register("name", { required: true })}
+                                {...register("company_name", { required: true })}
                                 required
                             />
                         </div>

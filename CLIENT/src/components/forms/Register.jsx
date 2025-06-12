@@ -8,6 +8,7 @@ import "../../style/Register.css";
 
 function Register() {
   const fetchData = useFetchData();
+
   const {
     register: registerFirst,
     handleSubmit: handleFirstSubmit,
@@ -60,7 +61,6 @@ function Register() {
     resetFirstForm();
     setResponseText("");
   };
-
   // שלב 2 - שליחת הנתונים לפי תפקיד
   const onSecondSubmit = async (data) => {
     try {
@@ -106,13 +106,17 @@ function Register() {
       body: formData,
       onSuccess: ({ user, token }) => {
         navigate(`/${user.git_name || user.username}/home`);
-        setCurrentUser(user);
         localStorage.setItem("currentUser", JSON.stringify(user));
         Cookies.set("accessToken", token, {
           expires: 1,
           secure: true,
           sameSite: "Strict",
         });
+        const enHancedUser = {
+          ...user,
+          initiatedAction: false,
+        };
+        setCurrentUser(enHancedUser);
         setResponseText("Registration successful! Redirecting to home page...");
       },
       onError: (errorMessage) => {

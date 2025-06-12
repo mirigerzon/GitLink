@@ -54,6 +54,32 @@ async function updateUserRating(gitName) {
     }, [{ field: "git_name", value: gitName }]);
 };
 
+async function createApply(data, email) {
+    if (Array.isArray(data)) {
+        data = Object.fromEntries(data.map(({ field, value }) => [field, value]));
+    }
+
+    let response;
+    try {
+        response = await genericDal.POST('job_applications', data);
+    } catch (err) {
+        if (err.message.includes('Duplicate ') || err.code === '23505') {
+            throw new Error('You have already contacted the recruiter for this position. Please wait for a response before sending another message.');
+        }
+        throw err; 
+    }
+
+    await genericDal.POST("messages", {
+        email: email,
+        title: 'Application Received!',
+        content: `We have received your application for job ${data.job_id}. The recruiter has been notified. We wish you the best of luck!`,
+        important: 1,
+        type: "apply"
+    });
+
+    return response;
+}
+
 module.exports = {
     getDevelopers,
     getDeveloper,
@@ -61,4 +87,5 @@ module.exports = {
     getUser,
     getRecruiter,
     rateProject,
+    createApply
 };

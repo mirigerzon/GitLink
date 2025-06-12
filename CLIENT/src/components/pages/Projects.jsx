@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Project from "./Project";
 import "../../style/Projects.css";
 import { CurrentUser } from "../../../App";
@@ -16,6 +16,8 @@ function Projects() {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [isChange, setIsChange] = useState(0);
+  const navigate = useNavigate();
+  const ownProjects = currentUser && currentUser.role == 'developer';
 
   useEffect(() => {
     setIsChange(0);
@@ -52,6 +54,8 @@ function Projects() {
             setUserData={setFilteredProjects}
             originalData={projects}
           />
+          {ownProjects && username == null && <button onClick={() => navigate(`/${currentUser.username}/projects`)}>My Project</button>}
+          {ownProjects && username && <button onClick={() => navigate(`/projects`)}>All Project</button>}
         </div>
       )}
 

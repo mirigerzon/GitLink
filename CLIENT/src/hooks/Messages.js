@@ -1,21 +1,27 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import { useFetchData } from "./FetchData.js";
-
-export const useMessages = (user) => {
+import { CurrentUser } from "../../App.jsx";
+export const useMessages = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isChange, setIsChange] = useState(0);
     const [error, setError] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
     const fetchData = useFetchData();
+    const { currentUser, setCurrentUser } = useContext(CurrentUser);
 
     const fetchMessages = useCallback(() => {
         setLoading(true);
+        setIsChange(0);
+        setCurrentUser(prevUser => ({
+            ...prevUser,
+            initiatedAction: false
+        }));
         fetchData({
-            role: `/${user.role}`,
+            role: `/${currentUser.role}`,
             type: `messages`,
             method: "GET",
-            params: { email: user.email },
+            params: { email: currentUser.email },
             onSuccess: (data) => {
                 setMessages(data);
                 setLoading(false);
@@ -25,21 +31,21 @@ export const useMessages = (user) => {
                 setLoading(false);
             },
         });
-    }, [user.email, user.role, isChange]);
+    }, [currentUser.email, currentUser.role, currentUser.initiatedAction]);
 
-    const hasUnread = messages?.some((msg) => !msg.read);
+    const hasUnread = messages?.some((msg) => !msg.is_read);
 
     const markAllAsRead = () => {
         setLoading(true);
         fetchData({
-            role: `/${user.role}`,
+            role: `/${currentUser.role}`,
             type: "messages",
             method: "PUT",
-            body: { read: true },
-            params: { email: user.email },
+            body: { is_read: true },
+            params: { email: currentUser.email },
             onSuccess: () => {
-                fetchMessages();
                 setLoading(false);
+                setIsChange(true);
             },
             onError: (errMsg) => {
                 setError(errMsg);
@@ -49,29 +55,28 @@ export const useMessages = (user) => {
     };
 
     useEffect(() => {
-        if (user.email) {
+        if (currentUser.email) {
             fetchMessages();
         }
-    }, [fetchMessages, user.email]);
+    }, [isChange, currentUser.email, currentUser.initiatedAction]);
 
     const deleteMessage = useCallback((id) => {
         setLoading(true);
         fetchData({
-            role: `/${user.role}`,
+            role: `/${currentUser.role}`,
             type: `messages/${id}`,
             method: "DELETE",
-            params: { email: user.email },
+            params: { email: currentUser.email },
             onSuccess: (data) => {
                 setLoading(false);
-                setIsChange(1);
+                setIsChange(true);
             },
             onError: (errMsg) => {
                 setError(errMsg);
                 setLoading(false);
             },
         });
-    }, [user.email, user.role]);
-
+    }, [currentUser.email, currentUser.role]);
 
     return {
         messages,

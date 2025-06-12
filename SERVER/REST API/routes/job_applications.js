@@ -5,7 +5,7 @@ const dataService = require('../../controllers/bl.js');
 const { writeLog } = require('../../LOG/log.js');
 
 router.get('/', async (req, res) => {
-    const table = "jobs";
+    const table = "job_applications";
     try {
         const conditions = createConditions(req);
         const data = await genericDataService.getItemByConditions(table, conditions.length ? conditions : undefined);
@@ -20,13 +20,13 @@ router.get('/', async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        const table = 'jobs';
-        const body = req.body; // לבדוק אם זה באמת אותו משתמש
-        const created = await genericDataService.createItem(table, body);
+        const table = 'job_applications';
+        const body = { 'job_id': req.body.job_id, 'user_id': req.body.user_id };
+        const created = await dataService.createApply(body, req.body.email);
         writeLog(`Created new item in table=${table} with data=${JSON.stringify(body)}`, 'info');
         res.status(201).json({ message: 'Created successfully', result: created });
     } catch (err) {
-        writeLog(`ERROR creating item in table=${'jobs'} - ${err.message}`, 'error');
+        writeLog(`ERROR creating item in table=${'job_applications'} - ${err.message}`, 'error');
         res.status(500).json({ error: err.message });
     }
 });
@@ -35,12 +35,12 @@ router.delete('/:itemId', async (req, res) => {
     try {
         const baseConditions = [{ field: 'id', value: req.params.itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
-        const result = await genericDataService.deleteItem('jobs', conditions);
-        writeLog(`Deleted itemId=${req.params.itemId} from table=${'jobs'}`, 'info');
+        const result = await genericDataService.deleteItem('job_applications', conditions);
+        writeLog(`Deleted itemId=${req.params.itemId} from table=${'job_applications'}`, 'info');
         res.json({ message: 'Deleted successfully', result });
     } catch (err) {
         console.error(err);
-        writeLog(`ERROR deleting itemId=${req.params.itemId} from table=${'jobs'} - ${err.message}`, 'error');
+        writeLog(`ERROR deleting itemId=${req.params.itemId} from table=${'job_applications'} - ${err.message}`, 'error');
         res.status(500).json({ error: err.message });
     }
 });
@@ -61,12 +61,12 @@ const createConditions = (req) => {
 };
 
 const addUserIdCondition = (req, conditions = []) => {
-    const userId = req.user?.user_id;
-    if (!userId) return conditions;
+    const user_id = req.user?.id;
+    if (!user_id) return conditions;
     // throw new Error("User not authenticated");
     const updated = [...conditions];
     if (!updated.some(cond => cond.field === 'user_id')) {
-        updated.push({ field: 'user_id', value: userId });
+        updated.push({ field: 'user_id', value: user_id });
     }
     return updated;
 };

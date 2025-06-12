@@ -15,9 +15,8 @@ function Jobs() {
   const [isChange, setIsChange] = useState(0);
   const logOut = useLogout();
   const fetchData = useFetchData();
-
   const [filteredJobs, setFilteredJobs] = useState(jobs);
-
+  const ownJobs = currentUser && currentUser.role == 'recruiter';
   useEffect(() => {
     setIsChange(0);
     fetchData({
@@ -47,6 +46,8 @@ function Jobs() {
           placeholder="Search by job title or required technologies..."
         />
         <Sort type="jobs" setUserData={setFilteredJobs} originalData={jobs} />
+        {ownJobs && username == null && <button onClick={() => navigate(`/${currentUser.username}/projects`)}>My Jobs</button>}
+        {ownJobs && username && <button onClick={() => navigate(`/projects`)}>All Jobs</button>}
       </div>
       <div className="jobs-grid">
         {filteredJobs.length > 0 &&

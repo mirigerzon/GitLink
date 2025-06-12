@@ -1,6 +1,5 @@
 const genericDal = require('../services/genericDal.js');
 const dal = require('../services/dal.js');
-
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -10,6 +9,7 @@ const transporter = nodemailer.createTransport({
         pass: 'ojoj bcch hqdc chst'
     }
 });
+
 async function sendEmailAndSave(userDetails) {
     const { user_id, email, title, content, username } = userDetails;
 
@@ -35,10 +35,6 @@ async function sendEmailAndSave(userDetails) {
         throw error;
     }
 }
-
-
-
-
 
 const verifyLogin = async (username, password) => {
     const users = await dal.getUser(username);
@@ -87,7 +83,6 @@ const registerNewUser = async (userData) => {
         await genericDal.POST("recruiters", recruiterData);
     }
 
-
     await sendEmailAndSave({
         user_id: newUser.insertId,
         email: email,
@@ -96,13 +91,11 @@ const registerNewUser = async (userData) => {
         username: username
     });
 
-
-    // await genericDal.POST("messages", {
-    //     user_id: newUser.insertId,
-    //     email: email,
-    //     title: 'WELCOME!',
-    //     content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
-    // });
+    await genericDal.POST("messages", {
+        email: email,
+        title: 'WELCOME!',
+        content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
+    });
 
     return {
         id: newUser.insertId,
@@ -112,6 +105,10 @@ const registerNewUser = async (userData) => {
     };
 };
 
+const getUser = async (username) => {
+    return dal.getUser(username);
+}
+
 const hashPassword = async (plainPassword) => {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
@@ -120,5 +117,6 @@ const hashPassword = async (plainPassword) => {
 
 module.exports = {
     verifyLogin,
-    registerNewUser
+    registerNewUser,
+    getUser
 };

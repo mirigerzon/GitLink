@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { CurrentUser } from "../../../App";
 import { useLogout } from "../../hooks/LogOut";
 import { Messages } from "../pages/Messages";
+import { FiLogOut } from 'react-icons/fi';
 import "../../style/NavBar.css";
 
 function Navigation() {
@@ -13,14 +14,17 @@ function Navigation() {
   return (
     <nav className="navigation">
       <div className="nav-container">
-        <div className="nav-brand">
-          <Link to="/home" className="brand-link">
-            GitLink
+        {currentUser && <div className="user-control">
+          <Link to={`${currentUser.username}/profile`}>
+            <div className="profile-link"> 
+              <img src={currentUser.profile_image}
+                alt={`${currentUser.username} avatar`}
+                className="profile-img" />
+              <span className="user-greeting">Hello, {currentUser.username}</span>
+            </div>
           </Link>
-          {currentUser && <div>
-            <Messages />
-          </div>}
-        </div>
+          <Messages />
+        </div>}
         <div className="nav-links">
           <Link to={"/home"} className={`nav-link ${location.pathname.includes("home") ? "active" : ""}`}  >
             Home
@@ -37,9 +41,7 @@ function Navigation() {
           <Link to={"/Jobs"} className={`nav-link ${location.pathname.includes("Jobs") ? "active" : ""}`}  >
             Jobs
           </Link>
-          {currentUser && (<Link to={`${currentUser.username}/profile`} className={`nav-link ${location.pathname.includes("profile") ? "active" : ""}`}    >
-            Profile
-          </Link>)}  {!currentUser && (<>      <Link to="/login" className={`nav-link ${location.pathname.includes("login") ? "active" : ""}`}      >
+          {!currentUser && (<><Link to="/login" className={`nav-link ${location.pathname.includes("login") ? "active" : ""}`}      >
             Login
           </Link>
             <Link to="/register" className={`nav-link ${location.pathname.includes("register") ? "active" : ""}`}      >
@@ -48,15 +50,16 @@ function Navigation() {
           </>
           )}
         </div>
-
-        {currentUser && (
-          <div className="nav-user">
-            <span className="user-greeting">Hello, {currentUser.username}</span>
-            <button onClick={logOut} className="logout-btn">
-              Logout
+        <div className="nav-brand">
+          <Link to="/home" className="brand-link">
+            GitLink
+          </Link>
+          {currentUser && (
+            <button onClick={logOut} className="logout-btn nav-user">
+              <FiLogOut />
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </nav>
   );

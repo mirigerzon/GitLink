@@ -9,6 +9,7 @@ import Sort from "../common/Sort";
 
 function Recruiters() {
   const { currentUser } = useContext(CurrentUser);
+  const fetchData = useFetchData();
   const logOut = useLogout();
   const [recruiters, setRecruiters] = useState([]);
   const [filteredRecruiters, setFilteredRecruiters] = useState(recruiters);

@@ -32,7 +32,7 @@ function Developer({ developerData }) {
         <div className="avatar">
           <img
             src={developerData.profile_image}
-            alt={`${developerData.name} avatar`}
+            alt={`${developerData.username} avatar`}
             className="avatar-img"
           />
           <div className="online-indicator"></div>

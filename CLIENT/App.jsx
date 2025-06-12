@@ -20,6 +20,7 @@ function App() {
     return storedUser ? JSON.parse(storedUser) : null;
   }, []);
   const [currentUser, setCurrentUser] = useState(initialCurrentUser);
+
   return (
     <>
       <CurrentUser.Provider value={{ currentUser, setCurrentUser }}>
@@ -46,8 +47,8 @@ function App() {
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>
-        <Outlet />
       </CurrentUser.Provider>
+      
     </>
   );
 }

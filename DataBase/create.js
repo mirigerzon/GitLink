@@ -112,7 +112,7 @@ async function createTables(connection) {
             username VARCHAR(100) NOT NULL,
             title VARCHAR(100),
             company_name VARCHAR(100) NOT NULL,
-            details VARCHAR(2000),
+            details VARCHAR(3000),
             requirements VARCHAR(2000),
             experience INT NOT NULL,
             languages VARCHAR(255),

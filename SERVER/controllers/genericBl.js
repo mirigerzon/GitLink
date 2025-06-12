@@ -17,7 +17,6 @@ const createItem = async (table, data) => {
   return await dal.POST(table, data);
 };
 
-
 const updateItem = async (table, data, conditions = []) => {
   return await dal.PUT(table, data, conditions);
 };

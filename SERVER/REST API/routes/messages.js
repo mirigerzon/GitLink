@@ -18,21 +18,20 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.put("/", async (req, res) => {
     try {
-        const table = 'messages';
-        let conditions = Object.entries(req.body).map(([key, value]) => ({
-            field: key,
-            value
-        }));
-        conditions = addUserIdCondition(req, conditions);
-        const body = Object.fromEntries(conditions.map(({ field, value }) => [field, value]));
-        const created = await genericDataService.createItem(table, body);
-        writeLog(`Created new item in table=${table} with data=${JSON.stringify(body)}`, 'info');
-        res.status(201).json({ message: 'Created successfully', result: created });
+        const body = req.body;
+        const result = await genericDataService.updateItem(
+            'messages',
+            body,
+            [{ field: 'email', value: req.user.email }] //לעשות שהוא יבדוק אם מי שביקש הוא המשתמש הנוכחי
+        );
+        writeLog(`Updated messager for user= ${body} with data=${JSON.stringify(body)}`, 'info');
+        res.json(result);
     } catch (err) {
-        writeLog(`ERROR creating item in table=${'messages'} - ${err.message}`, 'error');
-        res.status(500).json({ error: err.message });
+        console.error(err);
+        writeLog(`ERROR updating email= in table='messages' - ${err.message}`, 'error');
+        res.status(500).json({ error: `ERROR updating 'messages' item` });
     }
 });
 

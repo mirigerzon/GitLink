@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const dataService = require('../../controllers/authBl.js');
+const autoBl = require('../../controllers/authBl.js');
 const { writeLog } = require('../../LOG/log.js');
 
 const ACCESS_SECRET = process.env.ACCESS_SECRET;
@@ -25,14 +25,14 @@ const upload = multer({ storage });
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
-        const user = await dataService.verifyLogin(username, password);
+        const user = await autoBl.verifyLogin(username, password);
         if (!user) {
             writeLog(`Failed login attempt for user name=${username}`, 'warn');
             return res.status(401).json({ error: 'Invalid email or password' });
         }
         const ip = req.ip;
-        const accessToken = jwt.sign({ id: user.id, username: user.username, ip }, ACCESS_SECRET, { expiresIn: '15m' });
-        const refreshToken = jwt.sign({ id: user.id }, REFRESH_SECRET, { expiresIn: '1d' });
+        const accessToken = jwt.sign({ id: user.id, email: user.email, ip, username: user.username, role: user.role }, ACCESS_SECRET, { expiresIn: '15m' });
+        const refreshToken = jwt.sign({ username: user.username, id: user.id }, REFRESH_SECRET, { expiresIn: '1d' });
         writeLog(`User logged in successfully: user name=${username}, ip=${ip}`, 'info');
         res
             .cookie('refreshToken', refreshToken, {
@@ -51,10 +51,10 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', upload.single('profile_image'), async (req, res) => {
     try {
-        const user = await dataService.registerNewUser(req.body);
+        const user = await autoBl.registerNewUser(req.body);
         const ip = req.ip;
-        const accessToken = jwt.sign({ id: user.id, email: user.email, ip }, ACCESS_SECRET, { expiresIn: '15m' });
-        const refreshToken = jwt.sign({ id: user.id }, REFRESH_SECRET, { expiresIn: '1d' });
+        const accessToken = jwt.sign({ id: user.id, email: user.email, ip, username: user.username, role: user.role }, ACCESS_SECRET, { expiresIn: '15m' });
+        const refreshToken = jwt.sign({ username: user.username, id: user.id }, REFRESH_SECRET, { expiresIn: '1d' });
         writeLog(`User registered successfully: email=${user.email}, ip=${ip}`, 'info');
         res
             .cookie('refreshToken', refreshToken, {
@@ -83,7 +83,7 @@ router.post('/refresh', (req, res) => {
             writeLog('Invalid refresh token', 'warn');
             return res.sendStatus(403);
         }
-        const user = await dataService.getUserById(decoded.id);
+        const user = await autoBl.getUser(decoded.username);
         if (!user) {
             return res.sendStatus(403);
         }

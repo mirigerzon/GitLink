@@ -1,14 +1,51 @@
 .messages-container {
     position: relative;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.new-message-alert {
+    position: fixed;
+    top: 13.95vh;
+    right: 0;
+    background-color: white;
+    padding: 1vw;
+    font-size: 1.2rem;
+    font-weight: bold;
+    height: 10vh;
+    border: 1px solid #ddd;
+    border-right: 0;
+    border-radius: 10px 0px 0px 10px;
+    animation: slideInRight 1s ease-out 0.3s both;
+}
+
+.icon {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.new-messages {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    transform: translate(50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.5);
+    animation: pulse 2s infinite;
 }
 
 .messages-btn {
+    position: relative;
     background: none;
     font-size: 1.3rem;
     width: 2vw;
     display: inline-block;
     border: none;
     cursor: pointer;
+    left: -1.3vw;
 }
 
 .messages-icon-btn {
@@ -46,10 +83,18 @@
 }
 
 .messages-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #fafafa;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    height: 8vh;
+    padding: 4.5vh 1vw 2vw 0.5vw;
+    width: 19.5vw;
+    box-shadow: 0 2px 0px rgba(0, 0, 0, 0.1);
 }
 
 .mark-read-btn {
@@ -85,23 +130,28 @@
 
 .messages-popup {
     position: fixed;
-    left: 0vw;
-    top: 11.5vh;
-    height: 88.5vh;
+    right: 0vw;
+    top: 8.3vh;
+    height: 91.7vh;
     background: rgb(233, 236, 249);
     backdrop-filter: blur(10px);
-    border-right: 1px solid rgba(102, 126, 234, 0.2);
+    border-left: 1px solid rgba(102, 126, 234, 0.2);
     width: 20vw;
-    padding: 1vw;
+    padding: 1vh;
+    padding-right: 0;
 }
 
-.messages-content{
+.messages-content {
     background-color: #fafafa;
-    height: 84.2vh;
-    padding: 0.5vw;
+    height: 89.3vh;
+    padding: 0 0.5vw 0.5vw 0.5vw;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
-.close-btn{
-    bottom: 3vh;
+.close-btn {
+    bottom: 3.5vh;
+    right: 1vh;
     position: absolute;
+    background-color: rgba(233, 236, 249, 0.66);
 }
