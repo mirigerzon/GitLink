@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Project from "./Project";
 import "../../style/Projects.css";
 import { CurrentUser } from "../../../App";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import Search from "../common/Search";
 import Sort from "../common/Sort";

@@ -5,9 +5,9 @@ const PORT = 3001;
 const app = express();
 app.use(cors());
 app.use(express.json());
-require('dotenv').config({ path: '../SERVER/.env' });
+require('dotenv').config();
 
-async function main() {
+async function createDatabase() {
     const rootConnection = await mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -17,20 +17,19 @@ async function main() {
 
     await rootConnection.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME}\``);
     await rootConnection.end();
+}
 
-    const db = await mysql.createConnection({
+async function getDbConnection() {
+    return await mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
         port: process.env.DB_PORT || 3306,
     });
-
-    await createTables(db);
-    await db.end();
 }
 
-async function createTables(connection) {
+async function createUserTables(connection) {
     // users (general)
     await connection.query(`
         CREATE TABLE IF NOT EXISTS users (
@@ -44,6 +43,19 @@ async function createTables(connection) {
             is_active BOOLEAN DEFAULT TRUE
         )
     `);
+
+    // passwords
+    await connection.query(`
+        CREATE TABLE IF NOT EXISTS passwords (
+            user_id INT PRIMARY KEY,
+            hashed_password VARCHAR(255) NOT NULL,
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    `);
+}
+
+async function createRoleTables(connection) {
     // developers (specific fields)
     await connection.query(`
         CREATE TABLE IF NOT EXISTS developers (
@@ -56,6 +68,7 @@ async function createTables(connection) {
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
+
     // recruiters (specific fields)
     await connection.query(`
         CREATE TABLE IF NOT EXISTS recruiters (
@@ -65,15 +78,9 @@ async function createTables(connection) {
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
-    // passwords
-    await connection.query(`
-        CREATE TABLE IF NOT EXISTS passwords (
-            user_id INT PRIMARY KEY,
-            hashed_password VARCHAR(255) NOT NULL,
-            is_active BOOLEAN DEFAULT TRUE,
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-        )
-    `);
+}
+
+async function createProjectTables(connection) {
     // projects
     await connection.query(`
         CREATE TABLE IF NOT EXISTS projects (
@@ -92,7 +99,8 @@ async function createTables(connection) {
             FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
         )
     `);
-    // project ratings,
+
+    // project ratings
     await connection.query(`
         CREATE TABLE IF NOT EXISTS project_ratings (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -105,6 +113,9 @@ async function createTables(connection) {
             FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
         )
     `);
+}
+
+async function createJobTables(connection) {
     // jobs
     await connection.query(`
         CREATE TABLE IF NOT EXISTS jobs (
@@ -121,30 +132,49 @@ async function createTables(connection) {
             FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
         )
     `);
+
     // job_applications
     await connection.query(`
         CREATE TABLE IF NOT EXISTS job_applications (
-        user_id INT NOT NULL,
-        job_id INT NOT NULL,
-        remark VARCHAR(500),
-        is_active BOOLEAN DEFAULT TRUE,
-        PRIMARY KEY (user_id, job_id),
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-        FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
-    )
+            user_id INT NOT NULL,
+            job_id INT NOT NULL,
+            remark VARCHAR(500),
+            is_active BOOLEAN DEFAULT TRUE,
+            PRIMARY KEY (user_id, job_id),
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
+        )
     `);
+}
+
+async function createMessageTables(connection) {
     // messages
     await connection.query(`
-    CREATE TABLE IF NOT EXISTS messages (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        email VARCHAR(100) NOT NULL,
-        title VARCHAR(100) NOT NULL,
-        content VARCHAR(100),
-        is_active BOOLEAN DEFAULT TRUE,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    )
-`);
+        CREATE TABLE IF NOT EXISTS messages (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            title VARCHAR(100) NOT NULL,
+            content VARCHAR(100),
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    `);
+}
+
+async function createAllTables(connection) {
+    await createUserTables(connection);
+    await createRoleTables(connection);
+    await createProjectTables(connection);
+    await createJobTables(connection);
+    await createMessageTables(connection);
+}
+
+async function main() {
+    await createDatabase();
+    const db = await getDbConnection();
+    await createAllTables(db);
+    await db.end();
 }
 
 main();

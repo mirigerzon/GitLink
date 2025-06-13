@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CurrentUser } from "../../../App";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import Job from "./Job";
 import "../../style/jobs.css";
@@ -16,7 +16,9 @@ function Jobs() {
   const logOut = useLogout();
   const fetchData = useFetchData();
   const [filteredJobs, setFilteredJobs] = useState(jobs);
+  const navigate = useNavigate();
   const ownJobs = currentUser && currentUser.role == 'recruiter';
+
   useEffect(() => {
     setIsChange(0);
     fetchData({

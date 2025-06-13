@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext, } from "react";
+import { useContext, } from "react";
 import "../../style/Job.css";
 import Update from "../common/Update";
 import { useNavigate } from "react-router-dom";
-import { useFetchData } from "../../hooks/FetchData";
+import { useFetchData } from "../../hooks/fetchData";
 import { useLogout } from "../../hooks/LogOut";
 import { CurrentUser } from "../../../App";
 
@@ -17,16 +17,16 @@ function Job({ jobData }) {
       method: "POST",
       type: "job_applications",
       body: { user_id: currentUser.id, job_id: jobData.id, email: currentUser.email },
-      onSuccess: (data) => {
+      onSuccess: () => {
         setCurrentUser(prevUser => ({
           ...prevUser,
           initiatedAction: true
         }));
       },
-      onError: (err) => { 
+      onError: (err) => {
         console.error(`Failed to fetch developers: ${err}`);
         alert(err);
-       },
+      },
       logOut,
     });
   };

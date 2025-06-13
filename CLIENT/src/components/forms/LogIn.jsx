@@ -1,69 +1,26 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useFetchData } from "../../hooks/FetchData.js";
-import { CurrentUser } from "../../../App";
-import Cookies from "js-cookie";
+import { useAuth } from "../../hooks/useAuth.js";
 import "../../style/Login.css";
 
 function Login() {
-  const { register, handleSubmit, reset } = useForm();
-  const { setCurrentUser } = useContext(CurrentUser);
-  const [responseText, setResponseText] = useState(
-    "Enter your credentials to access your account"
-  );
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const fetchData = useFetchData();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm({
+    mode: 'onBlur' 
+  });
+
+  const { login, isLoading, message } = useAuth();
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
-    const userDetails = {
+    await login({
       username: data.username,
       password: data.password,
-    };
-    await checkIfExists(userDetails);
-    reset();
-    setIsLoading(false);
-  };
-
-  async function checkIfExists(userDetails) {
-    const username = userDetails.username;
-    const password = userDetails.password;
-
-    await fetchData({
-      type: "login",
-      method: "POST",
-      body: { username, password },
-      onSuccess: (res) => {
-        if (res && res.token) {
-          Cookies.set("accessToken", res.token, {
-            expires: 1,
-            secure: true,
-            sameSite: "Strict",
-          });
-          const enHancedUser = {
-            ...res.user,
-            initiatedAction: false,
-          };
-          localStorage.setItem("currentUser", JSON.stringify(res.user));
-          setResponseText("Login successful! Redirecting...");
-          setCurrentUser(enHancedUser);
-          navigate(`/${username}/home`);
-        } else {
-          setResponseText("Incorrect user name or password");
-        }
-      },
-      onError: () => {
-        setResponseText("Connection error. Please try again.");
-      },
     });
-
-    setTimeout(
-      () => setResponseText("Enter your credentials to access your account"),
-      3000
-    );
-  }
+    reset();
+  };
 
   return (
     <div className="login-container">
@@ -77,32 +34,52 @@ function Login() {
           <div className="form-group">
             <input
               type="text"
-              placeholder="user name"
-              className="form-input"
-              {...register("username", { required: true })}
-              required
+              placeholder="Username"
+              className={`form-input ${errors.username ? 'error' : ''}`}
+              {...register("username", {
+                required: "Username is required",
+                minLength: {
+                  value: 3,
+                  message: "Username must be at least 3 characters"
+                }
+              })}
             />
+            {errors.username && (
+              <span className="error-message">{errors.username.message}</span>
+            )}
           </div>
 
           <div className="form-group">
             <input
               type="password"
               placeholder="Password"
-              className="form-input"
-              {...register("password", { required: true })}
-              required
+              className={`form-input ${errors.password ? 'error' : ''}`}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters"
+                }
+              })}
             />
+            {errors.password && (
+              <span className="error-message">{errors.password.message}</span>
+            )}
           </div>
 
           <button
             type="submit"
             className={`login-btn ${isLoading ? "loading" : ""}`}
-            disabled={isLoading}
+            disabled={isLoading || Object.keys(errors).length > 0}
           >
             {isLoading ? "Signing In..." : "Sign In"}
           </button>
 
-          <div className="response-message">{responseText}</div>
+          {message && (
+            <div className={`response-message ${message.includes('successful') ? 'success' : 'error'}`}>
+              {message}
+            </div>
+          )}
         </form>
       </div>
     </div>

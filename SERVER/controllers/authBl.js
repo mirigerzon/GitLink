@@ -2,15 +2,15 @@ const genericDal = require('../services/genericDal.js');
 const dal = require('../services/dal.js');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'sara3280624@gmail.com',//להעביר לקובץ ENV
-        pass: 'ojoj bcch hqdc chst'
-    }
-});
+// const transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: 'sara3280624@gmail.com',//להעביר לקובץ ENV
+//         pass: 'ojoj bcch hqdc chst'
+//     }
+// });
 
-async function sendEmailAndSave(userDetails) {
+async function sendEmail(userDetails) {
     const { user_id, email, title, content, username } = userDetails;
 
     try {
@@ -21,12 +21,12 @@ async function sendEmailAndSave(userDetails) {
             content
         });
 
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: title,
-            html: content
-        });
+        // await transporter.sendMail({
+        //     from: process.env.EMAIL_USER,
+        //     to: email,
+        //     subject: title,
+        //     html: content
+        // });
 
         console.log('Email sent and saved successfully');
 
@@ -83,7 +83,7 @@ const registerNewUser = async (userData) => {
         await genericDal.POST("recruiters", recruiterData);
     }
 
-    await sendEmailAndSave({
+    await sendEmail({
         user_id: newUser.insertId,
         email: email,
         title: 'WELCOME!',
@@ -91,11 +91,11 @@ const registerNewUser = async (userData) => {
         username: username
     });
 
-    await genericDal.POST("messages", {
-        email: email,
-        title: 'WELCOME!',
-        content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
-    });
+    // await genericDal.POST("messages", {
+    //     email: email,
+    //     title: 'WELCOME!',
+    //     content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
+    // });
 
     return {
         id: newUser.insertId,

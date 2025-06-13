@@ -1,5 +1,6 @@
 import "../../style/Recruiter.css";
 import { useNavigate } from "react-router-dom";
+import { FiUser, FiFolder } from 'react-icons/fi';
 
 function Recruiter({ recruiterData }) {
   const navigate = useNavigate();
@@ -71,15 +72,14 @@ function Recruiter({ recruiterData }) {
           className="btn-profile"
           onClick={() => navigate(`/${recruiterData.username}/profile`)}
         >
-          <span className="btn-icon">👤</span>
-          View Profile
+          <FiUser className="btn-icon" />
         </button>
 
         <button
           className="btn-jobs"
           onClick={() => navigate(`/${recruiterData.username}/jobs`)}
         >
-          <span className="btn-icon">📁</span>
+          <span className="btn-icon"><FiFolder /></span>
           View Jobs
         </button>
       </div>

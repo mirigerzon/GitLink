@@ -160,6 +160,22 @@ function Sort({ type, setUserData, originalData }) {
     );
   }
 
+  if (type === "recruiters") {
+    return (
+      <div className="filter-container">
+
+        <div className="filter-group">
+          <label>Filter by Status:</label>
+          <select onChange={(e) => filterByField("is_active", e.target.value)}>
+            <option value="all">All Status</option>
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+          </select>
+        </div>
+      </div>
+    );
+  }
+
   return null;
 }
 

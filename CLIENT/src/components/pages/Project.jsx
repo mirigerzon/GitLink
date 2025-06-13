@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CurrentUser } from "../../../App";
 import { useFetchData } from "../../hooks/FetchData.js";
+import { FiGitBranch, FiStar, FiUser } from 'react-icons/fi';
 
 function Project({ projectData, setIsChange }) {
   const navigate = useNavigate();
@@ -51,11 +52,14 @@ function Project({ projectData, setIsChange }) {
         <div className="project-stats">
           <div className="stat">
             <span className="stat-value">{projectData.rating}</span>
-            <span className="stat-label">⭐ Rating</span>
+
+            <span className="stat-label"><FiStar /> Rating</span>
           </div>
           <div className="stat">
             <span className="stat-value">{projectData.forks_count}</span>
-            <span className="stat-label">👀 Forks</span>
+            <span className="stat-label">
+              <FiGitBranch /> Forks
+            </span>
           </div>
         </div>
       </div>
@@ -106,7 +110,7 @@ function Project({ projectData, setIsChange }) {
           className="btn-primary"
           onClick={() => navigate(`/${projectData.username}/profile`)}
         >
-          View Developer
+          <FiUser />View Developer
         </button>
 
         {false && (

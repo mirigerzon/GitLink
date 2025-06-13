@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { Link, useNavigate, Outlet } from "react-router-dom";
+// import { useContext } from "react";
+import { Link, Outlet } from "react-router-dom";
 import "../../style/Home.css";
 
 function Home() {

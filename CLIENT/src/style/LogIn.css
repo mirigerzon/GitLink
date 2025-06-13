@@ -3,7 +3,8 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  /* background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%); */
   position: relative;
   overflow: hidden;
 }
@@ -15,7 +16,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
+  /* background: radial-gradient(
       circle at 25% 25%,
       rgba(79, 70, 229, 0.2) 0%,
       transparent 50%
@@ -29,7 +30,7 @@
       circle at 50% 50%,
       rgba(124, 58, 237, 0.1) 0%,
       transparent 50%
-    );
+    ); */
   animation: pulse 15s ease-in-out infinite alternate;
 }
 
@@ -327,7 +328,7 @@ input[type="file"].form-input::file-selector-button:hover {
   border-radius: 12px;
   font-size: 14px;
   font-weight: 600;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.2);
   color: #dc2626;

@@ -1,6 +1,6 @@
 import { useState, createContext, useMemo } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
-import Navigation from "./src/components/common/NuvBar";
+import NavBar from "./src/components/common/NavBar";
 import LogIn from "./src/components/forms/LogIn";
 import Register from "./src/components/forms/Register";
 import Home from "./src/components/pages/Home";
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <CurrentUser.Provider value={{ currentUser, setCurrentUser }}>
-        <Navigation currentUser={currentUser} />
+        <NavBar currentUser={currentUser} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -48,7 +48,7 @@ function App() {
           <Route path="*" element={<Error />} />
         </Routes>
       </CurrentUser.Provider>
-      
+
     </>
   );
 }

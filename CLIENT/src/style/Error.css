@@ -70,13 +70,12 @@
     background-clip: text;
 }
 
-.error-message {
+/* .error-message {
     font-size: 1.2rem;
     color: #4a5568;
     line-height: 1.6;
-    margin-bottom: 2.5rem;
     opacity: 0.9;
-}
+} */
 
 .error-actions {
     display: flex;

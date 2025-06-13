@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut";
+import { FiDelete } from "react-icons/fi";
 function Delete({ type, itemId, setIsChange, role = null }) {
   const logOut = useLogout();
   const [process, setProcess] = useState(0);
@@ -32,7 +33,7 @@ function Delete({ type, itemId, setIsChange, role = null }) {
   return (
     <>
       <button onClick={(e) => deleteFunc(e)} className="action-btn delete-btn">
-        🗑️
+        <FiDelete />
       </button>
       {process == 1 && <h3>in process...</h3>}
     </>

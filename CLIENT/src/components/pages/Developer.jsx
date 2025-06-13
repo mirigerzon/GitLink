@@ -1,5 +1,6 @@
 import "../../style/Developer.css";
 import { useNavigate } from "react-router-dom";
+import { FiUser, FiStar, FiFolder } from 'react-icons/fi';
 
 function Developer({ developerData }) {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function Developer({ developerData }) {
         </div>
 
         <div className="stat-item">
-          <div className="stat-icon">⭐</div>
+          <div className="stat-icon"><FiStar /></div>
           <div className="stat-content">
             <span className="stat-number">{developerData.rating}</span>
             <div className="rating-stars">
@@ -91,16 +92,14 @@ function Developer({ developerData }) {
           className="btn-profile"
           onClick={() => navigate(`/${developerData.username}/profile`)}
         >
-          <span className="btn-icon">👤</span>
-          View Profile
+          <FiUser className="btn-icon" />
         </button>
 
         <button
           className="btn-projects"
           onClick={() => navigate(`/${developerData.username}/projects`)}
         >
-          <span className="btn-icon">📁</span>
-          View Projects
+          <FiFolder className="btn-icon" />
         </button>
       </div>
 

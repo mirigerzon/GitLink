@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import "../../style/Search.css";
+import { FiMic } from 'react-icons/fi';
+import { useRef } from "react";
 
 const Search = ({
   data,
@@ -9,6 +11,7 @@ const Search = ({
   className = "",
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const recognitionRef = useRef(null);
 
   const memoizedSearchFields = useMemo(
     () => searchFields,
@@ -35,8 +38,33 @@ const Search = ({
     setFilteredData(filteredData);
   }, [filteredData, setFilteredData]);
 
+  const startListening = () => {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert("Your browser does not support speech recognition");
+      return;
+    }
+
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setSearchTerm(transcript);
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+    };
+
+    recognition.start();
+    recognitionRef.current = recognition;
+  };
+
   return (
     <div className={`search-container ${className}`}>
+
       <div className="search-input-wrapper">
         <input
           type="text"
@@ -45,6 +73,9 @@ const Search = ({
           placeholder={placeholder}
           className="search-input"
         />
+        <button onClick={startListening}>
+          <FiMic />
+        </button>
       </div>
     </div>
   );
