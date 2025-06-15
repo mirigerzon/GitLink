@@ -34,7 +34,6 @@ function Register() {
     formData.append("username", stepOneData.username);
     formData.append("password", stepOneData.password);
     formData.append("role", selectedRole);
-
     formData.append("email", data.email);
     formData.append("phone", data.phone);
 
@@ -50,6 +49,10 @@ function Register() {
       } else if (data.profile_image?.length > 0) {
         formData.append("profile_image", data.profile_image[0]);
       }
+
+      if (data.cv_file?.length > 0) {
+        formData.append("cv_file", data.cv_file[0]);
+      }
     } else if (selectedRole === "recruiter") {
       formData.append("company_name", data.company_name || "");
       if (data.profile_image?.length > 0) {
@@ -58,11 +61,6 @@ function Register() {
     }
 
     await registerUser(formData);
-    reset();
-  };
-
-  const goBack = () => {
-    setStep(1);
     reset();
   };
 
@@ -319,13 +317,26 @@ function Register() {
                   style={{ display: 'none' }}
                 />
               </label>
-         </div>
+            </div>
+          )}
+
+          {selectedRole === "developer" && (
+            <div className="form-group">
+              <label className="file-input-label">
+                <FiUpload className="upload-icon" />
+                <span>Upload CV (PDF only)</span>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  className="form-input file-input"
+                  {...registerForm("cv_file")}
+                  style={{ display: 'none' }}
+                />
+              </label>
+            </div>
           )}
 
           <div className="form-actions">
-            <button type="button" onClick={goBack} className="back-btn">
-              Back
-            </button>
             <button
               type="submit"
               className={`register-btn ${isLoading ? "loading" : ""}`}

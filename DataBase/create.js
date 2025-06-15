@@ -40,6 +40,7 @@ async function createUserTables(connection) {
             role VARCHAR(100) NOT NULL,
             about VARCHAR(2000),
             profile_image VARCHAR(255),
+            cv_file VARCHAR(255),
             is_active BOOLEAN DEFAULT TRUE
         )
     `);
@@ -157,6 +158,7 @@ async function createMessageTables(connection) {
             title VARCHAR(100) NOT NULL,
             content VARCHAR(100),
             is_active BOOLEAN DEFAULT TRUE,
+            is_read BOOLEAN DEFAULT FALSE,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);

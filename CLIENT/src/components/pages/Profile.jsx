@@ -64,6 +64,41 @@ function Profile() {
     });
   }, [username, isChange, userData]);
 
+  const getImageUrl = () => {
+    if (!userData.profile_image) return null;
+    if (userData.profile_image.startsWith('https://github.com/')) {
+      return userData.profile_image;
+    }
+    return `http://localhost:3001/uploads/${userData.profile_image}`;
+  };
+
+  const getCVUrl = () => {
+    if (!userData.cv_file) return null;
+    return `http://localhost:3001/uploads/${userData.cv_file}`;
+  };
+
+  const handleViewCV = () => {
+    const cvUrl = getCVUrl();
+    if (cvUrl) {
+      window.open(cvUrl, '_blank');
+    }
+  };
+
+  const handleDownloadCV = async () => {
+    try {
+      const response = await fetch(`/api/auth/cv/${userData.id}`);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${userData.username}-cv.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading CV:', error);
+    }
+  };
+
   if (loading) return <div className="profile-loading">Loading profile...</div>;
   if (error) return <div className="profile-error">{error}</div>;
   if (!userData) return <div className="profile-error">User not found</div>;
@@ -75,7 +110,7 @@ function Profile() {
       <div className="profile-header">
         <div className="profile-section">
           <img
-            src={userData.profile_image || "/default-avatar.png"}
+            src={getImageUrl()}
             alt={`${userData.name}'s profile`}
             className="profile-image"
           />
@@ -115,6 +150,19 @@ function Profile() {
               <h2>Company</h2>
               <p className="profile-description">{userData.company_name}</p>
             </>
+          )}
+          {userData.role === 'developer' && userData.cv_file && (
+            <div className="cv-section">
+              <h3>Resume / CV</h3>
+              <div className="cv-buttons">
+                <button onClick={handleViewCV} className="btn btn-primary">
+                  View CV
+                </button>
+                <button onClick={handleDownloadCV} className="btn btn-secondary">
+                  Download CV
+                </button>
+              </div>
+            </div>
           )}
 
           <h2>Programming Languages</h2>

@@ -12,15 +12,38 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../../uploads/profile_images'));
+        if (file.fieldname === 'profile_image') {
+            cb(null, path.join(__dirname, '../../uploads/profile_images'));
+        } else if (file.fieldname === 'cv_file') {
+            cb(null, path.join(__dirname, '../../uploads/cv_files'));
+        }
     },
     filename: function (req, file, cb) {
         const ext = path.extname(file.originalname);
-        cb(null, `${Date.now()}-${file.fieldname}${ext}`);
+        const timestamp = Date.now();
+        if (file.fieldname === 'profile_image') {
+            cb(null, `${timestamp}-${file.fieldname}${ext}`);
+        } else if (file.fieldname === 'cv_file') {
+            cb(null, `${timestamp}-cv-${file.originalname}`);
+        }
     }
 });
 
-const upload = multer({ storage });
+const upload = multer({
+    storage,
+    limits: {
+        fileSize: 10 * 1024 * 1024
+    },
+    fileFilter: (req, file, cb) => {
+        if (file.fieldname === 'profile_image' && file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else if (file.fieldname === 'cv_file' && file.mimetype === 'application/pdf') {
+            cb(null, true);
+        } else {
+            cb(new Error('Invalid file type!'), false);
+        }
+    }
+});
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -49,13 +72,47 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/register', upload.single('profile_image'), async (req, res) => {
+router.post('/register', upload.fields([
+    { name: 'profile_image', maxCount: 1 },
+    { name: 'cv_file', maxCount: 1 }
+]), async (req, res) => {
     try {
-        const user = await autoBl.registerNewUser(req.body);
+        let profileImagePath = null;
+        let cvFilePath = null;
+
+        if (req.body.profile_image && req.body.profile_image.startsWith('https://github.com/')) {
+            profileImagePath = req.body.profile_image;
+        } else if (req.files && req.files['profile_image']) {
+            profileImagePath = `profile_images/${req.files['profile_image'][0].filename}`;
+        }
+
+        if (req.files && req.files['cv_file']) {
+            cvFilePath = `cv_files/${req.files['cv_file'][0].filename}`;
+        }
+
+        const userData = {
+            ...req.body,
+            profile_image: profileImagePath,
+            cv_file: cvFilePath
+        };
+
+        const user = await autoBl.registerNewUser(userData);
         const ip = req.ip;
-        const accessToken = jwt.sign({ id: user.id, email: user.email, ip, username: user.username, role: user.role }, ACCESS_SECRET, { expiresIn: '15m' });
-        const refreshToken = jwt.sign({ username: user.username, id: user.id }, REFRESH_SECRET, { expiresIn: '1d' });
+        const accessToken = jwt.sign({
+            id: user.id,
+            email: user.email,
+            ip,
+            username: user.username,
+            role: user.role
+        }, ACCESS_SECRET, { expiresIn: '15m' });
+
+        const refreshToken = jwt.sign({
+            username: user.username,
+            id: user.id
+        }, REFRESH_SECRET, { expiresIn: '1d' });
+
         writeLog(`User registered successfully: email=${user.email}, ip=${ip}`, 'info');
+
         res
             .cookie('refreshToken', refreshToken, {
                 httpOnly: true,
@@ -104,5 +161,24 @@ router.post('/logout', (req, res) => {
     res.status(200).json({ message: "Logged out" });
 });
 
+// זה כנראה לא צריך להיות בראוט הזה 
+router.get('/cv/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const user = await genericDal.GET("users", [
+            { field: "id", value: userId }
+        ]);
+
+        if (!user.length || !user[0].cv_file) {
+            return res.status(404).json({ error: 'CV not found' });
+        }
+
+        const filePath = path.join(__dirname, '../../uploads/', user[0].cv_file);
+        res.download(filePath);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error downloading CV' });
+    }
+});
 
 module.exports = router;

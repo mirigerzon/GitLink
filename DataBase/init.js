@@ -13,11 +13,11 @@ async function getDbConnection() {
 
 async function seedUsers(db) {
   await db.query(`
-    INSERT INTO users (username, email, phone, role, about, profile_image)
+    INSERT INTO users (username, email, phone, role, about, profile_image, cv_file)
     VALUES
-      ('alice', 'alice@example.com', 123456789, 'developer', 'Full-stack developer', 'https://...'),
-      ('bob', 'bob@example.com', 234567891, 'developer', 'Backend enthusiast', 'https://...'),
-      ('charlie', 'charlie@example.com', 345678912, 'recruiter', 'Java expert', 'https://...');
+      ('alice', 'alice@example.com', 123456789, 'developer', 'Full-stack developer', 'https://...', 'cv_files/alice-cv.pdf'),
+      ('bob', 'bob@example.com', 234567891, 'developer', 'Backend enthusiast', 'https://...', 'cv_files/bob-cv.pdf'),
+      ('charlie', 'charlie@example.com', 345678912, 'recruiter', 'Java expert', 'https://...', NULL);
   `);
 }
 
@@ -88,12 +88,12 @@ async function seedJobApplications(db) {
 
 async function seedMessages(db) {
   await db.query(`
-    INSERT INTO messages (user_id, email, title, content)
+    INSERT INTO messages (user_id, email, title, content, is_read)
     VALUES
-      (1, 'alice@example.com', 'Welcome!', 'Welcome to the platform!'),
-      (2, 'bob@example.com', 'Tip', 'Do not forget to update your profile.'),
-      (3, 'charlie@example.com', 'Alert', 'New job posted in your field.');
-  `);
+      (1, 'alice@example.com', 'Welcome!', 'Welcome to the platform!', FALSE),
+      (2, 'bob@example.com', 'Tip', 'Do not forget to update your profile.', FALSE),
+      (3, 'charlie@example.com', 'Alert', 'New job posted in your field.', FALSE);
+`);
 }
 
 async function runAllSeeders(db) {

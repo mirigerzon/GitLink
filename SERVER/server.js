@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./.env" });
 const verifyToken = require("./middleware/verifyToken.js");
 const authRoutes = require("./REST API/routes/auth.js");
+const path = require('path');
 
 const PORT = process.env.PORT || 3001;
 
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("", authRoutes);
-app.use('/upload', express.static('./upload'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const messagesRoutes = require("./REST API/routes/messages.js");
 const projectsRoutes = require("./REST API/routes/projects.js");

@@ -2,7 +2,7 @@ import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CurrentUser } from "../../../App";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { FiGitBranch, FiStar, FiUser } from 'react-icons/fi';
 
 function Project({ projectData, setIsChange }) {
@@ -13,7 +13,7 @@ function Project({ projectData, setIsChange }) {
 
   const isOwner = currentUser?.username === projectData.username;
   // allow slider visible always, but rating only allowed if connected, not owner, and not rated yet
-  const canRate = currentUser && !isOwner;
+  // const canRate = currentUser && !isOwner;
 
   const handleRate = () => {
     if (!currentUser) {
@@ -113,14 +113,14 @@ function Project({ projectData, setIsChange }) {
           <FiUser />View Developer
         </button>
 
-        {false && (
+        {/* {false && (
           <button
             className="btn-admin"
             onClick={() => console.log("Hide project")}
           >
             Hide Project
           </button>
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -50,7 +50,9 @@ const verifyLogin = async (username, password) => {
 };
 
 const registerNewUser = async (userData) => {
-    const { username, password, email, phone, role, about, profile_image, git_name, experience, languages, company_name
+    const {
+        username, password, email, phone, role, about, profile_image,
+        git_name, experience, languages, company_name, cv_file
     } = userData;
 
     if (role !== "developer" && role !== "recruiter") {
@@ -65,8 +67,9 @@ const registerNewUser = async (userData) => {
     }
 
     const hashedPassword = await hashPassword(password);
-    const generalUser = { username, email, phone, role, about, profile_image };
+    const generalUser = { username, email, phone, role, about, profile_image, cv_file };
     const newUser = await genericDal.POST("users", generalUser);
+
     await genericDal.POST("passwords", {
         user_id: newUser.insertId,
         hashed_password: hashedPassword
@@ -90,12 +93,6 @@ const registerNewUser = async (userData) => {
         content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
         username: username
     });
-
-    // await genericDal.POST("messages", {
-    //     email: email,
-    //     title: 'WELCOME!',
-    //     content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
-    // });
 
     return {
         id: newUser.insertId,

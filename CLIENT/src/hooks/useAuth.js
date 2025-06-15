@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFetchData } from './FetchData.js';
+import { useFetchData } from './fetchData.js';
 import { CurrentUser } from '../../App';
 import Cookies from 'js-cookie';
 

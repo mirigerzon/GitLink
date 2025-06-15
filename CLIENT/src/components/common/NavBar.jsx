@@ -11,13 +11,22 @@ function Navigation() {
   const logOut = useLogout();
   const location = useLocation();
 
+  const getImageUrl = () => {
+    if (!currentUser.profile_image) return null;
+    if (currentUser.profile_image.startsWith('https://github.com/')) {
+      return currentUser.profile_image;
+    }
+
+    return `http://localhost:3001/uploads/${currentUser.profile_image}`;
+  };
+
   return (
     <nav className="navigation">
       <div className="nav-container">
         {currentUser && <div className="user-control">
           <Link to={`${currentUser.username}/profile`}>
-            <div className="profile-link"> 
-              <img src={currentUser.profile_image}
+            <div className="profile-link">
+              <img src={getImageUrl()}
                 alt={`${currentUser.username} avatar`}
                 className="profile-img" />
               <span className="user-greeting">Hello, {currentUser.username}</span>
