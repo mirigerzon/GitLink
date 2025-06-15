@@ -1,11 +1,11 @@
-import Developer from "./Developer";
-import { React, useState, useEffect, useContext } from "react";
-import { CurrentUser } from "../../../App";
+import Developer from "./Developer.jsx";
+import { useState, useEffect, useContext } from "react";
+import { CurrentUser } from "../../../App.jsx";
 import { useFetchData } from "../../hooks/fetchData.js";
-import { useLogout } from "../../hooks/LogOut";
+import { useLogout } from "../../hooks/LogOut.js";
 import "../../style/developers.css";
-import Search from "../common/Search";
-import Sort from "../common/Sort";
+import Search from "../common/Search.jsx";
+import Sort from "../common/Sort.jsx";
 
 function Developers() {
   const { currentUser } = useContext(CurrentUser);

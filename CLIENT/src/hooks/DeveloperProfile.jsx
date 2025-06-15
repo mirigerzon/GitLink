@@ -1,8 +1,7 @@
 import { useState } from "react";
+import { useFetchData } from "./fetchData";
+import { useLogout } from "./LogOut";
 import { useForm } from "react-hook-form";
-import { useFetchData } from "../hooks/fetchData";
-import { useLogout } from "../hooks/LogOut";
-
 
 export function useDeveloperProfile(currentUser, username, setIsChange) {
     const [projectsToAdd, setProjectToAdd] = useState(null);

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Project from "./Project";
+import Project from "./Project.jsx";
 import "../../style/Projects.css";
-import { CurrentUser } from "../../../App";
+import { CurrentUser } from "../../../App.jsx";
 import { useFetchData } from "../../hooks/fetchData.js";
-import { useLogout } from "../../hooks/LogOut";
-import Search from "../common/Search";
-import Sort from "../common/Sort";
+import { useLogout } from "../../hooks/LogOut.js";
+import Search from "../common/Search.jsx";
+import Sort from "../common/Sort.jsx";
 
 function Projects() {
   const { username, id } = useParams();

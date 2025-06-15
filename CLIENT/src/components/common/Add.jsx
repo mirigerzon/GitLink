@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm } from "../../../node_modules/react-hook-form/dist";
 import { CurrentUser } from "./App";
 import { useFetchData } from "../../hooks/fetchData";
 
@@ -45,12 +45,10 @@ function Add({ type, setIsChange, inputs = [], defaultValue = {}, name = "Add" }
         setIsScreen(0);
     };
 
-    // Check if currentUser is available
     if (!currentUser) {
         return <div>Loading...</div>;
     }
 
-    // Check if inputs exist and not empty
     if (!inputs.length) {
         return <div>No input fields to display</div>;
     }

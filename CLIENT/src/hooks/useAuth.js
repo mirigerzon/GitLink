@@ -4,49 +4,75 @@ import { useFetchData } from './fetchData.js';
 import { CurrentUser } from '../../App';
 import Cookies from 'js-cookie';
 
+const COOKIE_CONFIG = {
+    expires: 1,
+    secure: true,
+    sameSite: 'Strict',
+};
+
+const MESSAGES = {
+    LOGIN_SUCCESS: 'Login successful! Redirecting...',
+    LOGIN_ERROR: 'Incorrect username or password',
+    REGISTER_SUCCESS: 'Registration successful! Redirecting...',
+    REGISTER_ERROR: 'Registration failed. Please try again.',
+    CONNECTION_ERROR: 'Connection error. Please try again.',
+    GENERAL_ERROR: 'An error occurred. Please try again.',
+    FORGOT_PASSWORD_SUCCESS: 'Password reset email sent successfully! Check your inbox.',
+    FORGOT_PASSWORD_ERROR: 'Failed to send reset email',
+    USERNAME_REQUIRED: 'Please enter your username first',
+};
+
 export const useAuth = () => {
     const { setCurrentUser } = useContext(CurrentUser);
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
+    const [forgotPasswordLoading, setForgotPasswordLoading] = useState(false);
+    const [forgotPasswordMessage, setForgotPasswordMessage] = useState('');
     const navigate = useNavigate();
     const fetchData = useFetchData();
+
+    const storeUserData = (user, token) => {
+        Cookies.set('accessToken', token, COOKIE_CONFIG);
+
+        const enhancedUser = {
+            ...user,
+            initiatedAction: false,
+        };
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        setCurrentUser(enhancedUser);
+
+        return enhancedUser;
+    };
+
+    const getRedirectPath = (user) => {
+        return `/${user.git_name || user.username}/home`;
+    };
 
     const login = async (credentials) => {
         setIsLoading(true);
         setMessage('');
-
         try {
             await fetchData({
                 type: 'login',
                 method: 'POST',
                 body: credentials,
                 onSuccess: (res) => {
-                    if (res && res.token) {
-                        Cookies.set('accessToken', res.token, {
-                            expires: 1,
-                            secure: true,
-                            sameSite: 'Strict',
-                        });
-
-                        const enhancedUser = {
-                            ...res.user,
-                            initiatedAction: false,
-                        };
-
-                        localStorage.setItem('currentUser', JSON.stringify(res.user));
-                        setCurrentUser(enhancedUser);
-                        setMessage('Login successful! Redirecting...');
-                        navigate(`/${credentials.username}/home`);
+                    if (res?.token && res?.user) {
+                        const enhancedUser = storeUserData(res.user, res.token);
+                        setMessage(MESSAGES.LOGIN_SUCCESS);
+                        navigate(getRedirectPath(enhancedUser));
                     } else {
-                        setMessage('Incorrect username or password');
+                        setMessage(MESSAGES.LOGIN_ERROR);
                     }
                 },
                 onError: () => {
-                    setMessage('Connection error. Please try again.');
+                    setMessage(MESSAGES.CONNECTION_ERROR);
                 },
             });
         } catch (error) {
-            setMessage('An error occurred. Please try again.', error);
+            console.error('Login error:', error);
+            setMessage(MESSAGES.GENERAL_ERROR);
         } finally {
             setIsLoading(false);
         }
@@ -55,48 +81,73 @@ export const useAuth = () => {
     const register = async (formData) => {
         setIsLoading(true);
         setMessage('');
-
         try {
             await fetchData({
                 type: 'register',
                 method: 'POST',
                 body: formData,
                 onSuccess: ({ user, token }) => {
-                    Cookies.set('accessToken', token, {
-                        expires: 1,
-                        secure: true,
-                        sameSite: 'Strict',
-                    });
-
-                    const enhancedUser = {
-                        ...user,
-                        initiatedAction: false,
-                    };
-
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    setCurrentUser(enhancedUser);
-                    setMessage('Registration successful! Redirecting...');
-                    navigate(`/${user.git_name || user.username}/home`);
+                    if (user && token) {
+                        const enhancedUser = storeUserData(user, token);
+                        setMessage(MESSAGES.REGISTER_SUCCESS);
+                        navigate(getRedirectPath(enhancedUser));
+                    } else {
+                        setMessage(MESSAGES.REGISTER_ERROR);
+                    }
                 },
                 onError: (errorMessage) => {
-                    setMessage('Registration failed. Please try again.');
-                    console.error('Failed to register user:', errorMessage);
+                    console.error('Registration error:', errorMessage);
+                    setMessage(MESSAGES.REGISTER_ERROR);
                 },
             });
         } catch (error) {
-            setMessage('Registration failed. Please try again.', error);
+            console.error('Registration error:', error);
+            setMessage(MESSAGES.REGISTER_ERROR);
         } finally {
             setIsLoading(false);
         }
     };
 
+    const forgotPassword = async (username) => {
+        if (!username?.trim()) {
+            setForgotPasswordMessage(MESSAGES.USERNAME_REQUIRED);
+            return;
+        }
+        setForgotPasswordLoading(true);
+        setForgotPasswordMessage('');
+        try {
+            await fetchData({
+                type: 'forgot-password',
+                method: 'POST',
+                body: { username: username.trim() },
+                onSuccess: () => {
+                    setForgotPasswordMessage(MESSAGES.FORGOT_PASSWORD_SUCCESS);
+                },
+                onError: (err) => {
+                    const errorMessage = err?.message || MESSAGES.FORGOT_PASSWORD_ERROR;
+                    setForgotPasswordMessage(errorMessage);
+                },
+            });
+        } catch (error) {
+            console.error('Forgot password error:', error);
+            setForgotPasswordMessage(MESSAGES.FORGOT_PASSWORD_ERROR);
+        } finally {
+            setForgotPasswordLoading(false);
+        }
+    };
+
     const clearMessage = () => setMessage('');
+    const clearForgotPasswordMessage = () => setForgotPasswordMessage('');
 
     return {
         login,
-        register,
         isLoading,
         message,
         clearMessage,
+        register,
+        forgotPassword,
+        forgotPasswordLoading,
+        forgotPasswordMessage,
+        clearForgotPasswordMessage,
     };
 };

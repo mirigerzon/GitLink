@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const genericDataService = require('../../controllers/genericBl.js');
 const dataService = require('../../controllers/bl.js');
-const { writeLog } = require('../../LOG/log.js');
+const { writeLog } = require('../../log/log.js');
 
 router.get('/', async (req, res) => {
     const table = "job_applications";

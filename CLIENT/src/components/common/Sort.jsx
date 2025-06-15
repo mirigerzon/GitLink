@@ -26,12 +26,6 @@ function Sort({ type, setUserData, originalData }) {
         if (value === "medium") return rating >= 2 && rating < 4;
         if (value === "low") return rating < 2;
       }
-      if (field === "role") {
-        return (
-          fieldValue &&
-          fieldValue.toLowerCase().includes(value.toLowerCase())
-        );
-      }
       return (
         fieldValue &&
         fieldValue.toString().toLowerCase().includes(value.toLowerCase())
@@ -50,16 +44,6 @@ function Sort({ type, setUserData, originalData }) {
             <option value="junior">Junior (0-2 years)</option>
             <option value="mid">Mid (3-5 years)</option>
             <option value="senior">Senior (6+ years)</option>
-          </select>
-        </div>
-
-        <div className="filter-group">
-          <label>Filter by Role:</label>
-          <select onChange={(e) => filterByField("role", e.target.value)}>
-            <option value="all">All Roles</option>
-            <option value="developer">Developer</option>
-            <option value="designer">Designer</option>
-            <option value="manager">Manager</option>
           </select>
         </div>
 

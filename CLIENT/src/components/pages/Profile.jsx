@@ -1,11 +1,11 @@
 import { React, useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { CurrentUser } from "../../../App";
+import { CurrentUser } from "../../../App.jsx";
 import { useFetchData } from "../../hooks/fetchData.js";
 import { useDeveloperProfile } from "../../hooks/DeveloperProfile.jsx";
 import { useRecruiterProfile } from "../../hooks/RecruiterProfile.jsx";
-import Update from "../common/Update";
-import Delete from "../common/Delete";
+import Update from "../common/Update.jsx";
+import Delete from "../common/Delete.jsx";
 import "../../style/Profile.css";
 
 function Profile() {
@@ -65,7 +65,7 @@ function Profile() {
   }, [username, isChange, userData]);
 
   const getImageUrl = () => {
-    if (!userData.profile_image) return null;
+    if (!userData.profile_image) return;
     if (userData.profile_image.startsWith('https://github.com/')) {
       return userData.profile_image;
     }
@@ -76,12 +76,11 @@ function Profile() {
     if (!userData.cv_file) return null;
     return `http://localhost:3001/uploads/${userData.cv_file}`;
   };
+
   const handleViewCV = () => {
     const cvUrl = getCVUrl();
     if (cvUrl) {
       window.open(cvUrl, '_blank');
-    } else {
-      alert("There is no CV for this user.");
     }
   };
 
@@ -99,10 +98,6 @@ function Profile() {
       console.error('Error downloading CV:', error);
     }
   };
-
-  const handleUploadCV =  async()=>{
-    
-  }
 
   if (loading) return <div className="profile-loading">Loading profile...</div>;
   if (error) return <div className="profile-error">{error}</div>;
@@ -156,7 +151,7 @@ function Profile() {
               <p className="profile-description">{userData.company_name}</p>
             </>
           )}
-          {userData.role === 'developer' && userData.cv_file ? (
+          {userData.role === 'developer' && userData.cv_file && (
             <div className="cv-section">
               <h3>Resume / CV</h3>
               <div className="cv-buttons">
@@ -168,11 +163,7 @@ function Profile() {
                 </button>
               </div>
             </div>
-          ) : <div className="cv-section">
-            <button onClick={handleUploadCV} className="btn btn-secondary">
-              uploud CV
-            </button>
-          </div>}
+          )}
 
           <h2>Programming Languages</h2>
           <div className="languages-container">

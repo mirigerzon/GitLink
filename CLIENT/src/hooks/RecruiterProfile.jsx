@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useFetchData } from "./fetchData";
+import { useLogout } from "./LogOut";
 import { useForm } from "react-hook-form";
-import { useFetchData } from "../hooks/fetchData";
-import { useLogout } from "../hooks/LogOut";
 
 export function useRecruiterProfile(currentUser, username, setIsChange) {
     const [openJobForm, setOpenJobForm] = useState(false);

@@ -1,7 +1,7 @@
 import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { CurrentUser } from "../../../App";
+import { CurrentUser } from "../../../App.jsx";
 import { useFetchData } from "../../hooks/fetchData.js";
 import { FiGitBranch, FiStar, FiUser } from 'react-icons/fi';
 

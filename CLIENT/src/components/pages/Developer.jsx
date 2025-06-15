@@ -54,13 +54,13 @@ function Developer({ developerData }) {
       </div>
 
       <div className="developer-stats">
-        <div className="stat-item">
+        {/* <div className="stat-item">
           <div className="stat-icon">🚀</div>
           <div className="stat-content">
             <span className="stat-number">{developerData.projectsCount}</span>
             <span className="stat-label">Projects</span>
           </div>
-        </div>
+        </div> */}
 
         <div className="stat-item">
           <div className="stat-icon"><FiStar /></div>

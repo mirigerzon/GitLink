@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFetchData } from "../../hooks/fetchData.js";
-// import { FaEdit } from "react-icons/fa"
-import { useLogout } from "../../hooks/LogOut";
+import { FaEdit } from "react-icons/fa"
+import { useLogout } from "../../hooks/LogOut.js";
 
 function Update({ type, itemId, setIsChange, inputs, role = null }) {
   const logOut = useLogout();
@@ -49,8 +49,8 @@ function Update({ type, itemId, setIsChange, inputs, role = null }) {
   return (
     <>
       {screen == 0 && (
-        <button onClick={(e) => setScreen(1)} className="action-btn edit-btn">
-          ✎
+        <button onClick={() => setScreen(1)} className="action-btn edit-btn">
+          <FaEdit />
         </button>
       )}
       {screen == 1 && (

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const autoBl = require('../../controllers/authBl.js');
-const { writeLog } = require('../../LOG/log.js');
+const { writeLog } = require('../../log/log.js');
 
 const ACCESS_SECRET = process.env.ACCESS_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
@@ -159,6 +159,32 @@ router.post('/logout', (req, res) => {
     writeLog('User logged out', 'info');
     res.clearCookie('refreshToken');
     res.status(200).json({ message: "Logged out" });
+});
+
+router.post('/forgot-password', async (req, res) => {
+    try {
+        const { username } = req.body;
+        if (!username || username.trim() === '') {
+            return res.status(400).json({
+                success: false,
+                message: "Username is required"
+            });
+        }
+        const result = await autoBl.forgotPassword(username.trim());
+        res.status(200).json(result);
+    } catch (error) {
+        console.error('Forgot password route error:', error);
+        if (error.message === "User not found") {
+            return res.status(404).json({
+                success: false,
+                message: "Username not found"
+            });
+        }
+        res.status(500).json({
+            success: false,
+            message: "Failed to send reset email. Please try again later."
+        });
+    }
 });
 
 // זה כנראה לא צריך להיות בראוט הזה 

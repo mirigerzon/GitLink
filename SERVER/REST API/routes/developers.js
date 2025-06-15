@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const dataService = require('../../controllers/bl.js');
-const { writeLog } = require('../../LOG/log.js');
+const { writeLog } = require('../../log/log.js');
 
 router.get('/', async (req, res) => {
     try {
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  try {
+    try {
         const data = await dataService.getDeveloper();
         writeLog(`Fetched data from table = developers `, 'info');
         res.json(data);

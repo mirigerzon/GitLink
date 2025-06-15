@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFetchData } from "../../hooks/fetchData.js";
-import { useLogout } from "../../hooks/LogOut";
+import { useLogout } from "../../hooks/LogOut.js";
 import { FiDelete, FiLoader } from "react-icons/fi";
 
 function Delete({ type, itemId, setIsChange, role = null, confirmMessage = null }) {

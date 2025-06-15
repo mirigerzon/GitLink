@@ -2,13 +2,15 @@ const genericDal = require('../services/genericDal.js');
 const dal = require('../services/dal.js');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-// const transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//         user: 'sara3280624@gmail.com',//להעביר לקובץ ENV
-//         pass: 'ojoj bcch hqdc chst'
-//     }
-// });
+require("dotenv").config();
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.PASSWORD_USER
+    }
+});
 
 async function sendEmail(userDetails) {
     const { user_id, email, title, content, username } = userDetails;
@@ -21,12 +23,12 @@ async function sendEmail(userDetails) {
             content
         });
 
-        // await transporter.sendMail({
-        //     from: process.env.EMAIL_USER,
-        //     to: email,
-        //     subject: title,
-        //     html: content
-        // });
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: title,
+            html: content
+        });
 
         console.log('Email sent and saved successfully');
 
@@ -51,9 +53,11 @@ const verifyLogin = async (username, password) => {
 
 const registerNewUser = async (userData) => {
     const {
-        username, password, email, phone, role, about, profile_image,
+        username, password, email, phone, role, about,
         git_name, experience, languages, company_name, cv_file
     } = userData;
+
+    const profile_image = userData.profile_image || 'profile_images/user.png';
 
     if (role !== "developer" && role !== "recruiter") {
         throw new Error("Invalid role");
@@ -112,8 +116,63 @@ const hashPassword = async (plainPassword) => {
     return hashedPassword;
 };
 
+const generateRandomPassword = (length = 12) => {
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+    let password = '';
+    for (let i = 0; i < length; i++) {
+        password += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+    return password;
+};
+
+const forgotPassword = async (username) => {
+    try {
+        const users = await dal.getUser(username);
+        if (!users || users.length === 0) {
+            throw new Error("User not found");
+        }
+        const user = users[0];
+        const newPassword = generateRandomPassword();
+        const hashedNewPassword = await hashPassword(newPassword);
+        await genericDal.PUT("passwords",
+            { hashed_password: hashedNewPassword },
+            [{ field: "user_id", value: user.user_id }]
+        );
+        await sendEmail({
+            user_id: user.user_id,
+            email: user.email,
+            title: 'Password Reset - GitLink',
+            content: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                    <h2 style="color: #333;">Password Reset</h2>
+                    <p>Hello ${user.username},</p>
+                    <p>Your password has been reset as requested. Here is your new password:</p>
+                    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                        <strong style="font-size: 18px; color: #007bff;">${newPassword}</strong>
+                    </div>
+                    <p><strong>Important:</strong> Please change this password after logging in for security reasons.</p>
+                    <p>If you didn't request this password reset, please contact support immediately.</p>
+                    <br>
+                    <p>Best regards,<br>GitLink Team</p>
+                </div>
+            `,
+            username: user.username
+        });
+
+        return {
+            success: true,
+            message: "New password sent to your email address"
+        };
+
+    } catch (error) {
+        console.error('Forgot password error:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     verifyLogin,
     registerNewUser,
-    getUser
+    getUser,
+    forgotPassword
 };

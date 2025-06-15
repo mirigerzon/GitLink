@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { CurrentUser } from "../../../App";
+import { CurrentUser } from "../../../App.jsx";
 import { useFetchData } from "../../hooks/fetchData.js";
-import { useLogout } from "../../hooks/LogOut";
-import Job from "./Job";
+import { useLogout } from "../../hooks/LogOut.js";
+import Job from "./Job.jsx";
 import "../../style/jobs.css";
-import Search from "../common/Search";
-import Sort from "../common/Sort";
+import Search from "../common/Search.jsx";
+import Sort from "../common/Sort.jsx";
 
 function Jobs() {
   const { username, id } = useParams();
