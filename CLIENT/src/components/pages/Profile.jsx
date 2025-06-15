@@ -76,11 +76,12 @@ function Profile() {
     if (!userData.cv_file) return null;
     return `http://localhost:3001/uploads/${userData.cv_file}`;
   };
-
   const handleViewCV = () => {
     const cvUrl = getCVUrl();
     if (cvUrl) {
       window.open(cvUrl, '_blank');
+    } else {
+      alert("There is no CV for this user.");
     }
   };
 
@@ -98,6 +99,10 @@ function Profile() {
       console.error('Error downloading CV:', error);
     }
   };
+
+  const handleUploadCV =  async()=>{
+    
+  }
 
   if (loading) return <div className="profile-loading">Loading profile...</div>;
   if (error) return <div className="profile-error">{error}</div>;
@@ -151,7 +156,7 @@ function Profile() {
               <p className="profile-description">{userData.company_name}</p>
             </>
           )}
-          {userData.role === 'developer' && userData.cv_file && (
+          {userData.role === 'developer' && userData.cv_file ? (
             <div className="cv-section">
               <h3>Resume / CV</h3>
               <div className="cv-buttons">
@@ -163,7 +168,11 @@ function Profile() {
                 </button>
               </div>
             </div>
-          )}
+          ) : <div className="cv-section">
+            <button onClick={handleUploadCV} className="btn btn-secondary">
+              uploud CV
+            </button>
+          </div>}
 
           <h2>Programming Languages</h2>
           <div className="languages-container">

@@ -64,7 +64,6 @@ const Search = ({
 
   return (
     <div className={`search-container ${className}`}>
-
       <div className="search-input-wrapper">
         <input
           type="text"
@@ -73,7 +72,7 @@ const Search = ({
           placeholder={placeholder}
           className="search-input"
         />
-        <button onClick={startListening}>
+        <button className="mic-button" onClick={startListening}>
           <FiMic />
         </button>
       </div>

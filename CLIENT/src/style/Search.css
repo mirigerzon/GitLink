@@ -1,13 +1,14 @@
 .search-input-wrapper {
   position: relative;
-  display: inline-block;
   width: 100%;
   max-width: 400px;
+  display: flex;
 }
 
+/* input עם מקום לשני כפתורים בצד ימין */
 .search-input {
   width: 100%;
-  padding: 10px 40px 10px 12px;
+  padding: 10px 80px 10px 12px; /* השאר מקום גם לרמקול וגם לניקוי */
   border: 2px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
@@ -21,6 +22,7 @@
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
+/* כפתור ניקוי */
 .clear-button {
   position: absolute;
   right: 8px;
@@ -51,6 +53,35 @@
   outline-offset: 2px;
 }
 
+/* כפתור מיקרופון */
+.mic-button {
+  position: absolute;
+  right: 1.2vw; 
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+}
+
+.mic-button:hover {
+  background-color: #0056b3;
+}
+
+.mic-button:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
 /* Responsive Design */
 @media (max-width: 480px) {
   .search-input-wrapper {
@@ -59,22 +90,5 @@
 
   .search-input {
     font-size: 16px;
-    /* Prevents zoom on iOS */
   }
-}
-
-.mic-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
-
-.mic-button:hover {
-  background-color: #0056b3;
 }

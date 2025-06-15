@@ -58,7 +58,6 @@ async function createApply(data, email) {
     if (Array.isArray(data)) {
         data = Object.fromEntries(data.map(({ field, value }) => [field, value]));
     }
-
     let response;
     try {
         response = await genericDal.POST('job_applications', data);
@@ -68,14 +67,12 @@ async function createApply(data, email) {
         }
         throw err; 
     }
-
     await genericDal.POST("messages", {
         user_id: data.user_id,
         email: email,
         title: 'Application Received!',
         content: `We have received your application for job number ${data.job_id}. The recruiter has been notified. We wish you the best of luck!`
     });
-
     return response;
 }
 

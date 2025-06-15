@@ -133,7 +133,6 @@ function Register() {
                 <span className="error-message">{errors.password.message}</span>
               )}
             </div>
-
             <div className="form-group">
               <input
                 type="password"
@@ -148,7 +147,6 @@ function Register() {
                 <span className="error-message">{errors.verifyPassword.message}</span>
               )}
             </div>
-
             <button
               type="submit"
               className="register-btn"
