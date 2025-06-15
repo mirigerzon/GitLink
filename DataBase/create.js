@@ -156,7 +156,7 @@ async function createMessageTables(connection) {
             user_id INT NOT NULL,
             email VARCHAR(100) NOT NULL,
             title VARCHAR(100) NOT NULL,
-            content VARCHAR(100),
+            content VARCHAR(1000),
             is_active BOOLEAN DEFAULT TRUE,
             is_read BOOLEAN DEFAULT FALSE,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
