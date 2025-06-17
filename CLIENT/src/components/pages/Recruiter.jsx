@@ -5,19 +5,19 @@ import { FiUser, FiFolder } from 'react-icons/fi';
 function Recruiter({ recruiterData }) {
   const navigate = useNavigate();
 
-  const generateStars = (rating) => {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-    const emptyStars = 5 - Math.ceil(rating);
+  // const generateStars = (rating) => {
+  //   const fullStars = Math.floor(rating);
+  //   const hasHalfStar = rating % 1 !== 0;
+  //   const emptyStars = 5 - Math.ceil(rating);
 
-    return (
-      <div className="stars">
-        {"★".repeat(fullStars)}
-        {hasHalfStar && "☆"}
-        {"☆".repeat(emptyStars)}
-      </div>
-    );
-  };
+  //   return (
+  //     <div className="stars">
+  //       {"★".repeat(fullStars)}
+  //       {hasHalfStar && "☆"}
+  //       {"☆".repeat(emptyStars)}
+  //     </div>
+  //   );
+  // };
 
   const getExperienceLevel = (years) => {
     if (years <= 2) return { level: "Junior", color: "#10b981" };
@@ -41,7 +41,7 @@ function Recruiter({ recruiterData }) {
 
         <div className="recruiter-info">
           <h3 className="recruiter-name">{recruiterData.name}</h3>
-          <p className="git-name">@{recruiterData.git_name}</p>
+          <p className="git-name">@{recruiterData.username}</p>
 
           <div
             className="experience-badge"
@@ -72,7 +72,7 @@ function Recruiter({ recruiterData }) {
           className="btn-profile"
           onClick={() => navigate(`/${recruiterData.username}/profile`)}
         >
-          <FiUser className="btn-icon" />
+          <FiUser className="btn-icon" />view profile
         </button>
 
         <button

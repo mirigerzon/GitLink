@@ -134,10 +134,6 @@ const forgotPassword = async (username) => {
         const user = users[0];
         const newPassword = generateRandomPassword();
         const hashedNewPassword = await hashPassword(newPassword);
-        await genericDal.PUT("passwords",
-            { hashed_password: hashedNewPassword },
-            [{ field: "user_id", value: user.user_id }]
-        );
         await sendEmail({
             user_id: user.user_id,
             email: user.email,
@@ -158,6 +154,11 @@ const forgotPassword = async (username) => {
             `,
             username: user.username
         });
+        
+        await genericDal.PUT("passwords",
+            { hashed_password: hashedNewPassword },
+            [{ field: "user_id", value: user.user_id }]
+        );
 
         return {
             success: true,

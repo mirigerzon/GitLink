@@ -189,7 +189,7 @@ function Profile() {
             {existingDeliverables ? (
               existingDeliverables.map((item) => (
                 <li key={item.id}>
-                  {item.name}
+                  {item.name || item.title}
                   <button
                     onClick={() =>
                       navigate(`/${item.username}/${userItemsType}/${item.id}`)

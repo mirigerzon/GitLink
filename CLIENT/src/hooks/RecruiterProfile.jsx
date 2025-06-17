@@ -38,6 +38,7 @@ export function useRecruiterProfile(currentUser, username, setIsChange) {
     function openAddForm() {
         setOpenJobForm(true);
         reset({
+            title: "",
             username: currentUser.username,
             company_name: currentUser.company_name,
             requirements: "",
@@ -70,7 +71,7 @@ export function useRecruiterProfile(currentUser, username, setIsChange) {
                                 type="text"
                                 placeholder="Job title"
                                 className="form-input"
-                                {...register("company_name", { required: true })}
+                                {...register("title", { required: true })}
                                 required
                             />
                         </div>
