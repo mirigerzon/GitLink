@@ -85,7 +85,7 @@ const registerNewUser = async (userData) => {
     if (role_id === '1') {
         const developerData = { user_id: newUser.insertId, git_name, experience, languages };
         await genericDal.CREATE("developers", developerData);
-    } else if (role_id === 2) {
+    } else if (role_id === '2') {
         const recruiterData = {
             user_id: newUser.insertId,
             company_name

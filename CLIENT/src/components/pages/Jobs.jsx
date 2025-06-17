@@ -47,7 +47,31 @@ function Jobs() {
           searchFields={["name", "languages"]}
           placeholder="Search by job title or required technologies..."
         />
-        <Sort type="jobs" setUserData={setFilteredJobs} originalData={jobs} />
+        <Sort
+          setUserData={setFilteredJobs}
+          originalData={jobs}
+          currentConfig={[
+            {
+              label: "Filter by Experience:",
+              field: "experience",
+              options: [
+                { value: "all", label: "All Levels" },
+                { value: "junior", label: "Junior (0-2 years)" },
+                { value: "mid", label: "Mid (3-5 years)" },
+                { value: "senior", label: "Senior (6+ years)" }
+              ]
+            },
+            {
+              label: "Filter by Views:",
+              field: "views",
+              options: [
+                { value: "all", label: "All Views" },
+                { value: "high", label: "High (50+)" },
+                { value: "medium", label: "Medium (10-49)" },
+                { value: "low", label: "Low (0-9)" }
+              ]
+            }
+          ]} />
         {ownJobs && username == null && <button onClick={() => navigate(`/${currentUser.username}/jobs`)}>My Jobs</button>}
         {ownJobs && username && <button onClick={() => navigate(`/jobs`)}>All Jobs</button>}
       </div>

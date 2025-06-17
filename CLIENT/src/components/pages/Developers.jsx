@@ -41,9 +41,30 @@ function Developers() {
             placeholder="Search by GitHub name, email or programming languages..."
           />
           <Sort
-            type="developers"
             setUserData={setFilteredDevelopers}
             originalData={developers}
+            currentConfig={[
+              {
+                label: "Filter by Experience:",
+                field: "experience",
+                options: [
+                  { value: "all", label: "All Levels" },
+                  { value: "junior", label: "Junior (0-2 years)" },
+                  { value: "mid", label: "Mid (3-5 years)" },
+                  { value: "senior", label: "Senior (6+ years)" }
+                ]
+              },
+              {
+                label: "Filter by Rating:",
+                field: "rating",
+                options: [
+                  { value: "all", label: "All Ratings" },
+                  { value: "high", label: "High (4-5)" },
+                  { value: "medium", label: "Medium (2-3)" },
+                  { value: "low", label: "Low (0-1)" }
+                ]
+              }
+            ]}
           />
         </div>
       </div>

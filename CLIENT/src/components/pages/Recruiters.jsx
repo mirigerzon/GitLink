@@ -42,9 +42,19 @@ function Recruiters() {
             placeholder="Search by GitHub name, email or programming languages..."
           />
           <Sort
-            type="recruiters"
             setUserData={setFilteredRecruiters}
             originalData={recruiters}
+            currentConfig={[
+              {
+                label: "Filter by Status:",
+                field: "is_active",
+                options: [
+                  { value: "all", label: "All Status" },
+                  { value: "1", label: "Active" },
+                  { value: "0", label: "Inactive" }
+                ]
+              }
+            ]}
           />
         </div>
       </div>

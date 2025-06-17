@@ -1,166 +1,88 @@
 import '../../style/Sort.css';
 
-function Sort({ type, setUserData, originalData }) {
-  function filterByField(field, value) {
+function Sort({ setUserData, originalData, currentConfig }) {
+  function applyFilter(field, value, data) {
     if (!value || value === "all") {
-      setUserData(originalData);
-      return;
+      return data;
     }
 
-    const filteredData = originalData.filter((item) => {
+    return data.filter((item) => {
       const fieldValue = item[field];
 
-      // Handle different field types
       if (field === "is_active") {
         return fieldValue.toString() === value;
       }
+
       if (field === "experience") {
         const exp = Number(fieldValue);
-        if (value === "junior") return exp <= 2;
-        if (value === "mid") return exp >= 3 && exp <= 5;
-        if (value === "senior") return exp >= 6;
+        switch (value) {
+          case "junior": return exp <= 2;
+          case "mid": return exp >= 3 && exp <= 5;
+          case "senior": return exp >= 6;
+          default: return true;
+        }
       }
+
       if (field === "rating") {
         const rating = Number(fieldValue);
-        if (value === "high") return rating >= 4;
-        if (value === "medium") return rating >= 2 && rating < 4;
-        if (value === "low") return rating < 2;
+        switch (value) {
+          case "high": return rating >= 4;
+          case "medium": return rating >= 2 && rating < 4;
+          case "low": return rating < 2;
+          default: return true;
+        }
       }
-      return (
-        fieldValue &&
-        fieldValue.toString().toLowerCase().includes(value.toLowerCase())
-      );
-    });
 
+      if (field === "views") {
+        const views = Number(fieldValue);
+        switch (value) {
+          case "high": return views >= 50;
+          case "medium": return views >= 10 && views < 50;
+          case "low": return views < 10;
+          default: return true;
+        }
+      }
+
+      if (field === "forks_count") {
+        const forks = Number(fieldValue);
+        switch (value) {
+          case "high": return forks >= 50;
+          case "medium": return forks >= 10 && forks < 50;
+          case "low": return forks < 10;
+          default: return true;
+        }
+      }
+
+      return fieldValue &&
+        fieldValue.toString().toLowerCase().includes(value.toLowerCase());
+    });
+  }
+
+  function handleFilterChange(field, value) {
+    const filteredData = applyFilter(field, value, originalData);
     setUserData(filteredData);
   }
-  if (type === "developers") {
-    return (
-      <div className="filter-container">
-        <div className="filter-group">
-          <label>Filter by Experience:</label>
-          <select onChange={(e) => filterByField("experience", e.target.value)}>
-            <option value="all">All Levels</option>
-            <option value="junior">Junior (0-2 years)</option>
-            <option value="mid">Mid (3-5 years)</option>
-            <option value="senior">Senior (6+ years)</option>
-          </select>
-        </div>
 
-        <div className="filter-group">
-          <label>Filter by Rating:</label>
-          <select onChange={(e) => filterByField("rating", e.target.value)}>
-            <option value="all">All Ratings</option>
-            <option value="high">High (4-5)</option>
-            <option value="medium">Medium (2-3)</option>
-            <option value="low">Low (0-1)</option>
-          </select>
-        </div>
-      </div>
-    );
+  if (!currentConfig) {
+    return null;
   }
 
-  // Jobs filters
-  if (type === "jobs") {
-    return (
-      <div className="filter-container">
-        <div className="filter-group">
-          <label>Filter by Experience:</label>
-          <select onChange={(e) => filterByField("experience", e.target.value)}>
-            <option value="all">All Levels</option>
-            <option value="junior">Junior (0-2 years)</option>
-            <option value="mid">Mid (3-5 years)</option>
-            <option value="senior">Senior (6+ years)</option>
+  return (
+    <div className="filter-container">
+      {currentConfig.map((filterGroup, index) => (
+        <div key={index} className="filter-group">
+          <label>{filterGroup.label}</label>
+          <select onChange={(e) => handleFilterChange(filterGroup.field, e.target.value)}>
+            {filterGroup.options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
         </div>
-
-        <div className="filter-group">
-          <label>Filter by Views:</label>
-          <select
-            onChange={(e) => {
-              if (e.target.value === "all") {
-                setUserData(originalData);
-                return;
-              }
-              const filtered = originalData.filter((item) => {
-                const views = Number(item.views);
-                if (e.target.value === "high") return views >= 50;
-                if (e.target.value === "medium")
-                  return views >= 10 && views < 50;
-                if (e.target.value === "low") return views < 10;
-              });
-              setUserData(filtered);
-            }}
-          >
-            <option value="all">All Views</option>
-            <option value="high">High (50+)</option>
-            <option value="medium">Medium (10-49)</option>
-            <option value="low">Low (0-9)</option>
-          </select>
-        </div>
-      </div>
-    );
-  }
-
-  // Projects filters
-  if (type === "projects") {
-    return (
-      <div className="filter-container">
-        <div className="filter-group">
-          <label>Filter by Rating:</label>
-          <select onChange={(e) => filterByField("rating", e.target.value)}>
-            <option value="all">All Ratings</option>
-            <option value="high">High (4-5)</option>
-            <option value="medium">Medium (2-3)</option>
-            <option value="low">Low (0-1)</option>
-          </select>
-        </div>
-
-        <div className="filter-group">
-          <label>Filter by forks:</label>
-          <select
-            onChange={(e) => {
-              if (e.target.value === "all") {
-                setUserData(originalData);
-                return;
-              }
-              const filtered = originalData.filter((item) => {
-                const forks_count = Number(item.forks_count);
-                if (e.target.value === "high") return forks_count >= 50;
-                if (e.target.value === "medium")
-                  return forks_count >= 10 && forks_count < 50;
-                if (e.target.value === "low") return forks_count < 10;
-              });
-              setUserData(filtered);
-            }}
-          >
-            <option value="all">All forks</option>
-            <option value="high">High (50+)</option>
-            <option value="medium">Medium (10-49)</option>
-            <option value="low">Low (0-9)</option>
-          </select>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "recruiters") {
-    return (
-      <div className="filter-container">
-
-        <div className="filter-group">
-          <label>Filter by Status:</label>
-          <select onChange={(e) => filterByField("is_active", e.target.value)}>
-            <option value="all">All Status</option>
-            <option value="1">Active</option>
-            <option value="0">Inactive</option>
-          </select>
-        </div>
-      </div>
-    );
-  }
-
-  return null;
+      ))}
+    </div>
+  );
 }
 
 export default Sort;

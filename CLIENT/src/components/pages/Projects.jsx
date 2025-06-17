@@ -50,9 +50,30 @@ function Projects() {
             placeholder="Search by project name, GitHub name, details, or programming languages..."
           />
           <Sort
-            type="projects"
             setUserData={setFilteredProjects}
             originalData={projects}
+            currentConfig={[
+              {
+                label: "Filter by Rating:",
+                field: "rating",
+                options: [
+                  { value: "all", label: "All Ratings" },
+                  { value: "high", label: "High (4-5)" },
+                  { value: "medium", label: "Medium (2-3)" },
+                  { value: "low", label: "Low (0-1)" }
+                ]
+              },
+              {
+                label: "Filter by Forks:",
+                field: "forks_count",
+                options: [
+                  { value: "all", label: "All forks" },
+                  { value: "high", label: "High (50+)" },
+                  { value: "medium", label: "Medium (10-49)" },
+                  { value: "low", label: "Low (0-9)" }
+                ]
+              }
+            ]}
           />
           {ownProjects && username == null && <button onClick={() => navigate(`/${currentUser.username}/projects`)}>My Project</button>}
           {ownProjects && username && <button onClick={() => navigate(`/projects`)}>All Project</button>}

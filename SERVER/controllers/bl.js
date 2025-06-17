@@ -81,6 +81,26 @@ async function createApply(data, email) {
     return response;
 }
 
+const updateUserProfile = async (userId, userData) => {
+    const conditions = [{ field: 'id', value: userId }];
+    return await updateItem('users', userData, conditions);
+};
+
+const changeUserPassword = async (userId, currentPassword, newPassword) => {
+    const user = await getItemByConditions('users', [{ field: 'id', value: userId }]);
+    if (!user || user.length === 0) {
+        throw new Error('User not found');
+    }
+
+    const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user[0].password);
+    if (!isCurrentPasswordValid) {
+        throw new Error('Current password is incorrect');
+    }
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    const conditions = [{ field: 'id', value: userId }];
+    return await updateItem('users', { password: hashedNewPassword }, conditions);
+};
+
 module.exports = {
     getJobApplications,
     getDevelopers,
@@ -89,5 +109,7 @@ module.exports = {
     getUser,
     getRecruiter,
     rateProject,
-    createApply
+    createApply,
+    updateUserProfile,
+    changeUserPassword
 };
