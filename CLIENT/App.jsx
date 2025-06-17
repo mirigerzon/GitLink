@@ -7,6 +7,7 @@ import Home from "./src/components/pages/Home";
 import Developers from "./src/components/pages/Developers";
 import Recruiters from "./src/components/pages/Recruiters";
 import Jobs from "./src/components/pages/Jobs";
+import Apply from "./src/components/pages/ApplyUsers";
 import Projects from "./src/components/pages/Projects";
 import Error from "./src/components/pages/Error";
 import Profile from "./src/components/pages/Profile";
@@ -38,8 +39,9 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="developers" element={<Developers />} />
             <Route path="jobs" element={<Jobs />} >
-              <Route path=":id" element={<Projects />} />
+              <Route path=":id" />
             </Route>
+            <Route path="jobs/:id/apply" element={<Apply />} />
             <Route path="projects" element={<Projects />}>
               <Route path=":id" element={<Projects />} />
             </Route>

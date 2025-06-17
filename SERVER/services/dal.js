@@ -12,6 +12,16 @@ const pool = mysql.createPool({
     connectionLimit: 10,
 });
 
+const getApplications = async (job_id) => {
+    const application = await GET(["users", "developers", "job_applications"],
+        [
+            'users.id = developers.user_id',
+            'users.id = job_applications.user_id',
+        ],
+        [{ field: 'job_id', value: 1 }]);
+    return application;
+}
+
 const getUser = async (username) => {
     const users = await GET(["users", "passwords"],
         ['users.id = passwords.user_id'],
@@ -147,4 +157,5 @@ module.exports = {
     getRecruiter,
     getProjectWithCreator,
     rateProjectTransactional,
+    getApplications,
 };

@@ -29,6 +29,10 @@ const getUser = async (username) => {
     const user = users[0];
     return user;
 }
+const getJobApplications = async (job_id) => {
+    const applications = await dal.getApplications(job_id);
+    return applications;
+}
 
 const rateProject = async (username, projectId, rating) => {
     await dal.rateProjectTransactional(username, projectId, rating);
@@ -65,7 +69,7 @@ async function createApply(data, email) {
         if (err.message.includes('Duplicate ') || err.code === '23505') {
             throw new Error('You have already contacted the recruiter for this position. Please wait for a response before sending another message.');
         }
-        throw err; 
+        throw err;
     }
     await genericDal.POST("messages", {
         user_id: data.user_id,
@@ -77,6 +81,7 @@ async function createApply(data, email) {
 }
 
 module.exports = {
+    getJobApplications,
     getDevelopers,
     getDeveloper,
     getRecruiters,

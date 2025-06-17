@@ -54,6 +54,14 @@ async function createUserTables(connection) {
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
+
+    //roles
+    await connection.query(`
+        CREATE TABLE IF NOT EXISTS roles(
+          role_id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(255) NOT NULL
+        )
+    `)
 }
 
 async function createRoleTables(connection) {

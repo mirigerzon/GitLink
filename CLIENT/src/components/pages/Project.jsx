@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { CurrentUser } from "../../../App.jsx";
 import { useFetchData } from "../../hooks/fetchData.js";
 import { FiGitBranch, FiStar, FiUser } from 'react-icons/fi';
+import Swal from 'sweetalert2';
 
 function Project({ projectData, setIsChange }) {
   const navigate = useNavigate();
@@ -12,16 +13,33 @@ function Project({ projectData, setIsChange }) {
   const fetchData = useFetchData();
 
   const isOwner = currentUser?.username === projectData.username;
-  // allow slider visible always, but rating only allowed if connected, not owner, and not rated yet
-  // const canRate = currentUser && !isOwner;
 
   const handleRate = () => {
     if (!currentUser) {
-      alert("You must be logged in to rate this project.");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Login required',
+        text: 'You must be logged in to rate this project.',
+        confirmButtonText: 'Login',
+        showCancelButton: true,
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#aaa',
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate('/login');
+        }
+      });
       return;
     }
     if (selectedRating < 1) {
-      alert("Please select a rating before submitting.");
+      Swal.fire({
+        icon: 'info',
+        title: 'No Rating Selected',
+        text: 'Please select a rating before submitting.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6',
+      });
       return;
     }
     fetchData({
@@ -34,12 +52,24 @@ function Project({ projectData, setIsChange }) {
       },
       onSuccess: (res) => {
         setIsChange(1);
-        alert(`${res.message}`);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: res.message,
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#3085d6',
+        });
         setSelectedRating(0);
       },
       onError: (err) => {
         console.error("Rating failed", err);
-        alert(`${err}`);
+        Swal.fire({
+          icon: 'error',
+          title: 'Rating Error',
+          text: err.message || String(err),
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#d33'
+        });
         setSelectedRating(0);
       },
     });

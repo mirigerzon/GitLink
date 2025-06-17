@@ -13,12 +13,18 @@ async function getDbConnection() {
 
 async function seedUsers(db) {
   await db.query(`
-    INSERT INTO users (username, email, phone, role, about, profile_image, cv_file)
+    INSERT INTO users (username, email, phone, role_id, about, profile_image, cv_file)
     VALUES
-      ('alice', 'alice@example.com', 123456789, 'developer', 'Full-stack developer', 'https://...', 'cv_files/alice-cv.pdf'),
-      ('bob', 'bob@example.com', 234567891, 'developer', 'Backend enthusiast', 'https://...', 'cv_files/bob-cv.pdf'),
-      ('charlie', 'charlie@example.com', 345678912, 'recruiter', 'Java expert', 'https://...', NULL);
+      ('alice', 'alice@example.com', 123456789, 1, 'Full-stack developer', 'https://...', 'cv_files/alice-cv.pdf'),
+      ('bob', 'bob@example.com', 234567891, 1, 'Backend enthusiast', 'https://...', 'cv_files/bob-cv.pdf'),
+      ('charlie', 'charlie@example.com', 345678912, 2, 'Java expert', 'https://...', NULL);
   `);
+  await db.query(`
+    INSERT INTO roles (name)
+    VALUES
+    ('developers'),
+    ('recruiters')
+    `)
 }
 
 async function seedPasswords(db) {

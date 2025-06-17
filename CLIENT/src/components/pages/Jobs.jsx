@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Outlet } from "react-router-dom";
 import { CurrentUser } from "../../../App.jsx";
 import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
@@ -55,6 +55,7 @@ function Jobs() {
         {filteredJobs.length > 0 &&
           filteredJobs.map((job) => <Job key={job.id} jobData={job} />)}
       </div>
+      <Outlet />
     </div>
   );
 }

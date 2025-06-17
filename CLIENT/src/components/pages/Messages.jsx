@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { CurrentUser } from "../../../App";
 import { useMessages } from "../../hooks/Messages";
 import useSound from 'use-sound';
-import notificationSound from '../../../public/sounds/notification.mp3';
 import '../../style/Messages.css';
 
 export const Messages = () => {
@@ -10,9 +9,8 @@ export const Messages = () => {
     const { messages, hasUnread, markAllAsRead, deleteMessage } = useMessages();
     const [open, setOpen] = useState(false);
     const [newMessageAlert, setNewMessageAlert] = useState(false);
-
-    const [play] = useSound(notificationSound);
-
+    const [play] = useSound('/sounds/notification.mp3');
+    
     const toggleOpen = () => setOpen(prev => !prev);
 
     useEffect(() => {

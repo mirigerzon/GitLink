@@ -4,12 +4,11 @@ const genericDataService = require('../../controllers/genericBl.js');
 const dataService = require('../../controllers/bl.js');
 const { writeLog } = require('../../log/log.js');
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const table = "job_applications";
     try {
-        const conditions = createConditions(req);
-        const data = await genericDataService.getItemByConditions(table, conditions.length ? conditions : undefined);
-        writeLog(`Fetched data from table=${table} with conditions=${JSON.stringify(conditions)}`, 'info');
+        const data = await dataService.getJobApplications(req.params.id);
+        writeLog(`Fetched data from table=${table}`, 'info');
         res.json(data);
     } catch (err) {
         console.error(err);
