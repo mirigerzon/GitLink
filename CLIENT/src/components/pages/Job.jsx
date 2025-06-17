@@ -42,7 +42,11 @@ function Job({ jobData }) {
       },
       onError: (err) => {
         console.error(`Failed to fetch developers: ${err}`);
-        alert(err);
+        Swal.fire({
+          title: 'Action failed',
+          text: typeof err === 'string' ? err : 'You might have already rated or registered.',
+          icon: 'error',
+        });
       },
       logOut,
     });
@@ -94,9 +98,9 @@ function Job({ jobData }) {
           {currentUser && currentUser.username == jobData.username ?
             <button className="apply-btn" onClick={() => navigate(`/${jobData.username}/jobs/${jobData.id}/apply`)}>
               View Applicants
-            </button> : <button className="apply-btn" onClick={handleApply}>
+            </button> : (currentUser.role == 'developer' && <button className="apply-btn" onClick={handleApply}>
               Apply Now
-            </button>}
+            </button>)}
           <button className="view-company-btn" onClick={() => navigate(`/${jobData.username}/profile`)}>
             View recruiter
           </button>

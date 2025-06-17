@@ -9,6 +9,9 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.PASSWORD_USER
+    },
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
@@ -16,7 +19,7 @@ async function sendEmail(userDetails) {
     const { user_id, email, title, content, username } = userDetails;
 
     try {
-        await genericDal.POST("messages", {
+        await genericDal.CREATE("messages", {
             user_id,
             email,
             title,
@@ -53,17 +56,17 @@ const verifyLogin = async (username, password) => {
 
 const registerNewUser = async (userData) => {
     const {
-        username, password, email, phone, role, about,
+        username, password, email, phone, role_id, about,
         git_name, experience, languages, company_name, cv_file
     } = userData;
 
     const profile_image = userData.profile_image || 'profile_images/user.png';
 
-    if (role !== "developer" && role !== "recruiter") {
+    if (role_id !== '1' && role_id !== '2') {
         throw new Error("Invalid role");
     }
 
-    if (role === "developer") {
+    if (role_id === '1') {
         const existingDevs = await genericDal.GET("developers", [
             { field: "git_name", value: git_name }
         ]);
@@ -71,23 +74,23 @@ const registerNewUser = async (userData) => {
     }
 
     const hashedPassword = await hashPassword(password);
-    const generalUser = { username, email, phone, role, about, profile_image, cv_file };
-    const newUser = await genericDal.POST("users", generalUser);
+    const generalUser = { username, email, phone, role_id, about, profile_image, cv_file };
+    const newUser = await genericDal.CREATE("users", generalUser);
 
-    await genericDal.POST("passwords", {
+    await genericDal.CREATE("passwords", {
         user_id: newUser.insertId,
         hashed_password: hashedPassword
     });
 
-    if (role === "developer") {
+    if (role_id === '1') {
         const developerData = { user_id: newUser.insertId, git_name, experience, languages };
-        await genericDal.POST("developers", developerData);
-    } else if (role === "recruiter") {
+        await genericDal.CREATE("developers", developerData);
+    } else if (role_id === 2) {
         const recruiterData = {
             user_id: newUser.insertId,
             company_name
         };
-        await genericDal.POST("recruiters", recruiterData);
+        await genericDal.CREATE("recruiters", recruiterData);
     }
 
     await sendEmail({
@@ -101,8 +104,8 @@ const registerNewUser = async (userData) => {
     return {
         id: newUser.insertId,
         ...generalUser,
-        ...(role === "developer" && { git_name, experience, languages }),
-        ...(role === "recruiter" && { company_name })
+        ...(role_id === '1' && { git_name, experience, languages }),
+        ...(role_id === '2' && { company_name })
     };
 };
 
@@ -154,8 +157,8 @@ const forgotPassword = async (username) => {
             `,
             username: user.username
         });
-        
-        await genericDal.PUT("passwords",
+
+        await genericDal.UPDATE("passwords",
             { hashed_password: hashedNewPassword },
             [{ field: "user_id", value: user.user_id }]
         );

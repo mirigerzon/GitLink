@@ -2082,3 +2082,329 @@
 [2025-06-17T11:55:37.979Z] [INFO] Fetched data from table = recruiters 
 [2025-06-17T11:55:40.703Z] [INFO] Fetched data from table = developers 
 [2025-06-17T11:55:40.709Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:13:24.237Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:13:24.247Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:13:26.759Z] [INFO] Fetched data from table=users 
+[2025-06-17T12:13:26.772Z] [INFO] Fetched data from table=users 
+[2025-06-17T12:13:26.798Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara1"}]
+[2025-06-17T12:13:26.805Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"sara1"}]
+[2025-06-17T12:13:27.906Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:13:27.913Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:15:16.471Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T12:15:16.502Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T12:15:24.536Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:15:24.546Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:15:28.779Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:15:28.791Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:16:15.610Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:16:15.620Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:16:31.524Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:16:31.533Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:16:57.673Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-17T12:16:57.735Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:16:57.747Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:17:27.167Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:17:27.177Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:17:29.292Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:17:35.576Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:17:35.585Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:17:49.199Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:17:49.208Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:17:51.353Z] [INFO] Fetched data from table=users 
+[2025-06-17T12:17:51.361Z] [INFO] Fetched data from table=users 
+[2025-06-17T12:17:51.372Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-17T12:17:51.379Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-17T12:17:54.138Z] [INFO] User logged out
+[2025-06-17T12:18:00.445Z] [INFO] User logged in successfully: user name=sara1, ip=::1
+[2025-06-17T12:18:00.536Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"M0583216525@gmail.com"}]
+[2025-06-17T12:18:00.546Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"M0583216525@gmail.com"}]
+[2025-06-17T12:18:04.361Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:04.374Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:07.244Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:18:09.596Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:18:11.708Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:18:14.735Z] [INFO] User logged out
+[2025-06-17T12:18:14.766Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:20.358Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-17T12:18:20.428Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:18:20.442Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:18:23.909Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:23.929Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:25.296Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:18:27.460Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:18:28.985Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:18:54.364Z] [INFO] Created new item in table=job_applications with data={"job_id":3,"user_id":5}
+[2025-06-17T12:18:54.464Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:18:54.493Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:18:54.503Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:54.513Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:54.518Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:59.123Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:18:59.127Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:59.144Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:18:59.148Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:59.165Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:18:59.170Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:18:59.231Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:21.487Z] [INFO] Updated messager for user= [object Object] with data={"is_read":true}
+[2025-06-17T12:19:21.503Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:21.525Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:21.531Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:21.537Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:47.941Z] [INFO] Created new item in table=job_applications with data={"job_id":2,"user_id":5}
+[2025-06-17T12:19:47.974Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:47.994Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:48.000Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:48.008Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:48.018Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:57.075Z] [INFO] Updated messager for user= [object Object] with data={"is_read":true}
+[2025-06-17T12:19:57.092Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:57.112Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:57.114Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:57.126Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:58.256Z] [INFO] Deleted itemId=16 from table=messages
+[2025-06-17T12:19:58.273Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:58.288Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:58.293Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:58.301Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:59.057Z] [INFO] Deleted itemId=15 from table=messages
+[2025-06-17T12:19:59.066Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:59.080Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:19:59.092Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:19:59.096Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:07.769Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T12:20:07.780Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T12:20:10.182Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:10.193Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:19.387Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:20:24.635Z] [INFO] Created new item in table=job_applications with data={"job_id":1,"user_id":5}
+[2025-06-17T12:20:24.661Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:20:24.667Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:24.683Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:20:24.687Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:24.702Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:38.157Z] [INFO] Deleted itemId=17 from table=messages
+[2025-06-17T12:20:38.171Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:20:38.190Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-17T12:20:38.193Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:38.210Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:42.347Z] [INFO] User logged out
+[2025-06-17T12:20:42.383Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:47.509Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-17T12:20:47.574Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:20:47.592Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:20:50.258Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:50.265Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:54.675Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:20:54.684Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:20:57.045Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:20:57.053Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:21:20.562Z] [INFO] Created new item in table=job_applications with data={"job_id":2,"user_id":4}
+[2025-06-17T12:21:20.586Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:21:20.589Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:21:20.613Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:21:20.619Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:21:20.630Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:21:21.488Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:21:32.559Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:21:32.565Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:21:45.933Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:21:45.939Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:34:12.792Z] [ERROR] ERROR updating email= in table='messages' - dal.PUT is not a function
+[2025-06-17T12:34:13.726Z] [ERROR] ERROR updating email= in table='messages' - dal.PUT is not a function
+[2025-06-17T12:34:14.494Z] [ERROR] ERROR updating email= in table='messages' - dal.PUT is not a function
+[2025-06-17T12:34:14.960Z] [ERROR] ERROR updating email= in table='messages' - dal.PUT is not a function
+[2025-06-17T12:34:17.227Z] [ERROR] ERROR updating email= in table='messages' - dal.PUT is not a function
+[2025-06-17T12:34:18.486Z] [INFO] Deleted itemId=18 from table=messages
+[2025-06-17T12:34:18.510Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:34:18.520Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:34:19.703Z] [ERROR] ERROR updating email= in table='messages' - dal.PUT is not a function
+[2025-06-17T12:34:20.603Z] [INFO] User logged out
+[2025-06-17T12:44:33.216Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:44:33.223Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:51:42.341Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:51:42.346Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:51:44.302Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:51:44.306Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:51:45.132Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:51:45.135Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:51:52.259Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-17T12:51:52.300Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:51:52.305Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:51:55.744Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:51:55.750Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:51:57.444Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:52:04.503Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:52:04.515Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:52:04.517Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:52:04.527Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:52:04.535Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:53:24.324Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:53:24.321Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:53:24.331Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:53:24.333Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:53:24.339Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:53:25.307Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:53:25.315Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:53:25.317Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T12:53:25.319Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:53:25.322Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:53:28.742Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:53:31.962Z] [ERROR] ERROR creating item in table=job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-17T12:53:34.463Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:53:34.471Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:53:36.260Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:53:36.269Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:53:40.122Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:53:40.130Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:53:47.950Z] [INFO] Fetched data from table=users 
+[2025-06-17T12:53:47.957Z] [INFO] Fetched data from table=users 
+[2025-06-17T12:53:47.975Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-17T12:53:47.982Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-17T12:53:49.574Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-17T12:53:49.579Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-17T12:53:58.497Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:53:58.503Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:56:59.454Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:56:59.458Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T12:57:00.151Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:57:00.156Z] [INFO] Fetched data from table = developers 
+[2025-06-17T12:57:01.913Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:57:01.919Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T12:57:03.162Z] [INFO] Fetched data from table=users 
+[2025-06-17T12:57:03.170Z] [INFO] Fetched data from table=users 
+[2025-06-17T12:57:03.180Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-17T12:57:03.186Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-17T12:57:05.555Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"miri"},{"field":"id","value":3}]
+[2025-06-17T12:57:05.562Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"miri"},{"field":"id","value":3}]
+[2025-06-17T12:57:07.328Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T12:57:07.333Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T13:09:35.625Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T13:09:35.628Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T13:09:35.634Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T13:09:35.636Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T13:09:35.662Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T13:09:35.664Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T13:09:35.677Z] [INFO] Fetched data from table=job_applications
+[2025-06-17T13:48:50.420Z] [ERROR] ERROR fetching data from table=developers- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T13:48:50.431Z] [ERROR] ERROR fetching data from table=developers- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T13:54:13.413Z] [ERROR] ERROR fetching data from table=messages - Got timeout reading communication packets
+[2025-06-17T13:54:21.784Z] [ERROR] ERROR fetching data from table=developers- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T13:54:21.787Z] [ERROR] ERROR fetching data from table=developers- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T13:54:21.791Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T13:54:21.793Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T13:54:21.796Z] [ERROR] ERROR fetching data from table=developers- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T13:54:27.865Z] [ERROR] ERROR fetching data from table=developers- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T13:54:50.128Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T13:54:50.134Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T13:59:46.085Z] [ERROR] ERROR fetching data from table=recruiters- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T13:59:46.092Z] [ERROR] ERROR fetching data from table=recruiters- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T14:00:31.971Z] [INFO] Fetched data from table = developers 
+[2025-06-17T14:00:32.738Z] [INFO] Fetched data from table = developers 
+[2025-06-17T14:00:52.465Z] [ERROR] ERROR fetching data from table=recruiters- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T14:00:53.459Z] [ERROR] ERROR fetching data from table=recruiters- Unknown column 'passwords.user_id' in 'on clause'
+[2025-06-17T14:03:11.307Z] [ERROR] ERROR fetching data from table=messages - Got timeout reading communication packets
+[2025-06-17T14:03:18.002Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T14:03:18.033Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T14:03:18.050Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T14:03:18.042Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T14:03:18.055Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T14:03:18.047Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T14:03:22.003Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"charlie"}]
+[2025-06-17T14:03:22.016Z] [INFO] Fetched data from table=jobs with conditions=[{"field":"username","value":"charlie"}]
+[2025-06-17T14:05:06.306Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T14:05:06.322Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T14:05:06.326Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T14:05:06.335Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T14:05:06.339Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T14:05:06.345Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T14:05:06.352Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T14:05:08.525Z] [INFO] User logged out
+[2025-06-17T14:05:08.581Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T14:05:44.275Z] [ERROR] Registration error for email=a0583286530@gmail.com - Unknown column 'role' in 'field list'
+[2025-06-17T14:06:43.051Z] [ERROR] Login error for user name=miri - user not found
+[2025-06-17T14:35:37.844Z] [ERROR] Registration error for email=a0583286530@gmail.com - Unknown column 'role' in 'field list'
+[2025-06-17T14:45:37.403Z] [ERROR] Registration error for email=a0583286530@gmail.com - Invalid role
+[2025-06-17T14:45:48.359Z] [ERROR] Registration error for email=a0583286530@gmail.com - Invalid role
+[2025-06-17T14:57:48.000Z] [ERROR] Login error for user name=miri - role not found
+[2025-06-17T15:00:02.340Z] [ERROR] Login error for user name=miri - role not found
+[2025-06-17T15:01:27.296Z] [ERROR] Login error for user name=miri - role not found
+[2025-06-17T15:02:27.861Z] [INFO] User registered successfully: email=a0583286530@gmail.com, ip=::1
+[2025-06-17T15:02:28.056Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:02:28.080Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:02:59.883Z] [INFO] User logged out
+[2025-06-17T15:03:38.269Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-17T15:03:38.361Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:03:38.385Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:03:51.008Z] [INFO] Fetched data from table = developers 
+[2025-06-17T15:03:51.024Z] [INFO] Fetched data from table = developers 
+[2025-06-17T15:03:54.390Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:03:54.412Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:03:55.310Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T15:03:55.323Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T15:03:56.448Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T15:03:56.461Z] [INFO] Fetched data from table=jobs with conditions=[]
+[2025-06-17T15:03:58.665Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T15:03:58.680Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T15:04:03.741Z] [INFO] Updated messager for user= [object Object] with data={"is_read":true}
+[2025-06-17T15:04:03.776Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:04:03.796Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:04:03.802Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T15:04:03.816Z] [INFO] Fetched data from table = recruiters 
+[2025-06-17T15:04:08.341Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:04:08.368Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:04:47.351Z] [INFO] Fetched data from table = developers 
+[2025-06-17T15:04:47.362Z] [INFO] Fetched data from table = developers 
+[2025-06-17T15:05:10.337Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:05:10.348Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:05:12.875Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:05:12.893Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:05:17.244Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:05:17.258Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:05:23.597Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:05:23.606Z] [INFO] Fetched data from table=projects with conditions=[]
+[2025-06-17T15:05:26.784Z] [INFO] Fetched data from table=users 
+[2025-06-17T15:05:26.803Z] [INFO] Fetched data from table=users 
+[2025-06-17T15:05:26.833Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-17T15:05:26.851Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-17T15:05:30.518Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"},{"field":"id","value":3}]
+[2025-06-17T15:05:30.532Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"},{"field":"id","value":3}]
+[2025-06-17T15:05:33.154Z] [INFO] Fetched data from table=users 
+[2025-06-17T15:05:33.171Z] [INFO] Fetched data from table=users 
+[2025-06-17T15:05:33.198Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-17T15:05:33.206Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-17T15:05:35.888Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"},{"field":"id","value":3}]
+[2025-06-17T15:05:35.903Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"bob"},{"field":"id","value":3}]
+[2025-06-17T15:05:38.460Z] [INFO] Fetched data from table = developers 
+[2025-06-17T15:05:38.475Z] [INFO] Fetched data from table = developers 
+[2025-06-17T15:05:40.450Z] [INFO] Fetched data from table=users 
+[2025-06-17T15:05:40.467Z] [INFO] Fetched data from table=users 
+[2025-06-17T15:05:40.496Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-17T15:05:40.511Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-17T15:05:46.749Z] [INFO] User logged out
+[2025-06-17T15:06:21.048Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-17T15:06:21.082Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:06:21.098Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:06:33.706Z] [INFO] User logged out
+[2025-06-17T15:06:58.920Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-17T15:06:58.985Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:06:59.004Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:32.982Z] [INFO] Deleted itemId=5 from table=messages
+[2025-06-17T15:08:33.008Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:33.022Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:36.295Z] [INFO] Updated messager for user= [object Object] with data={"is_read":true}
+[2025-06-17T15:08:36.318Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:36.340Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:38.090Z] [INFO] Deleted itemId=6 from table=messages
+[2025-06-17T15:08:38.115Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:38.131Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:40.432Z] [INFO] Deleted itemId=4 from table=messages
+[2025-06-17T15:08:40.451Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:40.466Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:42.060Z] [INFO] Updated messager for user= [object Object] with data={"is_read":true}
+[2025-06-17T15:08:42.080Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:08:42.094Z] [INFO] Fetched data from table=messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-17T15:09:18.928Z] [INFO] Fetched data from table=users 
+[2025-06-17T15:09:18.956Z] [INFO] Fetched data from table=users 
+[2025-06-17T15:09:19.003Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"miri"}]
+[2025-06-17T15:09:19.018Z] [INFO] Fetched data from table=projects with conditions=[{"field":"username","value":"miri"}]

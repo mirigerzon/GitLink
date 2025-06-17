@@ -30,6 +30,14 @@ async function getDbConnection() {
 }
 
 async function createUserTables(connection) {
+    //roles
+    await connection.query(`
+        CREATE TABLE IF NOT EXISTS roles(
+          role_id INT AUTO_INCREMENT PRIMARY KEY,
+          role VARCHAR(255) NOT NULL
+        )
+    `)
+
     // users (general)
     await connection.query(`
         CREATE TABLE IF NOT EXISTS users (
@@ -37,11 +45,12 @@ async function createUserTables(connection) {
             username VARCHAR(100) UNIQUE NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
             phone INT NOT NULL,
-            role VARCHAR(100) NOT NULL,
+            role_id INT(100) NOT NULL,
             about VARCHAR(2000),
             profile_image VARCHAR(255),
             cv_file VARCHAR(255),
-            is_active BOOLEAN DEFAULT TRUE
+            is_active BOOLEAN DEFAULT TRUE,
+            FOREIGN KEY (role_id) REFERENCES roles(role_id) ON DELETE CASCADE
         )
     `);
 
@@ -54,14 +63,6 @@ async function createUserTables(connection) {
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
-
-    //roles
-    await connection.query(`
-        CREATE TABLE IF NOT EXISTS roles(
-          role_id INT AUTO_INCREMENT PRIMARY KEY,
-          name VARCHAR(255) NOT NULL
-        )
-    `)
 }
 
 async function createRoleTables(connection) {

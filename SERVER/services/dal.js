@@ -13,18 +13,22 @@ const pool = mysql.createPool({
 });
 
 const getApplications = async (job_id) => {
-    const application = await GET(["users", "developers", "job_applications"],
+    const application = await GET(["users", "developers", "job_applications", "roles"],
         [
             'users.id = developers.user_id',
             'users.id = job_applications.user_id',
+            'users.role_id = roles.role_id'
         ],
-        [{ field: 'job_id', value: 1 }]);
+        [{ field: 'job_id', value: job_id, }]);
     return application;
 }
 
 const getUser = async (username) => {
-    const users = await GET(["users", "passwords"],
-        ['users.id = passwords.user_id'],
+    const users = await GET(["users", "passwords", "roles"],
+        [
+            'users.id = passwords.user_id',
+            'users.role_id = roles.role_id'
+        ],
         [{ field: "username", value: username }]);
     if (users.length == 0) throw new Error('user not found');
     const user = users[0];
@@ -37,10 +41,11 @@ const getUser = async (username) => {
 }
 
 const getDeveloper = async (id) => {
-    const user = await GET(["users", "developers", "passwords"],
+    const user = await GET(["users", "developers", "passwords", "roles"],
         [
             'users.id = developers.user_id',
             'users.id = passwords.user_id',
+            'users.role_id = roles.role_id'
         ],
         [{ field: 'id', value: id }]);
     if (user.length == 0) throw new Error('user not found');
@@ -48,10 +53,11 @@ const getDeveloper = async (id) => {
 }
 
 const getRecruiter = async (id) => {
-    const user = await GET(["users", "recruiters", "passwords"],
+    const user = await GET(["users", "recruiters", "passwords", "roles"],
         [
             'users.id = recruiters.user_id',
             'users.id = passwords.user_id',
+            'users.role_id = roles.role_id',
         ],
         [{ field: 'id', value: id }]);
     if (user.length == 0) throw new Error('user not found');
@@ -59,28 +65,27 @@ const getRecruiter = async (id) => {
 }
 
 const getDevelopers = async () => {
-    const user = await GET(["users", "developers"],
+    const user = await GET(["users", "developers", "roles"],
         [
             'users.id = developers.user_id',
-            'users.id = passwords.user_id',
+            'users.role_id = roles.role_id',
         ]);
     if (user.length == 0) throw new Error('user not found');
     return user;
 }
 
 const getRecruiters = async () => {
-    const user = await GET(["users", "recruiters"],
+    const user = await GET(["users", "recruiters", "roles"],
         [
             'users.id = recruiters.user_id',
-            'users.id = passwords.user_id',
+            'users.role_id = roles.role_id',
         ]);
     if (user.length == 0) throw new Error('user not found');
     return user;
 }
 
 const getProjectWithCreator = async (projectId) => {
-    return await GET(
-        ["projects", "developers"],
+    return await GET(["projects", "developers"],
         ["projects.git_name = developers.git_name"],
         [{ field: "projects.id", value: projectId }]
     );
@@ -133,21 +138,17 @@ const GET = async (tables = [], joins = [], conditions = []) => {
         }
         query += ` JOIN ${tables[i]} ON ${joins[i - 1]}`;
     }
-
     const values = [];
     const whereClauses = [`${tables[0]}.is_active = 1`];
-
     for (const cond of conditions) {
         whereClauses.push(`${cond.field} = ?`);
         values.push(cond.value);
     }
-
     query += ` WHERE ${whereClauses.join(" AND ")}`;
 
     const [results] = await pool.query(query, values);
     return results;
 };
-
 
 module.exports = {
     getUser,

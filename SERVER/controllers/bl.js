@@ -29,6 +29,7 @@ const getUser = async (username) => {
     const user = users[0];
     return user;
 }
+
 const getJobApplications = async (job_id) => {
     const applications = await dal.getApplications(job_id);
     return applications;
@@ -53,7 +54,7 @@ async function updateUserRating(gitName) {
     const totalRatings = ratedProjects.reduce((sum, p) => sum + p.rating * p.rating_count, 0);
     const totalCount = ratedProjects.reduce((sum, p) => sum + p.rating_count, 0);
     const userRating = totalCount > 0 ? Math.round((totalRatings / totalCount) * 100) / 100 : null;
-    await genericDal.PUT("developers", {
+    await genericDal.UPDATE("developers", {
         rating: userRating
     }, [{ field: "git_name", value: gitName }]);
 };
@@ -64,14 +65,14 @@ async function createApply(data, email) {
     }
     let response;
     try {
-        response = await genericDal.POST('job_applications', data);
+        response = await genericDal.CREATE('job_applications', data);
     } catch (err) {
         if (err.message.includes('Duplicate ') || err.code === '23505') {
             throw new Error('You have already contacted the recruiter for this position. Please wait for a response before sending another message.');
         }
         throw err;
     }
-    await genericDal.POST("messages", {
+    await genericDal.CREATE("messages", {
         user_id: data.user_id,
         email: email,
         title: 'Application Received!',

@@ -34,7 +34,7 @@ const DELETE = async (table, conditions = []) => {
   return result;
 };
 
-const POST = async (table, data) => {
+const CREATE = async (table, data) => {
   const fields = Object.keys(data);
   const values = Object.values(data);
   const placeholders = fields.map(() => "?");
@@ -45,7 +45,7 @@ const POST = async (table, data) => {
   return result;
 };
 
-const PUT = async (table, data, conditions = []) => {
+const UPDATE = async (table, data, conditions = []) => {
   const fields = Object.keys(data);
   const values = Object.values(data);
   const setClause = fields.map((field) => `${field} = ?`).join(", ");
@@ -59,6 +59,6 @@ const PUT = async (table, data, conditions = []) => {
 module.exports = {
   GET,
   DELETE,
-  POST,
-  PUT,
+  CREATE,
+  UPDATE,
 };

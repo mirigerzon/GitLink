@@ -11,6 +11,15 @@ async function getDbConnection() {
   });
 }
 
+async function seedRoles(db) {
+  await db.query(`
+    INSERT INTO roles (role)
+    VALUES
+    ('developer'),
+    ('recruiter')
+  `);
+}
+
 async function seedUsers(db) {
   await db.query(`
     INSERT INTO users (username, email, phone, role_id, about, profile_image, cv_file)
@@ -19,12 +28,7 @@ async function seedUsers(db) {
       ('bob', 'bob@example.com', 234567891, 1, 'Backend enthusiast', 'https://...', 'cv_files/bob-cv.pdf'),
       ('charlie', 'charlie@example.com', 345678912, 2, 'Java expert', 'https://...', NULL);
   `);
-  await db.query(`
-    INSERT INTO roles (name)
-    VALUES
-    ('developers'),
-    ('recruiters')
-    `)
+
 }
 
 async function seedPasswords(db) {
@@ -99,10 +103,11 @@ async function seedMessages(db) {
       (1, 'alice@example.com', 'Welcome!', 'Welcome to the platform!', FALSE),
       (2, 'bob@example.com', 'Tip', 'Do not forget to update your profile.', FALSE),
       (3, 'charlie@example.com', 'Alert', 'New job posted in your field.', FALSE);
-`);
+  `);
 }
 
 async function runAllSeeders(db) {
+  await seedRoles(db);
   await seedUsers(db);
   await seedPasswords(db);
   await seedDevelopers(db);

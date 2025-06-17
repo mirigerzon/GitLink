@@ -5,8 +5,8 @@ import { FiUpload } from 'react-icons/fi';
 import "../../style/Register.css";
 
 const ROLES = {
-  DEVELOPER: "developer",
-  RECRUITER: "recruiter"
+  DEVELOPER: 1,
+  RECRUITER: 2
 };
 
 const VALIDATION_RULES = {
@@ -381,7 +381,7 @@ function Register() {
     // Add step one data
     formData.append("username", stepOneData.username);
     formData.append("password", stepOneData.password);
-    formData.append("role", selectedRole);
+    formData.append("role_id", selectedRole);
 
     // Add common fields
     formData.append("email", data.email);

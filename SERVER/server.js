@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express();
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./.env" });
-const verifyToken = require("./middleware/verifyToken.js");
+const verifyToken = require("./REST API/middleware/verifyToken.js");
 const authRoutes = require("./REST API/routes/auth.js");
 const path = require('path');
 

@@ -14,11 +14,11 @@ const createItem = async (table, data) => {
   if (Array.isArray(data)) {
     data = Object.fromEntries(data.map(({ field, value }) => [field, value]));
   }
-  return await dal.POST(table, data);
+  return await dal.CREATE(table, data);
 };
 
 const updateItem = async (table, data, conditions = []) => {
-  return await dal.PUT(table, data, conditions);
+  return await dal.UPDATE(table, data, conditions);
 };
 
 module.exports = {
