@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
-import { CurrentUser } from "../../../App.jsx";
-import { useFetchData } from "../../hooks/fetchData.js";
+import { useCurrentUser } from "../../context.jsx";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import Job from "./Job.jsx";
 import "../../style/jobs.css";
@@ -11,7 +11,7 @@ import Sort from "../common/Sort.jsx";
 function Jobs() {
   const { username, id } = useParams();
   const [jobs, setJobs] = useState([]);
-  const { currentUser } = useContext(CurrentUser);
+  const { currentUser } = useCurrentUser();
   const [isChange, setIsChange] = useState(0);
   const logOut = useLogout();
   const fetchData = useFetchData();

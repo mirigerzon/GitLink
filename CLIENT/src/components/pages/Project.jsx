@@ -1,14 +1,14 @@
 import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { CurrentUser } from "../../../App.jsx";
-import { useFetchData } from "../../hooks/fetchData.js";
+import { useCurrentUser } from "../../context.jsx";;
+import { useFetchData } from "../../hooks/FetchData.js";
 import { FiGitBranch, FiStar, FiUser } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 
 function Project({ projectData, setIsChange }) {
   const navigate = useNavigate();
-  const { currentUser } = useContext(CurrentUser);
+  const { currentUser } = useCurrentUser();
   const [selectedRating, setSelectedRating] = useState(0);
   const fetchData = useFetchData();
 

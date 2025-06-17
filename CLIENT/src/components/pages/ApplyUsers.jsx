@@ -1,15 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { FiUser, FiStar, FiFolder } from 'react-icons/fi';
-import { useState, useEffect, useContext } from "react";
-import { useFetchData } from "../../hooks/fetchData";
+import { useState, useEffect } from "react";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut";
-import { CurrentUser } from "../../../App";
+import { useCurrentUser } from "../../context.jsx";
 import '../../style/ApplyUsers.css';
 function ApplyUsers() {
     const navigate = useNavigate();
     const fetchData = useFetchData();
     const logOut = useLogout();
-    const { currentUser } = useContext(CurrentUser);
+    const { currentUser } = useCurrentUser();
     const { id } = useParams();
     const [applicants, setApplicants] = useState([]);
     const [isChange, setIsChange] = useState(0);

@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { CurrentUser } from "../../../App";
+import { useCurrentUser } from "../../context.jsx";
 import { useLogout } from "../../hooks/LogOut";
 import { Messages } from "../pages/Messages";
 import { FiLogOut } from 'react-icons/fi';
 import "../../style/NavBar.css";
 
 function Navigation() {
-  const { currentUser } = useContext(CurrentUser);
+const { currentUser } = useCurrentUser();
   const logOut = useLogout();
   const location = useLocation();
 

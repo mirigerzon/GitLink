@@ -3,15 +3,15 @@ import "../../style/Job.css";
 import Update from "../common/Update";
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
-import { useFetchData } from "../../hooks/fetchData";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut";
-import { CurrentUser } from "../../../App";
+import { useCurrentUser } from "../../context.jsx";
 
 function Job({ jobData }) {
   const navigate = useNavigate();
   const fetchData = useFetchData();
   const logOut = useLogout();
-  const { currentUser, setCurrentUser } = useContext(CurrentUser);
+  const { currentUser, setCurrentUser } = useCurrentUser();
 
   const handleApply = () => {
     if (!currentUser) {
@@ -98,7 +98,7 @@ function Job({ jobData }) {
           {currentUser && currentUser.username == jobData.username ?
             <button className="apply-btn" onClick={() => navigate(`/${jobData.username}/jobs/${jobData.id}/apply`)}>
               View Applicants
-            </button> : (currentUser.role == 'developer' && <button className="apply-btn" onClick={handleApply}>
+            </button> : ( currentUser && currentUser.role == 'developer' && <button className="apply-btn" onClick={handleApply}>
               Apply Now
             </button>)}
           <button className="view-company-btn" onClick={() => navigate(`/${jobData.username}/profile`)}>

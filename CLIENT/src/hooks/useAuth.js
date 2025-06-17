@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFetchData } from './fetchData.js';
-import { CurrentUser } from '../../App';
+import { useFetchData } from './FetchData.js';
+import { useCurrentUser } from "../context.jsx";
 import Cookies from 'js-cookie';
 
 const COOKIE_CONFIG = {
@@ -23,7 +23,7 @@ const MESSAGES = {
 };
 
 export const useAuth = () => {
-    const { setCurrentUser } = useContext(CurrentUser);
+    const {setCurrentUser} = useCurrentUser();
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
     const [forgotPasswordLoading, setForgotPasswordLoading] = useState(false);

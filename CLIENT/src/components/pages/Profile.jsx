@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { CurrentUser } from "../../../App.jsx";
-import { useFetchData } from "../../hooks/fetchData.js";
+import { useCurrentUser } from "../../context.jsx";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useDeveloperProfile } from "../../hooks/DeveloperProfile.jsx";
 import { useRecruiterProfile } from "../../hooks/RecruiterProfile.jsx";
 import Update from "../common/Update.jsx";
@@ -10,7 +10,7 @@ import "../../style/Profile.css";
 
 function Profile() {
   const { username } = useParams();
-  const { currentUser } = useContext(CurrentUser);
+  const { currentUser } = useCurrentUser();
   const [isChange, setIsChange] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

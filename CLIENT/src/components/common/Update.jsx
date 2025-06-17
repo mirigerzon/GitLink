@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetchData } from "../../hooks/fetchData.js";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { FaEdit } from "react-icons/fa"
 import { useLogout } from "../../hooks/LogOut.js";
 

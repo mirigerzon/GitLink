@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useContext } from "react";
 import { useFetchData } from "./FetchData.js";
-import { CurrentUser } from "../../App.jsx";
+import { useCurrentUser } from "../context.jsx";
+
 export const useMessages = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -8,7 +9,7 @@ export const useMessages = () => {
     const [error, setError] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
     const fetchData = useFetchData();
-    const { currentUser, setCurrentUser } = useContext(CurrentUser);
+    const { currentUser, setCurrentUser } = useCurrentUser();
 
     const fetchMessages = useCallback(() => {
         setLoading(true);

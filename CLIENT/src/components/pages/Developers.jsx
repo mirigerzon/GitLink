@@ -1,14 +1,14 @@
 import Developer from "./Developer.jsx";
 import { useState, useEffect, useContext } from "react";
-import { CurrentUser } from "../../../App.jsx";
-import { useFetchData } from "../../hooks/fetchData.js";
+import { useCurrentUser } from "../../context.jsx";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import "../../style/developers.css";
 import Search from "../common/Search.jsx";
 import Sort from "../common/Sort.jsx";
 
 function Developers() {
-  const { currentUser } = useContext(CurrentUser);
+  const { currentUser } = useCurrentUser();
   const logOut = useLogout();
   const fetchData = useFetchData();
   const [developers, setDevelopers] = useState([]);

@@ -1,14 +1,14 @@
 import Recruiter from "./Recruiter.jsx";
 import { React, useState, useEffect, useContext } from "react";
-import { CurrentUser } from "../../../App.jsx";
-import { useFetchData } from "../../hooks/fetchData.js";
+import { useCurrentUser } from "../../context.jsx";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import "../../style/recruiters.css";
 import Search from "../common/Search.jsx";
 import Sort from "../common/Sort.jsx";
 
 function Recruiters() {
-  const { currentUser } = useContext(CurrentUser);
+  const { currentUser } = useCurrentUser();
   const fetchData = useFetchData();
   const logOut = useLogout();
   const [recruiters, setRecruiters] = useState([]);

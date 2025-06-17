@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetchData } from "./fetchData";
+import { useFetchData } from "./FetchData";
 import { useLogout } from "./LogOut";
 import { useForm } from "react-hook-form";
 
