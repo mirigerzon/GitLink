@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { FiUser, FiStar, FiFolder, FiMail, FiTrash2, FiEdit, FiCheck } from 'react-icons/fi';
 import { useState, useEffect } from "react";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import { useCurrentUser } from "../../context.jsx";
 import '../../style/ApplyUsers.css';

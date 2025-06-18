@@ -1,7 +1,7 @@
 import Developer from "./Developer.jsx";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useCurrentUser } from "../../context.jsx";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import "../../style/developers.css";
 import Search from "../common/Search.jsx";

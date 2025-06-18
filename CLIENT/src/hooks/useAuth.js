@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFetchData } from './FetchData.js';
+import { useFetchData } from "./fetchData.js";
 import { useCurrentUser } from "../context.jsx";
 import Cookies from 'js-cookie';
 
@@ -20,14 +20,18 @@ const MESSAGES = {
     FORGOT_PASSWORD_SUCCESS: 'Password reset email sent successfully! Check your inbox.',
     FORGOT_PASSWORD_ERROR: 'Failed to send reset email',
     USERNAME_REQUIRED: 'Please enter your username first',
+    USERNAME_CHECK_ERROR: 'Failed to check username availability',
 };
 
 export const useAuth = () => {
-    const {setCurrentUser} = useCurrentUser();
+    const { setCurrentUser } = useCurrentUser();
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
     const [forgotPasswordLoading, setForgotPasswordLoading] = useState(false);
     const [forgotPasswordMessage, setForgotPasswordMessage] = useState('');
+    const [usernameStatus, setUsernameStatus] = useState(null);
+    const [suggestedUsernames, setSuggestedUsernames] = useState([]);
+    const [isCheckingUsername, setIsCheckingUsername] = useState(false);
     const navigate = useNavigate();
     const fetchData = useFetchData();
 
@@ -47,6 +51,45 @@ export const useAuth = () => {
 
     const getRedirectPath = (user) => {
         return `/${user.git_name || user.username}/home`;
+    };
+
+    const checkUsernameAvailability = async (username) => {
+        if (!username || username.length < 3) {
+            setUsernameStatus(null);
+            setSuggestedUsernames([]);
+            return;
+        }
+
+        setIsCheckingUsername(true);
+        setUsernameStatus('checking');
+
+        try {
+            const response = await fetch(`http://localhost:3001/check-username/${username}`);
+            const data = await response.json();
+
+            if (data.available) {
+                setUsernameStatus('available');
+                setSuggestedUsernames([]);
+            } else {
+                setUsernameStatus('taken');
+                const suggestions = Object.keys(data)
+                    .filter(key => !isNaN(key))
+                    .map(key => data[key]);
+                setSuggestedUsernames(suggestions);
+            }
+        } catch (error) {
+            console.error('Error checking username:', error);
+            setUsernameStatus('error');
+            setSuggestedUsernames([]);
+        } finally {
+            setIsCheckingUsername(false);
+        }
+    };
+
+    const clearUsernameCheck = () => {
+        setUsernameStatus(null);
+        setSuggestedUsernames([]);
+        setIsCheckingUsername(false);
     };
 
     const login = async (credentials) => {
@@ -149,5 +192,10 @@ export const useAuth = () => {
         forgotPasswordLoading,
         forgotPasswordMessage,
         clearForgotPasswordMessage,
+        checkUsernameAvailability,
+        usernameStatus,
+        suggestedUsernames,
+        isCheckingUsername,
+        clearUsernameCheck,
     };
 };

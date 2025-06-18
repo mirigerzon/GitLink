@@ -79,8 +79,16 @@ const generateRandomPassword = (length = 12) => {
     return password;
 };
 
+const isUsernameAvailable = async (username) => {
+    if (!username) throw new Error("Username is required");
+
+    const user = await dal.getUser(username);
+    return user ? true : false;
+}
+
 module.exports = {
     verifyLogin,
     registerNewUser,
-    forgotPassword
+    forgotPassword,
+    isUsernameAvailable
 };

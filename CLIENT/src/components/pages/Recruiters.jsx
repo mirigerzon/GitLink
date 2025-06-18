@@ -1,7 +1,7 @@
 import Recruiter from "./Recruiter.jsx";
-import { React, useState, useEffect, useContext } from "react";
+import { React, useState, useEffect } from "react";
 import { useCurrentUser } from "../../context.jsx";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import "../../style/recruiters.css";
 import Search from "../common/Search.jsx";

@@ -25546,3 +25546,262 @@
 [2025-06-18T11:29:15.422Z] [INFO] Updated project id=9 by user=michal
 [2025-06-18T11:29:16.767Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"michal"},{"field":"id","value":9}]
 [2025-06-18T11:29:16.821Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"michal"},{"field":"id","value":9}]
+[2025-06-18T11:39:30.314Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"michal"},{"field":"id","value":9}]
+[2025-06-18T11:39:30.320Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"michal@michal.com"}]
+[2025-06-18T11:39:30.328Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"michal"},{"field":"id","value":9}]
+[2025-06-18T11:39:30.330Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"michal@michal.com"}]
+[2025-06-18T11:39:30.337Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"michal"},{"field":"id","value":9}]
+[2025-06-18T11:39:30.343Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"michal@michal.com"}]
+[2025-06-18T11:39:30.369Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"michal"},{"field":"id","value":9}]
+[2025-06-18T11:42:29.379Z] [INFO] User logged out
+[2025-06-18T11:42:29.437Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"michal"},{"field":"id","value":9}]
+[2025-06-18T12:17:09.348Z] [ERROR] ERROR login auth - User not found
+[2025-06-18T12:17:24.115Z] [INFO] User logged in successfully: user name=aaaaaa, ip=::1
+[2025-06-18T12:17:24.199Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"aaaaaa@aaaaaa.c"}]
+[2025-06-18T12:17:24.211Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"aaaaaa@aaaaaa.c"}]
+[2025-06-18T12:18:54.023Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:18:54.035Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:18:56.760Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:18:56.766Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:10.541Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"aaaaaa@aaaaaa.c"}]
+[2025-06-18T12:20:10.557Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:10.562Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"aaaaaa@aaaaaa.c"}]
+[2025-06-18T12:20:10.571Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:10.833Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"aaaaaa@aaaaaa.c"}]
+[2025-06-18T12:20:10.835Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:10.851Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:12.613Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:12.638Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:18.572Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:18.589Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:20.947Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:20.964Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:20:53.483Z] [INFO] User logged out
+[2025-06-18T12:20:53.551Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:00.817Z] [INFO] User logged in successfully: user name=uuuuuu, ip=::1
+[2025-06-18T12:21:00.857Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"uuuuuu@uuuuuu.com"}]
+[2025-06-18T12:21:00.866Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"uuuuuu@uuuuuu.com"}]
+[2025-06-18T12:21:03.535Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:03.554Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:22.007Z] [INFO] User logged out
+[2025-06-18T12:21:22.077Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:26.213Z] [INFO] User logged in successfully: user name=wwwwww, ip=::1
+[2025-06-18T12:21:26.243Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"wwwwww@wwwwww.com"}]
+[2025-06-18T12:21:26.256Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"wwwwww@wwwwww.com"}]
+[2025-06-18T12:21:28.173Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:28.184Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:33.615Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:33.638Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:36.518Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:36.542Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:39.245Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:39.274Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:42.552Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:21:42.570Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:22:11.697Z] [INFO] User logged out
+[2025-06-18T12:22:11.734Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:22:29.434Z] [INFO] User logged in successfully: user name=uuuuuu, ip=::1
+[2025-06-18T12:22:29.471Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"uuuuuu@uuuuuu.com"}]
+[2025-06-18T12:22:29.478Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"uuuuuu@uuuuuu.com"}]
+[2025-06-18T12:22:31.104Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:22:31.113Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:22:33.307Z] [INFO] Fetched user data for username=uuuuuu
+[2025-06-18T12:22:33.313Z] [INFO] Fetched user data for username=uuuuuu
+[2025-06-18T12:22:33.326Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"uuuuuu"}]
+[2025-06-18T12:22:33.333Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"uuuuuu"}]
+[2025-06-18T12:23:23.198Z] [INFO] User logged out
+[2025-06-18T12:24:16.546Z] [INFO] User registered successfully: email=chana@chana.com
+[2025-06-18T12:24:16.624Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:24:16.636Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:24:20.327Z] [INFO] Fetched user data for username=chana1
+[2025-06-18T12:24:20.340Z] [INFO] Fetched user data for username=chana1
+[2025-06-18T12:24:20.362Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"}]
+[2025-06-18T12:24:20.378Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"}]
+[2025-06-18T12:24:34.210Z] [INFO] Created project with data={"git_name":"chana","username":"chana1","name":"blogger","forks_count":0,"url":"https://github.com/chana/blogger","languages":"chana","details":"chana"}
+[2025-06-18T12:24:34.272Z] [INFO] Fetched user data for username=chana1
+[2025-06-18T12:24:34.276Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"}]
+[2025-06-18T12:24:34.291Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"}]
+[2025-06-18T12:24:34.296Z] [INFO] Fetched user data for username=chana1
+[2025-06-18T12:24:34.308Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"}]
+[2025-06-18T12:24:34.347Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"}]
+[2025-06-18T12:24:37.811Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:24:37.816Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:26:03.688Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:26:03.705Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:26:03.708Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:26:03.718Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:26:03.759Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:26:03.764Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:26:03.898Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:26:59.056Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:26:59.058Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:26:59.065Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:26:59.067Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:26:59.252Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:26:59.254Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:26:59.290Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:27:24.893Z] [ERROR] ERROR updating project projects - Database update failed: Column 'name' cannot be null
+[2025-06-18T12:27:45.535Z] [INFO] Deleted project id=10
+[2025-06-18T12:27:52.603Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:27:52.660Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:27:54.570Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:27:54.717Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:27:54.835Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:27:55.032Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:27:55.168Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:27:55.366Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-18T12:27:55.499Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"},{"field":"id","value":10}]
+[2025-06-18T12:30:26.260Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:30:26.322Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:30:28.953Z] [INFO] Fetched user data for username=chana1
+[2025-06-18T12:30:29.313Z] [INFO] Fetched user data for username=chana1
+[2025-06-18T12:30:29.324Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"}]
+[2025-06-18T12:30:29.558Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"chana1"}]
+[2025-06-18T12:30:31.618Z] [INFO] User logged out
+[2025-06-18T12:30:44.878Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-18T12:30:55.349Z] [INFO] User logged in successfully: user name=sara111, ip=::1
+[2025-06-18T12:30:55.389Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:30:55.399Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:30:58.514Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:30:58.523Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:31:21.015Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:31:21.016Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:31:21.023Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:31:21.025Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:31:21.040Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:31:21.042Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:31:21.061Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:31:23.305Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:31:23.307Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:31:23.313Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:31:23.316Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:31:23.564Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:31:23.567Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:31:23.712Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:34:18.162Z] [ERROR] ERROR updating project projects - Database update failed: Column 'name' cannot be null
+[2025-06-18T12:34:18.202Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:34:18.206Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:34:18.219Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:34:18.223Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:34:18.238Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:34:18.242Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:34:18.253Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:34:46.045Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:34:46.046Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:34:46.054Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:34:46.056Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:34:46.234Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:34:46.238Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:34:46.273Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:35:15.843Z] [ERROR] ERROR updating project projects - Database update failed: Column 'name' cannot be null
+[2025-06-18T12:35:20.626Z] [ERROR] ERROR updating project projects - Database update failed: Column 'name' cannot be null
+[2025-06-18T12:42:14.166Z] [ERROR] ERROR updating project projects - Database update failed: Column 'name' cannot be null
+[2025-06-18T12:42:16.671Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:42:16.673Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:42:16.684Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:42:16.687Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:42:16.947Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:42:16.951Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:42:17.131Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:43:33.377Z] [ERROR] ERROR updating project projects - Database update failed: Column 'name' cannot be null
+[2025-06-18T12:44:53.627Z] [ERROR] ERROR updating project projects - Database update failed: Column 'name' cannot be null
+[2025-06-18T12:44:57.404Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:44:57.409Z] [INFO] Fetched projects with conditions=[]
+[2025-06-18T12:46:39.770Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:46:39.785Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:46:56.353Z] [INFO] Access token refreshed for userId=13, ip=::1
+[2025-06-18T12:47:33.260Z] [INFO] Updated project id=3 by user=sara111
+[2025-06-18T12:47:35.133Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:47:35.208Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:49:10.238Z] [INFO] Updated project id=3 by user=sara111
+[2025-06-18T12:49:10.295Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:49:10.331Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:49:51.038Z] [INFO] Updated project id=3 by user=sara111
+[2025-06-18T12:49:51.077Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:49:51.088Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:49:51.091Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:49:51.100Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:49:51.102Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:49:51.111Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:49:51.117Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:49:59.320Z] [ERROR] ERROR updating project jobs - Data is required for UPDATE operation
+[2025-06-18T12:50:31.625Z] [ERROR] ERROR updating project jobs - Data is required for UPDATE operation
+[2025-06-18T12:50:31.661Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:50:31.666Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:50:31.675Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:50:31.678Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:50:31.687Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:50:31.690Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:50:31.699Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:01.970Z] [ERROR] ERROR updating project jobs - Data is required for UPDATE operation
+[2025-06-18T12:51:02.017Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:02.021Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:02.033Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:02.038Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:02.054Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:02.060Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:02.073Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:34.395Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:34.402Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:34.404Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:34.408Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:34.591Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:34.593Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:34.641Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:55.275Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:55.277Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:55.284Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:55.286Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:55.549Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:51:55.553Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:51:55.620Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:52:45.452Z] [ERROR] ERROR updating project jobs - Data is required for UPDATE operation
+[2025-06-18T12:53:01.304Z] [ERROR] ERROR updating project jobs - Data is required for UPDATE operation
+[2025-06-18T12:53:21.551Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:53:21.555Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:21.562Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:53:21.565Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:21.850Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:53:21.852Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:21.888Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:31.569Z] [INFO] Deleted job id=3
+[2025-06-18T12:53:31.593Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:31.602Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:34.080Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:34.083Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:53:34.093Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:34.097Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:53:34.164Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:53:34.168Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:53:34.195Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:57:03.571Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:57:03.573Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:57:03.579Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:57:03.603Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:57:03.782Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:57:03.784Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:57:03.900Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:59:46.003Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:59:46.005Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:59:46.009Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:59:46.010Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:59:46.025Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T12:59:46.026Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T12:59:46.209Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-18T13:03:35.624Z] [INFO] Fetched data from table = developers 
+[2025-06-18T13:03:35.636Z] [INFO] Fetched data from table = developers 
+[2025-06-18T13:03:39.783Z] [INFO] Access token refreshed for userId=13, ip=::1
+[2025-06-18T13:03:39.804Z] [INFO] Updated message for user=sara111@sara111.com
+[2025-06-18T13:03:39.829Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T13:03:39.839Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T13:09:07.003Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T13:09:07.007Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T13:09:07.019Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T13:47:39.303Z] [INFO] User logged out
+[2025-06-18T14:01:54.351Z] [INFO] User logged in successfully: user name=sara111, ip=::1
+[2025-06-18T14:01:54.383Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T14:01:54.387Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara111@sara111.com"}]
+[2025-06-18T14:05:19.161Z] [INFO] Fetched recruiters data
+[2025-06-18T14:05:19.167Z] [INFO] Fetched recruiters data
+[2025-06-18T14:05:21.173Z] [INFO] User logged out
+[2025-06-18T14:05:21.208Z] [INFO] Fetched recruiters data

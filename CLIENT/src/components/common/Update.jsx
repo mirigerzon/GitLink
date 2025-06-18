@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { FaEdit } from "react-icons/fa"
 import { useLogout } from "../../hooks/LogOut.js";
 
@@ -41,11 +41,6 @@ function Update({ type, itemId, setIsChange, inputs, role = null }) {
     }
   }
 
-  function handleCancel(e) {
-    e.target.reset();
-    setScreen(0);
-  }
-
   return (
     <>
       {screen == 0 && (
@@ -66,10 +61,10 @@ function Update({ type, itemId, setIsChange, inputs, role = null }) {
                 />
               </div>
             ))}
-            <button type="submit" value={"OK"}>
+            <button value={"OK"}>
               OK
             </button>
-            <button onClick={handleCancel} value={"cancel"}>
+            <button onClick={() => setScreen(0)} value={"cancel"}>
               cancel
             </button>
           </form>

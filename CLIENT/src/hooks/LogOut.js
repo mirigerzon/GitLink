@@ -1,8 +1,7 @@
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { useCurrentUser } from "../context";
-import { useFetchData } from "./FetchData";
+import { useFetchData } from "./fetchData.js";
 
 export function useLogout() {
   const { setCurrentUser } = useCurrentUser();

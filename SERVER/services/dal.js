@@ -37,7 +37,7 @@ const getUser = async (username) => {
         [{ field: "username", value: username }]
     );
 
-    if (users.length === 0) throw new Error('User not found');
+    if (users.length === 0) return null;
 
     const user = users[0];
 

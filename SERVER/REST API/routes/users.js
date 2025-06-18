@@ -142,8 +142,7 @@ router.get('/cv/:username', async (req, res) => {
         res.setHeader('Content-Type', 'application/pdf');
         res.download(filePath, `${username}-cv.pdf`);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Error downloading CV' });
+        handleError(res, err, 'CV', 'downloading CV');
     }
 });
 

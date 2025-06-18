@@ -43,8 +43,17 @@ const VALIDATION_RULES = {
 };
 
 function Register() {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: 'onBlur' });
-  const { register: registerUser, isLoading, message } = useAuth();
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({ mode: 'onBlur' });
+  const {
+    register: registerUser,
+    isLoading,
+    message,
+    checkUsernameAvailability,
+    usernameStatus,
+    suggestedUsernames,
+    isCheckingUsername,
+    clearUsernameCheck
+  } = useAuth();
 
   const [step, setStep] = useState(1);
   const [selectedRole, setSelectedRole] = useState("");
@@ -61,7 +70,38 @@ function Register() {
   const [isReady, setIsReady] = useState(false);
   const [cameraError, setCameraError] = useState(null);
 
+  const [username, setUsername] = useState('');
+  const [checkTimeout, setCheckTimeout] = useState(null);
+
   const hasErrors = Object.keys(errors).length > 0;
+
+  useEffect(() => {
+    // if (checkTimeout) {
+    //   clearTimeout(checkTimeout);
+    // }
+
+    if (username) {
+      const timeout = setTimeout(() => {
+        checkUsernameAvailability(username);
+      }, 500);
+
+      setCheckTimeout(timeout);
+    }
+    // else {
+    //   clearUsernameCheck();
+    // }
+
+    // return () => {
+    //   if (checkTimeout) {
+    //     clearTimeout(checkTimeout);
+    //   }
+    // };
+  }, [username]);
+
+  const selectSuggestedUsername = (suggestedName) => {
+    setUsername(suggestedName);
+    setValue('username', suggestedName);
+  };
 
   const startCamera = async () => {
     try {
@@ -254,10 +294,42 @@ function Register() {
                 <input
                   type="text"
                   placeholder="Username"
-                  className={`form-input ${errors.username ? 'error' : ''}`}
+                  className={`form-input ${errors.username ? 'error' : ''} ${usernameStatus === 'available' ? 'success' : ''} ${usernameStatus === 'taken' ? 'error' : ''}`}
                   {...register("username", VALIDATION_RULES.username)}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                    register("username", VALIDATION_RULES.username).onChange(e);
+                  }}
                 />
                 {errors.username && <span className="error-message">{errors.username.message}</span>}
+
+                {isCheckingUsername && (
+                  <span className="checking-message">Checking availability...</span>
+                )}
+                {usernameStatus === 'available' && (
+                  <span className="success-message">Username is available!</span>
+                )}
+                {usernameStatus === 'taken' && (
+                  <span className="error-message">Username is taken</span>
+                )}
+
+                {suggestedUsernames.length > 0 && (
+                  <div className="username-suggestions">
+                    <p className="suggestions-title">Available usernames:</p>
+                    <div className="suggestions-list">
+                      {suggestedUsernames.map((suggestion, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          className="suggestion-btn"
+                          onClick={() => selectSuggestedUsername(suggestion)}
+                        >
+                          {suggestion}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="form-group">
@@ -283,7 +355,11 @@ function Register() {
                 {errors.verifyPassword && <span className="error-message">{errors.verifyPassword.message}</span>}
               </div>
 
-              <button type="submit" className="register-btn" disabled={!selectedRole || hasErrors}>
+              <button
+                type="submit"
+                className="register-btn"
+                disabled={!selectedRole || hasErrors || usernameStatus === 'taken' || isCheckingUsername}
+              >
                 Next
               </button>
             </form>

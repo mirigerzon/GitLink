@@ -2,10 +2,11 @@ import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useCurrentUser } from "../../context.jsx";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { FiGitBranch, FiStar, FiUser } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 import Update from "../common/Update.jsx";
+import Delete from "../common/Delete.jsx";
 
 function Project({ projectData, setIsChange }) {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function Project({ projectData, setIsChange }) {
 
   const isOwner = currentUser?.username === projectData.username;
 
-  const handleRate = () => {
+  const handleRate = (star) => {
     if (!currentUser) {
       Swal.fire({
         icon: 'warning',
@@ -34,7 +35,7 @@ function Project({ projectData, setIsChange }) {
       });
       return;
     }
-    if (selectedRating < 1) {
+    if (star < 1) {
       Swal.fire({
         icon: 'info',
         title: 'No Rating Selected',
@@ -50,7 +51,7 @@ function Project({ projectData, setIsChange }) {
       method: "POST",
       body: {
         project_id: projectData.id,
-        rating: selectedRating,
+        rating: star,
       },
       onSuccess: (res) => {
         setIsChange(1);
@@ -138,20 +139,25 @@ function Project({ projectData, setIsChange }) {
       </div>
 
       <div className="project-actions">
-        {/* Edit buttons for owner */}
         {isOwner && (
           <div className="edit-section">
             <Update
               type="projects"
               itemId={projectData.id}
               setIsChange={setIsChange}
-              inputs={["name", "url", "languages", "details"]} // מתאימים לשדות מתוך הטבלה
+              inputs={["name", "url", "languages", "details"]}
               role={`/${currentUser.role}`}
+            />
+            <Delete
+              className="delete_btn"
+              type="projects"
+              itemId={projectData.id}
+              setIsChange={setIsChange}
+              role={currentUser ? `/${currentUser.role}` : null}
             />
           </div>
         )}
 
-        {/* Rating section - only for non-owners */}
         {!isOwner && (
           <div className="rating-section">
             <h4>Rate this project:</h4>
@@ -162,7 +168,9 @@ function Project({ projectData, setIsChange }) {
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
-                  onClick={() => setSelectedRating(star)}
+                  onClick={() => {
+                    handleRate(star)
+                  }}
                   onMouseEnter={() => setHoveredRating(star)}
                   disabled={isOwner}
                   className={getStarClass(star)}
@@ -176,14 +184,6 @@ function Project({ projectData, setIsChange }) {
               <div className="rating-display">
                 Selected: {selectedRating}/5 stars
               </div>
-            )}
-            {selectedRating > 0 && (
-              <button
-                onClick={handleRate}
-                className="btn-rating"
-              >
-                Submit Rating
-              </button>
             )}
           </div>
         )}

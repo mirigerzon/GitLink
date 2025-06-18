@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useFetchData } from "./fetchData.js";
+import { useFetchData } from "../hooks/fetchData.js";
 import { useCurrentUser } from "../context.jsx";
 export const useMessages = () => {
     const [messages, setMessages] = useState([]);

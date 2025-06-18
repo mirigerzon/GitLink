@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useFetchData } from "../hooks/fetchData.js";
+import { useFetchData } from "./fetchData.js";
 import { useLogout } from "../hooks/LogOut.js";
 import { useForm } from "react-hook-form";
 import Update from "../components/common/Update.jsx";
@@ -22,7 +22,6 @@ function DeveloperProfile({
     const logOut = useLogout();
     const { register, handleSubmit, reset } = useForm();
 
-    // Fetch GitHub repositories
     async function getGithubRepoNames(gitName) {
         const url = `https://api.github.com/users/${gitName}/repos?per_page=100`;
         try {
@@ -37,7 +36,6 @@ function DeveloperProfile({
         }
     }
 
-    // Submit new project
     async function onSubmit(data) {
         console.log("Adding project with data:", data);
         try {
@@ -64,7 +62,6 @@ function DeveloperProfile({
         reset();
     }
 
-    // Open project form with pre-filled data
     function openAddForm(repo) {
         setOpenRepo(repo);
         reset({
@@ -78,7 +75,6 @@ function DeveloperProfile({
         });
     }
 
-    // Render project management section
     const renderProjectManagement = () => {
         if (!isOwnProfile) return null;
 
@@ -169,15 +165,12 @@ function DeveloperProfile({
 
     return (
         <>
-            {/* Developer-specific sections */}
             <div className="profile-section">
-                {/* Experience section */}
                 <h2>Experience</h2>
                 <p className="profile-description">
                     {userData.experience} years of experience
                 </p>
 
-                {/* GitHub section */}
                 {userData.git_name && (
                     <>
                         <h2>GitHub</h2>
@@ -193,7 +186,6 @@ function DeveloperProfile({
                     </>
                 )}
 
-                {/* CV section */}
                 {userData.cv_file && (
                     <div className="cv-section">
                         <h2>Resume / CV</h2>
@@ -209,7 +201,6 @@ function DeveloperProfile({
                 )}
             </div>
 
-            {/* Projects section */}
             <div className="profile-section">
                 <h2>Existing {userItemsType}</h2>
                 <ul>

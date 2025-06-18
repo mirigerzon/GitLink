@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import { FiDelete, FiLoader } from "react-icons/fi";
 
@@ -31,12 +31,11 @@ function Delete({ type, itemId, setIsChange, role = null, confirmMessage = null 
         role: role,
         onSuccess: (result) => {
           console.log("Delete successful:", result);
-          setIsChange(prev => prev + 1); // Functional update
+          setIsChange(prev => prev + 1); 
         },
         onError: (error) => {
           console.error(`Failed to delete ${type} with ID ${itemId}:`, error);
 
-          // More specific error handling
           if (error.status === 401) {
             alert("Authentication failed. Please log in again.");
             logOut();

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Project from "./Project.jsx";
 import "../../style/Projects.css";
 import { useCurrentUser } from "../../context.jsx";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import Search from "../common/Search.jsx";
 import Sort from "../common/Sort.jsx";

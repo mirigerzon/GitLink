@@ -6,6 +6,7 @@ const bl = require('../../controllers/bl.js');
 const { writeLog } = require('../../log/log.js');
 const { handleError } = require('../utils/routerHelpers.js');
 const fs = require('fs');
+const { generateUsername } = require('unique-username-generator');
 
 const ACCESS_SECRET = process.env.ACCESS_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
@@ -175,7 +176,6 @@ router.post('/logout', (req, res) => {
     res.status(200).json({ message: "Logged out" });
 });
 
-// האם לא צריך להעביר את זה לראוט של המשתמשים
 router.post('/forgot-password', async (req, res) => {
     try {
         const { username } = req.body;
@@ -192,5 +192,28 @@ router.post('/forgot-password', async (req, res) => {
         //message: "Username not found"
     }
 });
+
+router.get('/check-username/:username', async (req, res) => {
+    const { username } = req.params;
+    if (!username) return res.status(400).json({ error: 'Username is required' });
+
+    const isAvailable = await authBl.isUsernameAvailable(username);
+    if (isAvailable) {
+        // האם להוציא את זה לפונקצית עזר חיצונית
+        const suggestions = [];
+        for (let i = 0; i < 5; i++) {
+            const suggestion = generateUsername("", 0, 5);
+            if (authBl.isUsernameAvailable(suggestion)) {
+                suggestions.push(suggestion);
+            }
+        }
+        res.json({
+            available: false, ...suggestions
+        });
+    } else {
+        res.json({ available: true, username });
+    }
+
+})
 
 module.exports = router;

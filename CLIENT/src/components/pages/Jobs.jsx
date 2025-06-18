@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 import { useCurrentUser } from "../../context.jsx";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import Job from "./Job.jsx";
 import "../../style/jobs.css";
@@ -77,7 +77,7 @@ function Jobs() {
       </div>
       <div className="jobs-grid">
         {filteredJobs.length > 0 &&
-          filteredJobs.map((job) => <Job key={job.id} jobData={job} />)}
+          filteredJobs.map((job) => <Job key={job.id} jobData={job} setIsChange={setIsChange} />)}
       </div>
       <Outlet />
     </div>

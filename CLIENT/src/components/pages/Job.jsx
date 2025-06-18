@@ -1,18 +1,19 @@
-// import { useContext, } from "react";
 import "../../style/Job.css";
-import Update from "../common/Update";
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
-import { useFetchData } from "../../hooks/FetchData.js";
+import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import { useCurrentUser } from "../../context.jsx";
 import { FiUser } from "react-icons/fi";
+import Update from "../common/Update.jsx";
+import Delete from "../common/Delete.jsx";
 
-function Job({ jobData }) {
+function Job({ jobData, setIsChange }) {
   const navigate = useNavigate();
   const fetchData = useFetchData();
   const logOut = useLogout();
   const { currentUser, setCurrentUser } = useCurrentUser();
+  const isOwner = currentUser?.username === jobData.username;
 
   const handleApply = () => {
     if (!currentUser) {
@@ -55,12 +56,6 @@ function Job({ jobData }) {
 
   return (
     <div className="job-card">
-      {/* <Update
-        type={"todos"}
-        itemId={todo.id}
-        setIsChange={setIsChange}
-        inputs={["title"]}
-      /> */}
       <div className="job-header">
         <div className="job-title-section">
           <p className="company-name">{jobData.company_name}</p>
@@ -68,6 +63,24 @@ function Job({ jobData }) {
       </div>
 
       <div className="job-content">
+        {isOwner && (
+          <div className="edit-section">
+            <Update
+              type="jobs"
+              itemId={jobData.id}
+              setIsChange={setIsChange}
+              inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
+              role={`/${currentUser.role}`}
+            />
+            <Delete
+              className="delete_btn"
+              type="jobs"
+              itemId={jobData.id}
+              setIsChange={setIsChange}
+              role={currentUser ? `/${currentUser.role}` : null}
+            />
+          </div>
+        )}
         <div className="job-requirements">
           <h4>Requirements</h4>
           <p>{jobData.requirements}</p>
@@ -101,6 +114,7 @@ function Job({ jobData }) {
               View Applicants
             </button> :
             // (currentUser && currentUser.role == 'developer' &&
+            // יש פה בעיה הוא מחזיר את התפקיד כמספר 
             (currentUser && currentUser.role_id == 1 &&
               <button className="apply-btn" onClick={handleApply}>
                 Apply Now

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useFetchData } from "../hooks/fetchData.js";
+import { useFetchData } from "./fetchData.js";
 import { useLogout } from "../hooks/LogOut.js";
 import { useForm } from "react-hook-form";
 import Update from "../components/common/Update.jsx";
