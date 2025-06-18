@@ -57,8 +57,6 @@ function Register() {
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  // const profileFileInputRef = useRef(null);
-  // const cvFileInputRef = useRef(null);
   const [stream, setStream] = useState(null);
   const [isReady, setIsReady] = useState(false);
   const [cameraError, setCameraError] = useState(null);
@@ -123,7 +121,6 @@ function Register() {
     startCamera();
   };
 
-  // פתרון מושלם - יצירת input וlick באותה פעולה
   const triggerProfileImageUpload = useCallback(() => {
     const input = document.createElement('input');
     input.type = 'file';
@@ -135,11 +132,9 @@ function Register() {
       if (file) {
         setProfileImage(file);
       }
-      // נקה את האלמנט מה-DOM
       document.body.removeChild(input);
     };
 
-    // הוסף לDOM, לחץ, והסר
     document.body.appendChild(input);
     input.click();
   }, []);

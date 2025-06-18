@@ -175,7 +175,8 @@ function Profile() {
         method: 'PUT',
         role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "guests",
         body: {
-          username: userData.username,
+          user_id: userData.user_id,
+          email: userData.email,
           currentPassword: passwords.currentPassword,
           newPassword: passwords.newPassword
         },

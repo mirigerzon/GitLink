@@ -1,6 +1,7 @@
 const dal = require('../services/dal.js');
 const genericDal = require('../services/genericDal.js');
 const bcrypt = require('bcrypt');
+const { sendPasswordChangeWarningEmail } = require('../services/emailService');
 
 const getUser = async (username) => {
     if (!username) throw new Error("Username is required");
@@ -27,7 +28,7 @@ const getRecruiters = () => {
 }
 
 const getRecruiter = (id) => {
-    const res = dal.getUserWithRoleData(id,'recruiter');
+    const res = dal.getUserWithRoleData(id, 'recruiter');
     return res || null;
 }
 
@@ -81,6 +82,30 @@ async function createApply(data, email) {
     return response;
 }
 
+const changeUserPassword = async (userId, currentPassword, newPassword, email) => {
+    if (!userId || !currentPassword || !newPassword) throw new Error("All password fields are required");
+
+    const passwords = await genericDal.GET('passwords', [
+        { field: 'user_id', value: userId }
+    ]);
+    if (!passwords || passwords.length === 0) throw new Error('User not found');
+
+    const isCurrentPasswordValid = await bcrypt.compare(currentPassword, passwords[0].hashed_password);
+    if (!isCurrentPasswordValid) {
+        throw new Error('Current password is incorrect');
+    }
+
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    const conditions = [{ field: 'user_id', value: userId }];
+
+    sendPasswordChangeWarningEmail(userId, email)
+
+    return await genericDal.UPDATE('passwords',
+        { hashed_password: hashedNewPassword },
+        conditions
+    );
+};
+
 module.exports = {
     getUser,
     getJobApplications,
@@ -89,7 +114,8 @@ module.exports = {
     getRecruiters,
     getRecruiter,
     rateProject,
-    createApply
+    createApply,
+    changeUserPassword
 };
 
 // const updateUserProfile = async (userId, userData) => {
@@ -99,24 +125,3 @@ module.exports = {
 //     return await genericDal.UPDATE('users', userData, conditions);
 // };
 
-// const changeUserPassword = async (userId, currentPassword, newPassword) => {
-//     if (!userId || !currentPassword || !newPassword) throw new Error("All password fields are required");
-
-//     const passwords = await genericDal.GET('passwords', [
-//         { field: 'user_id', value: userId }
-//     ]);
-//     if (!passwords || passwords.length === 0) throw new Error('User not found');
-
-//     const isCurrentPasswordValid = await bcrypt.compare(currentPassword, passwords[0].hashed_password);
-//     if (!isCurrentPasswordValid) {
-//         throw new Error('Current password is incorrect');
-//     }
-
-//     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-//     const conditions = [{ field: 'user_id', value: userId }];
-
-//     return await genericDal.UPDATE('passwords',
-//         { hashed_password: hashedNewPassword },
-//         conditions
-//     );
-// };

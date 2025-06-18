@@ -20,9 +20,9 @@ const addUserIdCondition = (req, conditions = []) => {
     if (!userId) return conditions;
 
     const updated = [...conditions];
-    if (!updated.some(cond => cond.field === 'user_id')) {
-        updated.push({ field: 'user_id', value: userId });
-    }
+    // if (!updated.some(cond => cond.field === 'user_id')) {
+    //     updated.push({ field: 'user_id', value: userId });
+    // }
     return updated;
 };
 

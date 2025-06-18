@@ -92,38 +92,40 @@ const getProjectWithCreator = async (projectId) => {
     return await genericDal.GET_WITH_JOINS(
         ["projects", "developers"],
         ["projects.git_name = developers.git_name"],
-        [{ field: "projects.id", value: projectId }]
+        [{ field: "id", value: projectId }]
     );
 };
 
 const rateProjectTransactional = async (username, projectId, rating) => {
-    if (!username || !projectId || rating === undefined) throw new Error('Username, project ID, and rating are required');
-    if (rating < 1 || rating > 5) throw new Error('Rating must be between 1 and 5');
+    if (!username || !projectId || rating === undefined)
+        throw new Error('Username, project ID, and rating are required');
+    if (rating < 1 || rating > 5)
+        throw new Error('Rating must be between 1 and 5');
+
     const conn = await pool.getConnection();
 
     try {
         await conn.beginTransaction();
+
         await conn.query(`
             INSERT INTO project_ratings (username, project_id, rating)
             VALUES (?, ?, ?)
         `, [username, projectId, rating]);
 
-        // Update project statistics
         await conn.query(`
-            UPDATE projects p
-            JOIN (
-                SELECT 
-                    project_id,
-                    ROUND(AVG(rating), 2) AS avg_rating,
-                    COUNT(*) AS count_rating
+            UPDATE projects
+            SET rating = (
+                SELECT ROUND(AVG(rating), 2)
                 FROM project_ratings
                 WHERE project_id = ?
-                GROUP BY project_id
-            ) r ON r.project_id = p.id
-            SET p.rating = r.avg_rating,
-                p.rating_count = r.count_rating
-            WHERE p.id = ?;
-        `, [projectId, projectId]);
+            ),
+            rating_count = (
+                SELECT COUNT(*)
+                FROM project_ratings
+                WHERE project_id = ?
+            )
+            WHERE id = ?;
+        `, [projectId, projectId, projectId]);
 
         await conn.commit();
     } catch (err) {

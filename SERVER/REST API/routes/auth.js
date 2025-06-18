@@ -175,6 +175,7 @@ router.post('/logout', (req, res) => {
     res.status(200).json({ message: "Logged out" });
 });
 
+// האם לא צריך להעביר את זה לראוט של המשתמשים
 router.post('/forgot-password', async (req, res) => {
     try {
         const { username } = req.body;

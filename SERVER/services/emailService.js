@@ -60,4 +60,31 @@ const sendPasswordResetEmail = async (user, newPassword) => {
     });
 };
 
-module.exports = { sendEmail, sendWelcomeEmail, sendPasswordResetEmail };
+const sendPasswordChangeWarningEmail = async (userId, email) => {
+    const subject = 'Security Alert: Your Password Was Changed';
+    const content = `
+        ⚠️ Hello,
+        We noticed that your password was just changed.
+        If **you** made this change, no further action is needed.
+        But if this wasn't you, please reset your password immediately to protect your account.
+        👉 [Click here to reset your password](https://your-app-url.com/reset-password)
+        Stay safe,
+        The Security Team
+    `;
+
+    await genericDal.CREATE("messages", {
+        user_id: userId,
+        email,
+        title: subject,
+        content
+    });
+
+    await sendEmail({
+        to: email,
+        subject,
+        html: content.replace(/\n/g, '<br/>')
+    });
+};
+
+
+module.exports = { sendEmail, sendWelcomeEmail, sendPasswordResetEmail, sendPasswordChangeWarningEmail };

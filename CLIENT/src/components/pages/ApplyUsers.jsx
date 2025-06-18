@@ -13,15 +13,9 @@ function ApplyUsers() {
     const { id } = useParams();
     const [applicants, setApplicants] = useState([]);
     const [isChange, setIsChange] = useState(0);
-    const [jobInfo, setJobInfo] = useState(null);
-    const [showEmailModal, setShowEmailModal] = useState(false);
-    const [selectedApplicant, setSelectedApplicant] = useState(null);
-    const [emailSubject, setEmailSubject] = useState('');
-    const [emailBody, setEmailBody] = useState('');
 
     useEffect(() => {
         setIsChange(0);
-        // Fetch applicants
         fetchData({
             role: currentUser ? `/${currentUser.role}` : "/guest",
             type: `job_applications/${id}`,
@@ -34,142 +28,72 @@ function ApplyUsers() {
         });
     }, [isChange]);
 
-    // Check if current user is the job owner
-    const isJobOwner = jobInfo && currentUser && jobInfo.user_id === currentUser.id;
-
-    // Email functions
     const handleSendEmail = (applicant) => {
-        setSelectedApplicant(applicant);
-        setEmailSubject(`Job Offer - ${jobInfo?.title || 'Position'}`);
-        setEmailBody(`Hi ${applicant.username},\n\nWe would like to offer you the position for ${jobInfo?.title || 'our job posting'}.\n\nPlease let us know if you're interested.\n\nBest regards`);
-        setShowEmailModal(true);
+        applicant;
     };
 
     const submitEmail = () => {
-        // כאן תממשי את הפונקציה לשליחת מייל
-        console.log('Sending email to:', selectedApplicant.email);
-        console.log('Subject:', emailSubject);
-        console.log('Body:', emailBody);
 
-        // דוגמה לקריאה לשרת
-        /*
-        fetchData({
-            role: `/${currentUser.role}`,
-            type: `send_email`,
-            method: "POST",
-            body: {
-                to: selectedApplicant.email,
-                subject: emailSubject,
-                body: emailBody,
-                job_id: id,
-                applicant_id: selectedApplicant.id
-            },
-            onSuccess: (data) => {
-                alert('Email sent successfully!');
-                setShowEmailModal(false);
-            },
-            onError: (err) => console.error(`Failed to send email: ${err}`),
-            logOut,
-        });
-        */
-
-        setShowEmailModal(false);
-        alert('Email sent successfully!'); // זמני
     };
 
-    // Job management functions
     const handleDeleteJob = () => {
-        if (window.confirm('Are you sure you want to delete this job? This action cannot be undone.')) {
-            // כאן תממשי את הפונקציה למחיקת עבודה
-            console.log('Deleting job:', id);
-
-            /*
-            fetchData({
-                role: `/${currentUser.role}`,
-                type: `jobs/${id}`,
-                method: "DELETE",
-                onSuccess: (data) => {
-                    alert('Job deleted successfully!');
-                    // navigate to jobs list
-                },
-                onError: (err) => console.error(`Failed to delete job: ${err}`),
-                logOut,
-            });
-            */
-
-            alert('Job deleted successfully!'); // זמני
-        }
+        // if (window.confirm('Are you sure you want to delete this job? This action cannot be undone.')) {
     };
 
     const handleMarkAsFilled = () => {
-        if (window.confirm('Mark this job as filled?')) {
-            // כאן תממשי את הפונקציה לסימון כנתפסה
-            console.log('Marking job as filled:', id);
+        // if (window.confirm('Mark this job as filled?')) {
 
-            /*
-            fetchData({
-                role: `/${currentUser.role}`,
-                type: `jobs/${id}/mark_filled`,
-                method: "PUT",
-                onSuccess: (data) => {
-                    alert('Job marked as filled!');
-                    setIsChange(prev => prev + 1);
-                },
-                onError: (err) => console.error(`Failed to mark job as filled: ${err}`),
-                logOut,
-            });
-            */
-
-            alert('Job marked as filled!'); // זמני
-            setIsChange(prev => prev + 1);
-        }
+        // }
     };
 
     const handleEditJob = () => {
-        console.log('Editing job:', id);
+        // console.log('Editing job:', id);
 
-        alert('Redirecting to edit job...'); // זמני
+        // alert('Redirecting to edit job...'); // זמני
     };
 
     return (
         <div className="applications-container">
             <div className="header-section">
                 <h2>Applicants for Job #{id}</h2>
-
-                {/* Job Management Buttons - Only show if user is job owner */}
-                {isJobOwner && (
-                    <div className="job-management-buttons">
-                        <button
-                            className="edit-job-btn"
-                            onClick={handleEditJob}
-                            title="Edit Job"
-                        >
-                            <FiEdit /> Edit Job
-                        </button>
-                        <button
-                            className="mark-filled-btn"
-                            onClick={handleMarkAsFilled}
-                            title="Mark as Filled"
-                        >
-                            <FiCheck /> Mark as Filled
-                        </button>
-                        <button
-                            className="delete-job-btn"
-                            onClick={handleDeleteJob}
-                            title="Delete Job"
-                        >
-                            <FiTrash2 /> Delete Job
-                        </button>
-                    </div>
-                )}
             </div>
 
             {applicants.length === 0 ? (
                 <p>No applicants yet.</p>
             ) : (
                 <div className="applicants-grid">
-                    {applicants.map(applicant => (
+                    {applicants.map(applicant => (<>
                         <div key={applicant.id} className="applicant-card">
+                            <div className="job-management-buttons">
+                                <button
+                                    className="edit-job-btn"
+                                    onClick={handleEditJob}
+                                    title="Edit Job"
+                                >
+                                    <FiEdit /> Edit Job
+                                </button>
+                                <button
+                                    className="mark-filled-btn"
+                                    onClick={handleMarkAsFilled}
+                                    title="Mark as Filled"
+                                >
+                                    <FiCheck /> Mark as Filled
+                                </button>
+                                <button
+                                    className="delete-job-btn"
+                                    onClick={handleDeleteJob}
+                                    title="Delete Job"
+                                >
+                                    <FiTrash2 /> Delete Job
+                                </button>
+                                <button
+                                    className="send-email-btn"
+                                    onClick={() => handleSendEmail(applicant)}
+                                    title="Send Job Offer Email"
+                                >
+                                    <FiMail /> Send Offer
+                                </button>
+                            </div>
                             <img
                                 src={applicant.profile_image || "/images/default-profile.png"}
                                 alt={`${applicant.username}'s profile`}
@@ -207,25 +131,13 @@ function ApplyUsers() {
                                 ) : (
                                     <p className="no-cv">No CV uploaded</p>
                                 )}
-
-                                {/* Send Email Button - Only show if user is job owner */}
-                                {isJobOwner && (
-                                    <button
-                                        className="send-email-btn"
-                                        onClick={() => handleSendEmail(applicant)}
-                                        title="Send Job Offer Email"
-                                    >
-                                        <FiMail /> Send Offer
-                                    </button>
-                                )}
                             </div>
                         </div>
-                    ))}
+                    </>))}
                 </div>
             )}
 
-            {/* Email Modal */}
-            {showEmailModal && (
+            {/* {showEmailModal && (
                 <div className="email-modal-overlay">
                     <div className="email-modal">
                         <div className="modal-header">
@@ -283,7 +195,7 @@ function ApplyUsers() {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     );
 }

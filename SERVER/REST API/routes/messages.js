@@ -25,6 +25,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// זה לא צריך להיות /id
 router.put('/', async (req, res) => {
     try {
         if (!req.body?.email) return res.status(401).json({ error: 'User not authenticated' });
@@ -55,5 +56,10 @@ router.delete('/:itemId', async (req, res) => {
         handleError(res, err, TABLE_NAME, 'deleting');
     }
 });
+
+router.post('/', async (req, res) => {
+
+});
+
 
 module.exports = router;

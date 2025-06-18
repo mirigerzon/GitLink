@@ -61,6 +61,30 @@ router.post("/rate", async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, url, details, languages } = req.body;
+
+        if (!id) return res.status(400).json({ error: 'Project ID is required' });
+        const result = await genericDataService.updateItem(
+            TABLE_NAME,
+            { name, url, details, languages },
+            [{ field: 'id', value: id }]
+        );
+
+        writeLog(`Updated project id=${id} by user=${req.user.username}`, 'info');
+        res.json({
+            message: 'Project updated successfully',
+            result,
+            project_id: id
+        });
+
+    } catch (err) {
+        handleError(res, err, TABLE_NAME, 'updating project');
+    }
+});
+
 router.delete('/:itemId', async (req, res) => {
     try {
         const { itemId } = req.params;

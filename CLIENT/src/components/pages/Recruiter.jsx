@@ -1,31 +1,9 @@
 import "../../style/Recruiter.css";
 import { useNavigate } from "react-router-dom";
-import { FiUser, FiFolder } from 'react-icons/fi';
+import { FiUser, FiFolder, FiMail, FiPhone, FiBriefcase, FiFileText } from 'react-icons/fi';
 
 function Recruiter({ recruiterData }) {
   const navigate = useNavigate();
-
-  // const generateStars = (rating) => {
-  //   const fullStars = Math.floor(rating);
-  //   const hasHalfStar = rating % 1 !== 0;
-  //   const emptyStars = 5 - Math.ceil(rating);
-
-  //   return (
-  //     <div className="stars">
-  //       {"★".repeat(fullStars)}
-  //       {hasHalfStar && "☆"}
-  //       {"☆".repeat(emptyStars)}
-  //     </div>
-  //   );
-  // };
-
-  const getExperienceLevel = (years) => {
-    if (years <= 2) return { level: "Junior", color: "#10b981" };
-    if (years <= 5) return { level: "Mid Level", color: "#f59e0b" };
-    return { level: "Senior", color: "#ef4444" };
-  };
-
-  const experienceInfo = getExperienceLevel(recruiterData.experience);
 
   return (
     <div className="recruiter-card">
@@ -33,38 +11,56 @@ function Recruiter({ recruiterData }) {
         <div className="avatar">
           <img
             src={recruiterData.profile_image}
-            alt={`${recruiterData.name} avatar`}
+            alt={`${recruiterData.username} avatar`}
             className="avatar-img"
           />
-          <div className="online-indicator"></div>
+          <div
+            className="status-indicator"
+            style={{ backgroundColor: "#10b981" }}
+          ></div>
         </div>
 
         <div className="recruiter-info">
-          <h3 className="recruiter-name">{recruiterData.name}</h3>
-          <p className="git-name">@{recruiterData.username}</p>
+          <h3 className="recruiter-name">{recruiterData.username}</h3>
+          <p className="user-id">ID: {recruiterData.user_id}</p>
 
-          <div
-            className="experience-badge"
-            style={{ backgroundColor: experienceInfo.color }}
-          >
-            <span>{experienceInfo.level}</span>
-            <span>{recruiterData.experience} years</span>
+          <div className="role-info">
+            <span className="role-badge">{recruiterData.role}</span>
           </div>
         </div>
       </div>
 
-      <div className="skills-section">
-        <div className="skills-list">
-          {(recruiterData.languages ?? "")
-            .split(",")
-            .map((skill) => skill.trim())
-            .filter((skill) => skill)
-            .map((skill, index) => (
-              <span key={index} className="skill-tag">
-                {skill}
-              </span>
-            ))}
-        </div>
+      <div className="details-section">
+        {recruiterData.company_name && (
+          <div className="detail-item">
+            <FiBriefcase className="detail-icon" />
+            <span className="detail-label">Company:</span>
+            <span className="detail-value">{recruiterData.company_name}</span>
+          </div>
+        )}
+
+        {recruiterData.email && (
+          <div className="detail-item">
+            <FiMail className="detail-icon" />
+            <span className="detail-label">Email:</span>
+            <span className="detail-value">{recruiterData.email}</span>
+          </div>
+        )}
+
+        {recruiterData.phone && (
+          <div className="detail-item">
+            <FiPhone className="detail-icon" />
+            <span className="detail-label">Phone:</span>
+            <span className="detail-value">{recruiterData.phone}</span>
+          </div>
+        )}
+
+        {recruiterData.about && (
+          <div className="about-section">
+            <h4>About</h4>
+            <p className="about-text">{recruiterData.about}</p>
+          </div>
+        )}
       </div>
 
       <div className="recruiter-actions">
@@ -72,16 +68,27 @@ function Recruiter({ recruiterData }) {
           className="btn-profile"
           onClick={() => navigate(`/${recruiterData.username}/profile`)}
         >
-          <FiUser className="btn-icon" />view profile
+          <FiUser className="btn-icon" />
+          View Profile
         </button>
 
         <button
           className="btn-jobs"
           onClick={() => navigate(`/${recruiterData.username}/jobs`)}
         >
-          <span className="btn-icon"><FiFolder /></span>
+          <FiFolder className="btn-icon" />
           View Jobs
         </button>
+
+        {recruiterData.cv_file && (
+          <button
+            className="btn-cv"
+            onClick={() => window.open(recruiterData.cv_file, '_blank')}
+          >
+            <FiFileText className="btn-icon" />
+            View CV
+          </button>
+        )}
       </div>
 
       <div className="card-overlay"></div>

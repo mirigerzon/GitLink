@@ -1,10 +1,11 @@
 import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useCurrentUser } from "../../context.jsx";;
+import { useCurrentUser } from "../../context.jsx";
 import { useFetchData } from "../../hooks/FetchData.js";
 import { FiGitBranch, FiStar, FiUser } from 'react-icons/fi';
 import Swal from 'sweetalert2';
+import Update from "../common/Update.jsx";
 
 function Project({ projectData, setIsChange }) {
   const navigate = useNavigate();
@@ -76,30 +77,6 @@ function Project({ projectData, setIsChange }) {
     });
   };
 
-  const handleStarClick = (rating) => {
-    if (!isOwner) {
-      setSelectedRating(rating);
-    } else {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Cannot Rate',
-        text: 'Sorry - you cannot rate your own project.',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#3085d6',
-      });
-    }
-  };
-
-  const handleStarHover = (rating) => {
-    if (!isOwner) {
-      setHoveredRating(rating);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredRating(0);
-  };
-
   const getStarClass = (starIndex) => {
     const activeRating = hoveredRating || selectedRating;
     let classes = "star-rating-star";
@@ -134,11 +111,14 @@ function Project({ projectData, setIsChange }) {
           </div>
         </div>
       </div>
+
       <div>
         <p>
-          link to GitHub → <a target="_blank" href={projectData.url}>{projectData.url}</a>
+          link to GitHub →
+          <a target="_blank" href={projectData.url}>{projectData.url}</a>
         </p>
       </div>
+
       <div className="project-data">
         <h4>Technologies:</h4>
         <div className="languages-list">
@@ -152,50 +132,67 @@ function Project({ projectData, setIsChange }) {
               </span>
             ))}
         </div>
-        <h4>description:</h4>
+
+        <h4>Description:</h4>
         <p>{projectData.details}</p>
       </div>
 
       <div className="project-actions">
-        <div className="rating-section">
-          <h4>Rate this project:</h4>
-          <div
-            className="star-rating-container"
-            onMouseLeave={handleMouseLeave}
-          >
-            {[1, 2, 3, 4, 5].map((star) => (
-              <button
-                key={star}
-                onClick={() => handleStarClick(star)}
-                onMouseEnter={() => handleStarHover(star)}
-                disabled={isOwner}
-                className={getStarClass(star)}
-                title={`Rate ${star} star${star > 1 ? 's' : ''}`}
-              >
-                ★
-              </button>
-            ))}
+        {/* Edit buttons for owner */}
+        {isOwner && (
+          <div className="edit-section">
+            <Update
+              type="projects"
+              itemId={projectData.id}
+              setIsChange={setIsChange}
+              inputs={["name", "url", "languages", "details"]} // מתאימים לשדות מתוך הטבלה
+              role={`/${currentUser.role}`}
+            />
           </div>
-          {selectedRating > 0 && (
-            <div className="rating-display">
-              Selected: {selectedRating}/5 stars
-            </div>
-          )}
-          {selectedRating > 0 && (
-            <button
-              onClick={handleRate}
-              className="btn-rating"
-              disabled={isOwner}
+        )}
+
+        {/* Rating section - only for non-owners */}
+        {!isOwner && (
+          <div className="rating-section">
+            <h4>Rate this project:</h4>
+            <div
+              className="star-rating-container"
+              onMouseLeave={() => setHoveredRating(0)}
             >
-              {isOwner ? "Cannot rate own project" : "Submit Rating"}
-            </button>
-          )}
-        </div>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  onClick={() => setSelectedRating(star)}
+                  onMouseEnter={() => setHoveredRating(star)}
+                  disabled={isOwner}
+                  className={getStarClass(star)}
+                  title={`Rate ${star} star${star > 1 ? 's' : ''}`}
+                >
+                  ★
+                </button>
+              ))}
+            </div>
+            {selectedRating > 0 && (
+              <div className="rating-display">
+                Selected: {selectedRating}/5 stars
+              </div>
+            )}
+            {selectedRating > 0 && (
+              <button
+                onClick={handleRate}
+                className="btn-rating"
+              >
+                Submit Rating
+              </button>
+            )}
+          </div>
+        )}
+
         <button
           className="btn-primary"
           onClick={() => navigate(`/${projectData.username}/profile`)}
         >
-          <FiUser />View Developer
+          <FiUser /> View Developer
         </button>
       </div>
     </div>

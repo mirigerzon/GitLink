@@ -67,21 +67,6 @@ router.get('/:username', async (req, res) => {
     }
 });
 
-// יש כזה גם בפרויקטים
-// router.post('/rate', async (req, res) => {
-//     try {
-//         validateRequiredFields(req.body, ['project_id', 'rating']);
-
-//         if (!req.user?.email) return res.status(401).json({ error: 'User not authenticated' });
-
-//         const { project_id, rating } = req.body;
-//         await dataService.rateProject(req.user.email, project_id, rating);
-//         res.status(200).json({ message: 'Rating submitted successfully' });
-//     } catch (err) {
-//         res.status(400).json({ error: err.message });
-//     }
-// });
-
 router.put('/update-cv', upload.single('cv_file'), async (req, res) => {
     try {
         const { user_id } = req.body;
@@ -126,23 +111,14 @@ router.put('/update-image', upload.single('profile_image'), async (req, res) => 
 
 router.put('/change-password', async (req, res) => {
     try {
-        validateRequiredFields(req.body, ['username', 'currentPassword', 'newPassword']);
+        validateRequiredFields(req.body, ['user_id', 'currentPassword', 'newPassword']);
 
-        const { username, currentPassword, newPassword } = req.body;
+        const { user_id, currentPassword, newPassword, email } = req.body;
 
-        if (req.user?.username && req.user.username !== username) return res.status(403).json({ error: 'You can only change your own password' });
+        if (req.user?.user_id && req.user.user_id !== user_id) return res.status(403).json({ error: 'You can only change your own password' });
 
-        const user = await dataService.getUser(username);
+        const user = await dataService.changeUserPassword(user_id, currentPassword, newPassword, email);
         if (!user) return res.status(404).json({ error: 'User not found' });
-
-        const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.hashed_password);
-        if (!isCurrentPasswordValid) return res.status(400).json({ error: 'Current password is incorrect' });
-
-        const hashedNewPassword = await bcrypt.hash(newPassword, 12);
-        await genericDataService.updateItem('passwords',
-            { hashed_password: hashedNewPassword },
-            [{ field: 'user_id', value: user.id }]
-        );
 
         res.status(200).json({ message: 'Password changed successfully' });
     } catch (err) {
