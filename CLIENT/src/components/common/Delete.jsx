@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetchData } from "../../hooks/fetchData.js";
+import { useFetchData } from "../../hooks/FetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import { FiDelete, FiLoader } from "react-icons/fi";
 
@@ -11,7 +11,7 @@ function Delete({ type, itemId, setIsChange, role = null, confirmMessage = null 
 
   const handleDeleteClick = (e) => {
     e.preventDefault();
-    e.stopPropagation(); // Prevent event bubbling
+    e.stopPropagation();
 
     if (confirmMessage !== false) {
       setShowConfirm(true);

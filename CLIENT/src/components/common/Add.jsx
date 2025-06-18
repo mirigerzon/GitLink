@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "../../../node_modules/react-hook-form/dist";
-import { CurrentUser } from "./App";
-import { useFetchData } from "../../hooks/fetchData";
+import { useCurrentUser } from "../../context.jsx";
+import { useFetchData } from "../../hooks/fetchData.js";
 
 function Add({ type, setIsChange, inputs = [], defaultValue = {}, name = "Add" }) {
-    const { currentUser } = useContext(CurrentUser);
+    const { currentUser } = useCurrentUser();
     const [isScreen, setIsScreen] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const fetchData = useFetchData();

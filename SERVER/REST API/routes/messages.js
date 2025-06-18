@@ -1,78 +1,59 @@
 const express = require('express');
 const router = express.Router();
 const genericDataService = require('../../controllers/genericBl.js');
-const dataService = require('../../controllers/bl.js');
 const { writeLog } = require('../../log/log.js');
+const {
+    createConditions,
+    addUserIdCondition,
+    handleError
+} = require('../utils/routerHelpers.js');
+
+const TABLE_NAME = 'messages';
 
 router.get('/', async (req, res) => {
-    const table = "messages";
     try {
         const conditions = createConditions(req);
-        const data = await genericDataService.getItemByConditions(table, conditions.length ? conditions : undefined);
-        writeLog(`Fetched data from table=${table} with conditions=${JSON.stringify(conditions)}`, 'info');
+        const data = await genericDataService.getItemByConditions(
+            TABLE_NAME,
+            conditions.length ? conditions : undefined
+        );
+
+        writeLog(`Fetched ${TABLE_NAME} with conditions=${JSON.stringify(conditions)}`, 'info');
         res.json(data);
     } catch (err) {
-        console.error(err);
-        writeLog(`ERROR fetching data from table=${table} - ${err.message}`, 'error');
-        res.status(500).json({ error: `ERROR requesting ${table}` });
+        handleError(res, err, TABLE_NAME, 'fetching');
     }
 });
 
-router.put("/", async (req, res) => {
+router.put('/', async (req, res) => {
     try {
+        if (!req.body?.email) return res.status(401).json({ error: 'User not authenticated' });
+
         const body = req.body;
         const result = await genericDataService.updateItem(
-            'messages',
+            TABLE_NAME,
             body,
-            [{ field: 'email', value: req.user.email }] //לעשות שהוא יבדוק אם מי שביקש הוא המשתמש הנוכחי
+            [{ field: 'email', value: req.body.email }]
         );
-        writeLog(`Updated messager for user= ${body} with data=${JSON.stringify(body)}`, 'info');
-        res.json(result);
+        writeLog(`Updated message for user=${req.body.email}`, 'info');
+        res.json({ message: 'Message updated successfully', result });
     } catch (err) {
-        console.error(err);
-        writeLog(`ERROR updating email= in table='messages' - ${err.message}`, 'error');
-        res.status(500).json({ error: `ERROR updating 'messages' item` });
+        handleError(res, err, TABLE_NAME, 'updating');
     }
 });
 
 router.delete('/:itemId', async (req, res) => {
     try {
-        const baseConditions = [{ field: 'id', value: req.params.itemId }];
+        const { itemId } = req.params;
+        const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
-        const result = await genericDataService.deleteItem('messages', conditions);
-        writeLog(`Deleted itemId=${req.params.itemId} from table=${'messages'}`, 'info');
-        res.json({ message: 'Deleted successfully', result });
+
+        const result = await genericDataService.deleteItem(TABLE_NAME, conditions);
+        writeLog(`Deleted message id=${itemId}`, 'info');
+        res.json({ message: 'Message deleted successfully', result });
     } catch (err) {
-        console.error(err);
-        writeLog(`ERROR deleting itemId=${req.params.itemId} from table=${'messages'} - ${err.message}`, 'error');
-        res.status(500).json({ error: err.message });
+        handleError(res, err, TABLE_NAME, 'deleting');
     }
 });
-
-const createConditions = (req) => {
-    const query = req.query;
-    if (query.user_id === 'null') {
-        query.user_id = req.user?.id;
-    }
-    let conditions = [];
-    if (Object.keys(query).length > 0) {
-        conditions = Object.entries(query).map(([key, value]) => ({
-            field: key,
-            value: isNaN(value) ? value : Number(value)
-        }));
-    }
-    return conditions;
-};
-
-const addUserIdCondition = (req, conditions = []) => {
-    const userId = req.user?.user_id;
-    if (!userId) return conditions;
-    // throw new Error("User not authenticated");
-    const updated = [...conditions];
-    if (!updated.some(cond => cond.field === 'user_id')) {
-        updated.push({ field: 'user_id', value: userId });
-    }
-    return updated;
-};
 
 module.exports = router;

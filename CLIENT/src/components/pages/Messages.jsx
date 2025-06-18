@@ -1,16 +1,16 @@
-import { useContext, useState, useEffect } from "react";
-import { CurrentUser } from "../../../App";
+import { useState, useEffect } from "react";
+import { useCurrentUser } from "../../context.jsx";
 import { useMessages } from "../../hooks/Messages";
 import useSound from 'use-sound';
 import '../../style/Messages.css';
 
 export const Messages = () => {
-    const { currentUser } = useContext(CurrentUser);
+    const { currentUser } = useCurrentUser();
     const { messages, hasUnread, markAllAsRead, deleteMessage } = useMessages();
     const [open, setOpen] = useState(false);
     const [newMessageAlert, setNewMessageAlert] = useState(false);
     const [play] = useSound('/sounds/notification.mp3');
-    
+
     const toggleOpen = () => setOpen(prev => !prev);
 
     useEffect(() => {

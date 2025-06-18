@@ -1,116 +1,67 @@
 const genericDal = require('../services/genericDal.js');
 const dal = require('../services/dal.js');
 const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
-require("dotenv").config();
-
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.PASSWORD_USER
-    },
-    tls: {
-        rejectUnauthorized: false
-    }
-});
-
-async function sendEmail(userDetails) {
-    const { user_id, email, title, content, username } = userDetails;
-
-    try {
-        await genericDal.CREATE("messages", {
-            user_id,
-            email,
-            title,
-            content
-        });
-
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: title,
-            html: content
-        });
-
-        console.log('Email sent and saved successfully');
-
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
-    }
-}
+const { sendWelcomeEmail } = require('../services/emailService');
 
 const verifyLogin = async (username, password) => {
+    if (!username || !password) throw new Error("Username and password are required");
+
     const users = await dal.getUser(username);
-    if (!users || users.length === 0)
-        return null;
-    const user = users[0];
+    if (!users || users.length === 0) throw new Error("Invalid credentials");
+
+    const user = users;
     const hashedPassword = user.hashed_password;
-    if (!hashedPassword) return null;
+
+    if (!hashedPassword) throw new Error("Invalid credentials");
+
     const isMatch = await bcrypt.compare(password, hashedPassword);
-    if (!isMatch) return null;
+    if (!isMatch) throw new Error("Invalid credentials");
+
     delete user.hashed_password;
     return user;
 };
 
 const registerNewUser = async (userData) => {
-    const {
-        username, password, email, phone, role_id, about,
-        git_name, experience, languages, company_name, cv_file
-    } = userData;
-
-    const profile_image = userData.profile_image || 'profile_images/user.png';
-
-    if (role_id !== '1' && role_id !== '2') {
-        throw new Error("Invalid role");
-    }
-
+    const { username, password, email, phone, role_id, about, git_name, experience, languages, company_name, cv_file } = userData;
+    if (!username || !password || !email || !role_id) throw new Error("Missing required fields");
+    if (role_id !== '1' && role_id !== '2') throw new Error("Invalid role");
     if (role_id === '1') {
-        const existingDevs = await genericDal.GET("developers", [
-            { field: "git_name", value: git_name }
-        ]);
-        if (existingDevs.length > 0) throw new Error("git_name already exists");
+        if (!git_name) throw new Error("Git name is required for developers");
+        const existingDevs = await genericDal.GET("developers", [{ field: "git_name", value: git_name }]);
+        if (existingDevs.length > 0) throw new Error("Git name already exists");
     }
-
+    const profile_image = userData.profile_image || 'profile_images/user.png';
     const hashedPassword = await hashPassword(password);
     const generalUser = { username, email, phone, role_id, about, profile_image, cv_file };
     const newUser = await genericDal.CREATE("users", generalUser);
-
-    await genericDal.CREATE("passwords", {
-        user_id: newUser.insertId,
-        hashed_password: hashedPassword
-    });
-
+    await genericDal.CREATE("passwords", { user_id: newUser.insertId, hashed_password: hashedPassword });
     if (role_id === '1') {
-        const developerData = { user_id: newUser.insertId, git_name, experience, languages };
-        await genericDal.CREATE("developers", developerData);
+        await genericDal.CREATE("developers", { user_id: newUser.insertId, git_name, experience, languages });
     } else if (role_id === '2') {
-        const recruiterData = {
-            user_id: newUser.insertId,
-            company_name
-        };
-        await genericDal.CREATE("recruiters", recruiterData);
+        await genericDal.CREATE("recruiters", { user_id: newUser.insertId, company_name });
     }
-
-    await sendEmail({
-        user_id: newUser.insertId,
-        email: email,
-        title: 'WELCOME!',
-        content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`,
-        username: username
-    });
-
-    return {
-        id: newUser.insertId,
-        ...generalUser,
-        ...(role_id === '1' && { git_name, experience, languages }),
-        ...(role_id === '2' && { company_name })
-    };
+    await sendWelcomeEmail(newUser.insertId, email, username);
+    return { id: newUser.insertId, ...generalUser, ...(role_id === '1' && { git_name, experience, languages }), ...(role_id === '2' && { company_name }) };
 };
 
-const getUser = async (username) => {
-    return dal.getUser(username);
+const forgotPassword = async (username) => {
+    if (!username) throw new Error("Username is required");
+
+    const users = await dal.getUser(username);
+    if (!users || users.length === 0) throw new Error("User not found");
+
+    const user = users[0];
+    const newPassword = generateRandomPassword();
+    const hashedNewPassword = await hashPassword(newPassword);
+
+    await sendPasswordResetEmail(user, newPassword);
+
+    await genericDal.UPDATE("passwords",
+        { hashed_password: hashedNewPassword },
+        [{ field: "user_id", value: user.user_id }]
+    );
+
+    return { success: true, message: "New password sent to your email address" };
 }
 
 const hashPassword = async (plainPassword) => {
@@ -128,55 +79,8 @@ const generateRandomPassword = (length = 12) => {
     return password;
 };
 
-const forgotPassword = async (username) => {
-    try {
-        const users = await dal.getUser(username);
-        if (!users || users.length === 0) {
-            throw new Error("User not found");
-        }
-        const user = users[0];
-        const newPassword = generateRandomPassword();
-        const hashedNewPassword = await hashPassword(newPassword);
-        await sendEmail({
-            user_id: user.user_id,
-            email: user.email,
-            title: 'Password Reset - GitLink',
-            content: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                    <h2 style="color: #333;">Password Reset</h2>
-                    <p>Hello ${user.username},</p>
-                    <p>Your password has been reset as requested. Here is your new password:</p>
-                    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
-                        <strong style="font-size: 18px; color: #007bff;">${newPassword}</strong>
-                    </div>
-                    <p><strong>Important:</strong> Please change this password after logging in for security reasons.</p>
-                    <p>If you didn't request this password reset, please contact support immediately.</p>
-                    <br>
-                    <p>Best regards,<br>GitLink Team</p>
-                </div>
-            `,
-            username: user.username
-        });
-
-        await genericDal.UPDATE("passwords",
-            { hashed_password: hashedNewPassword },
-            [{ field: "user_id", value: user.user_id }]
-        );
-
-        return {
-            success: true,
-            message: "New password sent to your email address"
-        };
-
-    } catch (error) {
-        console.error('Forgot password error:', error);
-        throw error;
-    }
-};
-
 module.exports = {
     verifyLogin,
     registerNewUser,
-    getUser,
     forgotPassword
 };

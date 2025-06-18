@@ -54,14 +54,6 @@ function Developer({ developerData }) {
       </div>
 
       <div className="developer-stats">
-        {/* <div className="stat-item">
-          <div className="stat-icon">🚀</div>
-          <div className="stat-content">
-            <span className="stat-number">{developerData.projectsCount}</span>
-            <span className="stat-label">Projects</span>
-          </div>
-        </div> */}
-
         <div className="stat-item">
           <div className="stat-icon"><FiStar /></div>
           <div className="stat-content">
@@ -92,14 +84,14 @@ function Developer({ developerData }) {
           className="btn-profile"
           onClick={() => navigate(`/${developerData.username}/profile`)}
         >
-          <FiUser className="btn-icon" />
+          <FiUser className="btn-icon" /> view profile
         </button>
 
         <button
           className="btn-projects"
           onClick={() => navigate(`/${developerData.username}/projects`)}
         >
-          <FiFolder className="btn-icon" />
+          <FiFolder className="btn-icon" /> view projects
         </button>
       </div>
 

@@ -5,62 +5,9 @@ const dataService = require('../../controllers/bl.js');
 const { writeLog } = require('../../log/log.js');
 const path = require('path');
 const bcrypt = require('bcrypt');
-
-router.get('/', async (req, res) => {
-    const table = "users";
-    try {
-        const data = await dataService.getUser(req.params.id);
-        writeLog(`Fetched data from table=${table}`, 'info');
-        res.json(data);
-    } catch (err) {
-        console.error(err);
-        writeLog(`ERROR fetching data from table=${table} - ${err.message}`, 'error');
-        res.status(500).json({ error: `ERROR requesting ${table}` });
-    }
-});
-
-router.get('/:username', async (req, res) => {
-    const table = "users";
-    try {
-        const data = await dataService.getUser(req.params.username);
-        writeLog(`Fetched data from table=${table} `, 'info');
-        res.json(data);
-    } catch (err) {
-        console.error(err);
-        writeLog(`ERROR fetching data from table=${table} - ${err.message}`, 'error');
-        res.status(500).json({ error: `ERROR requesting ${table}` });
-    }
-});
-
-router.post("/rate", async (req, res) => {
-    try {
-        const userEmail = req.user.email;
-        const { project_id, rating } = req.body;
-        if (!project_id || !rating) throw new Error("Missing parameters.");
-
-        await dataService.rateProject(userEmail, project_id, rating);
-        res.status(200).json({ message: "Rating submitted successfully." });
-    } catch (err) {
-        res.status(400).json({ error: err.message });
-    }
-});
-
-// const createConditions = (req) => {
-//     const query = req.query;
-//     if (query.user_id === 'null') {
-//         query.user_id = req.user?.id;
-//     }
-//     let conditions = [];
-//     if (Object.keys(query).length > 0) {
-//         conditions = Object.entries(query).map(([key, value]) => ({
-//             field: key,
-//             value: isNaN(value) ? value : Number(value)
-//         }));
-//     }
-//     return conditions;
-// };
-
 const multer = require('multer');
+const { handleError, validateRequiredFields } = require('../utils/routerHelpers.js');
+const fs = require('fs');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -95,64 +42,133 @@ const upload = multer({
     }
 });
 
+router.get('/', async (req, res) => {
+    try {
+        if (!req.user?.id) return res.status(401).json({ error: 'User not authenticated' });
+
+        const data = await dataService.getUser(req.user.id);
+        writeLog(`Fetched user data for id=${req.user.id}`, 'info');
+        res.json(data);
+    } catch (err) {
+        handleError(res, err, 'users', 'fetching');
+    }
+});
+
+router.get('/:username', async (req, res) => {
+    try {
+        const { username } = req.params;
+        if (!username) return res.status(400).json({ error: 'Username is required' });
+
+        const data = await dataService.getUser(username);
+        writeLog(`Fetched user data for username=${username}`, 'info');
+        res.json(data);
+    } catch (err) {
+        handleError(res, err, 'users', 'fetching');
+    }
+});
+
+// יש כזה גם בפרויקטים
+// router.post('/rate', async (req, res) => {
+//     try {
+//         validateRequiredFields(req.body, ['project_id', 'rating']);
+
+//         if (!req.user?.email) return res.status(401).json({ error: 'User not authenticated' });
+
+//         const { project_id, rating } = req.body;
+//         await dataService.rateProject(req.user.email, project_id, rating);
+//         res.status(200).json({ message: 'Rating submitted successfully' });
+//     } catch (err) {
+//         res.status(400).json({ error: err.message });
+//     }
+// });
+
 router.put('/update-cv', upload.single('cv_file'), async (req, res) => {
     try {
         const { user_id } = req.body;
+
+        if (req.user?.id && req.user.id !== parseInt(user_id)) return res.status(403).json({ error: 'You can only update your own CV' })
+
         let cvFilePath = null;
-        if (req.file) {
-            cvFilePath = `cv_files/${req.file.filename}`;
-        }
+        if (req.file) cvFilePath = `cv_files/${req.file.filename}`;
+
         await genericDataService.updateItem('users',
             { cv_file: cvFilePath },
             [{ field: 'id', value: user_id }]
         );
         res.status(200).json({ message: 'CV updated successfully' });
     } catch (err) {
-        console.error(err);
-        res.status(400).json({ error: err.message });
+        handleError(res, err, 'users', 'updating CV for');
     }
 });
 
 router.put('/update-image', upload.single('profile_image'), async (req, res) => {
     try {
         const { user_id, use_git_avatar } = req.body;
+
+        if (req.user?.id && req.user.id !== parseInt(user_id)) return res.status(403).json({ error: 'You can only update your own profile image' });
+
         let profileImagePath = null;
         if (use_git_avatar === 'true') {
             profileImagePath = req.body.profile_image; // GitHub URL
         } else if (req.file) {
             profileImagePath = `profile_images/${req.file.filename}`;
         }
+
         await genericDataService.updateItem('users',
             { profile_image: profileImagePath },
             [{ field: 'id', value: user_id }]
         );
         res.status(200).json({ message: 'Profile image updated successfully' });
     } catch (err) {
-        console.error(err);
-        res.status(400).json({ error: err.message });
+        handleError(res, err, 'users', 'updating profile image for');
     }
 });
 
 router.put('/change-password', async (req, res) => {
     try {
+        validateRequiredFields(req.body, ['username', 'currentPassword', 'newPassword']);
+
         const { username, currentPassword, newPassword } = req.body;
+
+        if (req.user?.username && req.user.username !== username) return res.status(403).json({ error: 'You can only change your own password' });
+
         const user = await dataService.getUser(username);
-        if (!user) {
-            throw new Error('User not found');
-        }
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
         const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.hashed_password);
-        if (!isCurrentPasswordValid) {
-            throw new Error('Current password is incorrect');
-        }
+        if (!isCurrentPasswordValid) return res.status(400).json({ error: 'Current password is incorrect' });
+
         const hashedNewPassword = await bcrypt.hash(newPassword, 12);
         await genericDataService.updateItem('passwords',
             { hashed_password: hashedNewPassword },
             [{ field: 'user_id', value: user.id }]
         );
+
         res.status(200).json({ message: 'Password changed successfully' });
     } catch (err) {
-        console.error(err);
-        res.status(400).json({ error: err.message });
+        handleError(res, err, 'users', 'changing password for');
     }
 });
+
+router.get('/cv/:username', async (req, res) => {
+    try {
+        const { username } = req.params;
+        const user = await dataService.getUser(username);
+
+        if (!user || !user.cv_file) {
+            return res.status(404).json({ error: 'CV not found' });
+        }
+        const filePath = path.join(__dirname, '../../uploads/', user.cv_file);
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).json({ error: 'CV file not found on server' });
+        }
+        res.setHeader('Content-Disposition', `attachment; filename="${username}-cv.pdf"`);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.download(filePath, `${username}-cv.pdf`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error downloading CV' });
+    }
+});
+
 module.exports = router;

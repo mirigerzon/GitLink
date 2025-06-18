@@ -1,15 +1,16 @@
 import "../../style/Project.css";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { CurrentUser } from "../../../App.jsx";
-import { useFetchData } from "../../hooks/fetchData.js";
+import { useState } from "react";
+import { useCurrentUser } from "../../context.jsx";;
+import { useFetchData } from "../../hooks/FetchData.js";
 import { FiGitBranch, FiStar, FiUser } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 
 function Project({ projectData, setIsChange }) {
   const navigate = useNavigate();
-  const { currentUser } = useContext(CurrentUser);
+  const { currentUser } = useCurrentUser();
   const [selectedRating, setSelectedRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
   const fetchData = useFetchData();
 
   const isOwner = currentUser?.username === projectData.username;
@@ -75,6 +76,47 @@ function Project({ projectData, setIsChange }) {
     });
   };
 
+  const handleStarClick = (rating) => {
+    if (!isOwner) {
+      setSelectedRating(rating);
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Cannot Rate',
+        text: 'Sorry - you cannot rate your own project.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6',
+      });
+    }
+  };
+
+  const handleStarHover = (rating) => {
+    if (!isOwner) {
+      setHoveredRating(rating);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredRating(0);
+  };
+
+  const getStarClass = (starIndex) => {
+    const activeRating = hoveredRating || selectedRating;
+    let classes = "star-rating-star";
+
+    if (starIndex <= activeRating) {
+      classes += " star-active";
+    }
+
+    if (isOwner) {
+      classes += " star-disabled";
+    } else {
+      classes += " star-interactive";
+    }
+
+    return classes;
+  };
+
   return (
     <div className="project-card">
       <div className="project-header">
@@ -82,7 +124,6 @@ function Project({ projectData, setIsChange }) {
         <div className="project-stats">
           <div className="stat">
             <span className="stat-value">{projectData.rating}</span>
-
             <span className="stat-label"><FiStar /> Rating</span>
           </div>
           <div className="stat">
@@ -117,24 +158,38 @@ function Project({ projectData, setIsChange }) {
 
       <div className="project-actions">
         <div className="rating-section">
-          <h4>Rate this project: {selectedRating}</h4>
-          <input
-            type="range"
-            min="1"
-            max="5"
-            step="1"
-            value={selectedRating}
-            disabled={isOwner}
-            onChange={(e) => setSelectedRating(Number(e.target.value))}
-            className="rating-slider"
-          />{selectedRating != 0 &&
+          <h4>Rate this project:</h4>
+          <div
+            className="star-rating-container"
+            onMouseLeave={handleMouseLeave}
+          >
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                onClick={() => handleStarClick(star)}
+                onMouseEnter={() => handleStarHover(star)}
+                disabled={isOwner}
+                className={getStarClass(star)}
+                title={`Rate ${star} star${star > 1 ? 's' : ''}`}
+              >
+                ★
+              </button>
+            ))}
+          </div>
+          {selectedRating > 0 && (
+            <div className="rating-display">
+              Selected: {selectedRating}/5 stars
+            </div>
+          )}
+          {selectedRating > 0 && (
             <button
-              onClick={isOwner ? () => { alert("Sorry - you cannot rate your own project.") } : handleRate}
+              onClick={handleRate}
               className="btn-rating"
+              disabled={isOwner}
             >
-              Rate
+              {isOwner ? "Cannot rate own project" : "Submit Rating"}
             </button>
-          }
+          )}
         </div>
         <button
           className="btn-primary"
@@ -142,15 +197,6 @@ function Project({ projectData, setIsChange }) {
         >
           <FiUser />View Developer
         </button>
-
-        {/* {false && (
-          <button
-            className="btn-admin"
-            onClick={() => console.log("Hide project")}
-          >
-            Hide Project
-          </button>
-        )} */}
       </div>
     </div>
   );

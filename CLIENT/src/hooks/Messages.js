@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useContext } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useFetchData } from "./fetchData.js";
-import { CurrentUser } from "../../App.jsx";
+import { useCurrentUser } from "../context.jsx";
 export const useMessages = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -8,7 +8,8 @@ export const useMessages = () => {
     const [error, setError] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
     const fetchData = useFetchData();
-    const { currentUser, setCurrentUser } = useContext(CurrentUser);
+
+    const { currentUser, setCurrentUser } = useCurrentUser();
 
     const fetchMessages = useCallback(() => {
         setLoading(true);
@@ -41,8 +42,7 @@ export const useMessages = () => {
             role: `/${currentUser.role}`,
             type: "messages",
             method: "PUT",
-            body: { is_read: true },
-            params: { email: currentUser.email },
+            body: { is_read: true, email: currentUser.email },
             onSuccess: () => {
                 setLoading(false);
                 setIsChange(true);
@@ -70,6 +70,7 @@ export const useMessages = () => {
             onSuccess: (data) => {
                 setLoading(false);
                 setIsChange(true);
+                data;
             },
             onError: (errMsg) => {
                 setError(errMsg);

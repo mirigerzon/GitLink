@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useAuth } from "../../hooks/useAuth.js";
 import { FiUpload, FiCamera, FiX } from 'react-icons/fi';
 import "../../style/Register.css";
@@ -57,8 +57,8 @@ function Register() {
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const profileFileInputRef = useRef(null);
-  const cvFileInputRef = useRef(null);
+  // const profileFileInputRef = useRef(null);
+  // const cvFileInputRef = useRef(null);
   const [stream, setStream] = useState(null);
   const [isReady, setIsReady] = useState(false);
   const [cameraError, setCameraError] = useState(null);
@@ -123,20 +123,44 @@ function Register() {
     startCamera();
   };
 
-  // File handling functions
-  const handleProfileImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setProfileImage(file);
-    }
-  };
+  // פתרון מושלם - יצירת input וlick באותה פעולה
+  const triggerProfileImageUpload = useCallback(() => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.style.display = 'none';
 
-  const handleCvFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setCvFile(file);
-    }
-  };
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setProfileImage(file);
+      }
+      // נקה את האלמנט מה-DOM
+      document.body.removeChild(input);
+    };
+
+    // הוסף לDOM, לחץ, והסר
+    document.body.appendChild(input);
+    input.click();
+  }, []);
+
+  const triggerCvFileUpload = useCallback(() => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.pdf';
+    input.style.display = 'none';
+
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setCvFile(file);
+      }
+      document.body.removeChild(input);
+    };
+
+    document.body.appendChild(input);
+    input.click();
+  }, []);
 
   const onStepOneSubmit = (data) => {
     setStepOneData(data);
@@ -151,29 +175,26 @@ function Register() {
     formData.append("role_id", selectedRole);
     formData.append("email", data.email);
     formData.append("phone", data.phone);
+
     if (selectedRole === ROLES.DEVELOPER) {
       formData.append("git_name", data.git_name);
       formData.append("experience", data.experience);
       formData.append("languages", data.languages || "");
       formData.append("about", data.about || "");
+
       if (useGitAvatar) {
         formData.append("profile_image", `https://github.com/${data.git_name}.png`);
       } else if (profileImage) {
         formData.append("profile_image", profileImage);
-      } else if (data.profile_image?.length > 0) {
-        formData.append("profile_image", data.profile_image[0]);
       }
+
       if (cvFile) {
         formData.append("cv_file", cvFile);
-      } else if (data.cv_file?.length > 0) {
-        formData.append("cv_file", data.cv_file[0]);
       }
     } else if (selectedRole === ROLES.RECRUITER) {
       formData.append("company_name", data.company_name || "");
       if (profileImage) {
         formData.append("profile_image", profileImage);
-      } else if (data.profile_image?.length > 0) {
-        formData.append("profile_image", data.profile_image[0]);
       }
     }
     return formData;
@@ -369,7 +390,7 @@ function Register() {
                   <button
                     type="button"
                     className="file-input-label"
-                    onClick={() => profileFileInputRef.current?.click()}
+                    onClick={triggerProfileImageUpload}
                   >
                     <FiUpload className="upload-icon" />
                     <span>Upload Profile Image</span>
@@ -383,16 +404,6 @@ function Register() {
                     <FiCamera className="camera-icon" />
                     <span>Take Photo</span>
                   </button>
-
-                  <input
-                    ref={profileFileInputRef}
-                    type="file"
-                    accept="image/*"
-                    className="form-input file-input"
-                    {...register("profile_image")}
-                    onChange={handleProfileImageChange}
-                    style={{ display: 'none' }}
-                  />
                 </div>
 
                 {profileImage && (
@@ -416,21 +427,11 @@ function Register() {
                   <button
                     type="button"
                     className="file-input-label"
-                    onClick={() => cvFileInputRef.current?.click()}
+                    onClick={triggerCvFileUpload}
                   >
                     <FiUpload className="upload-icon" />
                     <span>Upload CV (PDF only)</span>
                   </button>
-
-                  <input
-                    ref={cvFileInputRef}
-                    type="file"
-                    accept=".pdf"
-                    className="form-input file-input"
-                    {...register("cv_file")}
-                    onChange={handleCvFileChange}
-                    style={{ display: 'none' }}
-                  />
                 </div>
 
                 {cvFile && (

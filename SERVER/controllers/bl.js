@@ -2,32 +2,33 @@ const dal = require('../services/dal.js');
 const genericDal = require('../services/genericDal.js');
 const bcrypt = require('bcrypt');
 
+const getUser = async (username) => {
+    if (!username) throw new Error("Username is required");
+
+    const users = await dal.getUser(username);
+    if (!users || users.length === 0) return null;
+
+    return users;
+}
+
 const getDevelopers = () => {
-    const res = dal.getDevelopers();
+    const res = dal.getUsersByRole('developer');
     return res || null;
 }
 
 const getDeveloper = (id) => {
-    const res = dal.getDeveloper(id);
+    const res = dal.getUserWithRoleData(id, 'developer');
     return res || null;
 }
 
 const getRecruiters = () => {
-    const res = dal.getRecruiters();
+    const res = dal.getUsersByRole('recruiter');
     return res || null;
 }
 
 const getRecruiter = (id) => {
-    const res = dal.getRecruiter(id);
+    const res = dal.getUserWithRoleData(id,'recruiter');
     return res || null;
-}
-
-const getUser = async (username) => {
-    const users = await dal.getUser(username);
-    if (!users || users.length === 0)
-        return null;
-    const user = users[0];
-    return user;
 }
 
 const getJobApplications = async (job_id) => {
@@ -39,8 +40,7 @@ const rateProject = async (username, projectId, rating) => {
     await dal.rateProjectTransactional(username, projectId, rating);
 
     const projectWithUser = await dal.getProjectWithCreator(projectId);
-    if (!projectWithUser || projectWithUser.length === 0)
-        throw new Error("Project or creator not found.");
+    if (!projectWithUser || projectWithUser.length === 0) throw new Error("Project or creator not found.");
 
     const gitName = projectWithUser[0].git_name;
     await updateUserRating(gitName);
@@ -81,35 +81,42 @@ async function createApply(data, email) {
     return response;
 }
 
-const updateUserProfile = async (userId, userData) => {
-    const conditions = [{ field: 'id', value: userId }];
-    return await updateItem('users', userData, conditions);
-};
-
-const changeUserPassword = async (userId, currentPassword, newPassword) => {
-    const user = await getItemByConditions('users', [{ field: 'id', value: userId }]);
-    if (!user || user.length === 0) {
-        throw new Error('User not found');
-    }
-
-    const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user[0].password);
-    if (!isCurrentPasswordValid) {
-        throw new Error('Current password is incorrect');
-    }
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-    const conditions = [{ field: 'id', value: userId }];
-    return await updateItem('users', { password: hashedNewPassword }, conditions);
-};
-
 module.exports = {
+    getUser,
     getJobApplications,
     getDevelopers,
     getDeveloper,
     getRecruiters,
-    getUser,
     getRecruiter,
     rateProject,
-    createApply,
-    updateUserProfile,
-    changeUserPassword
+    createApply
 };
+
+// const updateUserProfile = async (userId, userData) => {
+//     if (!userId) throw new Error("User ID is required");
+
+//     const conditions = [{ field: 'id', value: userId }];
+//     return await genericDal.UPDATE('users', userData, conditions);
+// };
+
+// const changeUserPassword = async (userId, currentPassword, newPassword) => {
+//     if (!userId || !currentPassword || !newPassword) throw new Error("All password fields are required");
+
+//     const passwords = await genericDal.GET('passwords', [
+//         { field: 'user_id', value: userId }
+//     ]);
+//     if (!passwords || passwords.length === 0) throw new Error('User not found');
+
+//     const isCurrentPasswordValid = await bcrypt.compare(currentPassword, passwords[0].hashed_password);
+//     if (!isCurrentPasswordValid) {
+//         throw new Error('Current password is incorrect');
+//     }
+
+//     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+//     const conditions = [{ field: 'user_id', value: userId }];
+
+//     return await genericDal.UPDATE('passwords',
+//         { hashed_password: hashedNewPassword },
+//         conditions
+//     );
+// };

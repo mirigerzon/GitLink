@@ -1,11 +1,11 @@
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { CurrentUser } from "../../App";
-import { useFetchData } from "./fetchData";
+import { useCurrentUser } from "../context";
+import { useFetchData } from "./FetchData";
 
 export function useLogout() {
-  const { setCurrentUser } = useContext(CurrentUser);
+  const { setCurrentUser } = useCurrentUser();
   const navigate = useNavigate();
   const fetchData = useFetchData();
 
