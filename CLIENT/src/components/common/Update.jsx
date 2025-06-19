@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFetchData } from "../../hooks/fetchData.js";
 import Modal from "./Modal.jsx";
 import { useLogout } from "../../hooks/LogOut.js";
 import "../../style/Update.css";
 
-function Update({ type, itemId, setIsChange, inputs, role = null }) {
+function Update({ type, itemId, setIsChange, inputs, role = null, initialData = {} }) {
   const logOut = useLogout();
   const fetchData = useFetchData();
   const [formData, setFormData] = useState({});
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (showModal && initialData) {
+      setFormData(initialData);
+    }
+  }, [showModal, initialData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +48,7 @@ function Update({ type, itemId, setIsChange, inputs, role = null }) {
 
   return (
     <>
-      <button className="update-btn" onClick={() => setShowModal(true)}>
+      <button onClick={() => setShowModal(true)}>
         Edit
       </button>
 
@@ -51,13 +57,15 @@ function Update({ type, itemId, setIsChange, inputs, role = null }) {
           {inputs.map((inputName, index) => (
             <input
               key={index}
+              type="text"
               name={inputName}
-              placeholder={`Enter ${inputName}`}
+              placeholder={inputName}
+              value={formData[inputName] || ""}
               onChange={handleInputChange}
             />
           ))}
-          <button value="OK" onClick={updateFunc}>OK</button>
-          <button value="cancel" onClick={() => setShowModal(false)}>Cancel</button>
+          <button onClick={updateFunc}>OK</button>
+          <button onClick={() => setShowModal(false)}>Cancel</button>
         </Modal>
       )}
     </>

@@ -68,6 +68,8 @@ function Job({ jobData, setIsChange }) {
                 setIsChange={setIsChange}
                 inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
                 role={`/${currentUser.role}`}
+                initialData={jobData} 
+
               />
               <Delete
                 className="delete-job-btn"

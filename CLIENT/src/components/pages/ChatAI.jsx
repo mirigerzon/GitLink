@@ -12,7 +12,6 @@ const ChatAI = () => {
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
 
-    // Auto scroll to bottom
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -21,14 +20,12 @@ const ChatAI = () => {
         scrollToBottom();
     }, [messages]);
 
-    // Focus on input when chat opens
     useEffect(() => {
         if (isOpen && !isMinimized) {
             inputRef.current?.focus();
         }
     }, [isOpen, isMinimized]);
 
-    // Send message to OpenAI
     const sendMessage = async () => {
         if (!inputText.trim() || isLoading) return;
 
@@ -45,21 +42,14 @@ const ChatAI = () => {
         setIsLoading(true);
 
         try {
-            // Using OpenAI API directly
-            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            // קריאה לשרת שלך במקום ישירות ל-OpenAI
+            const response = await fetch('http://localhost:3001/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${'sk - proj - Unr_ClahlcLQIqgk7dOhzVRBSWQco4PGLNRnxfPTDf5iywkuwvhey3ZdMglYyCNKDwHk1Wsnt7T3BlbkFJlK9siN_Wglz4K6y2HjidmukTjMvXNvLUpGkCWZslrAkq_L8Z7VCxoBlTiWSChEZsQqjcjI4dIA'}`
                 },
                 body: JSON.stringify({
-                    model: 'gpt-3.5-turbo',
-                    messages: [
-                        { role: 'system', content: 'You are a helpful assistant.' },
-                        { role: 'user', content: currentInput }
-                    ],
-                    max_tokens: 150,
-                    temperature: 0.7
+                    message: currentInput
                 })
             });
 
@@ -70,14 +60,14 @@ const ChatAI = () => {
             const data = await response.json();
             const gptMessage = {
                 id: Date.now() + 1,
-                text: data.choices[0].message.content,
+                text: data.message,
                 sender: 'gpt',
                 timestamp: new Date()
             };
 
             setMessages(prev => [...prev, gptMessage]);
         } catch (error) {
-            console.error('Error calling OpenAI API:', error);
+            console.error('Error calling chat API:', error);
             const errorMessage = {
                 id: Date.now() + 1,
                 text: 'Sorry, I encountered an error. Please try again.',
@@ -90,7 +80,7 @@ const ChatAI = () => {
         }
     };
 
-    // Handle Enter key press
+    // שאר הקוד נשאר אותו דבר...
     const handleKeyPress = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -98,7 +88,6 @@ const ChatAI = () => {
         }
     };
 
-    // Format timestamp
     const formatTime = (date) => {
         return date.toLocaleTimeString('en-US', {
             hour: '2-digit',
@@ -108,7 +97,6 @@ const ChatAI = () => {
 
     return (
         <div className="gpt-chat-widget">
-            {/* Toggle button */}
             {!isOpen && (
                 <button
                     onClick={() => setIsOpen(true)}
@@ -120,10 +108,8 @@ const ChatAI = () => {
                 </button>
             )}
 
-            {/* Chat window */}
             {isOpen && (
                 <div className={`chat-container ${isMinimized ? 'minimized' : ''}`}>
-                    {/* Header */}
                     <div className="chat-header">
                         <div className="chat-title">
                             <div className="status-indicator"></div>
@@ -147,7 +133,6 @@ const ChatAI = () => {
                         </div>
                     </div>
 
-                    {/* Messages area */}
                     {!isMinimized && (
                         <>
                             <div className="messages-container">
@@ -165,7 +150,6 @@ const ChatAI = () => {
                                     </div>
                                 ))}
 
-                                {/* Loading animation */}
                                 {isLoading && (
                                     <div className="message gpt-message">
                                         <div className="message-bubble loading">
@@ -180,7 +164,6 @@ const ChatAI = () => {
                                 <div ref={messagesEndRef} />
                             </div>
 
-                            {/* Input area */}
                             <div className="input-container">
                                 <div className="input-wrapper">
                                     <textarea

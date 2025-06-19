@@ -231,6 +231,8 @@ function DeveloperProfile({
                                             setIsChange={setIsChange}
                                             inputs={["name", "details"]}
                                             role={currentUser ? `/${currentUser.role}` : null}
+              initialData={userData} 
+
                                         />
                                     </>
                                 )}

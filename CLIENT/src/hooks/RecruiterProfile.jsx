@@ -178,6 +178,8 @@ function RecruiterProfile({
                                             setIsChange={setIsChange}
                                             inputs={["title", "details"]}
                                             role={currentUser ? `/${currentUser.role}` : null}
+              initialData={userData} 
+
                                         />
                                     </>
                                 )}

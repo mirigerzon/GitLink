@@ -147,6 +147,7 @@ function Project({ projectData, setIsChange }) {
               setIsChange={setIsChange}
               inputs={["name", "url", "languages", "details"]}
               role={`/${currentUser.role}`}
+              initialData={projectData} 
             />
             <Delete
               className="delete_btn"

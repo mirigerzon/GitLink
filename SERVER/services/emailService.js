@@ -23,17 +23,42 @@ const sendEmail = async ({ to, subject, html }) => {
 };
 
 const sendWelcomeEmail = async (userId, email, username) => {
+    const welcomeContent = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #333;">Welcome to GitLink! 🎉</h2>
+            <p>Hello ${username},</p>
+            <p>Welcome to GitLink - the platform for project management and developer collaboration!</p>
+            
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <h3 style="color: #007bff; margin-top: 0;">What you can do:</h3>
+                <ul style="margin: 10px 0;">
+                    <li>Manage projects with powerful tools</li>
+                    <li>Collaborate with teams globally</li>
+                    <li>Track code changes with version control</li>
+                    <li>Join our active developer community</li>
+                </ul>
+            </div>
+            
+            <p><strong>Getting started:</strong> Complete your profile and create your first repository to explore all features.</p>
+            
+            <p>Need help? Contact us at <a href="mailto:support@gitlink.com" style="color: #007bff;">support@gitlink.com</a> or visit our <a href="https://gitlink.com/help" style="color: #007bff;">Help Center</a>.</p>
+            
+            <br>
+            <p>Best regards,<br>GitLink Team</p>
+        </div>
+    `;
+
     await genericDal.CREATE("messages", {
         user_id: userId,
         email,
-        title: 'WELCOME!',
-        content: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`
+        title: 'Welcome to GitLink! 🎉',
+        content: `Hello ${username}! Welcome to GitLink - the platform for project management and developer collaboration. Start managing projects, collaborating with teams, and tracking code changes today!`
     });
 
     await sendEmail({
         to: email,
-        subject: 'WELCOME!',
-        html: `💌 - Welcome to our platform, ${username}! We're excited to have you on board.`
+        subject: 'Welcome to GitLink! 🎉',
+        html: welcomeContent
     });
 };
 
@@ -67,7 +92,7 @@ const sendPasswordChangeWarningEmail = async (userId, email) => {
         We noticed that your password was just changed.
         If **you** made this change, no further action is needed.
         But if this wasn't you, please reset your password immediately to protect your account.
-        👉 [Click here to reset your password](https://your-app-url.com/reset-password)
+        👉 [Click here to reset your password](https://localhost:/reset-password)
         Stay safe,
         The Security Team
     `;

@@ -218,6 +218,7 @@ function ApplyUsers() {
                         setIsChange={setIsChange}
                         inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
                         role={`/${currentUser.role}`}
+                        initialData={applicants} 
                     />
                     <button className="button filledButton">Mark as Filled</button>
                     <button className="button deleteButton" onClick={handleDeleteJob}>Delete Job</button>
