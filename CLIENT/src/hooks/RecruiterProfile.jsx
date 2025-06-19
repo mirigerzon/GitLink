@@ -4,7 +4,7 @@ import { useLogout } from "../hooks/LogOut.js";
 import { useForm } from "react-hook-form";
 import Update from "../components/common/Update.jsx";
 import Delete from "../components/common/Delete.jsx";
-
+import '../style/RecruiterProfile.css';
 function RecruiterProfile({
     userData,
     currentUser,
@@ -90,8 +90,6 @@ function RecruiterProfile({
                                     {...register("title", { required: true })}
                                     required
                                 />
-                            </div>
-                            <div className="form-group">
                                 <input
                                     type="text"
                                     placeholder="Required experience (years)"
@@ -99,8 +97,6 @@ function RecruiterProfile({
                                     {...register("experience", { required: true })}
                                     required
                                 />
-                            </div>
-                            <div className="form-group">
                                 <input
                                     type="text"
                                     placeholder="Programming languages required"
@@ -108,15 +104,11 @@ function RecruiterProfile({
                                     {...register("languages", { required: true })}
                                     required
                                 />
-                            </div>
-                            <div className="form-group">
                                 <textarea
                                     placeholder="Job requirements"
                                     className="form-input textarea"
                                     {...register("requirements")}
                                 />
-                            </div>
-                            <div className="form-group">
                                 <textarea
                                     placeholder="Job description"
                                     className="form-input textarea"
@@ -163,7 +155,7 @@ function RecruiterProfile({
                         existingDeliverables.map((item) => (
                             <li key={item.id}>
                                 {item.title}
-                                <button
+                                <button className="view-btn"
                                     onClick={() =>
                                         navigate(`/${item.username}/${userItemsType}/${item.id}`)
                                     }
@@ -173,13 +165,14 @@ function RecruiterProfile({
                                 {isOwnProfile && (
                                     <>
                                         <Delete
-                                            className="delete_btn"
+                                            className="delete-btn"
                                             type={userItemsType}
                                             itemId={item.id}
                                             setIsChange={setIsChange}
                                             role={currentUser ? `/${currentUser.role}` : null}
                                         />
                                         <Update
+                                            className="update-btn"
                                             type={userItemsType}
                                             itemId={item.id}
                                             setIsChange={setIsChange}

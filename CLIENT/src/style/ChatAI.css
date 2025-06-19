@@ -136,10 +136,10 @@
     background: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
 }
-
+/* 
 .close-btn:hover {
     background: rgba(255, 71, 87, 0.8);
-}
+} */
 
 .messages-container {
     flex: 1;

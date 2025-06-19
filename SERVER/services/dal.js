@@ -154,10 +154,21 @@ const getApplications = async (job_id) => {
     return application;
 }
 
+const rejectApplicant = async (job_id, developerId, messageData) => {
+    const result = await genericDal.updateAndInformUser(
+        'job_applications',
+        { is_treated: 'rejected' },
+        [{ field: 'job_id', value: job_id },
+        { field: 'user_id', value: developerId }
+        ],
+        messageData)
+}
+
 // Graceful shutdown
 const closePool = async () => {
     await pool.end();
 };
+
 
 process.on('SIGINT', closePool);
 process.on('SIGTERM', closePool);
@@ -170,6 +181,7 @@ module.exports = {
     getProjectWithCreator,
     rateProjectTransactional,
     getApplications,
+    rejectApplicant,
     // Utility
     closePool
 };

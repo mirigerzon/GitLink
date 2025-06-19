@@ -42,7 +42,6 @@ router.delete('/:itemId', async (req, res) => {
         const { itemId } = req.params;
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
-
         const result = await genericDataService.deleteItem(TABLE_NAME, conditions);
         writeLog(`Deleted job application id=${itemId}`, 'info');
         res.json({ message: 'Application deleted successfully', result });
@@ -50,5 +49,45 @@ router.delete('/:itemId', async (req, res) => {
         handleError(res, err, TABLE_NAME, 'deleting');
     }
 });
+
+router.put('/notify', async (req, res) => {
+  try {
+    const result = await dataService.notifyApplicant(req.body);
+    res.json({ message: 'Email sent successfully', result });
+  } catch (err) {
+    handleError(res, err, 'job_application', 'notifying');
+  }
+});
+
+router.put('/:job_id', async (req, res) => {
+    try {
+        const { user_id, ...body } = req.body;
+        const result = await genericDataService.updateItem(
+            TABLE_NAME,
+            body,
+            [
+                { field: 'job_id', value: Number(req.params.job_id) },
+                { field: 'user_id', value: user_id }
+            ]
+        );
+        writeLog(`Updated message for user=${req.body.email}`, 'info');
+        res.json({ message: 'Message updated successfully', result });
+    } catch (err) {
+        handleError(res, err, TABLE_NAME, 'updating');
+    }
+});
+
+
+router.put('/reject/:job_id', async (req, res) => {
+    try {
+        const { job_id } = req.params;
+        const result = await dataService.rejectApplicant(req.body, Number(job_id));
+        writeLog(`reject application for job id=${job_id}`, 'info');
+        res.json({ message: 'Application reject successfully', result });
+    }
+    catch (err) {
+        handleError(res, err, 'reject applicant', 'deleting');
+    }
+})
 
 module.exports = router;

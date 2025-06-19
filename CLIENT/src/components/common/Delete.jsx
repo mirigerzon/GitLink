@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
-import { FiDelete, FiLoader } from "react-icons/fi";
+import { FiTrash, FiLoader } from "react-icons/fi";
+import Modal from "../common/Modal.jsx";
+import '../../style/Delete.css';
 
 function Delete({ type, itemId, setIsChange, role = null, confirmMessage = null }) {
   const logOut = useLogout();
@@ -31,7 +33,7 @@ function Delete({ type, itemId, setIsChange, role = null, confirmMessage = null 
         role: role,
         onSuccess: (result) => {
           console.log("Delete successful:", result);
-          setIsChange(prev => prev + 1); 
+          setIsChange(prev => prev + 1);
         },
         onError: (error) => {
           console.error(`Failed to delete ${type} with ID ${itemId}:`, error);
@@ -76,32 +78,30 @@ function Delete({ type, itemId, setIsChange, role = null, confirmMessage = null 
         aria-label={`Delete ${type}`}
         title={`Delete ${type}`}
       >
-        {isDeleting ? <FiLoader className="spinning" /> : <FiDelete />}
+        {isDeleting ? <FiLoader className="spinning" /> : <FiTrash />}
       </button>
 
       {showConfirm && (
-        <div className="confirm-dialog-overlay" onClick={handleConfirmCancel}>
-          <div className="confirm-dialog" onClick={(e) => e.stopPropagation()}>
-            <h3>Confirm Deletion</h3>
-            <p>{getConfirmationMessage()}</p>
-            <div className="confirm-buttons">
-              <button
-                onClick={executeDelete}
-                className="confirm-delete-btn"
-                disabled={isDeleting}
-              >
-                {isDeleting ? "Deleting..." : "Delete"}
-              </button>
-              <button
-                onClick={handleConfirmCancel}
-                className="confirm-cancel-btn"
-                disabled={isDeleting}
-              >
-                Cancel
-              </button>
-            </div>
+        <Modal onClose={handleConfirmCancel}>
+          <h3>Confirm Deletion</h3>
+          <p>{getConfirmationMessage()}</p>
+          <div className="confirm-buttons">
+            <button
+              onClick={executeDelete}
+              className="confirm-delete-btn"
+              disabled={isDeleting}
+            >
+              {isDeleting ? "Deleting..." : "Delete"}
+            </button>
+            <button
+              onClick={handleConfirmCancel}
+              className="confirm-cancel-btn"
+              disabled={isDeleting}
+            >
+              Cancel
+            </button>
           </div>
-        </div>
+        </Modal>
       )}
     </>
   );

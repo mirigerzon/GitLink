@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useFetchData } from "../../hooks/fetchData.js";
-import { FaEdit } from "react-icons/fa"
+import Modal from "./Modal.jsx";
 import { useLogout } from "../../hooks/LogOut.js";
+import "../../style/Update.css";
 
 function Update({ type, itemId, setIsChange, inputs, role = null }) {
   const logOut = useLogout();
   const fetchData = useFetchData();
-  const [screen, setScreen] = useState(0);
   const [formData, setFormData] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,10 +18,8 @@ function Update({ type, itemId, setIsChange, inputs, role = null }) {
     }));
   };
 
-  async function updateFunc(e) {
-    e.preventDefault();
-    e.target.reset();
-    setScreen(0);
+  async function updateFunc() {
+    setShowModal(false);
     try {
       await fetchData({
         type: `${type}/${itemId}`,
@@ -29,7 +28,7 @@ function Update({ type, itemId, setIsChange, inputs, role = null }) {
         role: role,
         onSuccess: (result) => {
           console.log("Update successful:", result);
-          setIsChange(1);
+          setIsChange((prev) => prev + 1);
         },
         onError: (error) => {
           console.log("Update was unsuccessful:", error);
@@ -43,32 +42,23 @@ function Update({ type, itemId, setIsChange, inputs, role = null }) {
 
   return (
     <>
-      {screen == 0 && (
-        <button onClick={() => setScreen(1)} className="action-btn edit-btn">
-          <FaEdit />
-        </button>
-      )}
-      {screen == 1 && (
-        <div>
-          <form onSubmit={updateFunc}>
-            {inputs.map((input, index) => (
-              <div key={index}>
-                <input
-                  name={input}
-                  placeholder={`Enter ${input}`}
-                  value={formData[input] || ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-            ))}
-            <button value={"OK"}>
-              OK
-            </button>
-            <button onClick={() => setScreen(0)} value={"cancel"}>
-              cancel
-            </button>
-          </form>
-        </div>
+      <button className="update-btn" onClick={() => setShowModal(true)}>
+        Edit
+      </button>
+
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          {inputs.map((inputName, index) => (
+            <input
+              key={index}
+              name={inputName}
+              placeholder={`Enter ${inputName}`}
+              onChange={handleInputChange}
+            />
+          ))}
+          <button value="OK" onClick={updateFunc}>OK</button>
+          <button value="cancel" onClick={() => setShowModal(false)}>Cancel</button>
+        </Modal>
       )}
     </>
   );

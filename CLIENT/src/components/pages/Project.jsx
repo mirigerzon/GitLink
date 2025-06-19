@@ -189,7 +189,7 @@ function Project({ projectData, setIsChange }) {
         )}
 
         <button
-          className="btn-primary"
+          className="view-profile-btn"
           onClick={() => navigate(`/${projectData.username}/profile`)}
         >
           <FiUser /> View Developer

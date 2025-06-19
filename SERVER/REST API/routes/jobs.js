@@ -66,12 +66,9 @@ router.delete('/:itemId', async (req, res) => {
     }
 });
 
-
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        // const { title, company_name, details, requirements, experience, languages } = req.body;
-
         if (!id) return res.status(400).json({ error: 'Project ID is required' });
         const result = await genericDataService.updateItem(
             TABLE_NAME,

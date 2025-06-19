@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState, React} from "react";
 import { useFetchData } from "./fetchData.js";
 import { useLogout } from "../hooks/LogOut.js";
 import { useForm } from "react-hook-form";
 import Update from "../components/common/Update.jsx";
 import Delete from "../components/common/Delete.jsx";
+import '../style/DeveloperProfile.css';
 
 function DeveloperProfile({
     userData,
@@ -208,7 +209,7 @@ function DeveloperProfile({
                         existingDeliverables.map((item) => (
                             <li key={item.id}>
                                 {item.name}
-                                <button
+                                <button className="view-btn"
                                     onClick={() =>
                                         navigate(`/${item.username}/${userItemsType}/${item.id}`)
                                     }

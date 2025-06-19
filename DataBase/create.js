@@ -73,7 +73,7 @@ async function createRoleTables(connection) {
             git_name VARCHAR(100) UNIQUE NOT NULL,
             experience INT NOT NULL,
             languages VARCHAR(255),
-            rating INT,
+            rating INT DEFAULT 0,
             is_active BOOLEAN DEFAULT TRUE,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
@@ -149,6 +149,7 @@ async function createJobTables(connection) {
             user_id INT NOT NULL,
             job_id INT NOT NULL,
             remark VARCHAR(500),
+            is_treated ENUM('pending', 'handled', 'rejected') DEFAULT 'pending',
             is_active BOOLEAN DEFAULT TRUE,
             PRIMARY KEY (user_id, job_id),
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,

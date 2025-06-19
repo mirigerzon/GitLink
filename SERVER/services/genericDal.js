@@ -24,7 +24,7 @@ const USER_ROLES = {
   RECRUITER: 'recruiter'
 };
 
-const validateTable = (table) => { if (!ALLOWED_TABLES.includes(table)) throw new Error(`Invalid table name: ${table}`)};
+const validateTable = (table) => { if (!ALLOWED_TABLES.includes(table)) throw new Error(`Invalid table name: ${table}`) };
 
 const validateTables = (tables) => {
   tables.forEach(validateTable);
@@ -165,10 +165,36 @@ const DELETE = async (table, conditions = []) => {
   }
 };
 
+const updateAndInformUser = async (table, data, conditions = [], messageData) => {
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction();
+
+    const updateSql = `UPDATE \`${table}\` SET ${Object.keys(data).map(f => `\`${f}\` = ?`).join(", ")} WHERE ${conditions.map(c => `\`${c.field}\` = ?`).join(" AND ")}`;
+    const updateParams = [...Object.values(data), ...conditions.map(c => c.value)];
+
+    const insertSql = `INSERT INTO messages (user_id, email, title, content) VALUES (?, ?, ?, ?)`;
+    const insertParams = [messageData.user_id, messageData.email, messageData.title, messageData.content];
+
+    await connection.query(updateSql, updateParams);
+    await connection.query(insertSql, insertParams);
+
+    await connection.commit();
+  } catch (error) {
+    await connection.rollback();
+    throw error;
+  } finally {
+    connection.release();
+  }
+};
+
+
+
 module.exports = {
   GET,
   GET_WITH_JOINS,
   CREATE,
   UPDATE,
   DELETE,
+  updateAndInformUser,
 };

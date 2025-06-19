@@ -1,18 +1,27 @@
-import { useParams } from "react-router-dom";
-import { FiUser, FiStar, FiFolder, FiMail, FiTrash2, FiEdit, FiCheck } from 'react-icons/fi';
+import { useParams, Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import { useState, useEffect } from "react";
 import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut";
 import { useCurrentUser } from "../../context.jsx";
+import Update from "../common/Update.jsx";
+import Modal from "../common/Modal.jsx";
 import '../../style/ApplyUsers.css';
 
 function ApplyUsers() {
+    const { id } = useParams();
     const fetchData = useFetchData();
     const logOut = useLogout();
+    const navigate = useNavigate();
     const { currentUser } = useCurrentUser();
-    const { id } = useParams();
-    const [applicants, setApplicants] = useState([]);
     const [isChange, setIsChange] = useState(0);
+    const [applicants, setApplicants] = useState([]);
+    const [showEmailModal, setShowEmailModal] = useState(false);
+    const [selectedApplicant, setSelectedApplicant] = useState(null);
+    const [emailSubject, setEmailSubject] = useState('');
+    const [emailBody, setEmailBody] = useState('');
+    const [remarkText, setRemarkText] = useState('');
+    const [isEditingRemark, setIsEditingRemark] = useState(false);
 
     useEffect(() => {
         setIsChange(0);
@@ -28,176 +37,286 @@ function ApplyUsers() {
         });
     }, [isChange]);
 
-    const handleSendEmail = (applicant) => {
-        applicant;
+    const openEmailModal = (applicant) => {
+        setSelectedApplicant(applicant);
+        setEmailSubject(`About your application to Job #${id}`);
+        setEmailBody('');
+        setShowEmailModal(true);
     };
 
-    const submitEmail = () => {
-
+    const handleSendEmail = async () => {
+        try {
+            await fetchData({
+                role: currentUser ? `/${currentUser.role}` : "/guest",
+                type: `job_applications/notify`,
+                method: 'PUT',
+                body: {
+                    user_id: selectedApplicant.id,
+                    email: selectedApplicant.email,
+                    title: emailSubject,
+                    content: emailBody
+                },
+                onSuccess: () => {
+                    setShowEmailModal(false);
+                    setSelectedApplicant(null);
+                    setEmailSubject('');
+                    setEmailBody('');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Email sent successfully',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                onError: (error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to send email!'
+                    });
+                }
+            });
+        } catch (error) {
+            alert("Error sending email");
+        }
     };
 
-    const handleDeleteJob = () => {
-        // if (window.confirm('Are you sure you want to delete this job? This action cannot be undone.')) {
+    const handleRemarkModal = async (applicant, isEditing = false) => {
+        const { value: remark } = await Swal.fire({
+            title: isEditing ? 'Edit Remark' : 'Add Remark',
+            input: 'textarea',
+            inputLabel: `Add Remark`,
+            inputValue: applicant.remark || '',
+            inputPlaceholder: 'Type your remark here...',
+            inputAttributes: {
+                'aria-label': 'Type your remark here'
+            },
+            showCancelButton: true,
+            confirmButtonText: isEditing ? 'Save' : 'Add',
+            cancelButtonText: 'Cancel'
+        });
+
+        if (remark !== undefined) {
+            submitRemark(applicant, remark);
+        }
+    };
+
+    const submitRemark = async (applicant, remark) => {
+        try {
+            await fetchData({
+                role: currentUser ? `/${currentUser.role}` : "/guest",
+                type: `job_applications/${id}`,
+                role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
+                method: 'PUT',
+                body: { remark: remark, user_id: applicant.id },
+                onSuccess: (result) => {
+                    setIsChange(1);
+                },
+                onError: (error) => {
+
+                }
+            });
+        } catch (error) {
+            alert(error);
+        }
+    };
+
+    const handleDeleteJob = async () => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'This job will be permanently deleted.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        });
+
+        if (result.isConfirmed) {
+            try {
+                await fetchData({
+                    role: currentUser ? `/${currentUser.role}` : "/guest",
+                    type: `jobs/${id}`,
+                    role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
+                    method: 'delete',
+                    onSuccess: (result) => {
+                        navigate('/home')
+                    },
+                    onError: (error) => {
+                    }
+                });
+            } catch (error) {
+                alert(error);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'The job has been deleted.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
+        };
+
     };
 
     const handleMarkAsFilled = () => {
-        // if (window.confirm('Mark this job as filled?')) {
-
-        // }
+        if (window.confirm('Mark this job as filled?')) {
+            // Here you'll add the actual mark as filled logic
+            console.log('Marking job as filled:', id);
+        }
     };
 
-    const handleEditJob = () => {
-        // console.log('Editing job:', id);
+    const handleReject = async (applicant) => {
+        try {
+            await fetchData({
+                role: currentUser ? `/${currentUser.role}` : "/guest",
+                type: `job_applications/reject/${id}`,
+                role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
+                method: 'put',
+                body: { developerEmail: applicant.email, developerId: applicant.id },
+                onSuccess: (result) => {
+                    setIsChange(1);
+                },
+                onError: (error) => {
+                }
+            });
+        } catch (error) {
+            alert(error);
+        }
+    }
 
-        // alert('Redirecting to edit job...'); // זמני
-    };
+    const handleStatus = async (applicant, status) => {
+        try {
+            await fetchData({
+                role: currentUser ? `/${currentUser.role}` : "/guest",
+                type: `job_applications/${id}`,
+                role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
+                method: 'put',
+                body: { is_treated: status, user_id: applicant.id },
+                onSuccess: (result) => {
+                    setIsChange(1);
+                },
+                onError: (error) => {
+                }
+            });
+        } catch (error) {
+            alert(error);
+        }
+    }
 
     return (
-        <div className="applications-container">
-            <div className="header-section">
-                <h2>Applicants for Job #{id}</h2>
+        <div className="container">
+            <div className="header">
+                <h2 className="title">Applicants for this position</h2>
+                <div className="jobActions">
+                    <Update
+                        className='update-job-btn'
+                        type="jobs"
+                        itemId={id}
+                        setIsChange={setIsChange}
+                        inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
+                        role={`/${currentUser.role}`}
+                    />
+                    <button className="button filledButton">Mark as Filled</button>
+                    <button className="button deleteButton" onClick={handleDeleteJob}>Delete Job</button>
+                </div>
             </div>
 
             {applicants.length === 0 ? (
-                <p>No applicants yet.</p>
+                <div className="noApplicants">There are no applicants for this job yet.</div>
             ) : (
-                <div className="applicants-grid">
-                    {applicants.map(applicant => (<>
-                        <div key={applicant.id} className="applicant-card">
-                            <div className="job-management-buttons">
-                                <button
-                                    className="edit-job-btn"
-                                    onClick={handleEditJob}
-                                    title="Edit Job"
-                                >
-                                    <FiEdit /> Edit Job
-                                </button>
-                                <button
-                                    className="mark-filled-btn"
-                                    onClick={handleMarkAsFilled}
-                                    title="Mark as Filled"
-                                >
-                                    <FiCheck /> Mark as Filled
-                                </button>
-                                <button
-                                    className="delete-job-btn"
-                                    onClick={handleDeleteJob}
-                                    title="Delete Job"
-                                >
-                                    <FiTrash2 /> Delete Job
-                                </button>
-                                <button
-                                    className="send-email-btn"
-                                    onClick={() => handleSendEmail(applicant)}
-                                    title="Send Job Offer Email"
-                                >
-                                    <FiMail /> Send Offer
-                                </button>
+                <div className="applicantsGrid">
+                    {applicants.map((applicant, index) => (
+                        <div className="applicantCard" key={index}>
+                            <div className="cardHeader">
+                                <div className="profileSection">
+                                    <img src={applicant.profile_image} alt="Profile" className="profileImage" />
+                                    <div className="profileInfo">
+                                        <h3 className="username">{applicant.name}</h3>
+                                        <div className="role">
+                                            <span className="smallIcon">👤</span>
+                                            <Link to={`/${applicant.username}/profile`}>View Developer</Link>
+                                        </div>
+                                        <div className="rating">
+                                            <span className="smallIcon">⭐</span>
+                                            {applicant.rating}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`statusBadge ${applicant.is_treated}`}>
+                                    {applicant.is_treated}
+                                </div>
                             </div>
-                            <img
-                                src={applicant.profile_image || "/images/default-profile.png"}
-                                alt={`${applicant.username}'s profile`}
-                                className="profile-image"
-                            />
-                            <h3>{applicant.username}</h3>
-                            <p><FiUser /> {applicant.role}</p>
-                            <p><FiStar /> Rating: {applicant.rating ?? "N/A"}</p>
-                            {(applicant.languages ?? "")
-                                .split(",")
-                                .map((skill) => skill.trim())
-                                .filter((skill) => skill)
-                                .map((skill, index) => (
-                                    <span key={index} className="skill-tag">
-                                        {skill}
-                                    </span>
-                                ))}
-                            <p>Email: {applicant.email}</p>
-                            <p>Phone: {applicant.phone}</p>
-                            <p>GitHub: {applicant.git_name}</p>
-                            <p>Experience: {applicant.experience}</p>
-                            <p>About: {applicant.about}</p>
-                            {applicant.remark && <p><strong>Remark:</strong> {applicant.remark}</p>}
 
-                            <div className="applicant-actions">
-                                {applicant.cv_file ? (
-                                    <a
-                                        href={`/uploads/cv_files/${applicant.cv_file}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="cv-link"
-                                    >
-                                        <FiFolder /> View CV
-                                    </a>
-                                ) : (
-                                    <p className="no-cv">No CV uploaded</p>
-                                )}
+                            <div className="skillsSection">
+                                {(applicant.languages ?? "")
+                                    .split(",")
+                                    .map((skill) => skill.trim())
+                                    .filter((skill) => skill)
+                                    .map((skill, index) => (
+                                        <span key={index} className="skill-tag">
+                                            {skill}
+                                        </span>
+                                    ))}
+                            </div>
+
+                            <div className="contactInfo">
+                                Email: {applicant.email}<br />
+                                Phone: {applicant.phone}
+                            </div>
+
+                            {applicant.remark && (
+                                <div className="remarkSection">{applicant.remark}</div>
+                            )}
+
+                            <div className="cardActions">
+                                <div className="actionRow">
+                                    <button className="smallButton handleButton" onClick={() => handleStatus(applicant, 'Handled')}>Handle</button>
+                                    <button className="smallButton rejectButton" onClick={() => handleReject(applicant)}>Reject</button>
+                                    <button className="smallButton pendingButton" onClick={() => handleStatus(applicant, 'pending')}>pending</button>
+                                    <button className="smallButton emailButton" onClick={() => openEmailModal(applicant)}>Send Email</button>
+                                </div>
+                                <div className="actionRow">
+                                    {applicant.cv ? (
+                                        <a href={applicant.cv} target="_blank" rel="noopener noreferrer" className="smallButton cvButton">
+                                            View CV
+                                        </a>
+                                    ) : (
+                                        <div className="noCv">No CV Available</div>
+                                    )}
+                                    <button className="smallButton remarkButton" onClick={() => handleRemarkModal(applicant)}>Add Remark</button>
+                                </div>
                             </div>
                         </div>
-                    </>))}
+                    ))}
                 </div>
             )}
-
-            {/* {showEmailModal && (
-                <div className="email-modal-overlay">
-                    <div className="email-modal">
-                        <div className="modal-header">
-                            <h3>Send Job Offer Email</h3>
-                            <button
-                                className="close-modal"
-                                onClick={() => setShowEmailModal(false)}
-                            >
-                                ×
-                            </button>
-                        </div>
-
-                        <div className="modal-body">
-                            <div className="recipient-info">
-                                <p><strong>To:</strong> {selectedApplicant?.email}</p>
-                                <p><strong>Applicant:</strong> {selectedApplicant?.username}</p>
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="email-subject">Subject:</label>
-                                <input
-                                    id="email-subject"
-                                    type="text"
-                                    value={emailSubject}
-                                    onChange={(e) => setEmailSubject(e.target.value)}
-                                    className="email-input"
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="email-body">Message:</label>
-                                <textarea
-                                    id="email-body"
-                                    value={emailBody}
-                                    onChange={(e) => setEmailBody(e.target.value)}
-                                    className="email-textarea"
-                                    rows="8"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="modal-footer">
-                            <button
-                                className="cancel-btn"
-                                onClick={() => setShowEmailModal(false)}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                className="send-btn"
-                                onClick={submitEmail}
-                            >
-                                <FiMail /> Send Email
-                            </button>
-                        </div>
+            {showEmailModal && (
+                <Modal onClose={() => setShowEmailModal(false)}>
+                    <h3>Send Email to {selectedApplicant?.username}</h3>
+                    <input
+                        type="text"
+                        placeholder="Subject"
+                        value={emailSubject}
+                        onChange={(e) => setEmailSubject(e.target.value)}
+                    />
+                    <input
+                        placeholder="Message content"
+                        rows="6"
+                        value={emailBody}
+                        onChange={(e) => setEmailBody(e.target.value)}
+                    />
+                    <div className="modal-actions">
+                        <button value="OK" onClick={handleSendEmail}>Send</button>
+                        <button value="cancel" onClick={() => setShowEmailModal(false)}>Cancel</button>
                     </div>
-                </div>
-            )} */}
+                </Modal>
+            )}
+
         </div>
-    );
+    )
 }
 
 export default ApplyUsers;

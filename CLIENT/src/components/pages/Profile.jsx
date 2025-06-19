@@ -6,6 +6,7 @@ import DeveloperProfile from "../../hooks/DeveloperProfile.jsx";
 import RecruiterProfile from "../../hooks/RecruiterProfile.jsx";
 import "../../style/Profile.css";
 import { FiUpload, FiEdit, FiLock } from "react-icons/fi";
+import Modal from "../common/Modal.jsx";
 
 function Profile() {
   const { username } = useParams();
@@ -18,7 +19,6 @@ function Profile() {
   const fetchData = useFetchData();
   const navigate = useNavigate();
 
-  // Profile management states
   const [showCVUpload, setShowCVUpload] = useState(false);
   const [showImageUpload, setShowImageUpload] = useState(false);
   const [showPasswordChange, setShowPasswordChange] = useState(false);
@@ -76,14 +76,13 @@ function Profile() {
     });
   }, [username, isChange, userData]);
 
-  // Profile management functions
+  // Handlers
   const handleCVUpload = async (e) => {
     e.preventDefault();
     if (!cvFile) {
       setMessage('Please select a CV file');
       return;
     }
-
     setLoading(true);
     const formData = new FormData();
     formData.append('cv_file', cvFile);
@@ -96,7 +95,7 @@ function Profile() {
         method: 'PUT',
         body: formData,
         onSuccess: (result) => {
-          setMessage('CV updated successfully!', result);
+          setMessage('CV updated successfully!');
           setShowCVUpload(false);
           setCvFile(null);
           setIsChange(prev => prev + 1);
@@ -106,7 +105,7 @@ function Profile() {
         }
       });
     } catch (error) {
-      setMessage('Unexpected error occurred', error);
+      setMessage('Unexpected error occurred');
     } finally {
       setLoading(false);
     }
@@ -114,7 +113,6 @@ function Profile() {
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
-
     setLoading(true);
     const formData = new FormData();
 
@@ -128,8 +126,8 @@ function Profile() {
       setLoading(false);
       return;
     }
-
     formData.append('user_id', userData.id);
+
     try {
       await fetchData({
         type: 'users/update-image',
@@ -137,7 +135,7 @@ function Profile() {
         role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
         body: formData,
         onSuccess: (result) => {
-          setMessage('Profile image updated successfully!', result);
+          setMessage('Profile image updated successfully!');
           setShowImageUpload(false);
           setImageFile(null);
           setUseGitAvatar(false);
@@ -148,7 +146,7 @@ function Profile() {
         }
       });
     } catch (error) {
-      setMessage('Unexpected error occurred', error);
+      setMessage('Unexpected error occurred');
     } finally {
       setLoading(false);
     }
@@ -161,14 +159,12 @@ function Profile() {
       setMessage('New passwords do not match');
       return;
     }
-
     if (passwords.newPassword.length < 6) {
       setMessage('New password must be at least 6 characters long');
       return;
     }
 
     setLoading(true);
-
     try {
       await fetchData({
         type: 'users/change-password',
@@ -181,7 +177,7 @@ function Profile() {
           newPassword: passwords.newPassword
         },
         onSuccess: (result) => {
-          setMessage('Password changed successfully!', result);
+          setMessage('Password changed successfully!');
           setShowPasswordChange(false);
           setPasswords({
             currentPassword: '',
@@ -194,15 +190,15 @@ function Profile() {
         }
       });
     } catch (error) {
-      setMessage('Unexpected error occurred', error);
+      setMessage('Unexpected error occurred');
     } finally {
       setLoading(false);
     }
   };
 
-  // Utility functions
+  // Helpers
   const getImageUrl = () => {
-    if (!userData.profile_image) return;
+    if (!userData?.profile_image) return;
     if (userData.profile_image.startsWith('https://github.com/')) {
       return userData.profile_image;
     }
@@ -210,7 +206,7 @@ function Profile() {
   };
 
   const getCVUrl = () => {
-    if (!userData.cv_file) return null;
+    if (!userData?.cv_file) return null;
     return `http://localhost:3001/uploads/${userData.cv_file}`;
   };
 
@@ -226,14 +222,12 @@ function Profile() {
       const response = await fetch(`/api/users/cv/${userData.username}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}` // אם יש אותנטיקציה
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -243,7 +237,6 @@ function Profile() {
       a.click();
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
-
       setMessage('CV downloaded successfully!');
     } catch (error) {
       console.error('Error downloading CV:', error);
@@ -269,7 +262,7 @@ function Profile() {
           {userData.role === 'developer' && (
             <button
               className="management-btn"
-              onClick={() => setShowCVUpload(!showCVUpload)}
+              onClick={() => setShowCVUpload(true)}
             >
               <FiUpload /> {userData.cv_file ? 'Update CV' : 'Upload CV'}
             </button>
@@ -278,7 +271,7 @@ function Profile() {
           {/* Profile Image Update Button */}
           <button
             className="management-btn"
-            onClick={() => setShowImageUpload(!showImageUpload)}
+            onClick={() => setShowImageUpload(true)}
           >
             <FiEdit /> Update Profile Image
           </button>
@@ -286,50 +279,45 @@ function Profile() {
           {/* Password Change Button */}
           <button
             className="management-btn"
-            onClick={() => setShowPasswordChange(!showPasswordChange)}
+            onClick={() => setShowPasswordChange(true)}
             disabled={loading}
           >
             <FiLock /> Change Password
           </button>
         </div>
 
-        {/* CV Upload Form */}
-        {showCVUpload && userData.role === 'developer' && (
-          <div className="upload-form">
+        {/* CV Upload Modal */}
+        {showCVUpload && (
+          <Modal onClose={() => setShowCVUpload(false)}>
             <h3>Upload CV</h3>
             <form onSubmit={handleCVUpload}>
-              <div className="form-group">
-                <label className="file-input-label">
-                  <FiUpload className="upload-icon" />
-                  <span>Select CV (PDF only)</span>
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={(e) => setCvFile(e.target.files[0])}
-                    style={{ display: 'none' }}
-                  />
-                </label>
-                {cvFile && <p>Selected: {cvFile.name}</p>}
-              </div>
+              <label>
+                Select CV (PDF only)
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={(e) => setCvFile(e.target.files[0])}
+                />
+              </label>
               <div className="form-buttons">
                 <button type="submit" disabled={loading}>
-                  {loading ? 'Uploading...' : 'Upload CV'}
+                  {loading ? "Uploading..." : "Upload CV"}
                 </button>
                 <button type="button" onClick={() => setShowCVUpload(false)}>
                   Cancel
                 </button>
               </div>
             </form>
-          </div>
+          </Modal>
         )}
 
-        {/* Image Upload Form */}
+        {/* Image Upload Modal */}
         {showImageUpload && (
-          <div className="upload-form">
+          <Modal onClose={() => setShowImageUpload(false)}>
             <h3>Update Profile Image</h3>
             <form onSubmit={handleImageUpload}>
-              {userData.role === 'developer' && userData.git_name && (
-                <div className="form-group">
+              <div className="form-group">
+                {userData.role === 'developer' && userData.git_name && (
                   <label className="checkbox-label">
                     <input
                       type="checkbox"
@@ -338,25 +326,22 @@ function Profile() {
                     />
                     Use GitHub profile image
                   </label>
-                </div>
-              )}
-
-              {!useGitAvatar && (
-                <div className="form-group">
-                  <label className="file-input-label">
-                    <FiUpload className="upload-icon" />
-                    <span>Select Image</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => setImageFile(e.target.files[0])}
-                      style={{ display: 'none' }}
-                    />
-                  </label>
-                  {imageFile && <p>Selected: {imageFile.name}</p>}
-                </div>
-              )}
-
+                )}
+                {!useGitAvatar && (
+                  <>
+                    <label className="file-input-label">
+                      <FiUpload className="upload-icon" />
+                      <span>Select Image</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImageFile(e.target.files[0])}
+                      />
+                    </label>
+                    {imageFile && <p>Selected: {imageFile.name}</p>}
+                  </>
+                )}
+              </div>
               <div className="form-buttons">
                 <button type="submit" disabled={loading}>
                   {loading ? 'Updating...' : 'Update Image'}
@@ -366,12 +351,12 @@ function Profile() {
                 </button>
               </div>
             </form>
-          </div>
+          </Modal>
         )}
 
-        {/* Password Change Form */}
+        {/* Password Change Modal */}
         {showPasswordChange && (
-          <div className="upload-form">
+          <Modal onClose={() => setShowPasswordChange(false)}>
             <h3>Change Password</h3>
             <form onSubmit={handlePasswordChange}>
               <div className="form-group">
@@ -382,8 +367,6 @@ function Profile() {
                   onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })}
                   required
                 />
-              </div>
-              <div className="form-group">
                 <input
                   type="password"
                   placeholder="New Password"
@@ -391,8 +374,6 @@ function Profile() {
                   onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })}
                   required
                 />
-              </div>
-              <div className="form-group">
                 <input
                   type="password"
                   placeholder="Confirm New Password"
@@ -410,7 +391,7 @@ function Profile() {
                 </button>
               </div>
             </form>
-          </div>
+          </Modal>
         )}
       </div>
     );
@@ -429,7 +410,6 @@ function Profile() {
     navigate,
     userItemsType,
     getImageUrl,
-    // getCVUrl,
     handleViewCV,
     handleDownloadCV
   };
@@ -473,8 +453,10 @@ function Profile() {
           </p>
 
           {renderProfileManagement()}
-          {userData.role === "developer" &&
-            (<><h2>Programming Languages</h2>
+
+          {userData.role === "developer" && (
+            <>
+              <h2>Programming Languages</h2>
               <div className="languages-container">
                 {userData.languages && userData.languages.length > 0 ? (
                   userData.languages
@@ -489,7 +471,9 @@ function Profile() {
                 ) : (
                   <p>No programming languages specified</p>
                 )}
-              </div></>)}
+              </div>
+            </>
+          )}
         </div>
 
         {userData.role === "developer" ? (

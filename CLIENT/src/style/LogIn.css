@@ -162,7 +162,7 @@
   transform: translateY(-2px);
 }
 
-.form-input:valid {
+/* .form-input:valid {
   border-color: #10b981;
   background: rgba(240, 253, 244, 0.9);
 }
@@ -170,7 +170,7 @@
 .form-input:invalid:not(:placeholder-shown) {
   border-color: #ef4444;
   background: rgba(254, 242, 242, 0.9);
-}
+} */
 
 /* Select dropdown styling */
 select.form-input {

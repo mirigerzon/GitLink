@@ -1,6 +1,7 @@
 const dal = require('../services/dal.js');
 const genericDal = require('../services/genericDal.js');
 const bcrypt = require('bcrypt');
+const { sendEmail } = require('../services/emailService');
 const { sendPasswordChangeWarningEmail } = require('../services/emailService');
 
 const getUser = async (username) => {
@@ -35,6 +36,28 @@ const getRecruiter = (id) => {
 const getJobApplications = async (job_id) => {
     const applications = await dal.getApplications(job_id);
     return applications;
+}
+
+const rejectApplicant = async (body, job_id) => {
+    const { developerId, developerEmail } = body;
+    const messageData = {
+        user_id: developerId,
+        email: developerEmail,
+        title: 'Application Rejected',
+        content: `Thank you for applying for Job #123.  
+            After careful review, we have decided to move forward with other candidates.  
+            We appreciate your interest and wish you success in your journey.
+            - The Recruitment Team`,
+    };
+    await dal.rejectApplicant(job_id, developerId, messageData);
+}
+
+const notifyApplicant = async ({ email, title, content }) => {
+    await sendEmail({
+        to: email,
+        subject: title,
+        html: content
+    });
 }
 
 const rateProject = async (username, projectId, rating) => {
@@ -115,7 +138,9 @@ module.exports = {
     getRecruiter,
     rateProject,
     createApply,
-    changeUserPassword
+    changeUserPassword,
+    rejectApplicant,
+    notifyApplicant
 };
 
 // const updateUserProfile = async (userId, userData) => {

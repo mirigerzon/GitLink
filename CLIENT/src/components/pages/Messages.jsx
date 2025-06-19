@@ -50,7 +50,7 @@ export const Messages = () => {
                                 </li>
                             ))}
                         </ul>
-                        <button className="close-btn" onClick={() => setOpen(false)}>Close</button>
+                        <button className="close-messages-btn" onClick={() => setOpen(false)}>Close</button>
                     </div>
                 </div>
             )}

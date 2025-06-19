@@ -1,18 +1,25 @@
 import { useState } from "react";
-import { useForm } from "../../../node_modules/react-hook-form/dist";
+import { useForm } from "react-hook-form";
 import { useCurrentUser } from "../../context.jsx";
 import { useFetchData } from "../../hooks/fetchData.js";
+import Modal from "../common/Modal.jsx";
+import "../../style/Update.css";
 
 function Add({ type, setIsChange, inputs = [], defaultValue = {}, name = "Add" }) {
     const { currentUser } = useCurrentUser();
-    const [isScreen, setIsScreen] = useState(0);
+    const [showModal, setShowModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const fetchData = useFetchData();
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({
         defaultValues: {
             ...defaultValue,
-            ...(currentUser?.id && { userId: currentUser.id })
+            ...(currentUser?.id && { userId: currentUser.id }),
         },
     });
 
@@ -25,9 +32,9 @@ function Add({ type, setIsChange, inputs = [], defaultValue = {}, name = "Add" }
                 body: data,
                 onSuccess: (result) => {
                     console.log("Add successful:", result);
-                    setIsChange(prev => prev + 1); // Improved state update
+                    setIsChange((prev) => prev + 1);
                     reset();
-                    setIsScreen(0);
+                    setShowModal(false);
                 },
                 onError: (error) => {
                     console.error("Add failed:", error);
@@ -42,74 +49,54 @@ function Add({ type, setIsChange, inputs = [], defaultValue = {}, name = "Add" }
 
     const handleCancel = () => {
         reset();
-        setIsScreen(0);
+        setShowModal(false);
     };
 
-    if (!currentUser) {
-        return <div>Loading...</div>;
-    }
-
-    if (!inputs.length) {
-        return <div>No input fields to display</div>;
-    }
+    if (!currentUser) return null;
+    if (!inputs.length) return null;
 
     return (
         <>
-            {isScreen === 0 && (
-                <button
-                    className="addBtn"
-                    onClick={() => setIsScreen(1)}
-                    disabled={isLoading}
-                >
-                    {name}
-                </button>
-            )}
+            <button className="btn-primary" onClick={() => setShowModal(true)} disabled={isLoading}>
+                {name}
+            </button>
 
-            {isScreen === 1 && (
-                <form onSubmit={handleSubmit(addFunc)} className="add-form">
-                    {inputs.map((input) => (
-                        <div key={input} className="input-group">
-                            <label htmlFor={input}>
-                                {input.charAt(0).toUpperCase() + input.slice(1)}
-                            </label>
-                            <input
-                                id={input}
-                                {...register(input, {
-                                    required: `${input} is required`,
-                                    minLength: {
-                                        value: 1,
-                                        message: `${input} cannot be empty`
-                                    }
-                                })}
-                                placeholder={`Enter ${input}`}
-                                disabled={isLoading}
-                            />
-                            {errors[input] && (
-                                <span className="error-message">
-                                    {errors[input].message}
-                                </span>
-                            )}
+            {showModal && (
+                <Modal onClose={handleCancel}>
+                    <form onSubmit={handleSubmit(addFunc)} className="add-form">
+                        {inputs.map((input) => (
+                            <div key={input} className="input-group">
+                                <label htmlFor={input}>
+                                    {input.charAt(0).toUpperCase() + input.slice(1)}
+                                </label>
+                                <input
+                                    id={input}
+                                    {...register(input, {
+                                        required: `${input} is required`,
+                                        minLength: {
+                                            value: 1,
+                                            message: `${input} cannot be empty`,
+                                        },
+                                    })}
+                                    placeholder={`Enter ${input}`}
+                                    disabled={isLoading}
+                                />
+                                {errors[input] && (
+                                    <span className="error-message">{errors[input].message}</span>
+                                )}
+                            </div>
+                        ))}
+
+                        <div style={{ marginTop: "20px", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+                            <button type="submit" value="OK" disabled={isLoading}>
+                                {isLoading ? "Adding..." : "OK"}
+                            </button>
+                            <button type="button" value="cancel" onClick={handleCancel} disabled={isLoading}>
+                                Cancel
+                            </button>
                         </div>
-                    ))}
-
-                    <div className="button-group">
-                        <button
-                            className="submit-btn"
-                            type="submit"
-                            disabled={isLoading}
-                        >
-                            {isLoading ? "Adding..." : "OK"}
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleCancel}
-                            disabled={isLoading}
-                            className="cancel-btn"
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </Modal>
             )}
         </>
     );

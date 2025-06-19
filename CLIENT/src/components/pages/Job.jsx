@@ -59,28 +59,29 @@ function Job({ jobData, setIsChange }) {
       <div className="job-header">
         <div className="job-title-section">
           <p className="company-name">{jobData.company_name}</p>
+          {isOwner && (
+            <div className="edit-section">
+              <Update
+                className='update-job-btn'
+                type="jobs"
+                itemId={jobData.id}
+                setIsChange={setIsChange}
+                inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
+                role={`/${currentUser.role}`}
+              />
+              <Delete
+                className="delete-job-btn"
+                type="jobs"
+                itemId={jobData.id}
+                setIsChange={setIsChange}
+                role={currentUser ? `/${currentUser.role}` : null}
+              />
+            </div>
+          )}
         </div>
       </div>
 
       <div className="job-content">
-        {isOwner && (
-          <div className="edit-section">
-            <Update
-              type="jobs"
-              itemId={jobData.id}
-              setIsChange={setIsChange}
-              inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
-              role={`/${currentUser.role}`}
-            />
-            <Delete
-              className="delete_btn"
-              type="jobs"
-              itemId={jobData.id}
-              setIsChange={setIsChange}
-              role={currentUser ? `/${currentUser.role}` : null}
-            />
-          </div>
-        )}
         <div className="job-requirements">
           <h4>Requirements</h4>
           <p>{jobData.requirements}</p>
