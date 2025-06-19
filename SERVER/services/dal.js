@@ -11,8 +11,6 @@ const pool = mysql.createPool({
     port: process.env.DB_PORT,
     waitForConnections: true,
     connectionLimit: 10,
-    // acquireTimeout: 60000,
-    // timeout: 60000,
 });
 
 const ALLOWED_TABLES = [
@@ -23,6 +21,23 @@ const ALLOWED_TABLES = [
 const USER_ROLES = {
     DEVELOPER: 'developer',
     RECRUITER: 'recruiter'
+};
+
+const getUsers = async () => {
+    try {
+        const users = await genericDal.GET_WITH_JOINS(
+            ["users", "passwords", "roles"],
+            [
+                'users.id = passwords.user_id',
+                `users.role_id = roles.role_id and roles.role != 'admin'`,
+            ],
+        );
+        if (users.length === 0) return null;
+        return users;
+    } catch (error) {
+        console.error('Error in getUser:', error.message);
+        throw new Error(`Failed to get user: ${error.message}`);
+    }
 };
 
 const getUser = async (username) => {
@@ -47,6 +62,8 @@ const getUser = async (username) => {
                 return await getUserWithRoleData(user.id, 'developers');
             case 'recruiter':
                 return await getUserWithRoleData(user.id, 'recruiters');
+            case 'admin':
+                return user;
             default:
                 throw new Error(`Invalid user role: ${user.role}`);
         }
@@ -196,28 +213,13 @@ const rejectApplicant = async (job_id, developerId, messageData) => {
     }
 }
 
-// Graceful shutdown
-const closePool = async () => {
-    try {
-        await pool.end();
-        console.log('Database pool closed successfully');
-    } catch (error) {
-        console.error('Error closing pool:', error.message);
-        throw new Error(`Failed to close pool: ${error.message}`);
-    }
-};
-
-process.on('SIGINT', closePool);
-process.on('SIGTERM', closePool);
-
 module.exports = {
     getUserWithRoleData,
     getUsersByRole,
+    getUsers,
     getUser,
     getProjectWithCreator,
     rateProjectTransactional,
     getApplications,
-    rejectApplicant,
-    // Utility
-    closePool
+    rejectApplicant
 };

@@ -33,7 +33,7 @@ function Profile() {
   });
 
   const isOwnProfile = currentUser && username === currentUser.username;
-  const userItemsType = userData?.role === "developer" ? "projects" : "jobs";
+  const userItemsType = userData?.role === "developer" ? "projects" : (userData?.role === 'recruiter') ? "jobs" : 'users';
 
   // Fetch user data
   useEffect(() => {
@@ -479,6 +479,7 @@ function Profile() {
         {userData.role === "developer" ? (
           <DeveloperProfile {...sharedProps} />
         ) : (
+          userData.role === 'recruiter' &&
           <RecruiterProfile {...sharedProps} />
         )}
       </div>

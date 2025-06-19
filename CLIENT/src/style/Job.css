@@ -76,13 +76,23 @@
 
 .job-requirements {
   margin-bottom: 1rem;
+  height: 20vh;
+  overflow-y: auto;
 }
 
-.job-requirements h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #374151;
-  margin: 0 0 0.5rem 0;
+.job-requirements::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.job-requirements::-webkit-scrollbar {
+  width: 0.5vh;
+  height: 1vh;
+}
+
+.job-requirements::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4);
+  border-radius: 10px;
 }
 
 .job-requirements p {

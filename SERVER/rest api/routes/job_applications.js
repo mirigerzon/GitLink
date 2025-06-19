@@ -77,7 +77,6 @@ router.put('/:job_id', async (req, res) => {
     }
 });
 
-
 router.put('/reject/:job_id', async (req, res) => {
     try {
         const { job_id } = req.params;

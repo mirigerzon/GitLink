@@ -68,7 +68,7 @@ function Job({ jobData, setIsChange }) {
                 setIsChange={setIsChange}
                 inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
                 role={`/${currentUser.role}`}
-                initialData={jobData} 
+                initialData={jobData}
 
               />
               <Delete
@@ -95,31 +95,18 @@ function Job({ jobData, setIsChange }) {
             <span className="detail-value">{jobData.experience} years</span>
           </div>
           <p className="detail-label">Languages:</p>
-          <div className="languages-container">
-            {jobData.languages && (
-              jobData.languages
-                .split(",")
-                .map((skill) => skill.trim())
-                .filter((skill) => skill)
-                .map((skill, index) => (
-                  <h3 key={index} className="skill-tag">
-                    {skill}
-                  </h3>
-                )))}
-          </div>
+          <span>{jobData.languages}</span>
           <p>views:</p>
           <span>{jobData.views}</span>
         </div>
 
         <div className="job-actions">
           {currentUser && currentUser.username == jobData.username ?
-            <button className="apply-btn" onClick={() => navigate(`/${jobData.username}/jobs/${jobData.id}/apply`)}>
+            <button className="apply-btn" onClick={() => { navigate(`/${jobData.username}/jobs/${jobData.id}/apply`) }}>
               View Applicants
             </button> :
-            // (currentUser && currentUser.role == 'developer' &&
-            // יש פה בעיה הוא מחזיר את התפקיד כמספר 
-            (currentUser && currentUser.role_id == 1 &&
-              <button className="apply-btn" onClick={handleApply}>
+            (currentUser && currentUser.role == 'developer' &&
+              <button className="apply-btn" disabled={jobData.is_seized} onClick={handleApply}>
                 Apply Now
               </button>)}
           <button className="view-company-btn" onClick={() => navigate(`/${jobData.username}/profile`)}>

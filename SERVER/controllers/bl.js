@@ -4,6 +4,12 @@ const bcrypt = require('bcrypt');
 const { sendEmail } = require('../services/emailService');
 const { sendPasswordChangeWarningEmail } = require('../services/emailService');
 
+const getUsers = async () => {
+    const users = await dal.getUsers();
+    if (!users || users.length === 0) return null;
+    return users;
+}
+
 const getUser = async (username) => {
     if (!username) throw new Error("Username is required");
 
@@ -11,6 +17,24 @@ const getUser = async (username) => {
     if (!users || users.length === 0) return null;
 
     return users;
+}
+
+const updateUserStatus = async (table, body, conditions) => {
+    const { email, id } = body;
+    const data = { status: body.status };
+    const messageData = {
+        user_id: id,
+        email: email,
+        title: body.status === 0 ? 'Account Blocked' : 'Account Active',
+        content: body.status === 0
+            ? `Your account has been blocked due to a violation of our policies.  
+                Please contact support if you have questions.  
+                - The Support Team`
+            : `Your account has been reactivated.  
+                Welcome back! If you have any questions, please contact support.  
+                - The Support Team`
+    };
+    await genericDal.updateAndInformUser(table, data, conditions, messageData);
 }
 
 const getDevelopers = () => {
@@ -130,7 +154,9 @@ const changeUserPassword = async (userId, currentPassword, newPassword, email) =
 };
 
 module.exports = {
+    getUsers,
     getUser,
+    updateUserStatus,
     getJobApplications,
     getDevelopers,
     getDeveloper,

@@ -189,7 +189,6 @@ const DELETE = async (table, conditions = []) => {
 
 const updateAndInformUser = async (table, data, conditions = [], messageData) => {
   const connection = await pool.getConnection();
-
   try {
     validateTable(table);
     validateConditions(conditions);

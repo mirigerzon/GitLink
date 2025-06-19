@@ -16,7 +16,8 @@ async function seedRoles(db) {
     INSERT INTO roles (role)
     VALUES
     ('developer'),
-    ('recruiter')
+    ('recruiter'),
+    ('admin')
   `);
 }
 
@@ -24,6 +25,7 @@ async function seedUsers(db) {
   await db.query(`
     INSERT INTO users (username, email, phone, role_id, about, profile_image, cv_file)
     VALUES
+      ('admin', 'gitlink10@gmail.com', 0527159812, 3, '', '', ''),
       ('alice', 'alice@example.com', 123456789, 1, 'Full-stack developer', 'https://...', 'cv_files/alice-cv.pdf'),
       ('bob', 'bob@example.com', 234567891, 1, 'Backend enthusiast', 'https://...', 'cv_files/bob-cv.pdf'),
       ('charlie', 'charlie@example.com', 345678912, 2, 'Java expert', 'https://...', NULL);
@@ -35,9 +37,10 @@ async function seedPasswords(db) {
   await db.query(`
     INSERT INTO passwords (user_id, hashed_password)
     VALUES
-      (1, '$2b$10$AGyVGvmsBM/22bB/ZSvn..KQdBh1CEP/eAICxCmXg9qp0P8C9GTUK'),
-      (2, '$2b$10$knYSIsliqk2UTbdzMH12z.8vYQBG5ITTzlBXvjOWFi3OSYVxHWF/2'),
-      (3, '$2b$10$g74BvDTnDJOs84FEcUqCcOZayxhwqXdi8DQ87fS9Qrj3LU3EqilQu');
+      (1, '$2b$10$j1XT3HhoYkB6hsAN/hcZbeCUUF95mDqxv7NbDkeKhVIBEQUfo9wtG'),
+      (2, '$2b$10$UKBrGw3lond5d.RujQuSfufY.b.UDBXw1q8kNsj0uULbjoYPcNTV2'),
+      (3, '$2b$10$UKBrGw3lond5d.RujQuSfufY.b.UDBXw1q8kNsj0uULbjoYPcNTV2'),
+      (4, '$2b$10$UKBrGw3lond5d.RujQuSfufY.b.UDBXw1q8kNsj0uULbjoYPcNTV2');
   `);
 }
 
@@ -45,8 +48,8 @@ async function seedDevelopers(db) {
   await db.query(`
     INSERT INTO developers (user_id, git_name, experience, languages, rating)
     VALUES
-      (1, 'aliceGH', 3, 'JavaScript,Python', 5),
-      (2, 'bobGH', 2, 'C++,C#', 4);
+      (2, 'aliceGH', 3, 'JavaScript,Python', 5),
+      (3, 'bobGH', 2, 'C++,C#', 4);
   `);
 }
 
@@ -54,7 +57,7 @@ async function seedRecruiters(db) {
   await db.query(`
     INSERT INTO recruiters (user_id, company_name)
     VALUES
-      (3, 'Some Company');
+      (4, 'Some Company');
   `);
 }
 
@@ -90,9 +93,9 @@ async function seedJobApplications(db) {
   await db.query(`
     INSERT INTO job_applications (user_id, job_id, remark)
     VALUES
-      (1, 1, 'Interested in backend role'),
-      (2, 1, 'Skilled in Java'),
-      (1, 2, 'Looking for Python work');
+      (2, 1, 'Interested in backend role'),
+      (3, 1, 'Skilled in Java'),
+      (2, 2, 'Looking for Python work');
   `);
 }
 
@@ -100,9 +103,9 @@ async function seedMessages(db) {
   await db.query(`
     INSERT INTO messages (user_id, email, title, content, is_read)
     VALUES
-      (1, 'alice@example.com', 'Welcome!', 'Welcome to the platform!', FALSE),
-      (2, 'bob@example.com', 'Tip', 'Do not forget to update your profile.', FALSE),
-      (3, 'charlie@example.com', 'Alert', 'New job posted in your field.', FALSE);
+      (2, 'alice@example.com', 'Welcome!', 'Welcome to the platform!', FALSE),
+      (3, 'bob@example.com', 'Tip', 'Do not forget to update your profile.', FALSE),
+      (4, 'charlie@example.com', 'Alert', 'New job posted in your field.', FALSE);
   `);
 }
 

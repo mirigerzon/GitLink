@@ -6,8 +6,10 @@ const { writeLog } = require('../../log/log.js');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
+const verifyToken = require('../middleware/verifyToken');
 const { handleError, validateRequiredFields } = require('../utils/routerHelpers.js');
 const fs = require('fs');
+const { verify } = require('crypto');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -42,25 +44,23 @@ const upload = multer({
     }
 });
 
-router.get('/', async (req, res) => {
+router.get('/:username', async (req, res) => {
     try {
-        if (!req.user?.id) return res.status(401).json({ error: 'User not authenticated' });
-
-        const data = await dataService.getUser(req.user.id);
-        writeLog(`Fetched user data for id=${req.user.id}`, 'info');
+        const { username } = req.params;
+        if (!username) return res.status(400).json({ error: 'Username is required' });
+        const data = await dataService.getUser(username);
+        writeLog(`Fetched user data for username=${username}`, 'info');
         res.json(data);
     } catch (err) {
         handleError(res, err, 'users', 'fetching');
     }
 });
 
-router.get('/:username', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const { username } = req.params;
-        if (!username) return res.status(400).json({ error: 'Username is required' });
-
-        const data = await dataService.getUser(username);
-        writeLog(`Fetched user data for username=${username}`, 'info');
+        // if (!req.user?.id) return res.status(401).json({ error: 'User not authenticated' });
+        const data = await dataService.getUsers();
+        writeLog(`Fetched users data`, 'info');
         res.json(data);
     } catch (err) {
         handleError(res, err, 'users', 'fetching');
@@ -123,6 +123,44 @@ router.put('/change-password', async (req, res) => {
         res.status(200).json({ message: 'Password changed successfully' });
     } catch (err) {
         handleError(res, err, 'users', 'changing password for');
+    }
+});
+
+router.put('/status/:username', async (req, res) => {
+    try {
+        const { username } = req.params;
+        if (!username) return res.status(400).json({ error: 'username is required' });
+        const result = await dataService.updateUserStatus(
+            'users',
+            req.body,
+            [{ field: 'username', value: username }]
+        );
+        writeLog(`Updated username=${username} by user=${req.user.username}`, 'info');
+        res.json({
+            message: 'user updated successfully',
+            result
+        });
+    } catch (err) {
+        handleError(res, err, 'users', 'updating user');
+    }
+});
+
+router.put('/:username', async (req, res) => {
+    try {
+        const { username } = req.params;
+        if (!username) return res.status(400).json({ error: 'username is required' });
+        const result = await genericDataService.updateItem(
+            'users',
+            req.body,
+            [{ field: 'username', value: username }]
+        );
+        writeLog(`Updated username=${username} by user=${req.user.username}`, 'info');
+        res.json({
+            message: 'user updated successfully',
+            result
+        });
+    } catch (err) {
+        handleError(res, err, 'users', 'updating user');
     }
 });
 

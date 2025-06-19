@@ -10,6 +10,7 @@ import Apply from "./components/pages/ApplyUsers";
 import Projects from "./components/pages/Projects";
 import Error from "./components/pages/Error";
 import Profile from "./components/pages/Profile";
+import Admin from "./components/pages/Admin.jsx";
 import "./style/App.css";
 
 import { CurrentUserProvider } from "./context.jsx";
@@ -38,6 +39,7 @@ function App() {
             <Route path=":id" element={<Projects />} />
           </Route>
           <Route path="profile" element={<Profile />} />
+          <Route path="users" element={<Admin />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

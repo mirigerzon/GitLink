@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  margin-bottom: 20px;
   padding: 15px;
 }
 
@@ -11,13 +10,6 @@
   flex-direction: column;
   min-width: 180px;
   flex: 1;
-}
-
-.filter-group label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #495057;
-  margin-bottom: 5px;
 }
 
 .filter-group select {

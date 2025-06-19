@@ -105,3 +105,969 @@
 [2025-06-19T08:24:49.865Z] [INFO] Fetched recruiters data
 [2025-06-19T08:24:51.765Z] [INFO] Fetched jobs with conditions=[]
 [2025-06-19T08:24:51.769Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T08:35:06.190Z] [ERROR] ERROR fetching messages - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:35:06.349Z] [ERROR] ERROR fetching messages - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:35:06.400Z] [ERROR] ERROR fetching messages - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:35:09.590Z] [ERROR] ERROR fetching jobs - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:35:09.618Z] [ERROR] ERROR fetching jobs - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:24.543Z] [ERROR] ERROR fetching messages - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:24.553Z] [ERROR] ERROR fetching jobs - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:24.587Z] [ERROR] ERROR fetching messages - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:24.607Z] [ERROR] ERROR fetching jobs - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:24.642Z] [ERROR] ERROR fetching messages - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:24.647Z] [ERROR] ERROR fetching jobs - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:24.672Z] [ERROR] ERROR fetching jobs - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:25.923Z] [INFO] User logged out
+[2025-06-19T08:36:26.079Z] [ERROR] ERROR fetching jobs - Database query failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:36:33.215Z] [ERROR] ERROR login auth - Failed to get user: Database query with joins failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:38:17.547Z] [ERROR] ERROR login auth - Failed to get user: Database query with joins failed: Access denied for user ''@'localhost' (using password: YES)
+[2025-06-19T08:40:56.741Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-19T08:40:56.864Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:40:56.876Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:41:00.118Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T08:41:00.125Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T08:41:04.255Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:41:04.270Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:41:07.850Z] [INFO] reject application for job id=4
+[2025-06-19T08:41:07.861Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:41:07.874Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:41:09.037Z] [INFO] Updated message for user=undefined
+[2025-06-19T08:41:09.065Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:41:09.070Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:41:10.268Z] [INFO] Updated message for user=undefined
+[2025-06-19T08:41:10.310Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:41:10.325Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:43:28.025Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:43:28.029Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:43:28.035Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:43:28.038Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:43:28.046Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:43:36.015Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:52:03.647Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T08:52:03.656Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:52:03.658Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:52:22.084Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T08:52:22.094Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:52:22.097Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:53:53.074Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T08:53:53.088Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:53:53.091Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:56:22.930Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:56:22.932Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:56:22.937Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:56:22.939Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:56:22.941Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:56:23.024Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:56:48.841Z] [INFO] Access token refreshed for userId=6, ip=::1
+[2025-06-19T08:56:48.848Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T08:56:48.859Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:56:48.864Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:56:48.869Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:57:38.448Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:57:38.453Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:57:38.455Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:57:38.458Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:57:38.521Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:57:38.542Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:58:57.245Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:58:57.250Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:58:57.255Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:58:57.261Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:58:57.360Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:58:57.396Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:58:58.315Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:58:58.327Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:58:58.328Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:58:58.332Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:58:58.363Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:58:58.391Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:59:25.062Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:59:25.078Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:59:25.084Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:59:25.089Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T08:59:25.127Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T08:59:47.562Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:00:16.496Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:00:16.509Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:00:16.512Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:00:16.519Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:00:16.546Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:10:32.677Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:10:32.800Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:10:32.821Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:10:34.168Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:10:34.176Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:10:34.194Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:10:34.198Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:10:34.207Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:10:34.210Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:10:34.216Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:10:37.258Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:10:37.299Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:10:37.305Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:10:37.317Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:10:49.971Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:10:50.015Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:10:50.030Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:10:50.061Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:12:00.223Z] [INFO] Access token refreshed for userId=6, ip=::1
+[2025-06-19T09:12:00.263Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:12:00.316Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:12:00.344Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:12:00.380Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:12:05.472Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:12:05.539Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:12:05.550Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:12:05.584Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:14:16.923Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:14:16.938Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:14:16.935Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:14:16.950Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:14:16.966Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:14:16.970Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:14:16.976Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:14:19.064Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:14:19.082Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:14:19.083Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:14:19.100Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:15:20.591Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:15:20.620Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:15:20.646Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:15:20.660Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:16:40.741Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:16:40.812Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:16:40.833Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:16:40.841Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:16:52.503Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:16:52.599Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:16:52.611Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:16:52.649Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:23:59.189Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:23:59.216Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:23:59.224Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:23:59.233Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:24:00.734Z] [INFO] User logged out
+[2025-06-19T09:24:09.670Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-19T09:24:09.699Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T09:24:09.707Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T09:24:12.756Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:24:12.762Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:24:15.987Z] [ERROR] ERROR creating job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-19T09:24:18.518Z] [INFO] User logged out
+[2025-06-19T09:24:18.540Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:24:24.228Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-19T09:24:24.258Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:24:24.263Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:24:27.172Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:24:27.176Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:24:53.560Z] [INFO] User logged out
+[2025-06-19T09:24:53.578Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:25:00.113Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-19T09:25:00.149Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T09:25:00.155Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T09:25:02.890Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:25:02.900Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:26:00.893Z] [INFO] User logged out
+[2025-06-19T09:26:00.949Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:26:09.000Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-19T09:26:09.146Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:26:09.189Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:26:44.869Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:26:44.894Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:26:48.266Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:26:48.271Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:26:48.331Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:26:48.338Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:27:26.121Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:27:26.129Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:27:28.899Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:27:28.934Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:27:28.913Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:27:28.948Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:28.952Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:27:28.961Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:28.967Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:31.143Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:31.155Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:31.193Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:27:31.218Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:27:31.222Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:27:31.246Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:27:31.261Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:36.704Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:36.727Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:27:36.783Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:27:36.791Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:36.797Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:27:36.814Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:27:36.817Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:27:46.931Z] [INFO] User logged out
+[2025-06-19T09:27:57.391Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-19T09:27:57.626Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T09:27:57.657Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T09:28:00.512Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:28:00.541Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:28:05.591Z] [INFO] User logged out
+[2025-06-19T09:28:05.669Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:28:45.717Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-19T09:28:45.787Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:28:45.796Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:28:49.797Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:28:49.808Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:28:51.621Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:28:51.692Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:28:51.699Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:28:51.708Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:28:53.653Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:28:53.728Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:28:53.744Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:28:53.759Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:28:57.581Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:28:57.677Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:28:57.687Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:28:57.717Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:29:01.396Z] [INFO] Updated project id=4 by user=sara
+[2025-06-19T09:29:01.487Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:29:01.511Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:29:01.520Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:29:09.507Z] [INFO] User logged out
+[2025-06-19T09:29:15.629Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-19T09:29:15.763Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:29:15.783Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:29:18.277Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:29:18.302Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T09:29:19.505Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:29:19.556Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:29:19.570Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:29:19.587Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:06.163Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:06.209Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:06.229Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:06.267Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:06.279Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:06.293Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:06.301Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:14.909Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:14.967Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:14.982Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:15.030Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:15.040Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:15.087Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:15.096Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:30.948Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:30.991Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:34.876Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:34.890Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:34.915Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:34.932Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:34.942Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:34.960Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:34.963Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:43.357Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:43.515Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:43.537Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:43.639Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:43.659Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:43.824Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:43.867Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:57.928Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:57.992Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:58.014Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:30:58.025Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:58.042Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:30:58.107Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:30:58.116Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:31:23.594Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:32:20.240Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:32:20.485Z] [ERROR] ERROR fetching job - Failed to get user with role data: Database query with joins failed: Table validation failed: Invalid table name: developer
+[2025-06-19T09:32:20.532Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:32:20.543Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:32:20.589Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:32:20.613Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:32:20.625Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:32:39.781Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:32:39.798Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:33:39.401Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:35:28.786Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:35:28.821Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:36:23.380Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:36:27.066Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:36:27.133Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:36:55.230Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:36:59.473Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:36:59.546Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:36:59.554Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:36:59.575Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:36:59.585Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:36:59.593Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:37:13.352Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:37:13.644Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:37:13.680Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:37:13.838Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:37:13.862Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:37:13.893Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:37:13.928Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:37:59.208Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:37:59.278Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:37:59.377Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:37:59.482Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:37:59.565Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:37:59.515Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:38:13.876Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:38:13.893Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:38:19.360Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:38:19.384Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:38:19.438Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:38:19.469Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:38:19.568Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:38:19.637Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:38:19.666Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:38:19.713Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:38:19.757Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:43:13.989Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:43:14.132Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:43:14.157Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:43:14.215Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:43:14.323Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:43:14.366Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:43:14.390Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:43:14.446Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:43:14.498Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:43:59.477Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:43:59.504Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:43:59.535Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:43:59.542Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:43:59.576Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:43:59.584Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:43:59.687Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:43:59.811Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:43:59.816Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:45:00.703Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:45:00.726Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:45:00.756Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:45:00.784Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:45:00.827Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:45:00.834Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:45:00.905Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:45:01.034Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:45:01.048Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:46:58.179Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:46:58.214Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:46:58.218Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:46:58.233Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:46:58.237Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:46:58.246Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T09:46:58.283Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T09:46:58.318Z] [INFO] Fetched job data for id=4
+[2025-06-19T09:46:58.322Z] [INFO] Fetched job_applications for job id=4
+[2025-06-19T10:02:27.661Z] [INFO] User logged out
+[2025-06-19T10:08:23.628Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-19T10:08:53.464Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-19T10:10:14.385Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-19T10:11:27.702Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-19T10:12:36.258Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-19T10:12:36.462Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-19T10:17:42.408Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-19T10:18:11.877Z] [INFO] User logged in successfully: user name=admin, ip=::1
+[2025-06-19T10:18:12.207Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:18:12.247Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:19:38.669Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:19:38.678Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:19:38.729Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:19:40.863Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:19:40.881Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:19:40.915Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:19:40.927Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:20:19.760Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:20:19.789Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:20:19.794Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:20:19.826Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:20:19.847Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:20:19.867Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:21:19.112Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:19.138Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:21:19.141Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:19.163Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:21:19.172Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:22.831Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:22.837Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:21:22.857Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:22.862Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:21:22.920Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:24.071Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:24.074Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:21:24.098Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:24.104Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:21:24.146Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:28.679Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:28.703Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:21:28.714Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:21:28.730Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:21:28.869Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:22:55.087Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:22:55.108Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:22:55.113Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:22:55.133Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:22:55.140Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:22:55.170Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:22:55.218Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:27:59.215Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:27:59.228Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:27:59.303Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:27:59.341Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:36:22.319Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:36:22.344Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:36:22.352Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:36:22.372Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:36:22.389Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:36:23.850Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:36:24.641Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:42:30.991Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:42:31.132Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:42:31.193Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:42:31.244Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:42:31.276Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:42:31.325Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:42:31.358Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:42:40.311Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:42:40.341Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:42:40.584Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:42:40.614Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:42:40.698Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:42:40.751Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:42:40.789Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:12.273Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:43:12.337Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:43:12.469Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:12.508Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:12.549Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:43:12.639Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:12.661Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:27.655Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:37.364Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:43:37.385Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:43:37.469Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:43:37.497Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:37.534Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:37.566Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:43:37.614Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T10:44:51.289Z] [INFO] Fetched users data
+[2025-06-19T10:44:51.332Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:44:54.495Z] [INFO] Fetched users data
+[2025-06-19T10:44:54.504Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:44:54.554Z] [INFO] Fetched users data
+[2025-06-19T10:44:54.567Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:44:54.588Z] [INFO] Fetched users data
+[2025-06-19T10:47:44.280Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:47:44.286Z] [INFO] Fetched users data
+[2025-06-19T10:47:44.318Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:47:44.323Z] [INFO] Fetched users data
+[2025-06-19T10:47:44.400Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:47:44.406Z] [INFO] Fetched users data
+[2025-06-19T10:47:44.489Z] [INFO] Fetched users data
+[2025-06-19T10:48:12.268Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:48:12.272Z] [INFO] Fetched users data
+[2025-06-19T10:48:12.284Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:48:12.289Z] [INFO] Fetched users data
+[2025-06-19T10:48:12.325Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:48:12.328Z] [INFO] Fetched users data
+[2025-06-19T10:48:12.409Z] [INFO] Fetched users data
+[2025-06-19T10:48:13.083Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:48:13.104Z] [INFO] Fetched users data
+[2025-06-19T10:48:13.131Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:48:13.139Z] [INFO] Fetched users data
+[2025-06-19T10:48:13.174Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:48:13.175Z] [INFO] Fetched users data
+[2025-06-19T10:48:13.239Z] [INFO] Fetched users data
+[2025-06-19T10:50:17.355Z] [INFO] Fetched users data
+[2025-06-19T10:50:37.694Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:50:37.710Z] [INFO] Fetched users data
+[2025-06-19T10:50:37.712Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:50:37.719Z] [INFO] Fetched users data
+[2025-06-19T10:50:37.721Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:50:37.727Z] [INFO] Fetched users data
+[2025-06-19T10:50:37.733Z] [INFO] Fetched users data
+[2025-06-19T10:54:49.330Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:54:49.334Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:54:49.341Z] [INFO] Fetched users data
+[2025-06-19T10:54:49.349Z] [INFO] Fetched users data
+[2025-06-19T10:54:49.562Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:54:49.563Z] [INFO] Fetched users data
+[2025-06-19T10:54:49.569Z] [INFO] Fetched users data
+[2025-06-19T10:55:05.265Z] [INFO] Fetched users data
+[2025-06-19T10:55:05.272Z] [INFO] Fetched users data
+[2025-06-19T10:55:46.639Z] [INFO] Fetched data from table = developers 
+[2025-06-19T10:55:46.644Z] [INFO] Fetched data from table = developers 
+[2025-06-19T10:55:49.120Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:55:49.126Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:55:54.251Z] [INFO] Fetched data from table = developers 
+[2025-06-19T10:55:54.257Z] [INFO] Fetched data from table = developers 
+[2025-06-19T10:55:56.946Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:55:56.951Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:55:56.968Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:55:56.973Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:56:01.600Z] [INFO] Fetched data from table = developers 
+[2025-06-19T10:56:01.605Z] [INFO] Fetched data from table = developers 
+[2025-06-19T10:56:04.698Z] [INFO] Fetched user data for username=alice
+[2025-06-19T10:56:04.708Z] [INFO] Fetched user data for username=alice
+[2025-06-19T10:56:04.729Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-19T10:56:04.740Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-19T10:56:09.269Z] [INFO] Fetched data from table = developers 
+[2025-06-19T10:56:09.278Z] [INFO] Fetched data from table = developers 
+[2025-06-19T10:56:15.354Z] [INFO] Fetched user data for username=alice
+[2025-06-19T10:56:15.362Z] [INFO] Fetched user data for username=alice
+[2025-06-19T10:56:15.374Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-19T10:56:15.382Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-19T10:56:42.958Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:56:42.959Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:56:42.967Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:56:44.376Z] [INFO] Fetched users data
+[2025-06-19T10:56:44.379Z] [INFO] Fetched users data
+[2025-06-19T10:56:47.023Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:56:47.029Z] [INFO] Fetched user data for username=admin
+[2025-06-19T10:56:47.038Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:56:47.047Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T10:56:49.240Z] [INFO] Fetched users data
+[2025-06-19T10:56:49.248Z] [INFO] Fetched users data
+[2025-06-19T10:56:50.605Z] [INFO] Fetched user data for username=alice
+[2025-06-19T10:56:50.612Z] [INFO] Fetched user data for username=alice
+[2025-06-19T10:56:50.620Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-19T10:56:50.625Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"alice"}]
+[2025-06-19T10:56:55.563Z] [INFO] Fetched users data
+[2025-06-19T10:56:55.569Z] [INFO] Fetched users data
+[2025-06-19T10:56:57.026Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T10:56:57.050Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T10:57:27.322Z] [INFO] Fetched recruiters data
+[2025-06-19T10:57:27.330Z] [INFO] Fetched recruiters data
+[2025-06-19T10:57:38.649Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T10:57:38.669Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T10:57:40.095Z] [INFO] Fetched recruiters data
+[2025-06-19T10:57:40.100Z] [INFO] Fetched recruiters data
+[2025-06-19T10:57:42.807Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T10:57:42.824Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T10:58:32.451Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:58:32.455Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:59:18.964Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T10:59:18.966Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T10:59:33.071Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T10:59:35.818Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:01:37.384Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:01:37.389Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T11:01:46.629Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T11:01:46.632Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:01:49.988Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:02:01.170Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:03:58.927Z] [ERROR] ERROR fetching users - Failed to get user: Failed to get user with role data: User not found
+[2025-06-19T11:04:05.384Z] [INFO] Fetched user data for username=bob
+[2025-06-19T11:04:09.521Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:04:09.524Z] [INFO] Fetched user data for username=bob
+[2025-06-19T11:04:09.527Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:04:09.529Z] [INFO] Fetched user data for username=bob
+[2025-06-19T11:04:09.534Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:04:09.561Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-19T11:04:09.568Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-19T11:04:19.478Z] [INFO] Fetched recruiters data
+[2025-06-19T11:04:19.486Z] [INFO] Fetched recruiters data
+[2025-06-19T11:04:21.180Z] [INFO] Fetched user data for username=bob
+[2025-06-19T11:04:21.187Z] [INFO] Fetched user data for username=bob
+[2025-06-19T11:04:21.196Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-19T11:04:21.201Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"bob"}]
+[2025-06-19T11:04:22.514Z] [INFO] Fetched users data
+[2025-06-19T11:04:22.523Z] [INFO] Fetched users data
+[2025-06-19T11:22:16.363Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:22:16.367Z] [INFO] Fetched users data
+[2025-06-19T11:22:16.371Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:22:16.373Z] [INFO] Fetched users data
+[2025-06-19T11:22:16.377Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:22:16.379Z] [INFO] Fetched users data
+[2025-06-19T11:22:16.382Z] [INFO] Fetched users data
+[2025-06-19T11:23:15.885Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:23:15.887Z] [INFO] Fetched users data
+[2025-06-19T11:23:15.891Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:23:15.891Z] [INFO] Fetched users data
+[2025-06-19T11:23:16.058Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:23:16.060Z] [INFO] Fetched users data
+[2025-06-19T11:23:16.073Z] [INFO] Fetched users data
+[2025-06-19T11:23:40.233Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:23:40.242Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:23:40.243Z] [INFO] Fetched users data
+[2025-06-19T11:23:40.248Z] [INFO] Fetched users data
+[2025-06-19T11:23:40.276Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:23:40.277Z] [INFO] Fetched users data
+[2025-06-19T11:23:40.299Z] [INFO] Fetched users data
+[2025-06-19T11:38:46.400Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:38:46.405Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:38:46.409Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T11:41:20.973Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T11:42:50.586Z] [ERROR] ERROR updating user users - Database update failed: Unknown column '0' in 'field list'
+[2025-06-19T11:44:20.136Z] [ERROR] ERROR updating user users - Database update failed: Unknown column '0' in 'field list'
+[2025-06-19T11:44:27.541Z] [ERROR] ERROR updating user users - Database update failed: Unknown column 'field' in 'field list'
+[2025-06-19T11:44:58.194Z] [ERROR] ERROR updating user users - Database update failed: Unknown column 'field' in 'field list'
+[2025-06-19T11:45:04.283Z] [INFO] Updated username=alice by user=admin
+[2025-06-19T11:45:08.633Z] [INFO] Fetched users data
+[2025-06-19T11:52:36.729Z] [ERROR] ERROR updating user users - dataService.updateUser is not a function
+[2025-06-19T12:07:14.589Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T12:07:18.641Z] [ERROR] ERROR updating user users - body is not defined
+[2025-06-19T12:13:45.597Z] [ERROR] ERROR updating user users - Transaction failed: Unknown column '0' in 'field list'
+[2025-06-19T12:14:34.384Z] [INFO] Updated username=alice by user=admin
+[2025-06-19T12:14:54.608Z] [INFO] Updated username=bob by user=admin
+[2025-06-19T12:15:11.991Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:15:12.068Z] [INFO] Fetched users data
+[2025-06-19T12:15:12.155Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:15:12.236Z] [INFO] Fetched users data
+[2025-06-19T12:15:12.302Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:15:12.369Z] [INFO] Fetched users data
+[2025-06-19T12:15:12.480Z] [INFO] Fetched users data
+[2025-06-19T12:15:52.121Z] [INFO] Updated username=alice by user=admin
+[2025-06-19T12:15:54.921Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:15:55.138Z] [INFO] Fetched users data
+[2025-06-19T12:15:55.347Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:15:55.570Z] [INFO] Fetched users data
+[2025-06-19T12:15:55.730Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:15:56.006Z] [INFO] Fetched users data
+[2025-06-19T12:15:56.246Z] [INFO] Fetched users data
+[2025-06-19T12:16:14.757Z] [INFO] Updated username=alice by user=admin
+[2025-06-19T12:16:47.369Z] [INFO] Updated username=alice by user=admin
+[2025-06-19T12:16:49.086Z] [INFO] Fetched users data
+[2025-06-19T12:16:53.056Z] [INFO] Updated username=bob by user=admin
+[2025-06-19T12:16:58.998Z] [INFO] Updated username=bob by user=admin
+[2025-06-19T12:17:03.129Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:17:03.362Z] [INFO] Fetched users data
+[2025-06-19T12:17:03.536Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:17:03.974Z] [INFO] Fetched users data
+[2025-06-19T12:17:04.213Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:17:04.422Z] [INFO] Fetched users data
+[2025-06-19T12:17:04.740Z] [INFO] Fetched users data
+[2025-06-19T12:17:13.378Z] [INFO] Updated username=alice by user=admin
+[2025-06-19T12:17:15.546Z] [INFO] Fetched users data
+[2025-06-19T12:17:19.142Z] [INFO] Updated username=bob by user=admin
+[2025-06-19T12:17:31.256Z] [INFO] Updated username=alice by user=admin
+[2025-06-19T12:17:47.818Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:17:47.984Z] [INFO] Fetched users data
+[2025-06-19T12:17:48.248Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:17:48.522Z] [INFO] Fetched users data
+[2025-06-19T12:17:48.698Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:17:49.000Z] [INFO] Fetched users data
+[2025-06-19T12:17:49.296Z] [INFO] Fetched users data
+[2025-06-19T12:17:52.629Z] [INFO] Updated username=bob by user=admin
+[2025-06-19T12:17:54.261Z] [INFO] Fetched users data
+[2025-06-19T12:18:22.918Z] [INFO] User logged out
+[2025-06-19T12:18:23.146Z] [INFO] Fetched users data
+[2025-06-19T12:19:14.243Z] [INFO] User registered successfully: email=a0583286530@gmail.com
+[2025-06-19T12:19:14.348Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:19:14.355Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:19:20.398Z] [INFO] Deleted message id=15
+[2025-06-19T12:19:20.418Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:19:20.424Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:19:27.670Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:19:27.683Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:22:21.114Z] [INFO] User logged out
+[2025-06-19T12:22:21.171Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:22:31.794Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-19T12:22:31.820Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:22:31.830Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:24:50.476Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:50.499Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:52.030Z] [INFO] Created job application: {"job_id":2,"user_id":5}
+[2025-06-19T12:24:52.083Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:52.111Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:24:52.119Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:52.144Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:24:52.153Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:54.008Z] [INFO] Created job application: {"job_id":1,"user_id":5}
+[2025-06-19T12:24:54.053Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:24:54.060Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:54.080Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:24:54.086Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:54.102Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:57.682Z] [INFO] Updated message for user=a0583286530@gmail.com
+[2025-06-19T12:24:57.714Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:24:57.737Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:24:57.748Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:24:57.762Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:25:02.805Z] [INFO] User logged out
+[2025-06-19T12:25:02.876Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:26:40.432Z] [INFO] User registered successfully: email=sara3280624@gmail.com
+[2025-06-19T12:26:40.583Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T12:26:40.599Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T12:26:53.295Z] [INFO] Fetched data from table = developers 
+[2025-06-19T12:26:53.318Z] [INFO] Fetched data from table = developers 
+[2025-06-19T12:26:54.266Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T12:26:54.284Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T12:26:55.310Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:26:55.327Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:26:58.711Z] [INFO] Fetched user data for username=sara
+[2025-06-19T12:26:58.728Z] [INFO] Fetched user data for username=sara
+[2025-06-19T12:26:58.757Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T12:26:58.775Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T12:27:18.127Z] [INFO] Created job with data={"title":"hii","username":"sara","company_name":"sara platform","requirements":"Hi! I'm a Full Stack Developer with a passion for solving problems and building systems that actually work. I love turning raw ideas into real, functional products — using clean, efficient, and maintainable code.\n\nMy work spans from server-side development with Node.js to creating dynamic, accessible interfaces with React. I'm always eager to learn new technologies, dive deep, and avoid shortcuts when it matters.\n\nBeyond the code, I care deeply about creating a smooth and thoughtful user experience — because behind every line of code is a real person using it.\n\nTo me, good development is a balance of listening, creativity, and precision.\nIf you're looking for someone who cares not only about the result but also about the journey — let's connect.","experience":"4","languages":"c++, java, html, css, react","details":"Hi! I'm a Full Stack Developer with a passion for solving problems and building systems that actually work. I love turning raw ideas into real, functional products — using clean, efficient, and maintainable code.\n\nMy work spans from server-side development with Node.js to creating dynamic, accessible interfaces with React. I'm always eager to learn new technologies, dive deep, and avoid shortcuts when it matters.\n\nBeyond the code, I care deeply about creating a smooth and thoughtful user experience — because behind every line of code is a real person using it.\n\nTo me, good development is a balance of listening, creativity, and precision.\nIf you're looking for someone who cares not only about the result but also about the journey — let's connect."}
+[2025-06-19T12:27:18.173Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T12:27:18.177Z] [INFO] Fetched user data for username=sara
+[2025-06-19T12:27:18.193Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T12:27:18.204Z] [INFO] Fetched user data for username=sara
+[2025-06-19T12:27:18.208Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T12:27:18.225Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T12:27:20.481Z] [INFO] User logged out
+[2025-06-19T12:27:25.762Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-19T12:27:25.812Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:27:25.827Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:27:28.647Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:27:28.667Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:27:31.994Z] [INFO] Created job application: {"job_id":3,"user_id":5}
+[2025-06-19T12:27:32.048Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:27:32.053Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:27:32.074Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:27:32.080Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:27:32.099Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:27:43.080Z] [INFO] User logged out
+[2025-06-19T12:27:43.153Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:27:49.246Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-19T12:27:49.319Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T12:27:49.332Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T12:27:54.408Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:27:54.424Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:27:56.850Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:27:56.858Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:27:56.881Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:27:56.887Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:27:56.905Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:27:56.915Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:28:01.114Z] [ERROR] ERROR updating project jobs - Database update failed: Unknown column 'is_seized' in 'field list'
+[2025-06-19T12:28:06.125Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T12:28:06.129Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:28:06.155Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:28:06.161Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T12:28:06.167Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:28:06.185Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:28:06.190Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T12:28:06.237Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:28:06.243Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:28:09.984Z] [ERROR] ERROR updating project jobs - Database update failed: Unknown column 'is_seized' in 'field list'
+[2025-06-19T12:29:26.291Z] [INFO] Updated project id=3 by user=sara
+[2025-06-19T12:29:26.336Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:29:26.352Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:29:26.369Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:29:26.390Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:29:26.398Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:29:29.896Z] [INFO] Updated project id=3 by user=sara
+[2025-06-19T12:29:29.931Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:29:29.936Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:29:29.951Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:29:29.973Z] [INFO] Fetched job data for id=3
+[2025-06-19T12:29:29.980Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:29:35.551Z] [INFO] reject application for job id=3
+[2025-06-19T12:29:35.583Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:29:35.596Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T12:29:38.103Z] [INFO] User logged out
+[2025-06-19T12:29:45.863Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-19T12:29:45.929Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:29:45.943Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:29:57.785Z] [INFO] Updated message for user=a0583286530@gmail.com
+[2025-06-19T12:29:57.825Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:29:57.848Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:29:59.122Z] [INFO] Deleted message id=20
+[2025-06-19T12:29:59.156Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:29:59.177Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:30:00.449Z] [INFO] Deleted message id=19
+[2025-06-19T12:30:00.484Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:30:00.504Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:30:01.267Z] [INFO] Deleted message id=17
+[2025-06-19T12:30:01.303Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:30:01.325Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:30:03.283Z] [INFO] Deleted message id=16
+[2025-06-19T12:30:03.318Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:30:03.334Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
+[2025-06-19T12:30:05.758Z] [INFO] User logged out
+[2025-06-19T12:30:15.172Z] [ERROR] ERROR login auth - Invalid credentials
+[2025-06-19T12:30:22.235Z] [INFO] User logged in successfully: user name=admin, ip=::1
+[2025-06-19T12:30:22.314Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:30:22.330Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:30:26.437Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:30:26.458Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:30:30.834Z] [INFO] Fetched user data for username=admin
+[2025-06-19T12:30:30.849Z] [INFO] Fetched user data for username=admin
+[2025-06-19T12:30:30.876Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T12:30:30.895Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T12:30:32.355Z] [INFO] Fetched users data
+[2025-06-19T12:30:32.371Z] [INFO] Fetched users data
+[2025-06-19T12:34:47.154Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:34:47.162Z] [INFO] Fetched users data
+[2025-06-19T12:34:47.187Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:34:47.193Z] [INFO] Fetched users data
+[2025-06-19T12:34:47.207Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:34:47.212Z] [INFO] Fetched users data
+[2025-06-19T12:34:47.229Z] [INFO] Fetched users data
+[2025-06-19T12:34:49.604Z] [INFO] Fetched data from table = developers 
+[2025-06-19T12:34:49.619Z] [INFO] Fetched data from table = developers 
+[2025-06-19T12:34:56.355Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T12:34:56.371Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T12:34:57.336Z] [INFO] Fetched recruiters data
+[2025-06-19T12:34:57.350Z] [INFO] Fetched recruiters data
+[2025-06-19T12:34:58.708Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:34:58.722Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:38:35.487Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:38:35.491Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:38:35.507Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:38:35.511Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:38:35.748Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:38:35.755Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:38:35.773Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:40:34.914Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:40:34.917Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:40:34.930Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:40:34.935Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:40:34.965Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:40:34.967Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:40:34.994Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:25.265Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:25.267Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:25.273Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:25.275Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:25.291Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:25.293Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:25.297Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:40.906Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:40.927Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:40.933Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:40.947Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:41.008Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:41.016Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:41.068Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:58.923Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:58.936Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:58.940Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:58.949Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:58.985Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:41:58.990Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:41:59.005Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T12:43:41.930Z] [INFO] Fetched user data for username=admin
+[2025-06-19T12:43:41.945Z] [INFO] Fetched user data for username=admin
+[2025-06-19T12:43:41.974Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T12:43:41.986Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T12:43:43.598Z] [INFO] Fetched users data
+[2025-06-19T12:43:43.611Z] [INFO] Fetched users data
+[2025-06-19T12:43:50.183Z] [INFO] User logged out
+[2025-06-19T12:43:50.236Z] [INFO] Fetched users data
+[2025-06-19T12:43:51.556Z] [INFO] Fetched users data
+[2025-06-19T12:43:51.578Z] [INFO] Fetched users data
+[2025-06-19T12:43:56.692Z] [WARN] Refresh token missing in request
+[2025-06-19T12:49:15.430Z] [INFO] User logged in successfully: user name=admin, ip=::1
+[2025-06-19T12:49:15.507Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:49:15.523Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T12:49:28.143Z] [INFO] Fetched user data for username=admin
+[2025-06-19T12:49:28.158Z] [INFO] Fetched user data for username=admin
+[2025-06-19T12:49:28.200Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T12:49:28.218Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T12:49:29.933Z] [INFO] Fetched users data
+[2025-06-19T12:49:29.949Z] [INFO] Fetched users data
+[2025-06-19T13:05:31.956Z] [INFO] Access token refreshed for userId=1, ip=::1
+[2025-06-19T13:05:31.989Z] [INFO] Updated username=miri by user=admin
+[2025-06-19T13:05:34.605Z] [INFO] Fetched users data
+[2025-06-19T13:08:03.045Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:08:03.075Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:08:03.086Z] [INFO] Fetched users data
+[2025-06-19T13:08:03.106Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:08:03.114Z] [INFO] Fetched users data
+[2025-06-19T13:08:03.131Z] [INFO] Fetched users data
+[2025-06-19T13:08:03.141Z] [INFO] Fetched users data
+[2025-06-19T13:08:20.377Z] [INFO] Updated username=miri by user=admin
+[2025-06-19T13:08:26.730Z] [INFO] Fetched users data
+[2025-06-19T13:09:38.803Z] [ERROR] ERROR updating user users - genericDataService.updateUser is not a function
+[2025-06-19T13:10:18.354Z] [INFO] Updated username=miri by user=admin
+[2025-06-19T13:11:54.519Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:11:54.555Z] [INFO] Fetched users data
+[2025-06-19T13:11:54.572Z] [INFO] Fetched users data
+[2025-06-19T13:11:54.576Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:11:54.808Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:11:54.814Z] [INFO] Fetched users data
+[2025-06-19T13:11:54.858Z] [INFO] Fetched users data
+[2025-06-19T13:19:31.037Z] [ERROR] ERROR fetching messages - Database query failed: connect ETIMEDOUT
+[2025-06-19T13:19:34.823Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:19:34.835Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:19:34.837Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:19:34.853Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:19:34.845Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:19:34.864Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:19:47.613Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:19:47.622Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:19:47.648Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:19:47.666Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:19:47.708Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:19:47.723Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:19:47.765Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:20:00.375Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:20:00.412Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:20:00.414Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:20:00.431Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:20:00.475Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:20:00.483Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:20:00.500Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:20:13.465Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:20:18.820Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:20:18.830Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:20:34.906Z] [ERROR] ERROR fetching users - Failed to get user: Database query with joins failed: Unknown column 'admin' in 'on clause'
+[2025-06-19T13:21:57.895Z] [ERROR] ERROR fetching messages - Database query failed: Got timeout reading communication packets
+[2025-06-19T13:22:02.671Z] [INFO] Fetched users data
+[2025-06-19T13:22:05.735Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:22:05.742Z] [INFO] Fetched users data
+[2025-06-19T13:22:05.769Z] [INFO] Fetched users data
+[2025-06-19T13:22:05.778Z] [INFO] Fetched users data
+[2025-06-19T13:22:05.787Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:25:39.626Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:25:39.645Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:25:42.016Z] [INFO] Fetched recruiters data
+[2025-06-19T13:25:42.030Z] [INFO] Fetched recruiters data
+[2025-06-19T13:26:09.261Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T13:26:09.274Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T13:26:10.986Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:26:11.002Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:29:47.085Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:29:47.105Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:30:28.730Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T13:30:28.741Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T13:30:30.002Z] [INFO] Fetched recruiters data
+[2025-06-19T13:30:30.012Z] [INFO] Fetched recruiters data
+[2025-06-19T13:30:32.068Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:30:32.082Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:30:41.957Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:30:41.972Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:32:51.482Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:32:51.488Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:32:51.510Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:32:51.518Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:32:51.565Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:32:51.579Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:32:51.596Z] [INFO] Fetched data from table = developers 
+[2025-06-19T13:32:54.276Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T13:32:54.292Z] [INFO] Fetched projects with conditions=[]
+[2025-06-19T13:32:55.528Z] [INFO] Fetched recruiters data
+[2025-06-19T13:32:55.540Z] [INFO] Fetched recruiters data
+[2025-06-19T13:32:57.406Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:32:57.421Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:37:06.335Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:37:06.342Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:37:06.356Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:37:06.357Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:37:06.574Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:37:06.581Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:37:06.599Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:41:29.286Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:41:29.298Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:41:29.300Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:41:29.313Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:41:29.532Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:41:29.536Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:41:29.581Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T13:44:23.235Z] [INFO] Fetched user data for username=admin
+[2025-06-19T13:44:23.251Z] [INFO] Fetched user data for username=admin
+[2025-06-19T13:44:23.309Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T13:44:23.330Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T13:44:25.308Z] [INFO] Fetched users data
+[2025-06-19T13:44:25.320Z] [INFO] Fetched users data
+[2025-06-19T13:47:07.112Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:47:07.118Z] [INFO] Fetched users data
+[2025-06-19T13:47:07.135Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:47:07.140Z] [INFO] Fetched users data
+[2025-06-19T13:47:07.153Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T13:47:07.157Z] [INFO] Fetched users data
+[2025-06-19T13:47:07.164Z] [INFO] Fetched users data

@@ -20,8 +20,24 @@ function ApplyUsers() {
     const [selectedApplicant, setSelectedApplicant] = useState(null);
     const [emailSubject, setEmailSubject] = useState('');
     const [emailBody, setEmailBody] = useState('');
+    const [jobData, setJobData] = useState({});
     const [remarkText, setRemarkText] = useState('');
-    const [isEditingRemark, setIsEditingRemark] = useState(false);
+    const [is_seized, setIs_seized] = useState(0);
+
+    useEffect(() => {
+        setIsChange(0);
+        fetchData({
+            role: currentUser ? `/${currentUser.role}` : "/guest",
+            type: `jobs/${id}`,
+            method: "GET",
+            onSuccess: (data) => {
+                setJobData(data);
+                setIs_seized(data.is_seized);
+            },
+            onError: (err) => console.error(`Failed to fetch applications: ${err}`),
+            logOut,
+        });
+    }, [is_seized]);
 
     useEffect(() => {
         setIsChange(0);
@@ -35,7 +51,7 @@ function ApplyUsers() {
             onError: (err) => console.error(`Failed to fetch applications: ${err}`),
             logOut,
         });
-    }, [isChange]);
+    }, [isChange, is_seized]);
 
     const openEmailModal = (applicant) => {
         setSelectedApplicant(applicant);
@@ -106,7 +122,6 @@ function ApplyUsers() {
             await fetchData({
                 role: currentUser ? `/${currentUser.role}` : "/guest",
                 type: `job_applications/${id}`,
-                role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
                 method: 'PUT',
                 body: { remark: remark, user_id: applicant.id },
                 onSuccess: (result) => {
@@ -138,7 +153,6 @@ function ApplyUsers() {
                 await fetchData({
                     role: currentUser ? `/${currentUser.role}` : "/guest",
                     type: `jobs/${id}`,
-                    role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
                     method: 'delete',
                     onSuccess: (result) => {
                         navigate('/home')
@@ -147,12 +161,10 @@ function ApplyUsers() {
                     }
                 });
             } catch (error) {
-                alert(error);
-
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Deleted!',
-                    text: 'The job has been deleted.',
+                    icon: 'error',
+                    title: 'Deleted faild!',
+                    text: 'The job has been not deleted.',
                     timer: 2000,
                     showConfirmButton: false
                 });
@@ -161,11 +173,37 @@ function ApplyUsers() {
 
     };
 
-    const handleMarkAsFilled = () => {
-        if (window.confirm('Mark this job as filled?')) {
-            // Here you'll add the actual mark as filled logic
-            console.log('Marking job as filled:', id);
-        }
+    const handleMarkAsFilled = async () => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: `This work will be signed as ${is_seized ? 'not' : ''} seized.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, mark it!',
+            cancelButtonText: 'Cancel'
+        });
+
+        if (result.isConfirmed) {
+            try {
+                await fetchData({
+                    role: currentUser ? `/${currentUser.role}` : "/guest",
+                    type: `jobs/${id}`,
+                    method: 'put',
+                    body: { is_seized: !is_seized },
+                    onSuccess: (result) => {
+                        setIs_seized((prev) => !prev)
+                        setIsChange(1);
+                    },
+                    onError: (error) => {
+                    }
+                });
+            } catch (error) {
+
+            }
+        };
+
     };
 
     const handleReject = async (applicant) => {
@@ -173,7 +211,6 @@ function ApplyUsers() {
             await fetchData({
                 role: currentUser ? `/${currentUser.role}` : "/guest",
                 type: `job_applications/reject/${id}`,
-                role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
                 method: 'put',
                 body: { developerEmail: applicant.email, developerId: applicant.id },
                 onSuccess: (result) => {
@@ -192,7 +229,6 @@ function ApplyUsers() {
             await fetchData({
                 role: currentUser ? `/${currentUser.role}` : "/guest",
                 type: `job_applications/${id}`,
-                role: currentUser ? (currentUser.role_id == 1 ? '/developer' : '/recruiter') : "/guests",
                 method: 'put',
                 body: { is_treated: status, user_id: applicant.id },
                 onSuccess: (result) => {
@@ -218,9 +254,9 @@ function ApplyUsers() {
                         setIsChange={setIsChange}
                         inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
                         role={`/${currentUser.role}`}
-                        initialData={applicants} 
+                        initialData={jobData}
                     />
-                    <button className="button filledButton">Mark as Filled</button>
+                    <button className="button filledButton" onClick={handleMarkAsFilled}>{is_seized ? 'Mark as not caught' : 'Mark as caught'}</button>
                     <button className="button deleteButton" onClick={handleDeleteJob}>Delete Job</button>
                 </div>
             </div>
@@ -274,10 +310,10 @@ function ApplyUsers() {
 
                             <div className="cardActions">
                                 <div className="actionRow">
-                                    <button className="smallButton handleButton" onClick={() => handleStatus(applicant, 'Handled')}>Handle</button>
-                                    <button className="smallButton rejectButton" onClick={() => handleReject(applicant)}>Reject</button>
-                                    <button className="smallButton pendingButton" onClick={() => handleStatus(applicant, 'pending')}>pending</button>
-                                    <button className="smallButton emailButton" onClick={() => openEmailModal(applicant)}>Send Email</button>
+                                    <button className="smallButton handleButton" disabled={is_seized} onClick={() => handleStatus(applicant, 'Handled')}>Handle</button>
+                                    <button className="smallButton rejectButton" disabled={is_seized} onClick={() => handleReject(applicant)}>Reject</button>
+                                    <button className="smallButton pendingButton" disabled={is_seized} onClick={() => handleStatus(applicant, 'pending')}>pending</button>
+                                    <button className="smallButton emailButton" disabled={is_seized} onClick={() => openEmailModal(applicant)}>Send Email</button>
                                 </div>
                                 <div className="actionRow">
                                     {applicant.cv ? (
@@ -287,7 +323,7 @@ function ApplyUsers() {
                                     ) : (
                                         <div className="noCv">No CV Available</div>
                                     )}
-                                    <button className="smallButton remarkButton" onClick={() => handleRemarkModal(applicant)}>Add Remark</button>
+                                    <button className="smallButton remarkButton" disabled={is_seized} onClick={() => handleRemarkModal(applicant)}>Add Remark</button>
                                 </div>
                             </div>
                         </div>

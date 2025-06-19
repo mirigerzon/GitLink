@@ -53,7 +53,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    line-height: 1.2;
     animation: slideInLeft 1s ease-out 0.3s both;
 }
 

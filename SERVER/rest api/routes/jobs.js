@@ -30,10 +30,9 @@ router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         if (!id) return res.status(400).json({ error: 'job ID is required' });
-
-        const data = await DataService.getDeveloper(id);
+        const data = await genericDataService.getItemByConditions('jobs', [{field:'id', value: Number(id)}]);
         writeLog(`Fetched job data for id=${id}`, 'info');
-        res.json(data);
+        res.json(data[0]);
     } catch (err) {
         handleError(res, err, 'job', 'fetching');
     }

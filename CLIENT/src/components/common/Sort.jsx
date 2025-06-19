@@ -71,7 +71,6 @@ function Sort({ setUserData, originalData, currentConfig }) {
     <div className="filter-container">
       {currentConfig.map((filterGroup, index) => (
         <div key={index} className="filter-group">
-          <label>{filterGroup.label}</label>
           <select onChange={(e) => handleFilterChange(filterGroup.field, e.target.value)}>
             {filterGroup.options.map((option) => (
               <option key={option.value} value={option.value}>

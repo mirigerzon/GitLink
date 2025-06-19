@@ -21,6 +21,7 @@ const updateItem = async (table, data, conditions = []) => {
   return await dal.UPDATE(table, data, conditions);
 };
 
+
 module.exports = {
   getItemByConditions,
   deleteItem,

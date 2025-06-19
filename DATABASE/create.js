@@ -138,6 +138,7 @@ async function createJobTables(connection) {
             experience INT NOT NULL,
             languages VARCHAR(255),
             views INT NOT NULL DEFAULT 0,
+            is_seized BOOLEAN DEFAULT 0,
             is_active BOOLEAN DEFAULT TRUE,
             FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
         )

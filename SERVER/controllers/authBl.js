@@ -13,10 +13,8 @@ const verifyLogin = async (username, password) => {
     const hashedPassword = user.hashed_password;
 
     if (!hashedPassword) throw new Error("Invalid credentials");
-
     const isMatch = await bcrypt.compare(password, hashedPassword);
     if (!isMatch) throw new Error("Invalid credentials");
-
     delete user.hashed_password;
     return user;
 };
@@ -41,7 +39,7 @@ const registerNewUser = async (userData) => {
         await genericDal.CREATE("recruiters", { user_id: newUser.insertId, company_name });
     }
     await sendWelcomeEmail(newUser.insertId, email, username);
-    return { id: newUser.insertId, ...generalUser, ...(role_id === '1' && { git_name, experience, languages }), ...(role_id === '2' && { company_name }) };
+    return { id: newUser.insertId, ...generalUser, ...(role_id === '1' && { role: 'developer', git_name, experience, languages }), ...(role_id === '2' && { role: 'recruiter', company_name }) };
 };
 
 const forgotPassword = async (username) => {
