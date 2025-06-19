@@ -25,7 +25,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// זה לא צריך להיות /id
 router.put('/', async (req, res) => {
     try {
         if (!req.body?.email) return res.status(401).json({ error: 'User not authenticated' });
@@ -37,6 +36,29 @@ router.put('/', async (req, res) => {
             [{ field: 'email', value: req.body.email }]
         );
         writeLog(`Updated message for user=${req.body.email}`, 'info');
+        res.json({ message: 'Message updated successfully', result });
+    } catch (err) {
+        handleError(res, err, TABLE_NAME, 'updating');
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    try {
+        if (!req.body?.email) return res.status(401).json({ error: 'User not authenticated' });
+
+        const { id } = req.params;
+        const body = req.body;
+
+        const result = await genericDataService.updateItem(
+            TABLE_NAME,
+            body,
+            [
+                { field: 'id', value: id },
+                { field: 'email', value: req.body.email }
+            ]
+        );
+
+        writeLog(`Updated message id=${id} for user=${req.body.email}`, 'info');
         res.json({ message: 'Message updated successfully', result });
     } catch (err) {
         handleError(res, err, TABLE_NAME, 'updating');

@@ -164,24 +164,7 @@ router.put('/:username', async (req, res) => {
     }
 });
 
-router.get('/cv/:username', async (req, res) => {
-    try {
-        const { username } = req.params;
-        const user = await dataService.getUser(username);
 
-        if (!user || !user.cv_file) {
-            return res.status(404).json({ error: 'CV not found' });
-        }
-        const filePath = path.join(__dirname, '../../uploads/', user.cv_file);
-        if (!fs.existsSync(filePath)) {
-            return res.status(404).json({ error: 'CV file not found on server' });
-        }
-        res.setHeader('Content-Disposition', `attachment; filename="${username}-cv.pdf"`);
-        res.setHeader('Content-Type', 'application/pdf');
-        res.download(filePath, `${username}-cv.pdf`);
-    } catch (err) {
-        handleError(res, err, 'CV', 'downloading CV');
-    }
-});
+
 
 module.exports = router;

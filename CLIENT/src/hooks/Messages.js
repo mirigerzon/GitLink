@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useFetchData } from "../hooks/fetchData.js";
 import { useCurrentUser } from "../context.jsx";
+
 export const useMessages = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -54,6 +55,24 @@ export const useMessages = () => {
         });
     };
 
+    const markMessageAsRead = useCallback((messageId) => {
+        setLoading(true);
+        fetchData({
+            role: `/${currentUser.role}`,
+            type: `messages/${messageId}`,
+            method: "PUT",
+            body: { is_read: true, email: currentUser.email },
+            onSuccess: () => {
+                setLoading(false);
+                setIsChange(true);
+            },
+            onError: (errMsg) => {
+                setError(errMsg);
+                setLoading(false);
+            },
+        });
+    }, [currentUser.email, currentUser.role]);
+
     useEffect(() => {
         if (currentUser.email) {
             fetchMessages();
@@ -83,6 +102,7 @@ export const useMessages = () => {
         messages,
         hasUnread,
         markAllAsRead,
+        markMessageAsRead,
         loading,
         error,
         isVisible,

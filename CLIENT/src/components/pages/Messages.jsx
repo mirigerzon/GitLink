@@ -6,7 +6,7 @@ import '../../style/Messages.css';
 
 export const Messages = () => {
     const { currentUser } = useCurrentUser();
-    const { messages, hasUnread, markAllAsRead, deleteMessage } = useMessages();
+    const { messages, hasUnread, markAllAsRead, markMessageAsRead, deleteMessage } = useMessages();
     const [open, setOpen] = useState(false);
     const [newMessageAlert, setNewMessageAlert] = useState(false);
     const [play] = useSound('/sounds/notification.mp3');
@@ -46,7 +46,16 @@ export const Messages = () => {
                                     <strong>{msg.title}</strong>
                                     <p>date: {msg.created_at}</p>
                                     <p>{msg.content}</p>
-                                    <button onClick={() => deleteMessage(msg.id)}>delete</button>
+                                    <div className="message-actions">
+                                        {!msg.is_read && (
+                                            <button onClick={() => markMessageAsRead(msg.id)} className="mark-btn">
+                                                MARK
+                                            </button>
+                                        )}
+                                        <button onClick={() => deleteMessage(msg.id)} className="delete-btn">
+                                            delete
+                                        </button>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

@@ -35,7 +35,6 @@ function Profile() {
   const isOwnProfile = currentUser && username === currentUser.username;
   const userItemsType = userData?.role === "developer" ? "projects" : (userData?.role === 'recruiter') ? "jobs" : 'users';
 
-  // Fetch user data
   useEffect(() => {
     setIsChange(0);
     setLoading(true);
@@ -54,7 +53,6 @@ function Profile() {
     });
   }, [username, isChange]);
 
-  // Fetch user items (projects/jobs)
   useEffect(() => {
     if (!userData) return;
     const itemsType = userData.role === "developer" ? "projects" : "jobs";
@@ -76,7 +74,6 @@ function Profile() {
     });
   }, [username, isChange, userData]);
 
-  // Handlers
   const handleCVUpload = async (e) => {
     e.preventDefault();
     if (!cvFile) {
@@ -219,16 +216,23 @@ function Profile() {
 
   const handleDownloadCV = async () => {
     try {
-      const response = await fetch(`/api/users/cv/${userData.username}`, {
+      const response = await fetch(`http://localhost:3001/cv/${userData.username}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      const contentType = response.headers.get('content-type');
+      console.log('Content type:', contentType);
+
       const blob = await response.blob();
+      console.log('Blob size:', blob.size);
+
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -237,6 +241,7 @@ function Profile() {
       a.click();
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
+
       setMessage('CV downloaded successfully!');
     } catch (error) {
       console.error('Error downloading CV:', error);
@@ -291,7 +296,7 @@ function Profile() {
           <Modal onClose={() => setShowCVUpload(false)}>
             <h3>Upload CV</h3>
             <form onSubmit={handleCVUpload}>
-              <label>
+              <label className="custom-file-upload">
                 Select CV (PDF only)
                 <input
                   type="file"
@@ -432,8 +437,8 @@ function Profile() {
           <h1 className="profile-name">{userData.username}</h1>
           <div className="profile-details">
             <div className="detail-item">
-              <span className="detail-label">Role:</span>
-              <span className="detail-value">{userData.role}</span>
+              {/* <span className="detail-label">Role:</span>
+              <span className="detail-value">{userData.role}</span> */}
               <span className="detail-label">Email:</span>
               <span className="detail-value">{userData.email}</span>
               <span className="detail-label">Phone:</span>

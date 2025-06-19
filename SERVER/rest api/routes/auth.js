@@ -6,6 +6,7 @@ const bl = require('../../controllers/bl.js');
 const { writeLog } = require('../../log/log.js');
 const { handleError } = require('../utils/routerHelpers.js');
 const fs = require('fs');
+const dataService = require('../../controllers/bl.js');
 const { generateUsername } = require('unique-username-generator');
 
 const ACCESS_SECRET = process.env.ACCESS_SECRET;
@@ -216,37 +217,24 @@ router.get('/check-username/:username', async (req, res) => {
 
 })
 
-
-// זה לא צריך להיות פה בטוח
-// להעביר את זה למקום אחר
-// האם להוציא את זה לשרת נפרד?
-router.post('/api/chat', async (req, res) => {
+router.get('/cv/:username', async (req, res) => {
     try {
-        const { message } = req.body;
-        if (!message) return res.status(400).json({ error: 'Message is required' });
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-            },
-            body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
-                messages: [
-                    { role: 'system', content: 'You are a helpful assistant.' },
-                    { role: 'user', content: message }
-                ],
-                max_tokens: 150,
-                temperature: 0.7
-            })
-        });
-        if (!response.ok) throw new Error(`OpenAI API error: ${response.status}`);
-        const data = await response.json();
-        res.json({ message: data.choices[0].message.content });
-    } catch (error) {
-        handleError(res, error, 'ChatGPT', 'Failed to get');
+        const { username } = req.params;
+        const user = await dataService.getUser(username);
+
+        if (!user || !user.cv_file) {
+            return res.status(404).json({ error: 'CV not found' });
+        }
+        const filePath = path.join(__dirname, '../../uploads/', user.cv_file);
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).json({ error: 'CV file not found on server' });
+        }
+        res.setHeader('Content-Disposition', `attachment; filename="${username}-cv.pdf"`);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.sendFile(filePath);
+    } catch (err) {
+        handleError(res, err, 'CV', 'downloading CV');
     }
 });
-
 
 module.exports = router;

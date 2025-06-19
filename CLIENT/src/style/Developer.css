@@ -240,24 +240,6 @@
   font-size: 1rem;
 }
 
-.card-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg,
-      rgba(255, 255, 255, 0.05) 0%,
-      transparent 100%);
-  /* pointer-events: none; */
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.developer-card:hover .card-overlay {
-  opacity: 1;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .developer-card {

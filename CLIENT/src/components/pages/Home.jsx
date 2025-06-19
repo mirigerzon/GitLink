@@ -1,6 +1,4 @@
-// import { useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
-import ChatAI from "./ChatAI";
+import { Link } from "react-router-dom";
 import "../../style/Home.css";
 
 function Home() {
@@ -39,7 +37,6 @@ function Home() {
           </div>
         </div>
       </main>
-      <ChatAI />
     </div>
   );
 }

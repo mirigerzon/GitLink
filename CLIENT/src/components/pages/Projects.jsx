@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Outlet } from "react-router-dom";
 import Project from "./Project.jsx";
 import "../../style/Projects.css";
 import { useCurrentUser } from "../../context.jsx";
@@ -85,6 +85,7 @@ function Projects() {
           <Project key={project.id} projectData={project} setIsChange={setIsChange} />
         )) : <h4>no projects found</h4>}
       </div>
+      <Outlet />
     </div>
   );
 }

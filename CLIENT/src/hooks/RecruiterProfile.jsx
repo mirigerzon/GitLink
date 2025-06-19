@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { useFetchData } from "./fetchData.js";
-import { useLogout } from "../hooks/LogOut.js";
-import { useForm } from "react-hook-form";
 import Update from "../components/common/Update.jsx";
 import Delete from "../components/common/Delete.jsx";
 import '../style/RecruiterProfile.css';
+import Add from "../components/common/Add.jsx";
+
 function RecruiterProfile({
     userData,
     currentUser,
@@ -14,131 +12,35 @@ function RecruiterProfile({
     navigate,
     userItemsType
 }) {
-    const [openJobForm, setOpenJobForm] = useState(false);
-    const fetchData = useFetchData();
-    const logOut = useLogout();
-    const { register, handleSubmit, reset } = useForm();
-
-    // Submit new job
-    async function onSubmit(data) {
-        console.log("Adding job with data:", data);
-        try {
-            await fetchData({
-                type: "jobs",
-                role: "/recruiter",
-                method: "POST",
-                body: data,
-                onSuccess: (result) => {
-                    console.log("add successful:", result);
-                    setOpenJobForm(false);
-                    reset();
-                    setIsChange(1);
-                },
-                onError: (error) => {
-                    console.log("add was unsuccessful", error);
-                    alert(error);
-                },
-                logOut,
-            });
-        } catch (error) {
-            console.log("Unexpected error:", error);
-        }
-        reset();
-    }
-
-    // Open job form with pre-filled data
-    function openAddForm() {
-        setOpenJobForm(true);
-        reset({
-            title: "",
-            username: userData.username,
-            company_name: userData.company_name,
-            requirements: "",
-            experience: "",
-            languages: "",
-            details: "",
-        });
-    }
-
-    // Render job management section
     const renderJobManagement = () => {
         if (!isOwnProfile) return null;
 
         return (
             <>
                 <h2>Jobs Management</h2>
-                <div className="project-actions">
-                    <button
-                        className="action-btn add-btn"
-                        onClick={openAddForm}
-                    >
-                        Add Job
-                    </button>
-                </div>
-
-                {openJobForm && (
-                    <div className="projectsToAdd">
-                        <form
-                            onSubmit={handleSubmit(onSubmit)}
-                            className="project-form"
-                        >
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    placeholder="Job title"
-                                    className="form-input"
-                                    {...register("title", { required: true })}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Required experience (years)"
-                                    className="form-input"
-                                    {...register("experience", { required: true })}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Programming languages required"
-                                    className="form-input"
-                                    {...register("languages", { required: true })}
-                                    required
-                                />
-                                <textarea
-                                    placeholder="Job requirements"
-                                    className="form-input textarea"
-                                    {...register("requirements")}
-                                />
-                                <textarea
-                                    placeholder="Job description"
-                                    className="form-input textarea"
-                                    {...register("details")}
-                                />
-                            </div>
-                            <div className="form-buttons">
-                                <button type="submit" className="submit-btn">
-                                    Add
-                                </button>
-                                <button
-                                    type="button"
-                                    className="cancel-btn"
-                                    onClick={() => setOpenJobForm(false)}
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                )}
+                <Add
+                    type="jobs"
+                    setIsChange={setIsChange}
+                    inputs={["username", "title", "company_name", "experience", "languages", "requirements", "details",]}
+                    defaultValue={{ username: currentUser.username }}
+                    name="Add Job"
+                    buttonClassName="action-btn add-btn"
+                    customTitle="Add New Job Position"
+                    validationRules={{
+                        title: { required: true, minLength: 3 },
+                        experience: { required: true },
+                        languages: { required: true },
+                        requirements: { required: false },
+                        details: { required: false }
+                    }}
+                />
             </>
         );
     };
 
     return (
         <>
-            {/* Recruiter-specific sections */}
             <div className="profile-section">
-                {/* Company section */}
                 {userData.company_name && (
                     <>
                         <h2>Company</h2>
@@ -147,7 +49,6 @@ function RecruiterProfile({
                 )}
             </div>
 
-            {/* Jobs section */}
             <div className="profile-section">
                 <h2>Existing {userItemsType}</h2>
                 <ul>
@@ -178,7 +79,7 @@ function RecruiterProfile({
                                             setIsChange={setIsChange}
                                             inputs={["title", "details"]}
                                             role={currentUser ? `/${currentUser.role}` : null}
-              initialData={userData} 
+                                            initialData={userData}
 
                                         />
                                     </>

@@ -23,12 +23,12 @@ async function seedRoles(db) {
 
 async function seedUsers(db) {
   await db.query(`
-    INSERT INTO users (username, email, phone, role_id, about, profile_image, cv_file)
-    VALUES
-      ('admin', 'gitlink10@gmail.com', 0527159812, 3, '', '', ''),
-      ('alice', 'alice@example.com', 123456789, 1, 'Full-stack developer', 'https://...', 'cv_files/alice-cv.pdf'),
-      ('bob', 'bob@example.com', 234567891, 1, 'Backend enthusiast', 'https://...', 'cv_files/bob-cv.pdf'),
-      ('charlie', 'charlie@example.com', 345678912, 2, 'Java expert', 'https://...', NULL);
+    INSERT INTO users (username, email, phone, role_id, about, profile_image, cv_file, status)
+VALUES
+  ('admin', 'gitlink10@gmail.com', 0527159812, 3, '', '', '', TRUE),
+  ('alice', 'alice@example.com', 123456789, 1, 'Full-stack developer', 'https://...', 'cv_files/alice-cv.pdf', TRUE),
+  ('bob', 'bob@example.com', 234567891, 1, 'Backend enthusiast', 'https://...', 'cv_files/bob-cv.pdf', FALSE),
+  ('charlie', 'charlie@example.com', 345678912, 2, 'Java expert', 'https://...', NULL, TRUE);
   `);
 
 }

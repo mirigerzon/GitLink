@@ -7,7 +7,7 @@ const verifyLogin = async (username, password) => {
     if (!username || !password) throw new Error("Username and password are required");
 
     const users = await dal.getUser(username);
-    if (!users || users.length === 0) throw new Error("Invalid credentials");
+    if (!users) throw new Error("Invalid credentials");
 
     const user = users;
     const hashedPassword = user.hashed_password;

@@ -50,9 +50,11 @@ async function createUserTables(connection) {
             profile_image VARCHAR(255),
             cv_file VARCHAR(255),
             is_active BOOLEAN DEFAULT TRUE,
+            status BOOLEAN DEFAULT  TRUE,
             FOREIGN KEY (role_id) REFERENCES roles(role_id) ON DELETE CASCADE
         )
-    `);
+    `)
+
 
     // passwords
     await connection.query(`

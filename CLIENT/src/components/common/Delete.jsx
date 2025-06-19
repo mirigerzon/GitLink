@@ -32,7 +32,6 @@ function Delete({ type, itemId, setIsChange, role = null, confirmMessage = null 
         method: "DELETE",
         role: role,
         onSuccess: (result) => {
-          console.log("Delete successful:", result);
           setIsChange(prev => prev + 1);
         },
         onError: (error) => {
