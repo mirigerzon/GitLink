@@ -27116,3 +27116,90 @@
 [2025-06-19T00:31:43.657Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"a0583286530@gmail.com"}]
 [2025-06-19T00:31:43.660Z] [INFO] Fetched jobs with conditions=[]
 [2025-06-19T00:31:43.662Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:23:36.229Z] [INFO] User registered successfully: email=sara3280624@gmail.com
+[2025-06-19T05:23:36.290Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:23:36.297Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:23:42.533Z] [INFO] Updated message for user=sara3280624@gmail.com
+[2025-06-19T05:23:42.556Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:23:42.568Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:23:50.435Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:23:50.445Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:23:52.800Z] [INFO] Fetched user data for username=sara
+[2025-06-19T05:23:52.810Z] [INFO] Fetched user data for username=sara
+[2025-06-19T05:23:52.826Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T05:23:52.835Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T05:24:08.763Z] [INFO] Created project with data={"git_name":"sara6310472","username":"sara","name":"Fifth_project_-get_the_100-_game_99-","forks_count":0,"url":"https://github.com/sara6310472/Fifth_project_-get_the_100-_game_99-","languages":"sara","details":"sara"}
+[2025-06-19T05:24:08.803Z] [INFO] Fetched user data for username=sara
+[2025-06-19T05:24:08.812Z] [INFO] Fetched user data for username=sara
+[2025-06-19T05:24:08.816Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T05:24:08.823Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T05:24:08.829Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T05:24:08.835Z] [INFO] Fetched projects with conditions=[{"field":"username","value":"sara"}]
+[2025-06-19T05:24:20.588Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:24:20.595Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:31:15.682Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:31:15.683Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:31:15.686Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:31:15.687Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:31:16.006Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:31:16.007Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:31:16.035Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:31:38.008Z] [INFO] User logged out
+[2025-06-19T05:31:38.065Z] [INFO] Fetched data from table = developers 
+[2025-06-19T05:32:07.400Z] [INFO] User registered successfully: email=miri@miri.com
+[2025-06-19T05:32:07.456Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"miri@miri.com"}]
+[2025-06-19T05:32:07.460Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"miri@miri.com"}]
+[2025-06-19T05:32:14.206Z] [INFO] Fetched user data for username=miri
+[2025-06-19T05:32:14.216Z] [INFO] Fetched user data for username=miri
+[2025-06-19T05:32:14.234Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-19T05:32:14.245Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-19T05:32:33.160Z] [INFO] Created job with data={"title":"miri","username":"miri","company_name":"niri","requirements":"miri","experience":"1","languages":"miri","details":"miri"}
+[2025-06-19T05:32:33.184Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-19T05:32:33.186Z] [INFO] Fetched user data for username=miri
+[2025-06-19T05:32:33.190Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-19T05:32:33.195Z] [INFO] Fetched user data for username=miri
+[2025-06-19T05:32:33.216Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"miri"}]
+[2025-06-19T05:32:37.521Z] [INFO] User logged out
+[2025-06-19T05:32:43.747Z] [INFO] User logged in successfully: user name=sara, ip=::1
+[2025-06-19T05:32:43.773Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:32:43.777Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:32:46.638Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:32:46.643Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:32:52.555Z] [INFO] Created job application: {"job_id":3,"user_id":4}
+[2025-06-19T05:32:52.598Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:32:52.594Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:32:52.621Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"sara3280624@gmail.com"}]
+[2025-06-19T05:32:52.624Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:32:52.636Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:32:58.229Z] [ERROR] ERROR creating job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-19T05:33:02.892Z] [ERROR] ERROR creating job_applications - You have already contacted the recruiter for this position. Please wait for a response before sending another message.
+[2025-06-19T05:33:05.749Z] [INFO] User logged out
+[2025-06-19T05:33:05.797Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:33:13.958Z] [INFO] User logged in successfully: user name=miri, ip=::1
+[2025-06-19T05:33:13.976Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"miri@miri.com"}]
+[2025-06-19T05:33:13.980Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"miri@miri.com"}]
+[2025-06-19T05:33:20.621Z] [INFO] Updated message for user=miri@miri.com
+[2025-06-19T05:33:20.640Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"miri@miri.com"}]
+[2025-06-19T05:33:20.648Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"miri@miri.com"}]
+[2025-06-19T05:33:34.921Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:33:34.928Z] [INFO] Fetched jobs with conditions=[]
+[2025-06-19T05:33:39.087Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:33:39.094Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:33:56.431Z] [INFO] Updated message for user=undefined
+[2025-06-19T05:33:56.452Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:33:56.460Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:33:59.642Z] [INFO] reject application for job id=3
+[2025-06-19T05:33:59.659Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:33:59.665Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:34:00.876Z] [INFO] Updated message for user=undefined
+[2025-06-19T05:34:00.895Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:34:00.903Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:34:16.329Z] [INFO] reject application for job id=3
+[2025-06-19T05:34:16.344Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:34:16.351Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:34:21.488Z] [INFO] Updated message for user=undefined
+[2025-06-19T05:34:21.503Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:34:21.510Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:34:22.622Z] [INFO] reject application for job id=3
+[2025-06-19T05:34:22.639Z] [INFO] Fetched job_applications for job id=3
+[2025-06-19T05:34:22.648Z] [INFO] Fetched job_applications for job id=3
