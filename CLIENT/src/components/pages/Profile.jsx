@@ -428,7 +428,11 @@ function Profile() {
             alt={`${userData.username}'s profile`}
             className="profile-image"
           />
-          <button onClick={() => navigate(`/${username}/${userItemsType}`)}>
+          <button
+            onClick={() =>
+              navigate(userItemsType === "users" ? "/users" : `/${username}/${userItemsType}`)
+            }
+          >
             view all {userItemsType}
           </button>
         </div>

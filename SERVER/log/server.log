@@ -1850,3 +1850,42 @@
 [2025-06-19T20:41:22.860Z] [INFO] Fetched recruiters data
 [2025-06-19T20:41:25.536Z] [INFO] Fetched data from table = developers 
 [2025-06-19T20:41:25.543Z] [INFO] Fetched data from table = developers 
+[2025-06-19T21:01:13.902Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-19T21:01:13.914Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-19T21:01:13.921Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"chana@chana.com"}]
+[2025-06-19T21:01:23.359Z] [INFO] User logged out
+[2025-06-19T21:01:33.298Z] [INFO] User logged in successfully: user name=admin, ip=::1
+[2025-06-19T21:01:33.334Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T21:01:33.342Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T21:01:36.564Z] [INFO] Fetched user data for username=admin
+[2025-06-19T21:01:36.575Z] [INFO] Fetched user data for username=admin
+[2025-06-19T21:01:36.588Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T21:01:36.626Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T21:01:38.398Z] [INFO] Fetched users data
+[2025-06-19T21:01:38.408Z] [INFO] Fetched users data
+[2025-06-19T21:01:49.285Z] [INFO] Updated username=bob by user=admin
+[2025-06-19T21:01:52.534Z] [INFO] Fetched users data
+[2025-06-19T21:05:29.885Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T21:05:29.892Z] [INFO] Fetched users data
+[2025-06-19T21:05:29.901Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T21:05:29.903Z] [INFO] Fetched users data
+[2025-06-19T21:05:30.116Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T21:05:30.119Z] [INFO] Fetched users data
+[2025-06-19T21:05:30.137Z] [INFO] Fetched users data
+[2025-06-19T21:05:31.185Z] [INFO] Fetched user data for username=admin
+[2025-06-19T21:05:31.192Z] [INFO] Fetched user data for username=admin
+[2025-06-19T21:05:31.200Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T21:05:31.207Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T21:05:58.118Z] [INFO] Fetched user data for username=admin
+[2025-06-19T21:05:58.123Z] [INFO] Fetched user data for username=admin
+[2025-06-19T21:05:58.131Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T21:05:58.138Z] [INFO] Fetched jobs with conditions=[{"field":"username","value":"admin"}]
+[2025-06-19T21:05:59.994Z] [INFO] Fetched users data
+[2025-06-19T21:06:00.000Z] [INFO] Fetched users data
+[2025-06-19T21:06:45.847Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T21:06:45.854Z] [INFO] Fetched users data
+[2025-06-19T21:06:45.855Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T21:06:45.860Z] [INFO] Fetched users data
+[2025-06-19T21:06:46.104Z] [INFO] Fetched messages with conditions=[{"field":"email","value":"gitlink10@gmail.com"}]
+[2025-06-19T21:06:46.106Z] [INFO] Fetched users data
+[2025-06-19T21:06:46.126Z] [INFO] Fetched users data

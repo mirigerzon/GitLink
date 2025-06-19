@@ -39,9 +39,8 @@ function App() {
             <Route path=":id" element={<Projects />} />
           </Route>
           <Route path="profile" element={<Profile />} />
-          <Route path="users" element={<Admin />} />
         </Route>
-
+        <Route path="users" element={<Admin />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </CurrentUserProvider>
