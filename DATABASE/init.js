@@ -25,10 +25,11 @@ async function seedUsers(db) {
   await db.query(`
     INSERT INTO users (username, email, phone, role_id, about, profile_image, cv_file, status)
 VALUES
-  ('admin', 'gitlink10@gmail.com', 0527159812, 3, '', '', '', TRUE),
-  ('alice', 'alice@example.com', 123456789, 1, 'Full-stack developer', 'https://...', 'cv_files/alice-cv.pdf', TRUE),
-  ('bob', 'bob@example.com', 234567891, 1, 'Backend enthusiast', 'https://...', 'cv_files/bob-cv.pdf', FALSE),
-  ('charlie', 'charlie@example.com', 345678912, 2, 'Java expert', 'https://...', NULL, TRUE);
+  ('admin', 'gitlink10@gmail.com', 0527159812, 3, '', 'profile_images/user.png', '', TRUE),
+  ('alice', 'alice@example.com', 123456789, 1, 'Full-stack developer', 'profile_images/user.png', 'cv_files/alice-cv.pdf', TRUE),
+  ('bob', 'bob@example.com', 234567891, 1, 'Backend enthusiast', 'profile_images/user.png', 'cv_files/bob-cv.pdf', FALSE),
+  ('charlie', 'charlie@example.com', 345678912, 2, 'Java expert', 'profile_images/user.png', NULL, TRUE);
+  
   `);
 
 }

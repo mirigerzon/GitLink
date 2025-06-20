@@ -1,26 +1,13 @@
-/* Projects.css */
+/* Projects.css - 3 Column Layout */
 .projects-container {
   margin: 1em;
   padding: 2rem;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
-.controllers-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
-  align-items: center;
-  justify-content: center;
-}
-
 .projects-container h1 {
   font-size: 3rem;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #1e6cb0 0%, #156299 50%, #221089);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -40,9 +27,10 @@
   border: 1px solid #e2e8f0;
 }
 
+/* Updated grid for 3 columns */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   padding: 1rem 0;
 }
@@ -228,10 +216,17 @@
   margin-left: 1rem;
 }
 
-/* Responsive Design */
+/* Responsive Design - Updated for 3 column layout */
+@media (max-width: 1400px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 1200px) {
   .projects-grid {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 }

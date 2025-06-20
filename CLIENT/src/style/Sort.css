@@ -1,25 +1,24 @@
 .filter-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  padding: 15px;
+  gap: 1vw;
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
-  min-width: 180px;
   flex: 1;
 }
 
 .filter-group select {
+  display: flex;
+  width: 12vw;
   padding: 10px 12px;
   border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 25vh;
+  font-size: 0.8rem;
   background-color: white;
   color: #495057;
-  outline: none;
   transition: all 0.3s ease;
   cursor: pointer;
   box-sizing: border-box;
@@ -80,7 +79,8 @@
   }
 
   .filter-group select {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
+    /* Prevents zoom on iOS */
   }
 }
 
@@ -94,6 +94,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

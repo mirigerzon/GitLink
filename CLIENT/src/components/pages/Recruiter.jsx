@@ -5,12 +5,20 @@ import { FiUser, FiFolder, FiMail, FiPhone, FiBriefcase, FiFileText } from 'reac
 function Recruiter({ recruiterData }) {
   const navigate = useNavigate();
 
+  const getImageUrl = () => {
+    if (!recruiterData?.profile_image) return;
+    if (recruiterData.profile_image.startsWith('https://github.com/')) {
+      return recruiterData.profile_image;
+    }
+    return `http://localhost:3001/uploads/${recruiterData.profile_image}`;
+  };
+  
   return (
     <div className="recruiter-card">
       <div className="recruiter-header">
         <div className="avatar">
           <img
-            src={recruiterData.profile_image}
+            src={getImageUrl()}
             alt={`${recruiterData.username} avatar`}
             className="avatar-img"
           />
@@ -22,8 +30,6 @@ function Recruiter({ recruiterData }) {
 
         <div className="recruiter-info">
           <h3 className="recruiter-name">{recruiterData.username}</h3>
-          <p className="user-id">ID: {recruiterData.user_id}</p>
-
           <div className="role-info">
             <span className="role-badge">{recruiterData.role}</span>
           </div>
@@ -32,7 +38,7 @@ function Recruiter({ recruiterData }) {
 
       <div className="details-section">
         {recruiterData.company_name && (
-          <div className="detail-item">
+          <div className="recruiter-detail-item">
             <FiBriefcase className="detail-icon" />
             <span className="detail-label">Company:</span>
             <span className="detail-value">{recruiterData.company_name}</span>
@@ -40,7 +46,7 @@ function Recruiter({ recruiterData }) {
         )}
 
         {recruiterData.email && (
-          <div className="detail-item">
+          <div className="recruiter-detail-item">
             <FiMail className="detail-icon" />
             <span className="detail-label">Email:</span>
             <span className="detail-value">{recruiterData.email}</span>
@@ -48,17 +54,10 @@ function Recruiter({ recruiterData }) {
         )}
 
         {recruiterData.phone && (
-          <div className="detail-item">
+          <div className="recruiter-detail-item">
             <FiPhone className="detail-icon" />
             <span className="detail-label">Phone:</span>
             <span className="detail-value">{recruiterData.phone}</span>
-          </div>
-        )}
-
-        {recruiterData.about && (
-          <div className="about-section">
-            <h4>About</h4>
-            <p className="about-text">{recruiterData.about}</p>
           </div>
         )}
       </div>

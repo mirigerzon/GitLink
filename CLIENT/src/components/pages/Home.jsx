@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaLaptopCode, FaUserTie, FaBriefcase, FaProjectDiagram } from "react-icons/fa";
 import "../../style/Home.css";
 
 function Home() {
@@ -14,22 +15,25 @@ function Home() {
             <div className="welcome-features">
               <div className="feature-card">
                 <Link to={"/developers"}>
-                  <div className="feature-icon">👨‍💻</div>{" "}
-                  <h3>Find Developers</h3>
+                  <div className="feature-icon"><FaUserTie /></div>{" "}
+                  <h3>Find</h3>
+                  <h3>Developers</h3>
                   <p>Connect with talented developers worldwide</p>
                 </Link>
               </div>
               <div className="feature-card">
                 <Link to={"/projects"}>
-                  <div className="feature-icon">🚀</div>
-                  <h3>Showcase Projects</h3>
+                  <div className="feature-icon"><FaLaptopCode /></div>
+                  <h3>Showcase</h3>
+                  <h3>Projects</h3>
                   <p>Display your best work and get recognized</p>
                 </Link>
               </div>
               <div className="feature-card">
                 <Link to={"/jobs"}>
-                  <div className="feature-icon">💼</div>
-                  <h3>Discover Jobs</h3>
+                  <div className="feature-icon"><FaBriefcase /></div>
+                  <h3>Discover</h3>
+                  <h3>Jobs</h3>
                   <p>Find your next career opportunity</p>
                 </Link>
               </div>

@@ -5,22 +5,9 @@
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
-.controllers-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
-  align-items: center;
-  justify-content: center;
-}
-
 .developers-header h1 {
   font-size: 3rem;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #66cfef 0%, #156299 50%, #221089);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -29,12 +16,11 @@
 
 .developers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   padding: 1rem 0;
 }
 
-/* Animation for grid items */
 .developers-grid>* {
   animation: fadeInUp 0.6s ease-out;
   animation-fill-mode: both;
@@ -125,7 +111,7 @@
 /* Responsive Design */
 @media (max-width: 1200px) {
   .developers-grid {
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 }

@@ -9,8 +9,8 @@
   width: 20vw;
   padding: 1.6vh 8vh 1.55vh 1.5vh;
   border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 25vh;
+  font-size: 0.8rem;
   outline: none;
   transition: border-color 0.3s ease;
   box-sizing: border-box;
@@ -55,10 +55,9 @@
   outline-offset: 2px;
 }
 
-/* כפתור מיקרופון */
 .mic-button {
   position: absolute;
-  right: 1.2vw; 
+  right: 0.5vw; 
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -67,8 +66,7 @@
   padding: 4px 8px;
   border: none;
   border-radius: 50%;
-  background-color: #007bff;
-  color: white;
+  color: black;
   cursor: pointer;
   width: 28px;
   height: 28px;

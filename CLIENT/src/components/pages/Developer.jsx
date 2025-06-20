@@ -19,10 +19,18 @@ function Developer({ developerData }) {
     );
   };
 
+  const getImageUrl = () => {
+    if (!developerData?.profile_image) return;
+    if (developerData.profile_image.startsWith('https://github.com/')) {
+      return developerData.profile_image;
+    }
+    return `http://localhost:3001/uploads/${developerData.profile_image}`;
+  };
+
   const getExperienceLevel = (years) => {
-    if (years <= 2) return { level: "Junior", color: "#10b981" };
-    if (years <= 5) return { level: "Mid Level", color: "#f59e0b" };
-    return { level: "Senior", color: "#ef4444" };
+    if (years <= 2) return { level: "Junior", color: "#66cfef" };
+    if (years <= 5) return { level: "Mid Level", color: "#4e9bb2" };
+    return { level: "Senior", color: "#221089" };
   };
 
   const experienceInfo = getExperienceLevel(developerData.experience);
@@ -32,11 +40,10 @@ function Developer({ developerData }) {
       <div className="developer-header">
         <div className="avatar">
           <img
-            src={developerData.profile_image}
+            src={getImageUrl()}
             alt={`${developerData.username} avatar`}
             className="avatar-img"
           />
-          <div className="online-indicator"></div>
         </div>
 
         <div className="developer-info">
@@ -45,22 +52,12 @@ function Developer({ developerData }) {
 
           <div
             className="experience-badge"
-            style={{ backgroundColor: experienceInfo.color }}
-          >
+            style={{ border: `1px solid ${experienceInfo.color}` }}          >
             <span>{experienceInfo.level}</span>
             <span>{developerData.experience} years</span>
           </div>
-        </div>
-      </div>
-
-      <div className="developer-stats">
-        <div className="stat-item">
-          <div className="stat-icon"><FiStar /></div>
-          <div className="stat-content">
-            <span className="stat-number">{developerData.rating}</span>
-            <div className="rating-stars">
-              {generateStars(developerData.rating)}
-            </div>
+          <div className="rating-stars">
+            {generateStars(developerData.rating)}
           </div>
         </div>
       </div>

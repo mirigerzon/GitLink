@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useCurrentUser } from "../../context.jsx";
 import { useMessages } from "../../hooks/Messages";
 import useSound from 'use-sound';
+import { BsChatDots } from "react-icons/bs";
 import '../../style/Messages.css';
 
 export const Messages = () => {
@@ -24,7 +25,7 @@ export const Messages = () => {
         <>
             <div className="icon">
                 <button onClick={toggleOpen} className="messages-btn">
-                    🔔
+                    <BsChatDots />
                     {hasUnread && <span className="new-messages"></span>}
                 </button>
             </div>

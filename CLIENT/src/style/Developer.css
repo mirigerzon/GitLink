@@ -6,6 +6,9 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
 }
 
 .developer-card:hover {
@@ -23,13 +26,12 @@
   background: linear-gradient(45deg,
       rgba(255, 255, 255, 0.1) 0%,
       transparent 100%);
-  /* pointer-events: none; */
 }
 
 .developer-header {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1vw;
   margin-bottom: 2rem;
   position: relative;
   z-index: 2;
@@ -43,7 +45,7 @@
 .avatar-img {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 25%;
   object-fit: cover;
   border: 3px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -83,27 +85,23 @@
 .developer-name {
   font-size: 1.5rem;
   font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .git-name {
   color: rgba(0, 0, 0, 0.8);
   font-size: 1rem;
   font-weight: 500;
-  margin: 0 0 1rem 0;
 }
 
 .experience-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
+  padding: 0rem 0.5rem 0.2rem 0.5rem;
+  border-radius: 10px;
   font-size: 0.875rem;
   font-weight: 600;
   color: rgb(0, 0, 0);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .developer-stats {
@@ -164,6 +162,7 @@
   margin-bottom: 2rem;
   position: relative;
   z-index: 2;
+  flex-grow: 1;
 }
 
 .skills-list {
@@ -173,7 +172,7 @@
 }
 
 .skill-tag {
-  background: #667eea;
+  background: #ccd8dc;
   color: rgb(0, 0, 0);
   padding: 0.5rem 1rem;
   border-radius: 10px;
@@ -192,6 +191,7 @@
   gap: 1rem;
   position: relative;
   z-index: 2;
+  margin-top: auto;
 }
 
 .btn-profile,
@@ -225,15 +225,14 @@
 }
 
 .btn-projects {
-  background: rgba(16, 185, 129, 0.8);
+  background: #156299;
   color: white;
-  border: 1px solid rgba(16, 185, 129, 0.5);
+  border: 1px solid #15629981;
 }
 
 .btn-projects:hover {
-  background: rgba(16, 185, 129, 1);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 8px 25px #15629981;
 }
 
 .btn-icon {
@@ -244,6 +243,7 @@
 @media (max-width: 768px) {
   .developer-card {
     padding: 1.5rem;
+    min-height: 350px;
   }
 
   .developer-header {

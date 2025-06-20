@@ -48,7 +48,7 @@
   font-weight: 800;
   color: #1e293b;
   margin: 0 0 1.5rem 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e6cb0 0%, #156299 50%, #221089);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -113,7 +113,7 @@
 }
 
 .skill-tag {
-  background: #b4c2ff;
+  background: #ccd8dc;
   color: rgb(0, 0, 0);
   padding: 0.5rem 1rem;
   border-radius: 10px;
@@ -192,9 +192,9 @@
   margin-bottom: 15px;
 }
 
-.form-group {
+/* .form-group {
   margin-bottom: 1.5rem;
-}
+} */
 
 .form-buttons {
   display: flex;
@@ -263,7 +263,6 @@
 .delete-btn:hover,
 .view-btn:hover {
   transform: translateY(-2px);
-  /* box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); */
 }
 
 .add-btn {

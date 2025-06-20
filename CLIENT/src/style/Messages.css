@@ -30,7 +30,7 @@
     transform: translate(50%, -50%);
     width: 10px;
     height: 10px;
-    background: #10b981;
+    background: #43fd7b;
     border-radius: 50%;
     border: 2px solid white;
     box-shadow: 0 2px 10px rgba(16, 185, 129, 0.5);
@@ -38,6 +38,7 @@
 }
 
 .messages-btn {
+    color: white;
     position: relative;
     background: none;
     font-size: 1.3rem;

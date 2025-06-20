@@ -26,7 +26,7 @@ function Project({ projectData, setIsChange }) {
         confirmButtonText: 'Login',
         showCancelButton: true,
         cancelButtonText: 'Cancel',
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#221089',
         cancelButtonColor: '#aaa',
       }).then(result => {
         if (result.isConfirmed) {
@@ -161,7 +161,7 @@ function Project({ projectData, setIsChange }) {
 
         {!isOwner && (
           <div className="rating-section">
-            <h4>Rate this project:</h4>
+            <p>Rate this project:</p>
             <div
               className="star-rating-container"
               onMouseLeave={() => setHoveredRating(0)}
