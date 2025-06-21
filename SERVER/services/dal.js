@@ -1,17 +1,5 @@
 const genericDal = require('../services/genericDal.js');
-const mysql = require("mysql2/promise");
-const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
-
-const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
-    waitForConnections: true,
-    connectionLimit: 10,
-});
+const pool = require("./mysqlPool");
 
 const ALLOWED_TABLES = [
     'users', 'developers', 'recruiters', 'passwords', 'roles',
@@ -20,7 +8,8 @@ const ALLOWED_TABLES = [
 
 const USER_ROLES = {
     DEVELOPER: 'developer',
-    RECRUITER: 'recruiter'
+    RECRUITER: 'recruiter',
+    ADMIN: 'admin'
 };
 
 const getUsers = async () => {
@@ -199,7 +188,7 @@ const getApplications = async (job_id) => {
 
 const rejectApplicant = async (job_id, developerId, messageData) => {
     try {
-        const result = await genericDal.updateAndInformUser(
+        const result = await this.updateAndInformUser(
             'job_applications',
             { is_treated: 'rejected' },
             [{ field: 'job_id', value: job_id },
@@ -213,6 +202,46 @@ const rejectApplicant = async (job_id, developerId, messageData) => {
     }
 }
 
+const updateAndInformUser = async (table, data, conditions = [], messageData) => {
+    const connection = await pool.getConnection();
+    try {
+        validateTable(table);
+        validateConditions(conditions);
+
+        if (!data || Object.keys(data).length === 0) {
+            throw new Error('Data is required for update operation');
+        }
+
+        if (conditions.length === 0) {
+            throw new Error('Conditions are required for update operation');
+        }
+
+        if (!messageData || !messageData.user_id || !messageData.email || !messageData.title || !messageData.content) {
+            throw new Error('Complete message data is required (user_id, email, title, content)');
+        }
+
+        await connection.beginTransaction();
+
+        const updateSql = `UPDATE \`${table}\` SET ${Object.keys(data).map(f => `\`${f}\` = ?`).join(", ")} WHERE ${conditions.map(c => `\`${c.field}\` = ?`).join(" AND ")}`;
+        const updateParams = [...Object.values(data), ...conditions.map(c => c.value)];
+
+        const insertSql = `INSERT INTO messages (user_id, email, title, content) VALUES (?, ?, ?, ?)`;
+        const insertParams = [messageData.user_id, messageData.email, messageData.title, messageData.content];
+
+        await connection.query(updateSql, updateParams);
+        await connection.query(insertSql, insertParams);
+
+        await connection.commit();
+        console.log('Transaction completed successfully: update and message sent');
+    } catch (error) {
+        await connection.rollback();
+        console.error('Error in updateAndInformUser:', error.message);
+        throw new Error(`Transaction failed: ${error.message}`);
+    } finally {
+        connection.release();
+    }
+  };
+
 module.exports = {
     getUserWithRoleData,
     getUsersByRole,
@@ -221,5 +250,6 @@ module.exports = {
     getProjectWithCreator,
     rateProjectTransactional,
     getApplications,
-    rejectApplicant
+    rejectApplicant,
+    updateAndInformUser
 };

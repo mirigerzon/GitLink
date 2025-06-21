@@ -9,7 +9,6 @@ const multer = require('multer');
 const verifyToken = require('../middleware/verifyToken');
 const { handleError, validateRequiredFields } = require('../utils/routerHelpers.js');
 const fs = require('fs');
-const { verify } = require('crypto');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

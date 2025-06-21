@@ -32,6 +32,17 @@ export const useAuth = () => {
     const [usernameStatus, setUsernameStatus] = useState(null);
     const [suggestedUsernames, setSuggestedUsernames] = useState([]);
     const [isCheckingUsername, setIsCheckingUsername] = useState(false);
+
+    // Registration form state
+    const [step, setStep] = useState(1);
+    const [selectedRole, setSelectedRole] = useState("");
+    const [stepOneData, setStepOneData] = useState({});
+    const [useGitAvatar, setUseGitAvatar] = useState(false);
+
+    // File handling state
+    const [profileImage, setProfileImage] = useState(null);
+    const [cvFile, setCvFile] = useState(null);
+
     const navigate = useNavigate();
     const fetchData = useFetchData();
 
@@ -92,6 +103,83 @@ export const useAuth = () => {
         setIsCheckingUsername(false);
     };
 
+    // File upload handlers
+    const triggerFileUpload = (accept, onFileSelect) => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = accept;
+        input.style.display = 'none';
+
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                onFileSelect(file);
+            }
+            document.body.removeChild(input);
+        };
+
+        document.body.appendChild(input);
+        input.click();
+    };
+
+    const uploadProfileImage = () => {
+        triggerFileUpload('image/*', setProfileImage);
+    };
+
+    const uploadCvFile = () => {
+        triggerFileUpload('.pdf', setCvFile);
+    };
+
+    // Registration step management
+    const goToStepTwo = (data) => {
+        setStepOneData(data);
+        setStep(2);
+    };
+
+    const resetRegistrationForm = () => {
+        setStep(1);
+        setSelectedRole("");
+        setStepOneData({});
+        setUseGitAvatar(false);
+        setProfileImage(null);
+        setCvFile(null);
+    };
+
+    // Form data builder
+    const buildFormData = (stepTwoData) => {
+        const ROLES = { DEVELOPER: 1, RECRUITER: 2 };
+        const formData = new FormData();
+
+        formData.append("username", stepOneData.username);
+        formData.append("password", stepOneData.password);
+        formData.append("role_id", selectedRole);
+        formData.append("email", stepTwoData.email);
+        formData.append("phone", stepTwoData.phone);
+
+        if (selectedRole === ROLES.DEVELOPER) {
+            formData.append("git_name", stepTwoData.git_name);
+            formData.append("experience", stepTwoData.experience);
+            formData.append("languages", stepTwoData.languages || "");
+            formData.append("about", stepTwoData.about || "");
+
+            if (useGitAvatar) {
+                formData.append("profile_image", `https://github.com/${stepTwoData.git_name}.png`);
+            } else if (profileImage) {
+                formData.append("profile_image", profileImage);
+            }
+
+            if (cvFile) {
+                formData.append("cv_file", cvFile);
+            }
+        } else if (selectedRole === ROLES.RECRUITER) {
+            formData.append("company_name", stepTwoData.company_name || "");
+            if (profileImage) {
+                formData.append("profile_image", profileImage);
+            }
+        }
+        return formData;
+    };
+
     const login = async (credentials) => {
         setIsLoading(true);
         setMessage('');
@@ -121,10 +209,11 @@ export const useAuth = () => {
         }
     };
 
-    const register = async (formData) => {
+    const register = async (stepTwoData) => {
         setIsLoading(true);
         setMessage('');
         try {
+            const formData = buildFormData(stepTwoData);
             await fetchData({
                 type: 'register',
                 method: 'POST',
@@ -133,6 +222,7 @@ export const useAuth = () => {
                     if (user && token) {
                         const enhancedUser = storeUserData(user, token);
                         setMessage(MESSAGES.REGISTER_SUCCESS);
+                        resetRegistrationForm();
                         navigate(getRedirectPath(enhancedUser));
                     } else {
                         setMessage(MESSAGES.REGISTER_ERROR);
@@ -183,19 +273,43 @@ export const useAuth = () => {
     const clearForgotPasswordMessage = () => setForgotPasswordMessage('');
 
     return {
+        // Auth functions
         login,
-        isLoading,
-        message,
-        clearMessage,
         register,
         forgotPassword,
+
+        // Auth state
+        isLoading,
+        message,
         forgotPasswordLoading,
         forgotPasswordMessage,
+        clearMessage,
         clearForgotPasswordMessage,
+
+        // Username validation
         checkUsernameAvailability,
         usernameStatus,
         suggestedUsernames,
         isCheckingUsername,
         clearUsernameCheck,
+
+        // Registration form state
+        step,
+        setStep,
+        selectedRole,
+        setSelectedRole,
+        stepOneData,
+        useGitAvatar,
+        setUseGitAvatar,
+        goToStepTwo,
+        resetRegistrationForm,
+
+        // File handling
+        profileImage,
+        setProfileImage,
+        cvFile,
+        setCvFile,
+        uploadProfileImage,
+        uploadCvFile,
     };
 };

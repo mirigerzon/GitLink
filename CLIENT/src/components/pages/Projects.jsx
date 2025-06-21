@@ -85,7 +85,7 @@ function Projects() {
           <Project key={project.id} projectData={project} setIsChange={setIsChange} />
         )) : <h4>no projects found</h4>}
       </div>
-      <Outlet />
+      {/* <Outlet /> */}
     </div>
   );
 }

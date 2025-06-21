@@ -189,8 +189,7 @@ router.post('/forgot-password', async (req, res) => {
         const result = await authBl.forgotPassword(username.trim());
         res.status(200).json(result);
     } catch (error) {
-        handleError(res, err, 'auth', 'Forgot password');
-        //message: "Username not found"
+        handleError(res, error, 'auth', 'Forgot password');
     }
 });
 

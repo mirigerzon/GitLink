@@ -1,18 +1,4 @@
-const mysql = require("mysql2/promise");
-const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
-
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
-  waitForConnections: true,
-  connectionLimit: 10,
-  // acquireTimeout: 60000,
-  // timeout: 60000,
-});
+const pool = require("./mysqlPool");
 
 const ALLOWED_TABLES = [
   'users', 'developers', 'recruiters', 'passwords', 'roles',
@@ -21,7 +7,8 @@ const ALLOWED_TABLES = [
 
 const USER_ROLES = {
   DEVELOPER: 'developer',
-  RECRUITER: 'recruiter'
+  RECRUITER: 'recruiter',
+  ADMIN: 'admin'
 };
 
 const validateTable = (table) => {
@@ -187,66 +174,10 @@ const DELETE = async (table, conditions = []) => {
   }
 };
 
-const updateAndInformUser = async (table, data, conditions = [], messageData) => {
-  const connection = await pool.getConnection();
-  try {
-    validateTable(table);
-    validateConditions(conditions);
-
-    if (!data || Object.keys(data).length === 0) {
-      throw new Error('Data is required for update operation');
-    }
-
-    if (conditions.length === 0) {
-      throw new Error('Conditions are required for update operation');
-    }
-
-    if (!messageData || !messageData.user_id || !messageData.email || !messageData.title || !messageData.content) {
-      throw new Error('Complete message data is required (user_id, email, title, content)');
-    }
-
-    await connection.beginTransaction();
-
-    const updateSql = `UPDATE \`${table}\` SET ${Object.keys(data).map(f => `\`${f}\` = ?`).join(", ")} WHERE ${conditions.map(c => `\`${c.field}\` = ?`).join(" AND ")}`;
-    const updateParams = [...Object.values(data), ...conditions.map(c => c.value)];
-
-    const insertSql = `INSERT INTO messages (user_id, email, title, content) VALUES (?, ?, ?, ?)`;
-    const insertParams = [messageData.user_id, messageData.email, messageData.title, messageData.content];
-
-    await connection.query(updateSql, updateParams);
-    await connection.query(insertSql, insertParams);
-
-    await connection.commit();
-    console.log('Transaction completed successfully: update and message sent');
-  } catch (error) {
-    await connection.rollback();
-    console.error('Error in updateAndInformUser:', error.message);
-    throw new Error(`Transaction failed: ${error.message}`);
-  } finally {
-    connection.release();
-  }
-};
-
-// Graceful shutdown
-const closePool = async () => {
-  try {
-    await pool.end();
-    console.log('Database pool closed successfully');
-  } catch (error) {
-    console.error('Error closing pool:', error.message);
-    throw new Error(`Failed to close pool: ${error.message}`);
-  }
-};
-
-process.on('SIGINT', closePool);
-process.on('SIGTERM', closePool);
-
 module.exports = {
   GET,
   GET_WITH_JOINS,
   CREATE,
   UPDATE,
   DELETE,
-  updateAndInformUser,
-  closePool
 };

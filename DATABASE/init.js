@@ -49,7 +49,7 @@ async function seedDevelopers(db) {
   await db.query(`
     INSERT INTO developers (user_id, git_name, experience, languages, rating)
     VALUES
-      (2, 'aliceGH', 3, 'JavaScript,Python', 5),
+      (2, 'aliceGH', 3, 'JavaScript, Python', 5),
       (3, 'bobGH', 2, 'C++,C#', 4);
   `);
 }

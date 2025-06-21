@@ -29,16 +29,20 @@ async function getDbConnection() {
     });
 }
 
-async function createUserTables(connection) {
-    //roles
-    await connection.query(`
-        CREATE TABLE IF NOT EXISTS roles(
-          role_id INT AUTO_INCREMENT PRIMARY KEY,
-          role VARCHAR(255) NOT NULL
-        )
-    `)
+const timestampColumns = `
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+`;
 
-    // users (general)
+async function createUserTables(connection) {
+    await connection.query(`
+        CREATE TABLE IF NOT EXISTS roles (
+            role_id INT AUTO_INCREMENT PRIMARY KEY,
+            role VARCHAR(255) NOT NULL,
+            ${timestampColumns}
+        )
+    `);
+
     await connection.query(`
         CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -50,25 +54,24 @@ async function createUserTables(connection) {
             profile_image VARCHAR(255),
             cv_file VARCHAR(255),
             is_active BOOLEAN DEFAULT TRUE,
-            status BOOLEAN DEFAULT  TRUE,
+            status BOOLEAN DEFAULT TRUE,
+            ${timestampColumns},
             FOREIGN KEY (role_id) REFERENCES roles(role_id) ON DELETE CASCADE
         )
-    `)
+    `);
 
-
-    // passwords
     await connection.query(`
         CREATE TABLE IF NOT EXISTS passwords (
             user_id INT PRIMARY KEY,
             hashed_password VARCHAR(255) NOT NULL,
             is_active BOOLEAN DEFAULT TRUE,
+            ${timestampColumns},
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
 }
 
 async function createRoleTables(connection) {
-    // developers (specific fields)
     await connection.query(`
         CREATE TABLE IF NOT EXISTS developers (
             user_id INT PRIMARY KEY,
@@ -77,23 +80,23 @@ async function createRoleTables(connection) {
             languages VARCHAR(255),
             rating INT DEFAULT 0,
             is_active BOOLEAN DEFAULT TRUE,
+            ${timestampColumns},
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
 
-    // recruiters (specific fields)
     await connection.query(`
         CREATE TABLE IF NOT EXISTS recruiters (
             user_id INT PRIMARY KEY,
             company_name VARCHAR(100) NOT NULL,
             is_active BOOLEAN DEFAULT TRUE,
+            ${timestampColumns},
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
 }
 
 async function createProjectTables(connection) {
-    // projects
     await connection.query(`
         CREATE TABLE IF NOT EXISTS projects (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -107,12 +110,12 @@ async function createProjectTables(connection) {
             rating DOUBLE DEFAULT 0,
             rating_count INT DEFAULT 0,
             is_active BOOLEAN DEFAULT TRUE,
+            ${timestampColumns},
             FOREIGN KEY (git_name) REFERENCES developers(git_name) ON DELETE CASCADE,
             FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
         )
     `);
 
-    // project ratings
     await connection.query(`
         CREATE TABLE IF NOT EXISTS project_ratings (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -120,6 +123,7 @@ async function createProjectTables(connection) {
             project_id INT NOT NULL,
             rating TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
             is_active BOOLEAN DEFAULT TRUE,
+            ${timestampColumns},
             UNIQUE (username, project_id),
             FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE,
             FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
@@ -128,7 +132,6 @@ async function createProjectTables(connection) {
 }
 
 async function createJobTables(connection) {
-    // jobs
     await connection.query(`
         CREATE TABLE IF NOT EXISTS jobs (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -142,11 +145,11 @@ async function createJobTables(connection) {
             views INT NOT NULL DEFAULT 0,
             is_seized BOOLEAN DEFAULT 0,
             is_active BOOLEAN DEFAULT TRUE,
+            ${timestampColumns},
             FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
         )
     `);
 
-    // job_applications
     await connection.query(`
         CREATE TABLE IF NOT EXISTS job_applications (
             user_id INT NOT NULL,
@@ -154,6 +157,7 @@ async function createJobTables(connection) {
             remark VARCHAR(500),
             is_treated ENUM('pending', 'handled', 'rejected') DEFAULT 'pending',
             is_active BOOLEAN DEFAULT TRUE,
+            ${timestampColumns},
             PRIMARY KEY (user_id, job_id),
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
@@ -162,7 +166,6 @@ async function createJobTables(connection) {
 }
 
 async function createMessageTables(connection) {
-    // messages
     await connection.query(`
         CREATE TABLE IF NOT EXISTS messages (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -172,6 +175,7 @@ async function createMessageTables(connection) {
             content VARCHAR(1000),
             is_active BOOLEAN DEFAULT TRUE,
             is_read BOOLEAN DEFAULT FALSE,
+            ${timestampColumns},
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
