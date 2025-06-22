@@ -142,7 +142,6 @@ async function createJobTables(connection) {
             requirements VARCHAR(2000),
             experience INT NOT NULL,
             languages VARCHAR(255),
-            views INT NOT NULL DEFAULT 0,
             is_seized BOOLEAN DEFAULT 0,
             is_active BOOLEAN DEFAULT TRUE,
             ${timestampColumns},

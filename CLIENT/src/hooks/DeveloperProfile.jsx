@@ -1,9 +1,9 @@
-import { useState, React } from "react";
+import { useState } from "react";
 import Update from "../components/common/Update.jsx";
 import Delete from "../components/common/Delete.jsx";
-import '../style/DeveloperProfile.css';
 import Add from "../components/common/Add.jsx";
 import Swal from 'sweetalert2';
+import '../style/DeveloperProfile.css';
 
 function DeveloperProfile({
     userData,
@@ -47,7 +47,7 @@ function DeveloperProfile({
                     </button>
                 </div>
 
-                {projectsToAdd ? (
+                {projectsToAdd && (
                     <div className="projectsToAdd">
                         <div className="projectsName">
                             <h3>Projects can be added:</h3>
@@ -98,7 +98,7 @@ function DeveloperProfile({
                             </ul>
                         </div>
                     </div>
-                ) : <div>No projects found to add.</div>}
+                )}
             </>
         );
     };
@@ -155,7 +155,7 @@ function DeveloperProfile({
                                 >
                                     View
                                 </button>
-                                {isOwnProfile && (
+                                {(isOwnProfile || currentUser.role === 'admin') && (
                                     <>
                                         <Delete
                                             className="delete_btn"

@@ -17,7 +17,7 @@ const getUsers = async () => {
 const getUser = async (username) => {
     try {
         const user = await dal.getUser(username);
-        return  user
+        return user
     } catch (error) {
         console.error('Error fetching user:', error);
         throw new Error('Failed to fetch user');
@@ -142,7 +142,7 @@ const rateProject = async (username, projectId, rating) => {
         await updateUserRating(gitName);
     } catch (error) {
         console.error('Error rating project:', error);
-        throw error; 
+        throw error;
     }
 };
 
@@ -176,7 +176,7 @@ const createApply = async (data, email) => {
 
         const response = await genericDal.CREATE('job_applications', data);
 
-        await genericDal.CREATE("messages", {
+        await dal.createMessage({
             user_id: data.user_id,
             email: email,
             title: 'Application Received!',
@@ -197,7 +197,6 @@ const createApply = async (data, email) => {
 
 const changeUserPassword = async (userId, currentPassword, newPassword, email) => {
     try {
-        // בדיקות בסיסיות שלא נעשו ברמת הRoute
         if (!userId || !currentPassword || !newPassword) {
             throw new Error("All password fields are required");
         }
@@ -226,8 +225,12 @@ const changeUserPassword = async (userId, currentPassword, newPassword, email) =
         );
     } catch (error) {
         console.error('Error changing password:', error);
-        throw error;   
+        throw error;
     }
+};
+
+const getJobsWithApplicantsCount = async () => {
+    return await dal.getJobsWithApplicantsCount(); 
 };
 
 module.exports = {
@@ -243,5 +246,6 @@ module.exports = {
     createApply,
     changeUserPassword,
     rejectApplicant,
-    notifyApplicant
+    notifyApplicant,
+    getJobsWithApplicantsCount
 };

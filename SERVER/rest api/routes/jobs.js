@@ -13,13 +13,9 @@ const TABLE_NAME = 'jobs';
 
 router.get('/', async (req, res) => {
     try {
-        const conditions = createConditions(req);
-        const data = await genericDataService.getItemByConditions(
-            TABLE_NAME,
-            conditions.length ? conditions : undefined
-        );
+        const data = await DataService.getJobsWithApplicantsCount()
 
-        writeLog(`Fetched ${TABLE_NAME} with conditions=${JSON.stringify(conditions)}`, 'info');
+        writeLog(`Fetched ${TABLE_NAME}`, 'info');
         res.json(data);
     } catch (err) {
         handleError(res, err, TABLE_NAME, 'fetching');

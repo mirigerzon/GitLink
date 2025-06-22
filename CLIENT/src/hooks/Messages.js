@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { useFetchData } from "../hooks/fetchData.js";
 import { useCurrentUser } from "../context.jsx";
+import { io } from "socket.io-client";
+
+const SOCKET_URL = "http://localhost:3001";
 
 export const useMessages = () => {
     const [messages, setMessages] = useState([]);
@@ -8,6 +11,7 @@ export const useMessages = () => {
     const [isChange, setIsChange] = useState(0);
     const [error, setError] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
+    const [hasUnread, setHasUnread] = useState(false);
     const fetchData = useFetchData();
 
     const { currentUser, setCurrentUser } = useCurrentUser();
@@ -26,6 +30,7 @@ export const useMessages = () => {
             params: { email: currentUser.email },
             onSuccess: (data) => {
                 setMessages(data);
+                setHasUnread(data.some(msg => !msg.is_read));
                 setLoading(false);
             },
             onError: (errMsg) => {
@@ -33,9 +38,7 @@ export const useMessages = () => {
                 setLoading(false);
             },
         });
-    }, [currentUser.email, currentUser.role, currentUser.initiatedAction]);
-
-    const hasUnread = messages?.some((msg) => !msg.is_read);
+    }, [currentUser.email, currentUser.role]);
 
     const markAllAsRead = () => {
         setLoading(true);
@@ -47,6 +50,7 @@ export const useMessages = () => {
             onSuccess: () => {
                 setLoading(false);
                 setIsChange(true);
+                setHasUnread(false); 
             },
             onError: (errMsg) => {
                 setError(errMsg);
@@ -73,12 +77,6 @@ export const useMessages = () => {
         });
     }, [currentUser.email, currentUser.role]);
 
-    useEffect(() => {
-        if (currentUser.email) {
-            fetchMessages();
-        }
-    }, [isChange, currentUser.email, currentUser.initiatedAction]);
-
     const deleteMessage = useCallback((id) => {
         setLoading(true);
         fetchData({
@@ -86,10 +84,9 @@ export const useMessages = () => {
             type: `messages/${id}`,
             method: "DELETE",
             params: { email: currentUser.email },
-            onSuccess: (data) => {
+            onSuccess: () => {
                 setLoading(false);
                 setIsChange(true);
-                data;
             },
             onError: (errMsg) => {
                 setError(errMsg);
@@ -97,6 +94,30 @@ export const useMessages = () => {
             },
         });
     }, [currentUser.email, currentUser.role]);
+
+    useEffect(() => {
+        const socket = io(SOCKET_URL, {
+            withCredentials: true,
+        });
+
+        socket.on("new_message", (message) => {
+            if (message.email === currentUser.email) {
+                setMessages((prevMessages) => {
+                    const updated = [message, ...prevMessages];
+                    setHasUnread(updated.some(msg => !msg.is_read));
+                    return updated;
+                });
+            }
+        });
+
+        return () => socket.disconnect();
+    }, [currentUser.email]);
+
+    useEffect(() => {
+        if (currentUser.email) {
+            fetchMessages();
+        }
+    }, [isChange, currentUser.email, currentUser.initiatedAction]);
 
     return {
         messages,

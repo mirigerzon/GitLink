@@ -139,7 +139,7 @@ function Project({ projectData, setIsChange }) {
       </div>
 
       <div className="project-actions">
-        {isOwner && (
+        {(isOwner || currentUser?.role === 'admin') && (
           <div className="edit-section">
             <Update
               type="projects"

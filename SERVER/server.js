@@ -1,11 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const http = require("http");
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./.env" });
 const verifyToken = require("./rest api/middleware/verifyToken.js");
 const authRoutes = require("./rest api/routes/auth.js");
 const path = require('path');
+
+const { init } = require("./socket");
 
 const PORT = process.env.PORT || 3001;
 
@@ -28,6 +31,7 @@ const recruitersRoutes = require("./rest api/routes/recruiters.js");
 const jobsRoutes = require("./rest api/routes/jobs.js");
 const job_applicationsRoutes = require("./rest api/routes/job_applications.js");
 const usersRoutes = require("./rest api/routes/users.js");
+
 app.use("/:role/messages", verifyToken, messagesRoutes);
 app.use("/:role/jobs", verifyToken, jobsRoutes);
 app.use("/:role/job_applications", verifyToken, job_applicationsRoutes);
@@ -36,6 +40,12 @@ app.use("/:role/developers", verifyToken, developersRoutes);
 app.use("/:role/recruiters", verifyToken, recruitersRoutes);
 app.use("/:role/users", verifyToken, usersRoutes);
 
-app.listen(PORT, () => {
-    console.log(`The server runs on port: ${PORT}`);
+const server = http.createServer(app);
+
+const io = init(server);
+
+server.listen(PORT, () => {
+    console.log(`🚀 The server runs on port: ${PORT}`);
 });
+
+module.exports = { io };

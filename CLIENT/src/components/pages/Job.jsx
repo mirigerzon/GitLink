@@ -59,7 +59,7 @@ function Job({ jobData, setIsChange }) {
       <div className="job-header">
         <div className="job-title-section">
           <p className="company-name">{jobData.company_name}</p>
-          {isOwner && (
+          {(isOwner || currentUser?.role === 'admin') && (
             <div className="edit-section">
               <Update
                 className='update-job-btn'
@@ -95,9 +95,18 @@ function Job({ jobData, setIsChange }) {
             <span className="detail-value">{jobData.experience} years</span>
           </div>
           <p className="detail-label">Languages:</p>
-          <span>{jobData.languages}</span>
-          <p>views:</p>
-          <span>{jobData.views}</span>
+          <div className="languages-list">
+            {(jobData.languages ?? "")
+              .split(",")
+              .map((skill) => skill.trim())
+              .filter((skill) => skill)
+              .map((skill, index) => (
+                <span key={index} className="skill-tag">
+                  {skill}
+                </span>
+              ))}
+          </div>
+          <div>applicants count: {jobData.applicants_count}</div>
         </div>
 
         <div className="job-actions">

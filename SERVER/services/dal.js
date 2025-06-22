@@ -1,5 +1,6 @@
 const genericDal = require('../services/genericDal.js');
 const pool = require("./mysqlPool");
+const { getIO } = require("../socket");
 
 const ALLOWED_TABLES = [
     'users', 'developers', 'recruiters', 'passwords', 'roles',
@@ -240,7 +241,40 @@ const updateAndInformUser = async (table, data, conditions = [], messageData) =>
     } finally {
         connection.release();
     }
-  };
+};
+
+async function createMessage(messageData) {
+    const result = await genericDal.CREATE("messages", messageData);
+    const newMessage = {
+        id: result.insertId,
+        ...messageData,
+    };
+    const io = getIO();
+    io.emit("new_message", newMessage);
+    return newMessage;
+}
+
+const getJobsWithApplicantsCount = async () => {
+    try {
+        const sql = `
+            SELECT 
+                j.*,
+                COUNT(ja.user_id) AS applicants_count
+            FROM jobs j
+            LEFT JOIN job_applications ja 
+                ON j.id = ja.job_id AND ja.is_active = 1
+            WHERE j.is_active = 1
+            GROUP BY j.id
+            ORDER BY j.created_at DESC;
+        `;
+
+        const [rows] = await pool.query(sql);
+        return rows;
+    } catch (error) {
+        console.error('Error in getJobsWithApplicantsCount:', error.message);
+        throw new Error(`Failed to get jobs with applicants count: ${error.message}`);
+    }
+};
 
 module.exports = {
     getUserWithRoleData,
@@ -251,5 +285,7 @@ module.exports = {
     rateProjectTransactional,
     getApplications,
     rejectApplicant,
-    updateAndInformUser
+    updateAndInformUser,
+    createMessage,
+    getJobsWithApplicantsCount
 };

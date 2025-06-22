@@ -224,6 +224,7 @@ export const useAuth = () => {
                         setMessage(MESSAGES.REGISTER_SUCCESS);
                         resetRegistrationForm();
                         navigate(getRedirectPath(enhancedUser));
+                        localStorage.setItem("isNewUser", "true");
                     } else {
                         setMessage(MESSAGES.REGISTER_ERROR);
                     }
@@ -273,27 +274,20 @@ export const useAuth = () => {
     const clearForgotPasswordMessage = () => setForgotPasswordMessage('');
 
     return {
-        // Auth functions
         login,
         register,
         forgotPassword,
-
-        // Auth state
         isLoading,
         message,
         forgotPasswordLoading,
         forgotPasswordMessage,
         clearMessage,
         clearForgotPasswordMessage,
-
-        // Username validation
         checkUsernameAvailability,
         usernameStatus,
         suggestedUsernames,
         isCheckingUsername,
         clearUsernameCheck,
-
-        // Registration form state
         step,
         setStep,
         selectedRole,
@@ -303,8 +297,6 @@ export const useAuth = () => {
         setUseGitAvatar,
         goToStepTwo,
         resetRegistrationForm,
-
-        // File handling
         profileImage,
         setProfileImage,
         cvFile,

@@ -11,7 +11,7 @@ function verifyToken(req, res, next) {
 
   jwt.verify(token, ACCESS_SECRET, (err, decoded) => {
     if (err) return res.status(401).json({ error: 'Invalid token' });
-    if (decoded.ip !== req.ip) return res.status(403).json({ error: 'Token IP mismatch' });
+    // if (decoded.ip !== req.ip) return res.status(403).json({ error: 'Token IP mismatch' });
 
     req.user = decoded;
     next();

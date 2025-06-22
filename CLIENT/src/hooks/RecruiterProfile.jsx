@@ -1,7 +1,7 @@
 import Update from "../components/common/Update.jsx";
 import Delete from "../components/common/Delete.jsx";
-import '../style/RecruiterProfile.css';
 import Add from "../components/common/Add.jsx";
+import '../style/RecruiterProfile.css';
 
 function RecruiterProfile({
     userData,
@@ -63,7 +63,7 @@ function RecruiterProfile({
                                 >
                                     View
                                 </button>
-                                {isOwnProfile && (
+                                {(isOwnProfile || currentUser?.role === 'admin') && (
                                     <>
                                         <Delete
                                             className="delete-btn"
@@ -80,7 +80,6 @@ function RecruiterProfile({
                                             inputs={["title", "details"]}
                                             role={currentUser ? `/${currentUser.role}` : null}
                                             initialData={userData}
-
                                         />
                                     </>
                                 )}

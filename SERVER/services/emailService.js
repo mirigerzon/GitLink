@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const genericDal = require('../services/genericDal');
+const dal = require('../services/dal')
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
@@ -48,7 +49,7 @@ const sendWelcomeEmail = async (userId, email, username) => {
         </div>
     `;
 
-    await genericDal.CREATE("messages", {
+    await dal.createMessage({
         user_id: userId,
         email,
         title: 'Welcome to GitLink! 🎉',
@@ -97,7 +98,7 @@ const sendPasswordChangeWarningEmail = async (userId, email) => {
         The Security Team
     `;
 
-    await genericDal.CREATE("messages", {
+    await dal.createMessage({
         user_id: userId,
         email,
         title: subject,

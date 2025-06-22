@@ -61,7 +61,7 @@ function Admin() {
         },
       });
     } catch (error) {
-      alert("Unexpected error occurred");
+      console.error("Unexpected error occurred", error);
     }
   };
 
@@ -102,6 +102,13 @@ function Admin() {
     }
   };
 
+  const getImageUrl = (user) => {
+    if (!user.profile_image) return;
+    if (user.profile_image.startsWith('https://github.com/')) {
+      return user.profile_image;
+    }
+    return `http://localhost:3001/uploads/${user.profile_image}`;
+  };
 
   return (
     <>
@@ -117,7 +124,7 @@ function Admin() {
       ) : (
         <div className="admin-page">
           <h1 className="admin-title">User Management Panel</h1>
-          <div className="admin-controls">
+          <div className="controllers-section">
             <Search
               data={users}
               setFilteredData={setFilteredUsers}
@@ -164,7 +171,7 @@ function Admin() {
                     </td>
                     <td>
                       {user.profile_image ? (
-                        <img src={`http://localhost:3001/uploads/${user.profile_image}`} alt="Profile" className="admin-avatar" />
+                        <img src={getImageUrl(user)} alt="Profile" className="admin-avatar" />
                       ) : (
                         "N/A"
                       )}
@@ -219,7 +226,6 @@ function Admin() {
       )}
     </>
   );
-
 }
 
 export default Admin;
