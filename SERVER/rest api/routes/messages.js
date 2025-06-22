@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const genericDataService = require('../../services/generic.js');
-const { writeLog } = require('../../log/log.js');
+const {
+    getItemByConditions,
+    updateItem,
+    deleteItem
+} = require('../../services/generic.js'); const { writeLog } = require('../../log/log.js');
 const {
     createConditions,
     addUserIdCondition,
@@ -13,7 +16,7 @@ const TABLE_NAME = 'messages';
 router.get('/', async (req, res) => {
     try {
         const conditions = createConditions(req);
-        const data = await genericDataService.getItemByConditions(
+        const data = await getItemByConditions(
             TABLE_NAME,
             conditions.length ? conditions : undefined
         );
@@ -30,7 +33,7 @@ router.put('/', async (req, res) => {
         if (!req.body?.email) return res.status(401).json({ error: 'User not authenticated' });
 
         const body = req.body;
-        const result = await genericDataService.updateItem(
+        const result = await updateItem(
             TABLE_NAME,
             body,
             [{ field: 'email', value: req.body.email }]
@@ -49,7 +52,7 @@ router.put('/:id', async (req, res) => {
         const { id } = req.params;
         const body = req.body;
 
-        const result = await genericDataService.updateItem(
+        const result = await updateItem(
             TABLE_NAME,
             body,
             [
@@ -71,17 +74,12 @@ router.delete('/:itemId', async (req, res) => {
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
 
-        const result = await genericDataService.deleteItem(TABLE_NAME, conditions);
+        const result = await deleteItem(TABLE_NAME, conditions);
         writeLog(`Deleted message id=${itemId}`, 'info');
         res.json({ message: 'Message deleted successfully', result });
     } catch (err) {
         handleError(res, err, TABLE_NAME, 'deleting');
     }
 });
-
-router.post('/', async (req, res) => {
-
-});
-
 
 module.exports = router;

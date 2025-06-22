@@ -5,12 +5,6 @@ const ALLOWED_TABLES = [
   'projects', 'job_applications', 'project_ratings', 'messages', 'jobs'
 ];
 
-const USER_ROLES = {
-  DEVELOPER: 'developer',
-  RECRUITER: 'recruiter',
-  ADMIN: 'admin'
-};
-
 const validateTable = (table) => {
   try {
     if (!ALLOWED_TABLES.includes(table)) throw new Error(`Invalid table name: ${table}`);

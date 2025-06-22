@@ -1,15 +1,13 @@
-const genericDal = require('../models/genericDal.js');
-const dal = require('../models/dal.js');
+const generic = require('../models/generic.js');
+const userModel = require('../models/users.js')
 const bcrypt = require('bcrypt');
-const { sendWelcomeEmail, sendPasswordResetEmail } = require('../models/emailService.js');
+const { sendWelcomeEmail, sendPasswordResetEmail } = require('./emailService.js');
 const { generateUsername } = require('unique-username-generator');
 const jwt = require('jsonwebtoken');
-const ACCESS_SECRET = process.env.ACCESS_SECRET;
-const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
 const login = async (username, password) => {
     try {
-        const users = await dal.getUser(username);
+        const users = await userModel.getUser(username);
         if (!users) {
             throw new Error("Invalid credentials");
         }
@@ -38,7 +36,7 @@ const register = async (userData) => {
         }
 
         if (role_id === '1') {
-            const existingDevs = await genericDal.GET("developers", [{ field: "git_name", value: git_name }]);
+            const existingDevs = await generic.GET("developers", [{ field: "git_name", value: git_name }]);
             if (existingDevs.length > 0) {
                 throw new Error("Git name already exists");
             }
@@ -48,13 +46,13 @@ const register = async (userData) => {
         const hashedPassword = await hashPassword(password);
         const generalUser = { username, email, phone, role_id, about, profile_image, cv_file };
 
-        const newUser = await genericDal.CREATE("users", generalUser);
-        await genericDal.CREATE("passwords", { user_id: newUser.insertId, hashed_password: hashedPassword });
+        const newUser = await generic.CREATE("users", generalUser);
+        await generic.CREATE("passwords", { user_id: newUser.insertId, hashed_password: hashedPassword });
 
         if (role_id === '1') {
-            await genericDal.CREATE("developers", { user_id: newUser.insertId, git_name, experience, languages });
+            await generic.CREATE("developers", { user_id: newUser.insertId, git_name, experience, languages });
         } else if (role_id === '2') {
-            await genericDal.CREATE("recruiters", { user_id: newUser.insertId, company_name });
+            await generic.CREATE("recruiters", { user_id: newUser.insertId, company_name });
         }
 
         await sendWelcomeEmail(newUser.insertId, email, username);
@@ -80,7 +78,7 @@ const refreshToken = async (refreshTokenFromCookie, ip) => {
 
     try {
         const decoded = jwt.verify(refreshTokenFromCookie, process.env.REFRESH_SECRET);
-        const user = await dal.getUser(decoded.username);
+        const user = await userModel.getUser(decoded.username);
         if (!user) {
             const err = new Error('User not found');
             err.status = 403;
@@ -118,7 +116,7 @@ const checkUsername = async (username) => {
 
 const forgotPassword = async (username) => {
     try {
-        const user = await dal.getUser(username);
+        const user = await userModel.getUser(username);
         if (!user) {
             throw new Error("User not found");
         }
@@ -126,7 +124,7 @@ const forgotPassword = async (username) => {
         const newPassword = generateRandomPassword();
         const hashedNewPassword = await hashPassword(newPassword);
 
-        await genericDal.UPDATE("passwords",
+        await generic.UPDATE("passwords",
             { hashed_password: hashedNewPassword },
             [{ field: "user_id", value: user.user_id }]
         );
@@ -160,7 +158,7 @@ const generateRandomPassword = (length = 12) => {
 
 const isUsernameAvailable = async (username) => {
     try {
-        const user = await dal.getUser(username);
+        const user = await userModel.getUser(username);
         return user ? true : false;
     } catch (error) {
         console.error('Error checking username availability:', error);
@@ -170,7 +168,7 @@ const isUsernameAvailable = async (username) => {
 
 const getUserCV = async (username) => {
     try {
-        const user = await dal.getUser(username);
+        const user = await userModel.getUser(username);
         return user.cv_file;
     } catch (error) {
         console.error('Error fetching user:', error);

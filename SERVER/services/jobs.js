@@ -1,7 +1,7 @@
-const dal = require('../models/dal.js');
+const jobsModel = require('../models/jobs');
 
 const getJobsWithApplicantsCount = async () => {
-    return await dal.getJobsWithApplicantsCount();
+    return await jobsModel.getJobsWithApplicantsCount();
 };
 
 module.exports = {

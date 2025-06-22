@@ -1,11 +1,11 @@
-const dal = require('../models/dal.js');
-const { updateUserRating } = require('./developerService');
+const projectsModel = require('../models/projects');
+const generic = require('../models/generic')
 
 const rateProject = async (username, projectId, rating) => {
     try {
-        await dal.rateProjectTransactional(username, projectId, rating);
+        await projectsModel.rateProjectTransactional(username, projectId, rating);
 
-        const projectWithUser = await dal.getProjectWithCreator(projectId);
+        const projectWithUser = await projectsModel.getProjectWithCreator(projectId);
         if (!projectWithUser?.length) {
             throw new Error("Project or creator not found.");
         }
@@ -20,7 +20,7 @@ const rateProject = async (username, projectId, rating) => {
 
 const updateUserRating = async (gitName) => {
     try {
-        const creatorProjects = await genericDal.GET("projects", [
+        const creatorProjects = await generic.GET("projects", [
             { field: "git_name", value: gitName }
         ]);
 
@@ -31,7 +31,7 @@ const updateUserRating = async (gitName) => {
         const totalCount = ratedProjects.reduce((sum, p) => sum + p.rating_count, 0);
         const userRating = totalCount > 0 ? Math.round((totalRatings / totalCount) * 100) / 100 : null;
 
-        await genericDal.UPDATE("developers", { rating: userRating }, [
+        await generic.UPDATE("developers", { rating: userRating }, [
             { field: "git_name", value: gitName }
         ]);
     } catch (error) {

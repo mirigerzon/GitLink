@@ -1,11 +1,11 @@
-const dal = require('../models/dal.js');
-const genericDal = require('../models/genericDal.js');
+const generic = require('../models/generic.js');
+const usersModels = require('../models/users.js');
 const bcrypt = require('bcrypt');
-const { sendPasswordChangeWarningEmail } = require('../models/emailService.js');
+const { sendPasswordChangeWarningEmail } = require('../services/emailService.js');
 
 const getUsers = async () => {
     try {
-        const users = await dal.getUsers();
+        const users = await usersModels.getUsers();
         return users?.length > 0 ? users : null;
     } catch (error) {
         console.error('Error fetching users:', error);
@@ -15,7 +15,7 @@ const getUsers = async () => {
 
 const getUser = async (username) => {
     try {
-        const user = await dal.getUser(username);
+        const user = await usersModels.getUser(username);
         return user;
     } catch (error) {
         console.error('Error fetching user:', error);
@@ -35,7 +35,8 @@ const updateUserStatus = async (table, body, conditions) => {
                 ? `Your account has been blocked...`
                 : `Your account has been reactivated...`
         };
-        await dal.updateAndInformUser(table, data, conditions, messageData);
+
+        await usersModels.updateAndInformUser(table, data, conditions, messageData);
     } catch (error) {
         console.error('Error updating user status:', error);
         throw new Error('Failed to update user status');
@@ -48,7 +49,7 @@ const changeUserPassword = async (userId, currentPassword, newPassword, email) =
             throw new Error("All password fields are required");
         }
 
-        const passwords = await genericDal.GET('passwords', [
+        const passwords = await generic.GET('passwords', [
             { field: 'user_id', value: userId }
         ]);
 
@@ -66,7 +67,7 @@ const changeUserPassword = async (userId, currentPassword, newPassword, email) =
 
         await sendPasswordChangeWarningEmail(userId, email);
 
-        return await genericDal.UPDATE('passwords', { hashed_password: hashedNewPassword }, conditions);
+        return await generic.UPDATE('passwords', { hashed_password: hashedNewPassword }, conditions);
     } catch (error) {
         console.error('Error changing password:', error);
         throw error;

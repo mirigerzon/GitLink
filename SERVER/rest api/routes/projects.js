@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const genericDataService = require('../../services/generic.js');
-const projectsService = require('../../services/bl.js');
+const {
+    getItemByConditions,
+    createItem,
+    updateItem,
+    deleteItem
+} = require('../../services/generic.js');
+const projectsService = require('../../services/projects.js');
 const { writeLog } = require('../../log/log.js');
 const {
     createConditions,
@@ -15,7 +20,7 @@ const TABLE_NAME = 'projects';
 router.get('/', async (req, res) => {
     try {
         const conditions = createConditions(req);
-        const data = await genericDataService.getItemByConditions(
+        const data = await getItemByConditions(
             TABLE_NAME,
             conditions.length ? conditions : undefined
         );
@@ -37,7 +42,7 @@ router.post("/", async (req, res) => {
         conditions = addUserIdCondition(req, conditions);
         const body = Object.fromEntries(conditions.map(({ field, value }) => [field, value]));
 
-        const created = await genericDataService.createItem(TABLE_NAME, body);
+        const created = await createItem(TABLE_NAME, body);
         writeLog(`Created project with data=${JSON.stringify(body)}`, 'info');
         res.status(201).json({ message: 'Project created successfully', result: created });
     } catch (err) {
@@ -67,7 +72,7 @@ router.put('/:id', async (req, res) => {
         const { name, url, details, languages } = req.body;
 
         if (!id) return res.status(400).json({ error: 'Project ID is required' });
-        const result = await genericDataService.updateItem(
+        const result = await updateItem(
             TABLE_NAME,
             { name, url, details, languages },
             [{ field: 'id', value: id }]
@@ -91,7 +96,7 @@ router.delete('/:itemId', async (req, res) => {
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
 
-        const result = await genericDataService.deleteItem(TABLE_NAME, conditions);
+        const result = await deleteItem(TABLE_NAME, conditions);
         writeLog(`Deleted project id=${itemId}`, 'info');
         res.json({ message: 'Project deleted successfully', result });
     } catch (err) {

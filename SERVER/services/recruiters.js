@@ -1,8 +1,8 @@
-const dal = require('../models/dal.js');
+const usersModels = require('../models/users.js');
 
 const getRecruiters = async () => {
     try {
-        const res = await dal.getUsersByRole('recruiter');
+        const res = await usersModels.getUsersByRole('recruiter');
         return res || null;
     } catch (error) {
         console.error('Error fetching recruiters:', error);
@@ -12,7 +12,7 @@ const getRecruiters = async () => {
 
 const getRecruiter = async (id) => {
     try {
-        const res = await dal.getUserWithRoleData(id, 'recruiter');
+        const res = await usersModels.getUserWithRoleData(id, 'recruiter');
         return res || null;
     } catch (error) {
         console.error('Error fetching recruiter:', error);

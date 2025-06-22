@@ -1,9 +1,8 @@
-const dal = require('../models/dal.js');
-const genericDal = require('../models/genericDal.js');
+const usersModel = require('../models/users.js');
 
 const getDevelopers = async () => {
     try {
-        const res = await dal.getUsersByRole('developer');
+        const res = await usersModel.getUsersByRole('developer');
         return res || null;
     } catch (error) {
         console.error('Error fetching developers:', error);
@@ -13,7 +12,7 @@ const getDevelopers = async () => {
 
 const getDeveloper = async (id) => {
     try {
-        const res = await dal.getUserWithRoleData(id, 'developer');
+        const res = await usersModel.getUserWithRoleData(id, 'developer');
         return res || null;
     } catch (error) {
         console.error('Error fetching developer:', error);

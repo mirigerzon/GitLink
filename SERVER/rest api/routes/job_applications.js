@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const generic = require('../../services/generic.js')
+const { deleteItem, updateItem } = require('../../services/generic.js');
 const jobApplicationsService = require('../../services/job_applications.js');
 const { writeLog } = require('../../log/log.js');
 const { addUserIdCondition, handleError, validateRequiredFields } = require('../utils/routerHelpers.js');
@@ -42,7 +42,7 @@ router.delete('/:itemId', async (req, res) => {
         const { itemId } = req.params;
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
-        const result = await generic.deleteItem(TABLE_NAME, conditions);
+        const result = await deleteItem(TABLE_NAME, conditions);
         writeLog(`Deleted job application id=${itemId}`, 'info');
         res.json({ message: 'Application deleted successfully', result });
     } catch (err) {
@@ -62,7 +62,7 @@ router.put('/notify', async (req, res) => {
 router.put('/:job_id', async (req, res) => {
     try {
         const { user_id, ...body } = req.body;
-        const result = await generic.updateItem(
+        const result = await updateItem(
             TABLE_NAME,
             body,
             [

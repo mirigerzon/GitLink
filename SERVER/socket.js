@@ -10,10 +10,10 @@ function init(server) {
         },
     });
     io.on("connection", (socket) => {
-        console.log("🟢 New client connected via Socket.IO:", socket.id);
+        console.log("New client connected via Socket.IO:", socket.id);
 
         socket.on("disconnect", () => {
-            console.log("🔴 Client disconnected:", socket.id);
+            console.log("Client disconnected:", socket.id);
         });
     });
     return io;

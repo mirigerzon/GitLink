@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const genericDataService = require('../../services/generic.js');
-const jobsService = require('../../services/jobs.js');
+const {
+    getItemByConditions,
+    createItem,
+    deleteItem,
+    updateItem
+} = require('../../services/generic.js'); const jobsService = require('../../services/jobs.js');
 const { writeLog } = require('../../log/log.js');
 const {
     addUserIdCondition,
@@ -25,7 +29,7 @@ router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         if (!id) return res.status(400).json({ error: 'job ID is required' });
-        const data = await genericDataService.getItemByConditions('jobs', [{ field: 'id', value: Number(id) }]);
+        const data = await getItemByConditions('jobs', [{ field: 'id', value: Number(id) }]);
         writeLog(`Fetched job data for id=${id}`, 'info');
         res.json(data[0]);
     } catch (err) {
@@ -38,7 +42,7 @@ router.post('/', async (req, res) => {
         if (!req.user?.id) return res.status(401).json({ error: 'User not authenticated' });
 
         const body = { ...req.body };
-        const created = await genericDataService.createItem(TABLE_NAME, body);
+        const created = await createItem(TABLE_NAME, body);
         writeLog(`Created job with data=${JSON.stringify(body)}`, 'info');
         res.status(201).json({ message: 'Job created successfully', result: created });
     } catch (err) {
@@ -52,7 +56,7 @@ router.delete('/:itemId', async (req, res) => {
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
 
-        const result = await genericDataService.deleteItem(TABLE_NAME, conditions);
+        const result = await deleteItem(TABLE_NAME, conditions);
         writeLog(`Deleted job id=${itemId}`, 'info');
         res.json({ message: 'Job deleted successfully', result });
     } catch (err) {
@@ -64,7 +68,7 @@ router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         if (!id) return res.status(400).json({ error: 'Project ID is required' });
-        const result = await genericDataService.updateItem(
+        const result = await updateItem(
             TABLE_NAME,
             req.body,
             [{ field: 'id', value: id }]

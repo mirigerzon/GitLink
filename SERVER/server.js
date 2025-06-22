@@ -41,12 +41,13 @@ app.use("/:role/developers", developersRoutes);
 app.use("/:role/recruiters", recruitersRoutes);
 app.use("/:role/users", usersRoutes);
 
+// מידלוור 
 const server = http.createServer(app);
 
 const io = init(server);
-
 server.listen(PORT, () => {
     console.log(`The server runs on port: ${PORT}`);
 });
 
 module.exports = { io };
+// לסדר שAPP יהיה השרת 

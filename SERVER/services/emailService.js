@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
-const genericDal = require('../models/genericDal');
-const dal = require('../models/dal')
+const messagesModel = require('../models/messages')
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
@@ -14,13 +13,22 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const sendEmail = async ({ to, subject, html }) => {
-    return await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to,
-        subject,
-        html
+const sendEmail = async ({ user_id, email, title, content, dbContent, saveOnly = true }) => {
+    await messagesModel.createMessage({
+        user_id,
+        email,
+        title,
+        content: dbContent || content
     });
+
+    if (!saveOnly) {
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: title,
+            html: content.replace(/\n/g, '<br/>')
+        });
+    }
 };
 
 const sendWelcomeEmail = async (userId, email, username) => {
@@ -29,7 +37,6 @@ const sendWelcomeEmail = async (userId, email, username) => {
             <h2 style="color: #333;">Welcome to GitLink! 🎉</h2>
             <p>Hello ${username},</p>
             <p>Welcome to GitLink - the platform for project management and developer collaboration!</p>
-            
             <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
                 <h3 style="color: #007bff; margin-top: 0;">What you can do:</h3>
                 <ul style="margin: 10px 0;">
@@ -39,27 +46,20 @@ const sendWelcomeEmail = async (userId, email, username) => {
                     <li>Join our active developer community</li>
                 </ul>
             </div>
-            
             <p><strong>Getting started:</strong> Complete your profile and create your first repository to explore all features.</p>
-            
             <p>Need help? Contact us at <a href="mailto:support@gitlink.com" style="color: #007bff;">support@gitlink.com</a> or visit our <a href="https://gitlink.com/help" style="color: #007bff;">Help Center</a>.</p>
-            
             <br>
             <p>Best regards,<br>GitLink Team</p>
         </div>
     `;
 
-    await dal.createMessage({
+    await sendEmail({
         user_id: userId,
         email,
         title: 'Welcome to GitLink! 🎉',
-        content: `Hello ${username}! Welcome to GitLink - the platform for project management and developer collaboration. Start managing projects, collaborating with teams, and tracking code changes today!`
-    });
-
-    await sendEmail({
-        to: email,
-        subject: 'Welcome to GitLink! 🎉',
-        html: welcomeContent
+        content: welcomeContent,
+        dbContent: `Hello ${username}, welcome to GitLink!`,
+        saveOnly: false
     });
 };
 
@@ -80,9 +80,12 @@ const sendPasswordResetEmail = async (user, newPassword) => {
     `;
 
     await sendEmail({
-        to: user.email,
-        subject: 'Password Reset - GitLink',
-        html: emailContent
+        user_id: user.id,
+        email: user.email,
+        title: 'Password Reset - GitLink',
+        content: emailContent,
+        dbContent: `Your password was reset. New password: ${newPassword}`,
+        saveOnly: false
     });
 };
 
@@ -98,19 +101,14 @@ const sendPasswordChangeWarningEmail = async (userId, email) => {
         The Security Team
     `;
 
-    await dal.createMessage({
+    await sendEmail({
         user_id: userId,
         email,
         title: subject,
-        content
-    });
-
-    await sendEmail({
-        to: email,
-        subject,
-        html: content.replace(/\n/g, '<br/>')
+        content,
+        dbContent: 'Your password was changed. If this wasn’t you, please reset it.',
+        saveOnly: false
     });
 };
-
 
 module.exports = { sendEmail, sendWelcomeEmail, sendPasswordResetEmail, sendPasswordChangeWarningEmail };
