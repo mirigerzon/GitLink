@@ -5,7 +5,7 @@ import useSound from 'use-sound';
 import { BsChatDots } from "react-icons/bs";
 import '../../style/Messages.css';
 
-export const Messages = () => {
+const Messages = () => {
     const { currentUser } = useCurrentUser();
     const { messages, hasUnread, markAllAsRead, markMessageAsRead, deleteMessage } = useMessages();
     const [open, setOpen] = useState(false);
@@ -67,3 +67,5 @@ export const Messages = () => {
         </>
     );
 };
+
+export default Messages;

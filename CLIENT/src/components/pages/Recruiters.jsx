@@ -5,7 +5,6 @@ import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import "../../style/recruiters.css";
 import Search from "../common/Search.jsx";
-import Sort from "../common/Sort.jsx";
 
 function Recruiters() {
   const { currentUser } = useCurrentUser();
@@ -40,21 +39,6 @@ function Recruiters() {
             setFilteredData={setFilteredRecruiters}
             searchFields={["git_name", "email", "languages"]}
             placeholder="Search by GitHub name, email or programming languages..."
-          />
-          <Sort
-            setUserData={setFilteredRecruiters}
-            originalData={recruiters}
-            currentConfig={[
-              {
-                label: "Filter by Status:",
-                field: "is_active",
-                options: [
-                  { value: "all", label: "All Status" },
-                  { value: "1", label: "Active" },
-                  { value: "0", label: "Inactive" }
-                ]
-              }
-            ]}
           />
         </div>
       </div>

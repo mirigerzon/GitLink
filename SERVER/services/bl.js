@@ -1,8 +1,8 @@
-const dal = require('../services/dal.js');
-const genericDal = require('../services/genericDal.js');
+const dal = require('../models/dal.js');
+const genericDal = require('../models/genericDal.js');
 const bcrypt = require('bcrypt');
-const { sendEmail } = require('../services/emailService');
-const { sendPasswordChangeWarningEmail } = require('../services/emailService');
+const { sendEmail } = require('../models/emailService.js');
+const { sendPasswordChangeWarningEmail } = require('../models/emailService.js');
 
 const getUsers = async () => {
     try {
@@ -230,7 +230,7 @@ const changeUserPassword = async (userId, currentPassword, newPassword, email) =
 };
 
 const getJobsWithApplicantsCount = async () => {
-    return await dal.getJobsWithApplicantsCount(); 
+    return await dal.getJobsWithApplicantsCount();
 };
 
 module.exports = {

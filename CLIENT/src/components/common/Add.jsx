@@ -12,7 +12,8 @@ function Add({
     name = "Add",
     buttonClassName = "btn-primary",
     validationRules = {},
-    customTitle
+    customTitle,
+    disable = false
 }) {
     const { currentUser } = useCurrentUser();
     const [isLoading, setIsLoading] = useState(false);
@@ -55,9 +56,6 @@ function Add({
                 formData[input] = element.value;
             }
         });
-        // if (currentUser?.id) {
-        //     formData.userId = currentUser.id;
-        // }
         Object.keys(defaultValue).forEach(key => {
             if (!formData[key]) {
                 formData[key] = defaultValue[key];
@@ -196,7 +194,7 @@ function Add({
         <button
             className={buttonClassName}
             onClick={openAddModal}
-            disabled={isLoading}
+            disabled={isLoading || disable}
         >
             {isLoading ? "Adding..." : name}
         </button>

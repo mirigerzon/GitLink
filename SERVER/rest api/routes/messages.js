@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const genericDataService = require('../../controllers/genericBl.js');
+const genericDataService = require('../../services/generic.js');
 const { writeLog } = require('../../log/log.js');
 const {
     createConditions,
@@ -80,7 +80,7 @@ router.delete('/:itemId', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    
+
 });
 
 

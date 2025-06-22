@@ -1,7 +1,6 @@
 const { Server } = require("socket.io");
 
 let io;
-
 function init(server) {
     io = new Server(server, {
         cors: {
@@ -10,7 +9,6 @@ function init(server) {
             credentials: true,
         },
     });
-
     io.on("connection", (socket) => {
         console.log("🟢 New client connected via Socket.IO:", socket.id);
 
@@ -18,7 +16,6 @@ function init(server) {
             console.log("🔴 Client disconnected:", socket.id);
         });
     });
-
     return io;
 }
 

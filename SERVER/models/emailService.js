@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
-const genericDal = require('../services/genericDal');
-const dal = require('../services/dal')
+const genericDal = require('../models/genericDal');
+const dal = require('../models/dal')
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({

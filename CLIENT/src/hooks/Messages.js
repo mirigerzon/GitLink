@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useFetchData } from "../hooks/fetchData.js";
 import { useCurrentUser } from "../context.jsx";
 import { io } from "socket.io-client";
+import useSound from "use-sound";
 
 const SOCKET_URL = "http://localhost:3001";
 
@@ -13,6 +14,7 @@ export const useMessages = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [hasUnread, setHasUnread] = useState(false);
     const fetchData = useFetchData();
+    const [play] = useSound('/sounds/notification.mp3');
 
     const { currentUser, setCurrentUser } = useCurrentUser();
 
@@ -50,7 +52,7 @@ export const useMessages = () => {
             onSuccess: () => {
                 setLoading(false);
                 setIsChange(true);
-                setHasUnread(false); 
+                setHasUnread(false);
             },
             onError: (errMsg) => {
                 setError(errMsg);
@@ -105,6 +107,12 @@ export const useMessages = () => {
                 setMessages((prevMessages) => {
                     const updated = [message, ...prevMessages];
                     setHasUnread(updated.some(msg => !msg.is_read));
+                    setCurrentUser(prevUser => ({
+                        ...prevUser,
+                        initiatedAction: true
+                    }));
+                    play();
+
                     return updated;
                 });
             }

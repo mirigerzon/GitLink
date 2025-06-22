@@ -1,4 +1,4 @@
-const dal = require('../services/genericDal');
+const dal = require('../models/genericDal');
 
 const getItemByConditions = async (table, conditions = []) => {
   try {

@@ -46,6 +46,9 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .project-stats {
@@ -90,6 +93,9 @@
   background: #f8fafc;
   border-radius: 12px;
   border-left: 4px solid #221089;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .project-card>div:nth-child(2) p {
@@ -234,6 +240,7 @@
   font-weight: 600;
   color: #374151;
 }
+
 /* 
 .btn-rating {
   color: black;

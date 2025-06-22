@@ -1,53 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const genericDataService = require('../../controllers/genericBl.js');
-const dataService = require('../../controllers/bl.js');
+const genericDataService = require('../../services/generic.js');
+const usersService = require('../../services/users.js');
+
 const { writeLog } = require('../../log/log.js');
-const path = require('path');
-const bcrypt = require('bcrypt');
-const multer = require('multer');
-const verifyToken = require('../middleware/verifyToken');
-const { handleError, validateRequiredFields } = require('../utils/routerHelpers.js');
-const fs = require('fs');
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        if (file.fieldname === 'cv_file') {
-            cb(null, 'uploads/cv_files/');
-        } else if (file.fieldname === 'profile_image') {
-            cb(null, 'uploads/profile_images/');
-        }
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({
-    storage: storage,
-    fileFilter: function (req, file, cb) {
-        if (file.fieldname === 'cv_file') {
-            if (file.mimetype === 'application/pdf') {
-                cb(null, true);
-            } else {
-                cb(new Error('Only PDF files are allowed for CV'), false);
-            }
-        } else if (file.fieldname === 'profile_image') {
-            if (file.mimetype.startsWith('image/')) {
-                cb(null, true);
-            } else {
-                cb(new Error('Only image files are allowed'), false);
-            }
-        }
-    }
-});
+const { handleError, validateRequiredFields, upload } = require('../utils/routerHelpers.js');
 
 router.get('/:username', async (req, res) => {
     try {
         const { username } = req.params;
         if (!username) return res.status(400).json({ error: 'Username is required' });
-        const data = await dataService.getUser(username);
+        const data = await usersService.getUser(username);
         writeLog(`Fetched user data for username=${username}`, 'info');
         res.json(data);
     } catch (err) {
@@ -57,8 +20,7 @@ router.get('/:username', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        // if (!req.user?.id) return res.status(401).json({ error: 'User not authenticated' });
-        const data = await dataService.getUsers();
+        const data = await usersService.getUsers();
         writeLog(`Fetched users data`, 'info');
         res.json(data);
     } catch (err) {
@@ -93,7 +55,7 @@ router.put('/update-image', upload.single('profile_image'), async (req, res) => 
 
         let profileImagePath = null;
         if (use_git_avatar === 'true') {
-            profileImagePath = req.body.profile_image; // GitHub URL
+            profileImagePath = req.body.profile_image; 
         } else if (req.file) {
             profileImagePath = `profile_images/${req.file.filename}`;
         }
@@ -116,7 +78,7 @@ router.put('/change-password', async (req, res) => {
 
         if (req.user?.user_id && req.user.user_id !== user_id) return res.status(403).json({ error: 'You can only change your own password' });
 
-        const user = await dataService.changeUserPassword(user_id, currentPassword, newPassword, email);
+        const user = await usersService.changeUserPassword(user_id, currentPassword, newPassword, email);
         if (!user) return res.status(404).json({ error: 'User not found' });
 
         res.status(200).json({ message: 'Password changed successfully' });
@@ -129,7 +91,7 @@ router.put('/status/:username', async (req, res) => {
     try {
         const { username } = req.params;
         if (!username) return res.status(400).json({ error: 'username is required' });
-        const result = await dataService.updateUserStatus(
+        const result = await usersService.updateUserStatus(
             'users',
             req.body,
             [{ field: 'username', value: username }]
@@ -162,8 +124,5 @@ router.put('/:username', async (req, res) => {
         handleError(res, err, 'users', 'updating user');
     }
 });
-
-
-
 
 module.exports = router;

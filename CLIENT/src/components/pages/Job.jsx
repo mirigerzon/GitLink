@@ -37,10 +37,10 @@ function Job({ jobData, setIsChange }) {
       type: "job_applications",
       body: { user_id: currentUser.id, job_id: jobData.id, email: currentUser.email },
       onSuccess: () => {
-        setCurrentUser(prevUser => ({
-          ...prevUser,
-          initiatedAction: true
-        }));
+        // setCurrentUser(prevUser => ({
+        //   ...prevUser,
+        //   initiatedAction: true
+        // }));
       },
       onError: (err) => {
         console.error(`Failed to fetch developers: ${err}`);

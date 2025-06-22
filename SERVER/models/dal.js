@@ -1,4 +1,4 @@
-const genericDal = require('../services/genericDal.js');
+const genericDal = require('../models/genericDal.js');
 const pool = require("./mysqlPool");
 const { getIO } = require("../socket");
 

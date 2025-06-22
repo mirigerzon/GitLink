@@ -32,20 +32,21 @@ const jobsRoutes = require("./rest api/routes/jobs.js");
 const job_applicationsRoutes = require("./rest api/routes/job_applications.js");
 const usersRoutes = require("./rest api/routes/users.js");
 
-app.use("/:role/messages", verifyToken, messagesRoutes);
-app.use("/:role/jobs", verifyToken, jobsRoutes);
-app.use("/:role/job_applications", verifyToken, job_applicationsRoutes);
-app.use("/:role/projects", verifyToken, projectsRoutes);
-app.use("/:role/developers", verifyToken, developersRoutes);
-app.use("/:role/recruiters", verifyToken, recruitersRoutes);
-app.use("/:role/users", verifyToken, usersRoutes);
+app.use(verifyToken)
+app.use("/:role/messages", messagesRoutes);
+app.use("/:role/jobs", jobsRoutes);
+app.use("/:role/job_applications", job_applicationsRoutes);
+app.use("/:role/projects", projectsRoutes);
+app.use("/:role/developers", developersRoutes);
+app.use("/:role/recruiters", recruitersRoutes);
+app.use("/:role/users", usersRoutes);
 
 const server = http.createServer(app);
 
 const io = init(server);
 
 server.listen(PORT, () => {
-    console.log(`🚀 The server runs on port: ${PORT}`);
+    console.log(`The server runs on port: ${PORT}`);
 });
 
 module.exports = { io };

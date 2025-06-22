@@ -77,20 +77,9 @@ function DeveloperProfile({
                                                     languages: { required: true },
                                                     details: { required: false }
                                                 }}
-                                                onBeforeSubmit={async (data) => {
-                                                    const alreadyExists = existingDeliverables?.some(
-                                                        (project) => project.name === data.name
-                                                    );
-                                                    if (alreadyExists) {
-                                                        Swal.fire({
-                                                            title: 'Project Already Exists',
-                                                            text: 'A project with this name already exists.',
-                                                            icon: 'warning'
-                                                        });
-                                                        return false;
-                                                    }
-                                                    return true;
-                                                }}
+                                                disable={existingDeliverables?.some(
+                                                    (project) => project.name === repo.name
+                                                )}
                                             />
                                         </li>
                                     );

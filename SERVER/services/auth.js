@@ -1,9 +1,13 @@
-const genericDal = require('../services/genericDal.js');
-const dal = require('../services/dal.js');
+const genericDal = require('../models/genericDal.js');
+const dal = require('../models/dal.js');
 const bcrypt = require('bcrypt');
-const { sendWelcomeEmail, sendPasswordResetEmail } = require('../services/emailService');
+const { sendWelcomeEmail, sendPasswordResetEmail } = require('../models/emailService.js');
+const { generateUsername } = require('unique-username-generator');
+const jwt = require('jsonwebtoken');
+const ACCESS_SECRET = process.env.ACCESS_SECRET;
+const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
-const verifyLogin = async (username, password) => {
+const login = async (username, password) => {
     try {
         const users = await dal.getUser(username);
         if (!users) {
@@ -12,24 +16,20 @@ const verifyLogin = async (username, password) => {
 
         const user = users;
         const hashedPassword = user.hashed_password;
-        if (!hashedPassword) {
-            throw new Error("Invalid credentials");
-        }
+        if (!hashedPassword) throw new Error("Invalid credentials");
 
         const isMatch = await bcrypt.compare(password, hashedPassword);
-        if (!isMatch) {
-            throw new Error("Invalid credentials");
-        }
+        if (!isMatch) throw new Error("Invalid credentials");
 
         delete user.hashed_password;
         return user;
     } catch (error) {
         console.error('Error in login verification:', error);
-        throw error;  
+        throw error;
     }
 };
 
-const registerNewUser = async (userData) => {
+const register = async (userData) => {
     try {
         const { username, password, email, phone, role_id, about, git_name, experience, languages, company_name, cv_file } = userData;
 
@@ -67,7 +67,52 @@ const registerNewUser = async (userData) => {
         };
     } catch (error) {
         console.error('Error registering new user:', error);
-        throw error;   
+        throw error;
+    }
+};
+
+const refreshToken = async (refreshTokenFromCookie, ip) => {
+    if (!refreshTokenFromCookie) {
+        const err = new Error('No refresh token provided');
+        err.status = 401;
+        throw err;
+    }
+
+    try {
+        const decoded = jwt.verify(refreshTokenFromCookie, process.env.REFRESH_SECRET);
+        const user = await dal.getUser(decoded.username);
+        if (!user) {
+            const err = new Error('User not found');
+            err.status = 403;
+            throw err;
+        }
+
+        return jwt.sign(
+            { id: user.id, username: user.username, ip, role_id: user.role_id },
+            process.env.ACCESS_SECRET,
+            { expiresIn: '15m' }
+        );;
+    } catch (err) {
+        err.status = err.status || 403;
+        throw err;
+    }
+};
+
+const checkUsername = async (username) => {
+    if (!username) return res.status(400).json({ error: 'Username is required' });
+
+    const isAvailable = await isUsernameAvailable(username);
+    if (isAvailable) {
+        const suggestions = [];
+        for (let i = 0; i < 5; i++) {
+            const suggestion = generateUsername("", 0, 5);
+            if (isUsernameAvailable(suggestion)) {
+                suggestions.push(suggestion);
+            }
+        }
+        return { available: false, ...suggestions };
+    } else {
+        return { available: true, username };
     }
 };
 
@@ -90,7 +135,7 @@ const forgotPassword = async (username) => {
         return { success: true, message: "New password sent to your email address" };
     } catch (error) {
         console.error('Error in forgot password:', error);
-        throw error; 
+        throw error;
     }
 }
 
@@ -123,9 +168,22 @@ const isUsernameAvailable = async (username) => {
     }
 }
 
+const getUserCV = async (username) => {
+    try {
+        const user = await dal.getUser(username);
+        return user.cv_file;
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        throw new Error('Failed to fetch user');
+    }
+}
+
 module.exports = {
-    verifyLogin,
-    registerNewUser,
+    login,
+    register,
+    refreshToken,
+    checkUsername,
     forgotPassword,
-    isUsernameAvailable
+    isUsernameAvailable,
+    getUserCV
 };

@@ -4,7 +4,7 @@ import Joyride from "react-joyride";
 import Swal from "sweetalert2";
 import { useCurrentUser } from "../../context.jsx";
 import { useLogout } from "../../hooks/LogOut";
-import { Messages } from "../pages/Messages";
+import Messages from "../pages/Messages";
 import { FiLogOut } from 'react-icons/fi';
 import { MdMessage } from "react-icons/md";
 import "../../style/NavBar.css";
@@ -181,9 +181,6 @@ function NavBar() {
               </Link>
             </>
           )}
-        </div>
-
-        <div className="nav-brand">
           {currentUser && currentUser?.role === 'admin' && (
             <>
               <Link to="/users" className={`nav-link users-link ${location.pathname.includes("users") ? "active" : ""}`} onClick={closeMobileMenu}>
@@ -191,7 +188,9 @@ function NavBar() {
               </Link>
             </>
           )}
-          
+        </div>
+
+        <div className="nav-brand">
           <Link to="/home" className="brand-link">
             GitLink
           </Link>

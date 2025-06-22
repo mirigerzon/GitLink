@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const genericDataService = require('../../controllers/genericBl.js');
-const dataService = require('../../controllers/bl.js');
+const genericDataService = require('../../services/generic.js');
+const projectsService = require('../../services/bl.js');
 const { writeLog } = require('../../log/log.js');
 const {
     createConditions,
@@ -54,7 +54,7 @@ router.post("/rate", async (req, res) => {
 
         if (!username) return res.status(401).json({ error: 'User not authenticated' });
 
-        await dataService.rateProject(username, project_id, rating);
+        await projectsService.rateProject(username, project_id, rating);
         res.status(200).json({ message: 'Rating submitted successfully' });
     } catch (err) {
         res.status(400).json({ error: err.message });

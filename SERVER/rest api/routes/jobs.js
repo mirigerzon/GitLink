@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const genericDataService = require('../../controllers/genericBl.js');
-const DataService = require('../../controllers/bl.js');
+const genericDataService = require('../../services/generic.js');
+const jobsService = require('../../services/jobs.js');
 const { writeLog } = require('../../log/log.js');
 const {
-    createConditions,
     addUserIdCondition,
     handleError
 } = require('../utils/routerHelpers.js');
@@ -13,7 +12,7 @@ const TABLE_NAME = 'jobs';
 
 router.get('/', async (req, res) => {
     try {
-        const data = await DataService.getJobsWithApplicantsCount()
+        const data = await jobsService.getJobsWithApplicantsCount()
 
         writeLog(`Fetched ${TABLE_NAME}`, 'info');
         res.json(data);
@@ -26,7 +25,7 @@ router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         if (!id) return res.status(400).json({ error: 'job ID is required' });
-        const data = await genericDataService.getItemByConditions('jobs', [{field:'id', value: Number(id)}]);
+        const data = await genericDataService.getItemByConditions('jobs', [{ field: 'id', value: Number(id) }]);
         writeLog(`Fetched job data for id=${id}`, 'info');
         res.json(data[0]);
     } catch (err) {
