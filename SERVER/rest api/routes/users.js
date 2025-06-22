@@ -55,7 +55,7 @@ router.put('/update-image', upload.single('profile_image'), async (req, res) => 
 
         let profileImagePath = null;
         if (use_git_avatar === 'true') {
-            profileImagePath = req.body.profile_image; 
+            profileImagePath = req.body.profile_image;
         } else if (req.file) {
             profileImagePath = `profile_images/${req.file.filename}`;
         }
@@ -64,7 +64,7 @@ router.put('/update-image', upload.single('profile_image'), async (req, res) => 
             { profile_image: profileImagePath },
             [{ field: 'id', value: user_id }]
         );
-        res.status(200).json({ message: 'Profile image updated successfully' });
+        res.status(200).json({ message: 'Profile image updated successfully', file: profileImagePath });
     } catch (err) {
         handleError(res, err, 'users', 'updating profile image for');
     }

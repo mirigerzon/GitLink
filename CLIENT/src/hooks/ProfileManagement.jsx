@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { FiUpload, FiEdit, FiLock } from "react-icons/fi";
 import Modal from "../components/common/Modal";
+import { useCurrentUser } from "../context";
 
 function ProfileManagement({ userData, currentUser, isOwnProfile, setIsChange, fetchData }) {
     const [showCVUpload, setShowCVUpload] = useState(false);
     const [showImageUpload, setShowImageUpload] = useState(false);
     const [showPasswordChange, setShowPasswordChange] = useState(false);
+    const { setCurrentUser } = useCurrentUser();
     const [cvFile, setCvFile] = useState(null);
     const [imageFile, setImageFile] = useState(null);
     const [useGitAvatar, setUseGitAvatar] = useState(false);
@@ -77,9 +79,13 @@ function ProfileManagement({ userData, currentUser, isOwnProfile, setIsChange, f
                 onSuccess: (result) => {
                     setMessage('Profile image updated successfully!', result);
                     setShowImageUpload(false);
-                    setImageFile(null);
                     setUseGitAvatar(false);
                     setIsChange(prev => prev + 1);
+                    setCurrentUser(prevUser => ({
+                        ...prevUser,
+                        profile_image: result.file
+                    }));
+                    setImageFile(null);
                 },
                 onError: (error) => {
                     setMessage(`Error updating image: ${error}`);
