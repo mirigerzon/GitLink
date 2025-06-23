@@ -1,4 +1,4 @@
-const { writeLog } = require('../../log/log');
+const { writeLog } = require('../../common/logger');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');

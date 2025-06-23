@@ -6,7 +6,6 @@ import { useCurrentUser } from "../../context.jsx";
 import { useLogout } from "../../hooks/LogOut";
 import Messages from "../pages/Messages";
 import { FiLogOut } from 'react-icons/fi';
-import { MdMessage } from "react-icons/md";
 import "../../style/NavBar.css";
 
 function NavBar() {

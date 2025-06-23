@@ -4,12 +4,13 @@ const app = express();
 const http = require("http");
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./.env" });
-const verifyToken = require("./rest api/middleware/verifyToken.js");
+const verifyToken = require("./rest api/middlewares/verifyToken.js");
 const authRoutes = require("./rest api/routes/auth.js");
 const path = require('path');
 const { init } = require("./socket");
-const { writeLog } = require('./log/log.js');
+const { writeLog } = require('./common/logger.js');
 const PORT = process.env.PORT || 3001;
+
 const messagesRoutes = require("./rest api/routes/messages.js");
 const projectsRoutes = require("./rest api/routes/projects.js");
 const developersRoutes = require("./rest api/routes/developers.js");
@@ -37,6 +38,20 @@ app.use("/:role/projects", projectsRoutes);
 app.use("/:role/developers", developersRoutes);
 app.use("/:role/recruiters", recruitersRoutes);
 app.use("/:role/users", usersRoutes);
+// app.use('*', (req, res) => {
+//     res.status(404).json({ error: 'Path not found' });
+// });
+app.use((err, req, res, next) => {
+    writeLog(`Error: ${err.message} - Stack: ${err.stack}`);
+    const statusCode = err.status || err.statusCode || 500;
+    res.status(statusCode).json({
+        error: {
+            message: err.message || 'Internal server error',
+            status: statusCode,
+            ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+        }
+    });
+});
 
 const server = http.createServer(app);
 const io = init(server);

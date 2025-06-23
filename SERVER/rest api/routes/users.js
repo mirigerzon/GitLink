@@ -1,128 +1,129 @@
 const express = require('express');
 const router = express.Router();
+const asyncHandler = require('../middlewares/asyncHandler');
 const genericDataService = require('../../services/generic.js');
 const usersService = require('../../services/users.js');
+const { writeLog } = require('../../common/logger.js');
+const { validateRequiredFields, upload } = require('../utils/routerHelpers.js');
+const RESOURCE_NAME = 'users';
 
-const { writeLog } = require('../../log/log.js');
-const { handleError, validateRequiredFields, upload } = require('../utils/routerHelpers.js');
-
-router.get('/:username', async (req, res) => {
-    try {
-        const { username } = req.params;
-        if (!username) return res.status(400).json({ error: 'Username is required' });
-        const data = await usersService.getUser(username);
-        writeLog(`Fetched user data for username=${username}`, 'info');
-        res.json(data);
-    } catch (err) {
-        handleError(res, err, 'users', 'fetching');
+router.get('/:username', asyncHandler(async (req, res) => {
+    const { username } = req.params;
+    if (!username) {
+        const error = new Error('Username is required');
+        error.status = 400;
+        throw error;
     }
-});
+    const data = await usersService.getUser(username);
+    writeLog(`Fetched ${RESOURCE_NAME} data for username=${username}`, 'info');
+    res.json(data);
+}));
 
-router.get('/', async (req, res) => {
-    try {
-        const data = await usersService.getUsers();
-        writeLog(`Fetched users data`, 'info');
-        res.json(data);
-    } catch (err) {
-        handleError(res, err, 'users', 'fetching');
+router.get('/', asyncHandler(async (req, res) => {
+    const data = await usersService.getUsers();
+    writeLog(`Fetched ${RESOURCE_NAME} data`, 'info');
+    res.json(data);
+}));
+
+router.put('/update-cv', upload.single('cv_file'), asyncHandler(async (req, res) => {
+    const { user_id } = req.body;
+
+    if (req.user?.id && req.user.id !== parseInt(user_id)) {
+        const error = new Error('You can only update your own CV');
+        error.status = 403;
+        throw error;
     }
-});
 
-router.put('/update-cv', upload.single('cv_file'), async (req, res) => {
-    try {
-        const { user_id } = req.body;
+    let cvFilePath = null;
+    if (req.file) cvFilePath = `cv_files/${req.file.filename}`;
 
-        if (req.user?.id && req.user.id !== parseInt(user_id)) return res.status(403).json({ error: 'You can only update your own CV' })
+    await genericDataService.updateItem(RESOURCE_NAME,
+        { cv_file: cvFilePath },
+        [{ field: 'id', value: user_id }]
+    );
+    res.status(200).json({ message: 'CV updated successfully' });
+}));
 
-        let cvFilePath = null;
-        if (req.file) cvFilePath = `cv_files/${req.file.filename}`;
+router.put('/update-image', upload.single('profile_image'), asyncHandler(async (req, res) => {
+    const { user_id, use_git_avatar } = req.body;
 
-        await genericDataService.updateItem('users',
-            { cv_file: cvFilePath },
-            [{ field: 'id', value: user_id }]
-        );
-        res.status(200).json({ message: 'CV updated successfully' });
-    } catch (err) {
-        handleError(res, err, 'users', 'updating CV for');
+    if (req.user?.id && req.user.id !== parseInt(user_id)) {
+        const error = new Error('You can only update your own profile image');
+        error.status = 403;
+        throw error;
     }
-});
 
-router.put('/update-image', upload.single('profile_image'), async (req, res) => {
-    try {
-        const { user_id, use_git_avatar } = req.body;
-
-        if (req.user?.id && req.user.id !== parseInt(user_id)) return res.status(403).json({ error: 'You can only update your own profile image' });
-
-        let profileImagePath = null;
-        if (use_git_avatar === 'true') {
-            profileImagePath = req.body.profile_image;
-        } else if (req.file) {
-            profileImagePath = `profile_images/${req.file.filename}`;
-        }
-
-        await genericDataService.updateItem('users',
-            { profile_image: profileImagePath },
-            [{ field: 'id', value: user_id }]
-        );
-        res.status(200).json({ message: 'Profile image updated successfully', file: profileImagePath });
-    } catch (err) {
-        handleError(res, err, 'users', 'updating profile image for');
+    let profileImagePath = null;
+    if (use_git_avatar === 'true') {
+        profileImagePath = req.body.profile_image;
+    } else if (req.file) {
+        profileImagePath = `profile_images/${req.file.filename}`;
     }
-});
 
-router.put('/change-password', async (req, res) => {
-    try {
-        validateRequiredFields(req.body, ['user_id', 'currentPassword', 'newPassword']);
+    await genericDataService.updateItem(RESOURCE_NAME,
+        { profile_image: profileImagePath },
+        [{ field: 'id', value: user_id }]
+    );
+    res.status(200).json({ message: 'Profile image updated successfully', file: profileImagePath });
+}));
 
-        const { user_id, currentPassword, newPassword, email } = req.body;
+router.put('/change-password', asyncHandler(async (req, res) => {
+    validateRequiredFields(req.body, ['user_id', 'currentPassword', 'newPassword']);
 
-        if (req.user?.user_id && req.user.user_id !== user_id) return res.status(403).json({ error: 'You can only change your own password' });
+    const { user_id, currentPassword, newPassword, email } = req.body;
 
-        const user = await usersService.changeUserPassword(user_id, currentPassword, newPassword, email);
-        if (!user) return res.status(404).json({ error: 'User not found' });
-
-        res.status(200).json({ message: 'Password changed successfully' });
-    } catch (err) {
-        handleError(res, err, 'users', 'changing password for');
+    if (req.user?.user_id && req.user.user_id !== user_id) {
+        const error = new Error('You can only change your own password');
+        error.status = 403;
+        throw error;
     }
-});
 
-router.put('/status/:username', async (req, res) => {
-    try {
-        const { username } = req.params;
-        if (!username) return res.status(400).json({ error: 'username is required' });
-        const result = await usersService.updateUserStatus(
-            'users',
-            req.body,
-            [{ field: 'username', value: username }]
-        );
-        writeLog(`Updated username=${username} by user=${req.user.username}`, 'info');
-        res.json({
-            message: 'user updated successfully',
-            result
-        });
-    } catch (err) {
-        handleError(res, err, 'users', 'updating user');
+    const user = await usersService.changeUserPassword(user_id, currentPassword, newPassword, email);
+    if (!user) {
+        const error = new Error('User not found');
+        error.status = 404;
+        throw error;
     }
-});
 
-router.put('/:username', async (req, res) => {
-    try {
-        const { username } = req.params;
-        if (!username) return res.status(400).json({ error: 'username is required' });
-        const result = await genericDataService.updateItem(
-            'users',
-            req.body,
-            [{ field: 'username', value: username }]
-        );
-        writeLog(`Updated username=${username} by user=${req.user.username}`, 'info');
-        res.json({
-            message: 'user updated successfully',
-            result
-        });
-    } catch (err) {
-        handleError(res, err, 'users', 'updating user');
+    res.status(200).json({ message: 'Password changed successfully' });
+}));
+
+router.put('/status/:username', asyncHandler(async (req, res) => {
+    const { username } = req.params;
+    if (!username) {
+        const error = new Error('username is required');
+        error.status = 400;
+        throw error;
     }
-});
+    const result = await usersService.updateUserStatus(
+        RESOURCE_NAME,
+        req.body,
+        [{ field: 'username', value: username }]
+    );
+    writeLog(`Updated username=${username} by user=${req.user.username}`, 'info');
+    res.json({
+        message: 'user updated successfully',
+        result
+    });
+}));
+
+router.put('/:username', asyncHandler(async (req, res) => {
+    const { username } = req.params;
+    if (!username) {
+        const error = new Error('username is required');
+        error.status = 400;
+        throw error;
+    }
+    const result = await genericDataService.updateItem(
+        RESOURCE_NAME,
+        req.body,
+        [{ field: 'username', value: username }]
+    );
+    writeLog(`Updated username=${username} by user=${req.user.username}`, 'info');
+    res.json({
+        message: 'user updated successfully',
+        result
+    });
+}));
 
 module.exports = router;
