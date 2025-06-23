@@ -39,30 +39,35 @@ router.delete('/:itemId', asyncHandler(async (req, res) => {
     res.json({ message: 'Application deleted successfully', result });
 }));
 
-router.put('/notify', asyncHandler(async (req, res) => {
-    const result = await jobApplicationsService.notifyApplicant(req.body);
-    res.json({ message: 'Email sent successfully', result });
-}));
-
+// Generic PUT route for updating job applications
 router.put('/:job_application_id', asyncHandler(async (req, res) => {
-    const { user_id, ...body } = req.body;
-    const result = await updateItem(
-        RESOURCE_NAME,
-        body,
-        [
-            { field: 'job_id', value: Number(req.params.job_application_id) },
-            { field: 'user_id', value: user_id }
-        ]
-    );
-    writeLog(`Updated message for user=${req.body.email}`, 'info');
-    res.json({ message: 'Message updated successfully', result });
-}));
+    const { action, ...data } = req.body;
 
-router.put('/reject/:job_id', asyncHandler(async (req, res) => {
-    const { job_id } = req.params;
-    const result = await jobApplicationsService.rejectApplicant(req.body, Number(job_id));
-    writeLog(`reject application for job id=${job_id}`, 'info');
-    res.json({ message: 'Application reject successfully', result });
+    switch (action) {
+        case 'notify':
+            const notifyResult = await jobApplicationsService.notifyApplicant(data);
+            writeLog(`Sent notification for application id=${req.params.job_application_id}`, 'info');
+            return res.json({ message: 'Email sent successfully', result: notifyResult });
+
+        case 'reject':
+            const rejectResult = await jobApplicationsService.rejectApplicant(data, Number(req.params.job_application_id));
+            writeLog(`Rejected application id=${req.params.job_application_id}`, 'info');
+            return res.json({ message: 'Application rejected successfully', result: rejectResult });
+
+        case 'update':
+        default:
+            const { user_id, ...body } = data;
+            const updateResult = await updateItem(
+                RESOURCE_NAME,
+                body,
+                [
+                    { field: 'job_id', value: Number(req.params.job_application_id) },
+                    { field: 'user_id', value: user_id }
+                ]
+            );
+            writeLog(`Updated application id=${req.params.job_application_id}`, 'info');
+            return res.json({ message: 'Application updated successfully', result: updateResult });
+    }
 }));
 
 module.exports = router;
