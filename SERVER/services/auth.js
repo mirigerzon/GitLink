@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const { sendWelcomeEmail, sendPasswordResetEmail } = require('./emailService.js');
 const { generateUsername } = require('unique-username-generator');
 const jwt = require('jsonwebtoken');
+const ACCESS_SECRET = process.env.ACCESS_SECRET;
+const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
 const login = async (username, password) => {
     if (!username || !password) {
@@ -220,11 +222,62 @@ const isUsernameAvailable = async (username) => {
     }
 };
 
+const handleFileUploads = (body, files) => {
+    let profileImagePath = null;
+    let cvFilePath = null;
+
+    if (body.profile_image && body.profile_image.startsWith('https://github.com/')) {
+        profileImagePath = body.profile_image;
+    } else if (files && files['profile_image'] && files['profile_image'].length > 0) {
+        profileImagePath = `profile_images/${files['profile_image'][0].filename}`;
+    } else if (body.role_id === 2) {
+        profileImagePath = `profile_images/user.png`;
+    }
+
+    if (files && files['cv_file'] && files['cv_file'].length > 0) {
+        cvFilePath = `cv_files/${files['cv_file'][0].filename}`;
+    }
+
+    return { profileImagePath, cvFilePath };
+};
+
+const generateTokens = (userResult, ip) => {
+    const refreshToken = jwt.sign(
+        { username: userResult.username, id: userResult.id },
+        REFRESH_SECRET,
+        { expiresIn: '1d' }
+    );
+
+    const accessToken = jwt.sign(
+        {
+            id: userResult.id,
+            email: userResult.email,
+            ip,
+            username: userResult.username,
+            role_id: userResult.role_id
+        },
+        ACCESS_SECRET,
+        { expiresIn: '15m' }
+    );
+
+    return { refreshToken, accessToken };
+};
+
+const setCookieOptions = () => ({
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'Strict',
+    maxAge: 24 * 60 * 60 * 1000
+});
+
 module.exports = {
     login,
     register,
     refreshToken,
     checkUsername,
     forgotPassword,
-    getUserCV
+    getUserCV,
+    handleFileUploads,
+    generateTokens,
+    setCookieOptions
 };

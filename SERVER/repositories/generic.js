@@ -5,6 +5,7 @@ const ALLOWED_TABLES = [
   'projects', 'job_applications', 'project_ratings', 'messages', 'jobs'
 ];
 
+// האם זה צריך להיות פה?
 const validateTable = (table) => {
   if (!table) {
     throw new Error('Table name is required');

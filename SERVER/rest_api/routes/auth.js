@@ -1,72 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('../middlewares/asyncHandler');
-const {
-    login,
-    register,
-    refreshToken,
-    forgotPassword,
-    checkUsername,
-    getUserCV
-} = require('../../services/auth.js');
+const { login, register, refreshToken, forgotPassword, checkUsername, getUserCV, handleFileUploads, generateTokens, setCookieOptions } = require('../../services/auth.js');
 const { upload } = require('../utils/routerHelpers.js');
-const jwt = require('jsonwebtoken');
-const ACCESS_SECRET = process.env.ACCESS_SECRET;
-const REFRESH_SECRET = process.env.REFRESH_SECRET;
 const path = require('path');
 const fs = require('fs');
 const { writeLog } = require('../../common/logger.js');
-
-// TODO: העבר את הלוגיקה הזאת ל-services/fileHandler.js
-const handleFileUploads = (body, files) => {
-    let profileImagePath = null;
-    let cvFilePath = null;
-
-    if (body.profile_image && body.profile_image.startsWith('https://github.com/')) {
-        profileImagePath = body.profile_image;
-    } else if (files && files['profile_image'] && files['profile_image'].length > 0) {
-        profileImagePath = `profile_images/${files['profile_image'][0].filename}`;
-    } else if (body.role_id === 2) {
-        profileImagePath = `profile_images/user.png`;
-    }
-
-    if (files && files['cv_file'] && files['cv_file'].length > 0) {
-        cvFilePath = `cv_files/${files['cv_file'][0].filename}`;
-    }
-
-    return { profileImagePath, cvFilePath };
-};
-
-// TODO: העבר את הלוגיקה הזאת ל-services/tokenHandler.js
-const generateTokens = (userResult, ip) => {
-    const refreshToken = jwt.sign(
-        { username: userResult.username, id: userResult.id },
-        REFRESH_SECRET,
-        { expiresIn: '1d' }
-    );
-
-    const accessToken = jwt.sign(
-        {
-            id: userResult.id,
-            email: userResult.email,
-            ip,
-            username: userResult.username,
-            role_id: userResult.role_id
-        },
-        ACCESS_SECRET,
-        { expiresIn: '15m' }
-    );
-
-    return { refreshToken, accessToken };
-};
-
-// TODO: העבר את הלוגיקה הזאת ל-services/cookieHandler.js
-const setCookieOptions = () => ({
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'Strict',
-    maxAge: 24 * 60 * 60 * 1000
-});
 
 router.post('/login', asyncHandler(async (req, res) => {
     const { username, password } = req.body;

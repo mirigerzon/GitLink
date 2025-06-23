@@ -99,9 +99,19 @@ const changeUserPassword = async (userId, currentPassword, newPassword, email) =
     }
 };
 
+const checkUserOwnership = (req, targetUserId, resourceName) => {
+    if (req.user?.id && req.user.id !== parseInt(targetUserId)) {
+        writeLog(`Unauthorized access attempt by user: ${req.user.username} trying to access ${resourceName} of user: ${targetUserId} from IP: ${req.ip}`, 'warn');
+        const error = new Error(`You can only update your own ${resourceName}`);
+        error.status = 403;
+        throw error;
+    }
+};
+
 module.exports = {
     getUsers,
     getUser,
     updateUserStatus,
-    changeUserPassword
+    changeUserPassword,
+    checkUserOwnership
 };

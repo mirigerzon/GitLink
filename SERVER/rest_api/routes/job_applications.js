@@ -8,16 +8,6 @@ const asyncHandler = require('../middlewares/asyncHandler');
 
 const RESOURCE_NAME = 'job_applications';
 
-// TODO: העבר את הלוגיקה הזאת ל-services/authorizationService.js
-const checkUserOwnership = (req, targetUserId, resourceName) => {
-    if (req.user?.id && req.user.id !== targetUserId) {
-        writeLog(`Unauthorized access attempt by user: ${req.user.username} trying to access ${resourceName} of user: ${targetUserId} from IP: ${req.ip}`, 'warn');
-        const error = new Error(`You can only access your own ${resourceName}`);
-        error.status = 403;
-        throw error;
-    }
-};
-
 router.get('/:id', asyncHandler(async (req, res) => {
     const { id } = req.params;
 
@@ -50,7 +40,7 @@ router.post('/', asyncHandler(async (req, res) => {
         throw error;
     }
 
-    checkUserOwnership(req, user_id, 'job application');
+    jobApplicationsService.checkUserOwnership(req, user_id, 'job application');
 
     writeLog(`Creating job application for user: ${user_id} to job: ${job_id} from IP: ${req.ip}`, 'info');
 

@@ -98,9 +98,19 @@ const createApply = async (data, email) => {
     }
 };
 
+const checkUserOwnership = (req, targetUserId, resourceName) => {
+    if (req.user?.id && req.user.id !== targetUserId) {
+        writeLog(`Unauthorized access attempt by user: ${req.user.username} trying to access ${resourceName} of user: ${targetUserId} from IP: ${req.ip}`, 'warn');
+        const error = new Error(`You can only access your own ${resourceName}`);
+        error.status = 403;
+        throw error;
+    }
+};
+
 module.exports = {
     getJobApplications,
     rejectApplicant,
     notifyApplicant,
-    createApply
+    createApply,
+    checkUserOwnership
 };

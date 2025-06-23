@@ -7,16 +7,6 @@ const { writeLog } = require('../../common/logger.js');
 const { validateRequiredFields, upload } = require('../utils/routerHelpers.js');
 const RESOURCE_NAME = 'users';
 
-// TODO: העבר את הלוגיקה הזאת ל-services/authorizationService.js
-const checkUserOwnership = (req, targetUserId, resourceName) => {
-    if (req.user?.id && req.user.id !== parseInt(targetUserId)) {
-        writeLog(`Unauthorized access attempt by user: ${req.user.username} trying to access ${resourceName} of user: ${targetUserId} from IP: ${req.ip}`, 'warn');
-        const error = new Error(`You can only update your own ${resourceName}`);
-        error.status = 403;
-        throw error;
-    }
-};
-
 router.get('/:username', asyncHandler(async (req, res) => {
     const { username } = req.params;
 
@@ -70,7 +60,7 @@ router.put('/update-cv', upload.single('cv_file'), asyncHandler(async (req, res)
         throw error;
     }
 
-    checkUserOwnership(req, user_id, 'CV');
+    usersService.checkUserOwnership(req, user_id, 'CV');
 
     writeLog(`Updating CV for user: ${user_id} from IP: ${req.ip}`, 'info');
 
@@ -104,7 +94,7 @@ router.put('/update-image', upload.single('profile_image'), asyncHandler(async (
         throw error;
     }
 
-    checkUserOwnership(req, user_id, 'profile image');
+    usersService.checkUserOwnership(req, user_id, 'profile image');
 
     writeLog(`Updating profile image for user: ${user_id} from IP: ${req.ip}`, 'info');
 
