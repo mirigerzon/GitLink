@@ -11,7 +11,6 @@ function writeLog(message, type = 'info') {
     fs.appendFile(logFile, logMessage, (err) => {
         if (err) console.error('Failed to write log:', err);
     });
-
 }
 
 module.exports = { writeLog };

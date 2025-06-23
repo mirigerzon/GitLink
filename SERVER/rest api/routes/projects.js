@@ -15,20 +15,20 @@ const {
     validateRequiredFields
 } = require('../utils/routerHelpers.js');
 
-const TABLE_NAME = 'projects';
+const RESOURCE_NAME = 'projects';
 
 router.get('/', async (req, res) => {
     try {
         const conditions = createConditions(req);
         const data = await getItemByConditions(
-            TABLE_NAME,
+            RESOURCE_NAME,
             conditions.length ? conditions : undefined
         );
 
-        writeLog(`Fetched ${TABLE_NAME} with conditions=${JSON.stringify(conditions)}`, 'info');
+        writeLog(`Fetched ${RESOURCE_NAME} with conditions=${JSON.stringify(conditions)}`, 'info');
         res.json(data);
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'fetching');
+        handleError(res, err, RESOURCE_NAME, 'fetching');
     }
 });
 
@@ -42,11 +42,11 @@ router.post("/", async (req, res) => {
         conditions = addUserIdCondition(req, conditions);
         const body = Object.fromEntries(conditions.map(({ field, value }) => [field, value]));
 
-        const created = await createItem(TABLE_NAME, body);
+        const created = await createItem(RESOURCE_NAME, body);
         writeLog(`Created project with data=${JSON.stringify(body)}`, 'info');
         res.status(201).json({ message: 'Project created successfully', result: created });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'creating');
+        handleError(res, err, RESOURCE_NAME, 'creating');
     }
 });
 
@@ -73,7 +73,7 @@ router.put('/:id', async (req, res) => {
 
         if (!id) return res.status(400).json({ error: 'Project ID is required' });
         const result = await updateItem(
-            TABLE_NAME,
+            RESOURCE_NAME,
             { name, url, details, languages },
             [{ field: 'id', value: id }]
         );
@@ -86,7 +86,7 @@ router.put('/:id', async (req, res) => {
         });
 
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'updating project');
+        handleError(res, err, RESOURCE_NAME, 'updating project');
     }
 });
 
@@ -96,11 +96,11 @@ router.delete('/:itemId', async (req, res) => {
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
 
-        const result = await deleteItem(TABLE_NAME, conditions);
+        const result = await deleteItem(RESOURCE_NAME, conditions);
         writeLog(`Deleted project id=${itemId}`, 'info');
         res.json({ message: 'Project deleted successfully', result });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'deleting');
+        handleError(res, err, RESOURCE_NAME, 'deleting');
     }
 });
 

@@ -54,7 +54,7 @@ const createApply = async (data, email) => {
             user_id: data.user_id,
             email: email,
             title: 'Application Received!',
-            dbContent: `We received your application for job #${data.job_id}. Thank you!`, // זה מה שיישמר בטבלה
+            dbContent: `We received your application for job #${data.job_id}. Thank you!`,
             content: `
                 <div style="font-family: Arial, sans-serif;">
                     <h2>Application Received</h2>

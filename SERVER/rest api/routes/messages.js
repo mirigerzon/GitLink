@@ -11,20 +11,20 @@ const {
     handleError
 } = require('../utils/routerHelpers.js');
 
-const TABLE_NAME = 'messages';
+const RESOURCE_NAME = 'messages';
 
 router.get('/', async (req, res) => {
     try {
         const conditions = createConditions(req);
         const data = await getItemByConditions(
-            TABLE_NAME,
+            RESOURCE_NAME,
             conditions.length ? conditions : undefined
         );
 
-        writeLog(`Fetched ${TABLE_NAME} with conditions=${JSON.stringify(conditions)}`, 'info');
+        writeLog(`Fetched ${RESOURCE_NAME} with conditions=${JSON.stringify(conditions)}`, 'info');
         res.json(data);
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'fetching');
+        handleError(res, err, RESOURCE_NAME, 'fetching');
     }
 });
 
@@ -34,14 +34,14 @@ router.put('/', async (req, res) => {
 
         const body = req.body;
         const result = await updateItem(
-            TABLE_NAME,
+            RESOURCE_NAME,
             body,
             [{ field: 'email', value: req.body.email }]
         );
         writeLog(`Updated message for user=${req.body.email}`, 'info');
         res.json({ message: 'Message updated successfully', result });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'updating');
+        handleError(res, err, RESOURCE_NAME, 'updating');
     }
 });
 
@@ -53,7 +53,7 @@ router.put('/:id', async (req, res) => {
         const body = req.body;
 
         const result = await updateItem(
-            TABLE_NAME,
+            RESOURCE_NAME,
             body,
             [
                 { field: 'id', value: id },
@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
         writeLog(`Updated message id=${id} for user=${req.body.email}`, 'info');
         res.json({ message: 'Message updated successfully', result });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'updating');
+        handleError(res, err, RESOURCE_NAME, 'updating');
     }
 });
 
@@ -74,11 +74,11 @@ router.delete('/:itemId', async (req, res) => {
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
 
-        const result = await deleteItem(TABLE_NAME, conditions);
+        const result = await deleteItem(RESOURCE_NAME, conditions);
         writeLog(`Deleted message id=${itemId}`, 'info');
         res.json({ message: 'Message deleted successfully', result });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'deleting');
+        handleError(res, err, RESOURCE_NAME, 'deleting');
     }
 });
 

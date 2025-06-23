@@ -12,16 +12,16 @@ const {
     handleError
 } = require('../utils/routerHelpers.js');
 
-const TABLE_NAME = 'jobs';
+const RESOURCE_NAME = 'jobs';
 
 router.get('/', async (req, res) => {
     try {
         const data = await jobsService.getJobsWithApplicantsCount()
 
-        writeLog(`Fetched ${TABLE_NAME}`, 'info');
+        writeLog(`Fetched ${RESOURCE_NAME}`, 'info');
         res.json(data);
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'fetching');
+        handleError(res, err, RESOURCE_NAME, 'fetching');
     }
 });
 
@@ -42,11 +42,11 @@ router.post('/', async (req, res) => {
         if (!req.user?.id) return res.status(401).json({ error: 'User not authenticated' });
 
         const body = { ...req.body };
-        const created = await createItem(TABLE_NAME, body);
+        const created = await createItem(RESOURCE_NAME, body);
         writeLog(`Created job with data=${JSON.stringify(body)}`, 'info');
         res.status(201).json({ message: 'Job created successfully', result: created });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'creating');
+        handleError(res, err, RESOURCE_NAME, 'creating');
     }
 });
 
@@ -56,11 +56,11 @@ router.delete('/:itemId', async (req, res) => {
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
 
-        const result = await deleteItem(TABLE_NAME, conditions);
+        const result = await deleteItem(RESOURCE_NAME, conditions);
         writeLog(`Deleted job id=${itemId}`, 'info');
         res.json({ message: 'Job deleted successfully', result });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'deleting');
+        handleError(res, err, RESOURCE_NAME, 'deleting');
     }
 });
 
@@ -69,7 +69,7 @@ router.put('/:id', async (req, res) => {
         const { id } = req.params;
         if (!id) return res.status(400).json({ error: 'Project ID is required' });
         const result = await updateItem(
-            TABLE_NAME,
+            RESOURCE_NAME,
             req.body,
             [{ field: 'id', value: id }]
         );
@@ -82,7 +82,7 @@ router.put('/:id', async (req, res) => {
         });
 
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'updating project');
+        handleError(res, err, RESOURCE_NAME, 'updating project');
     }
 });
 

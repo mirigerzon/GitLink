@@ -4,15 +4,15 @@ const { getDevelopers, getDeveloper } = require('../../services/developers.js');
 const { writeLog } = require('../../log/log.js');
 const { handleError } = require('../utils/routerHelpers.js');
 
-const TABLE_NAME = 'developers';
+const RESOURCE_NAME = 'developers';
 
 router.get('/', async (req, res) => {
     try {
         const data = await getDevelopers();
-        writeLog(`Fetched data from table = ${TABLE_NAME} `, 'info');
+        writeLog(`Fetched data from RESOURCE = ${RESOURCE_NAME} `, 'info');
         res.json(data);
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'fetching');
+        handleError(res, err, RESOURCE_NAME, 'fetching');
     }
 });
 

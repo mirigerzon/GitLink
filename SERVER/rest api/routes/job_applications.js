@@ -5,7 +5,7 @@ const jobApplicationsService = require('../../services/job_applications.js');
 const { writeLog } = require('../../log/log.js');
 const { addUserIdCondition, handleError, validateRequiredFields } = require('../utils/routerHelpers.js');
 
-const TABLE_NAME = 'job_applications';
+const RESOURCE_NAME = 'job_applications';
 
 router.get('/:id', async (req, res) => {
     try {
@@ -13,10 +13,10 @@ router.get('/:id', async (req, res) => {
         if (!id) return res.status(400).json({ error: 'Job ID is required' });
 
         const data = await jobApplicationsService.getJobApplications(id);
-        writeLog(`Fetched ${TABLE_NAME} for job id=${id}`, 'info');
+        writeLog(`Fetched ${RESOURCE_NAME} for job id=${id}`, 'info');
         res.json(data);
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'fetching');
+        handleError(res, err, RESOURCE_NAME, 'fetching');
     }
 });
 
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
         writeLog(`Created job application: ${JSON.stringify(applicationData)}`, 'info');
         res.status(201).json({ message: 'Application submitted successfully', result: created });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'creating');
+        handleError(res, err, RESOURCE_NAME, 'creating');
     }
 });
 
@@ -42,11 +42,11 @@ router.delete('/:itemId', async (req, res) => {
         const { itemId } = req.params;
         const baseConditions = [{ field: 'id', value: itemId }];
         const conditions = addUserIdCondition(req, baseConditions);
-        const result = await deleteItem(TABLE_NAME, conditions);
+        const result = await deleteItem(RESOURCE_NAME, conditions);
         writeLog(`Deleted job application id=${itemId}`, 'info');
         res.json({ message: 'Application deleted successfully', result });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'deleting');
+        handleError(res, err, RESOURCE_NAME, 'deleting');
     }
 });
 
@@ -59,21 +59,21 @@ router.put('/notify', async (req, res) => {
     }
 });
 
-router.put('/:job_id', async (req, res) => {
+router.put('/:job_application_id', async (req, res) => {
     try {
         const { user_id, ...body } = req.body;
         const result = await updateItem(
-            TABLE_NAME,
+            RESOURCE_NAME,
             body,
             [
-                { field: 'job_id', value: Number(req.params.job_id) },
+                { field: 'job_id', value: Number(req.params.job_application_id) },
                 { field: 'user_id', value: user_id }
             ]
         );
         writeLog(`Updated message for user=${req.body.email}`, 'info');
         res.json({ message: 'Message updated successfully', result });
     } catch (err) {
-        handleError(res, err, TABLE_NAME, 'updating');
+        handleError(res, err, RESOURCE_NAME, 'updating');
     }
 });
 
