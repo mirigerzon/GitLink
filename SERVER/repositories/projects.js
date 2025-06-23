@@ -2,29 +2,56 @@ const { GET_WITH_JOINS } = require("./generic");
 const pool = require("./mysqlPool");
 
 const getProjectWithCreator = async (projectId) => {
-    if (!projectId) throw new Error('Project ID is required');
+    if (!projectId) {
+        throw new Error('Project ID is required');
+    }
 
-    return await GET_WITH_JOINS(
-        ["projects", "developers"],
-        ["projects.git_name = developers.git_name"],
-        [{ field: "id", value: projectId }]
-    );
+    try {
+        const projects = await GET_WITH_JOINS(
+            ["projects", "developers"],
+            ["projects.git_name = developers.git_name"],
+            [{ field: "id", value: projectId }]
+        );
+
+        return projects;
+    } catch (error) {
+        console.error('Error in getProjectWithCreator:', error.message);
+        throw new Error(`Failed to fetch project with creator: ${error.message}`);
+    }
 };
 
 const rateProjectTransactional = async (username, projectId, rating) => {
-    const conn = await pool.getConnection();
+    if (!username || !projectId || rating === undefined) {
+        throw new Error('Username, project ID, and rating are required');
+    }
+
+    if (typeof rating !== 'number' || rating < 1 || rating > 5) {
+        throw new Error('Rating must be a number between 1 and 5');
+    }
+
+    const connection = await pool.getConnection();
+
     try {
-        if (!username || !projectId || rating === undefined)
-            throw new Error('Username, project ID, and rating are required');
+        await connection.beginTransaction();
 
-        await conn.beginTransaction();
+        const [existingRating] = await connection.query(
+            'SELECT id FROM project_ratings WHERE username = ? AND project_id = ?',
+            [username, projectId]
+        );
 
-        await conn.query(`
-            INSERT INTO project_ratings (username, project_id, rating)
-            VALUES (?, ?, ?)
-        `, [username, projectId, rating]);
+        if (existingRating.length > 0) {
+            await connection.query(
+                'UPDATE project_ratings SET rating = ? WHERE username = ? AND project_id = ?',
+                [rating, username, projectId]
+            );
+        } else {
+            await connection.query(
+                'INSERT INTO project_ratings (username, project_id, rating) VALUES (?, ?, ?)',
+                [username, projectId, rating]
+            );
+        }
 
-        await conn.query(`
+        await connection.query(`
             UPDATE projects
             SET rating = (
                 SELECT ROUND(AVG(rating), 2)
@@ -39,12 +66,14 @@ const rateProjectTransactional = async (username, projectId, rating) => {
             WHERE id = ?;
         `, [projectId, projectId, projectId]);
 
-        await conn.commit();
+        await connection.commit();
+        return true;
     } catch (error) {
-        await conn.rollback();
+        await connection.rollback();
+        console.error('Error in rateProjectTransactional:', error.message);
         throw new Error(`Transaction failed: ${error.message}`);
     } finally {
-        conn.release();
+        connection.release();
     }
 };
 

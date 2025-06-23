@@ -6,35 +6,55 @@ const { sendPasswordChangeWarningEmail } = require('../services/emailService.js'
 const getUsers = async () => {
     try {
         const users = await usersRepositories.getUsers();
-        return users?.length > 0 ? users : null;
+        return users && users.length > 0 ? users : [];
     } catch (error) {
         console.error('Error fetching users:', error);
         throw new Error('Failed to fetch users');
     }
-}
+};
 
 const getUser = async (username) => {
+    if (!username) {
+        throw new Error('Username is required');
+    }
+
     try {
         const user = await usersRepositories.getUser(username);
-        if (user.role == 'admin') return user;
-        return usersRepositories.getUserWithRoleData(user.id, `${user.role}s`)
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        if (user.role === 'admin') {
+            return user;
+        }
+
+        return await usersRepositories.getUserWithRoleData(user.id, `${user.role}s`);
     } catch (error) {
         console.error('Error fetching user:', error);
-        throw new Error('Failed to fetch user');
+        throw error;
     }
-}
+};
 
 const updateUserStatus = async (table, body, conditions) => {
+    if (!table || !body || !conditions) {
+        throw new Error('Table, body, and conditions are required');
+    }
+
+    const { email, id, status } = body;
+
+    if (!email || !id || status === undefined) {
+        throw new Error('Email, ID, and status are required');
+    }
+
     try {
-        const { email, id } = body;
-        const data = { status: body.status };
+        const data = { status: status };
         const messageData = {
             user_id: id,
             email: email,
-            title: body.status === 0 ? 'Account Blocked' : 'Account Active',
-            content: body.status === 0
-                ? `Your account has been blocked...`
-                : `Your account has been reactivated...`
+            title: status === 0 ? 'Account Blocked' : 'Account Activated',
+            content: status === 0
+                ? 'Your account has been temporarily blocked. Please contact support if you believe this is an error.'
+                : 'Your account has been reactivated. You can now access all features.'
         };
 
         await usersRepositories.updateAndInformUser(table, data, conditions, messageData);
@@ -42,14 +62,18 @@ const updateUserStatus = async (table, body, conditions) => {
         console.error('Error updating user status:', error);
         throw new Error('Failed to update user status');
     }
-}
+};
 
 const changeUserPassword = async (userId, currentPassword, newPassword, email) => {
-    try {
-        if (!userId || !currentPassword || !newPassword) {
-            throw new Error("All password fields are required");
-        }
+    if (!userId || !currentPassword || !newPassword || !email) {
+        throw new Error('User ID, current password, new password, and email are required');
+    }
 
+    if (newPassword.length < 6) {
+        throw new Error('New password must be at least 6 characters long');
+    }
+
+    try {
         const passwords = await generic.GET('passwords', [
             { field: 'user_id', value: userId }
         ]);

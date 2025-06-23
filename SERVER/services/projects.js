@@ -1,13 +1,21 @@
 const projectsRepository = require('../repositories/projects');
-const generic = require('../repositories/generic')
+const generic = require('../repositories/generic');
 
 const rateProject = async (username, projectId, rating) => {
+    if (!username || !projectId || !rating) {
+        throw new Error('Username, project ID, and rating are required');
+    }
+
+    if (rating < 1 || rating > 5) {
+        throw new Error('Rating must be between 1 and 5');
+    }
+
     try {
         await projectsRepository.rateProjectTransactional(username, projectId, rating);
 
         const projectWithUser = await projectsRepository.getProjectWithCreator(projectId);
         if (!projectWithUser?.length) {
-            throw new Error("Project or creator not found.");
+            throw new Error('Project or creator not found');
         }
 
         const gitName = projectWithUser[0].git_name;
@@ -19,20 +27,26 @@ const rateProject = async (username, projectId, rating) => {
 };
 
 const updateUserRating = async (gitName) => {
+    if (!gitName) {
+        throw new Error('Git name is required');
+    }
+
     try {
-        const creatorProjects = await generic.GET("projects", [
-            { field: "git_name", value: gitName }
+        const creatorProjects = await generic.GET('projects', [
+            { field: 'git_name', value: gitName }
         ]);
 
         const ratedProjects = creatorProjects.filter(p => p.rating_count > 0);
-        if (ratedProjects.length === 0) return;
+        if (ratedProjects.length === 0) {
+            return;
+        }
 
         const totalRatings = ratedProjects.reduce((sum, p) => sum + p.rating * p.rating_count, 0);
         const totalCount = ratedProjects.reduce((sum, p) => sum + p.rating_count, 0);
         const userRating = totalCount > 0 ? Math.round((totalRatings / totalCount) * 100) / 100 : null;
 
-        await generic.UPDATE("developers", { rating: userRating }, [
-            { field: "git_name", value: gitName }
+        await generic.UPDATE('developers', { rating: userRating }, [
+            { field: 'git_name', value: gitName }
         ]);
     } catch (error) {
         console.error('Error updating user rating:', error);

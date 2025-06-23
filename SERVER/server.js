@@ -4,20 +4,20 @@ const app = express();
 const http = require("http");
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./.env" });
-const verifyToken = require("./rest api/middlewares/verifyToken.js");
-const authRoutes = require("./rest api/routes/auth.js");
+const verifyToken = require("./rest_api/middlewares/verifyToken.js");
+const authRoutes = require("./rest_api/routes/auth.js");
 const path = require('path');
 const { init } = require("./socket");
 const { writeLog } = require('./common/logger.js');
 const PORT = process.env.PORT || 3001;
 
-const messagesRoutes = require("./rest api/routes/messages.js");
-const projectsRoutes = require("./rest api/routes/projects.js");
-const developersRoutes = require("./rest api/routes/developers.js");
-const recruitersRoutes = require("./rest api/routes/recruiters.js");
-const jobsRoutes = require("./rest api/routes/jobs.js");
-const job_applicationsRoutes = require("./rest api/routes/job_applications.js");
-const usersRoutes = require("./rest api/routes/users.js");
+const messagesRoutes = require("./rest_api/routes/messages.js");
+const projectsRoutes = require("./rest_api/routes/projects.js");
+const developersRoutes = require("./rest_api/routes/developers.js");
+const recruitersRoutes = require("./rest_api/routes/recruiters.js");
+const jobsRoutes = require("./rest_api/routes/jobs.js");
+const job_applicationsRoutes = require("./rest_api/routes/job_applications.js");
+const usersRoutes = require("./rest_api/routes/users.js");
 const corsOptions = {
     origin: "http://localhost:5173",
     credentials: true,

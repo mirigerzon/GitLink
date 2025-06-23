@@ -87,6 +87,25 @@
   letter-spacing: 0.5px;
 }
 
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  max-width: 100%;
+  flex-wrap: nowrap;
+}
+
+.project-name {
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+  font-size: 15px;
+}
+
 .project-card>div:nth-child(2) {
   margin-bottom: 1.5rem;
   padding: 1rem;

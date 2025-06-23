@@ -55,7 +55,7 @@ function DeveloperProfile({
                                 {projectsToAdd.map((repo) => {
                                     return (
                                         <li key={repo.id}>
-                                            {repo.name}
+                                            <span className="project-name">{repo.name}</span>
                                             <Add
                                                 type="projects"
                                                 setIsChange={setIsChange}

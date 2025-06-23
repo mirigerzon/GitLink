@@ -6,33 +6,39 @@ const ALLOWED_TABLES = [
 ];
 
 const validateTable = (table) => {
-  try {
-    if (!ALLOWED_TABLES.includes(table)) throw new Error(`Invalid table name: ${table}`);
-  } catch (error) {
-    console.error('Error in validateTable:', error.message);
-    throw error;
+  if (!table) {
+    throw new Error('Table name is required');
+  }
+  if (!ALLOWED_TABLES.includes(table)) {
+    throw new Error(`Invalid table name: ${table}`);
   }
 };
 
 const validateTables = (tables) => {
-  try {
-    tables.forEach(validateTable);
-  } catch (error) {
-    console.error('Error in validateTables:', error.message);
-    throw new Error(`Table validation failed: ${error.message}`);
+  if (!Array.isArray(tables) || tables.length === 0) {
+    throw new Error('Tables must be a non-empty array');
   }
+  tables.forEach(validateTable);
 };
 
 const validateConditions = (conditions) => {
-  try {
-    if (!Array.isArray(conditions)) throw new Error('Conditions must be an array');
+  if (!Array.isArray(conditions)) {
+    throw new Error('Conditions must be an array');
+  }
 
-    conditions.forEach(cond => {
-      if (!cond.field || cond.value === undefined) throw new Error('Invalid condition: field and value are required');
-    });
-  } catch (error) {
-    console.error('Error in validateConditions:', error.message);
-    throw new Error(`Condition validation failed: ${error.message}`);
+  conditions.forEach(cond => {
+    if (!cond || typeof cond !== 'object') {
+      throw new Error('Invalid condition: must be an object');
+    }
+    if (!cond.field || cond.value === undefined) {
+      throw new Error('Invalid condition: field and value are required');
+    }
+  });
+};
+
+const validateData = (data) => {
+  if (!data || typeof data !== 'object' || Object.keys(data).length === 0) {
+    throw new Error('Data is required and must be a non-empty object');
   }
 };
 
@@ -62,18 +68,18 @@ const GET = async (table, conditions = []) => {
 
 const GET_WITH_JOINS = async (tables = [], joins = [], conditions = []) => {
   try {
-    if (tables.length === 0) {
-      throw new Error("At least one table is required");
-    }
-
     validateTables(tables);
     validateConditions(conditions);
+
+    if (joins.length !== tables.length - 1) {
+      throw new Error(`JOIN conditions count (${joins.length}) must equal tables count minus 1 (${tables.length - 1})`);
+    }
 
     let query = `SELECT * FROM \`${tables[0]}\``;
 
     for (let i = 1; i < tables.length; i++) {
-      if (!joins[i - 1]) {
-        throw new Error(`Missing JOIN condition between ${tables[i - 1]} and ${tables[i]}`);
+      if (!joins[i - 1] || typeof joins[i - 1] !== 'string') {
+        throw new Error(`Invalid JOIN condition between ${tables[i - 1]} and ${tables[i]}`);
       }
       query += ` JOIN \`${tables[i]}\` ON ${joins[i - 1]}`;
     }
@@ -99,10 +105,7 @@ const GET_WITH_JOINS = async (tables = [], joins = [], conditions = []) => {
 const CREATE = async (table, data) => {
   try {
     validateTable(table);
-
-    if (!data || Object.keys(data).length === 0) {
-      throw new Error('Data is required for CREATE operation');
-    }
+    validateData(data);
 
     const fields = Object.keys(data);
     const values = Object.values(data);
@@ -121,11 +124,8 @@ const CREATE = async (table, data) => {
 const UPDATE = async (table, data, conditions = []) => {
   try {
     validateTable(table);
+    validateData(data);
     validateConditions(conditions);
-
-    if (!data || Object.keys(data).length === 0) {
-      throw new Error('Data is required for UPDATE operation');
-    }
 
     if (conditions.length === 0) {
       throw new Error('Conditions are required for UPDATE operation');

@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
-const messagesRepository = require('../repositories/messages')
-require("dotenv").config();
+const messagesRepository = require('../repositories/messages');
+require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -14,24 +14,37 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async ({ user_id, email, title, content, dbContent, saveOnly = true }) => {
-    await messagesRepository.createMessage({
-        user_id,
-        email,
-        title,
-        content: dbContent || content
-    });
+    if (!user_id || !email || !title || !content) {
+        throw new Error('User ID, email, title, and content are required');
+    }
 
-    if (!saveOnly) {
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: title,
-            html: content.replace(/\n/g, '<br/>')
+    try {
+        await messagesRepository.createMessage({
+            user_id,
+            email,
+            title,
+            content: dbContent || content
         });
+
+        if (!saveOnly) {
+            await transporter.sendMail({
+                from: process.env.EMAIL_USER,
+                to: email,
+                subject: title,
+                html: content.replace(/\n/g, '<br/>')
+            });
+        }
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw new Error('Failed to send email');
     }
 };
 
 const sendWelcomeEmail = async (userId, email, username) => {
+    if (!userId || !email || !username) {
+        throw new Error('User ID, email, and username are required');
+    }
+
     const welcomeContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #333;">Welcome to GitLink! 🎉</h2>
@@ -64,6 +77,10 @@ const sendWelcomeEmail = async (userId, email, username) => {
 };
 
 const sendPasswordResetEmail = async (user, newPassword) => {
+    if (!user || !user.username || !user.email || !newPassword) {
+        throw new Error('User data and new password are required');
+    }
+
     const emailContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #333;">Password Reset</h2>
@@ -90,15 +107,23 @@ const sendPasswordResetEmail = async (user, newPassword) => {
 };
 
 const sendPasswordChangeWarningEmail = async (userId, email) => {
+    if (!userId || !email) {
+        throw new Error('User ID and email are required');
+    }
+
     const subject = 'Security Alert: Your Password Was Changed';
     const content = `
-        ⚠️ Hello,
-        We noticed that your password was just changed.
-        If **you** made this change, no further action is needed.
-        But if this wasn't you, please reset your password immediately to protect your account.
-        👉 [Click here to reset your password](https://localhost:/reset-password)
-        Stay safe,
-        The Security Team
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #d32f2f;">⚠️ Security Alert</h2>
+            <p>Hello,</p>
+            <p>We noticed that your password was just changed.</p>
+            <p>If <strong>you</strong> made this change, no further action is needed.</p>
+            <p>But if this wasn't you, please reset your password immediately to protect your account.</p>
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p style="margin: 0;"><strong>👉 <a href="https://localhost/reset-password" style="color: #007bff;">Click here to reset your password</a></strong></p>
+            </div>
+            <p>Stay safe,<br>The Security Team</p>
+        </div>
     `;
 
     await sendEmail({
@@ -106,26 +131,44 @@ const sendPasswordChangeWarningEmail = async (userId, email) => {
         email,
         title: subject,
         content,
-        dbContent: 'Your password was changed. If this wasn’t you, please reset it.',
+        dbContent: 'Your password was changed. If this wasn\'t you, please reset it.',
         saveOnly: false
     });
 };
 
-const sendApplicatEmail = (job_id) => {
-    return (
-        `
-        <div style="font-family: Arial, sans-serif;">
-            <h2>Application Received</h2>
-            <p>We have received your application for job #${job_id}. Our team will review it shortly.</p>
+const sendApplicationEmail = async (userId, email, jobId) => {
+    if (!userId || !email || !jobId) {
+        throw new Error('User ID, email, and job ID are required');
+    }
+
+    const content = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #28a745;">Application Received! ✅</h2>
+            <p>Thank you for your interest in our position!</p>
+            <p>We have received your application for job #${jobId}. Our team will review it shortly.</p>
+            <div style="background-color: #d4edda; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p style="margin: 0;"><strong>What's next?</strong> We'll be in touch if your qualifications match our requirements.</p>
+            </div>
             <p>Thank you for applying!</p>
+            <br>
+            <p>Best regards,<br>GitLink Team</p>
         </div>
-        `
-    )
-}
+    `;
+
+    await sendEmail({
+        user_id: userId,
+        email,
+        title: 'Application Received!',
+        content,
+        dbContent: `We received your application for job #${jobId}. Thank you!`,
+        saveOnly: false
+    });
+};
+
 module.exports = {
     sendEmail,
     sendWelcomeEmail,
     sendPasswordResetEmail,
     sendPasswordChangeWarningEmail,
-    sendApplicatEmail
+    sendApplicationEmail
 };
