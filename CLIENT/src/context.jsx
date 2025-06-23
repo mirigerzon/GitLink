@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
 
 export const CurrentUserContext = createContext(null);
 
@@ -9,6 +9,14 @@ export const CurrentUserProvider = ({ children }) => {
   }, []);
 
   const [currentUser, setCurrentUser] = useState(initialCurrentUser);
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    } else {
+      localStorage.removeItem("currentUser");
+    }
+  }, [currentUser]);
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>

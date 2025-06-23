@@ -21,6 +21,7 @@ function Admin() {
   const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
+    setIsChange(0);
     fetchData({
       role: currentUser ? `/${currentUser.role}` : "/guest",
       type: "users",
@@ -39,9 +40,9 @@ function Admin() {
       title: user.status ? "Block this user?" : "Unblock this user?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: user.status ? "#d33" : "#3085d6",
+      confirmButtonColor: user.status ? "#d33" : "#156299",
       cancelButtonColor: "#aaa",
-      confirmButtonText: user.status ? "Yes, block!" : "Yes, unblock!",
+      confirmButtonText: user.status ? "Yes" : "Yes",
     });
 
     if (!result.isConfirmed) return;
@@ -71,9 +72,9 @@ function Admin() {
       text: "This will grant administrative privileges to the user.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#156299",
       cancelButtonColor: "#aaa",
-      confirmButtonText: "Yes, make admin!",
+      confirmButtonText: "Yes",
       cancelButtonText: "Cancel",
     });
 
@@ -205,6 +206,71 @@ function Admin() {
           </div>
         </div>
       )}
+
+      <div className="mobile-cards-container">
+        {filteredUsers.map((user) => (
+          <div key={user.id} className="user-card">
+            <div className="user-card-header">
+              <div className="user-basic-info">
+                {user.profile_image ? (
+                  <img src={getImageUrl(user)} alt="Profile" className="admin-avatar" />
+                ) : (
+                  <div className="admin-avatar" style={{ backgroundColor: '#ddd', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#666' }}>
+                    {user.username.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <div className="user-details">
+                  <h3>{user.username}</h3>
+                  <p className="email">{user.email}</p>
+                  {user.phone && <p className="phone">{user.phone}</p>}
+                </div>
+              </div>
+              <div className={`user-status-badge ${user.status ? 'status-active' : 'status-blocked'}`}>
+                {user.status ? "Active" : "Blocked"}
+              </div>
+            </div>
+
+            <div className="user-meta-grid">
+              <div className="meta-item">
+                <span className="meta-label">ID</span>
+                <span className="meta-value">#{user.id}</span>
+              </div>
+              <div className="meta-item">
+                <span className="meta-label">Role</span>
+                <span className="meta-value">{user.role}</span>
+              </div>
+            </div>
+
+            {user.about && (
+              <div className="user-about">
+                {user.about.split(" ").slice(0, 15).join(" ")}
+                {user.about.split(" ").length > 15 ? "..." : ""}
+              </div>
+            )}
+
+            <div className="user-actions">
+              <button
+                onClick={() => navigate(`/${user.username}/profile`)}
+                className="card-btn btn-view"
+              >
+                View Profile
+              </button>
+              <button
+                onClick={() => handleBlockUser(user)}
+                className={`card-btn ${user.status ? "btn-block" : "btn-unblock"}`}
+              >
+                {user.status ? "Block User" : "Unblock User"}
+              </button>
+              <button
+                onClick={() => setUserAsAdminBtn(user)}
+                className="card-btn btn-admin"
+              >
+                Make Admin
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {modalData && (
         <Modal onClose={() => setModalData(null)}>

@@ -22,7 +22,16 @@ function NavBar() {
     if (isNewUser === "true") {
       showWelcome();
     }
+    const handleStartGuide = () => {
+      showWelcome();
+    };
+
+    window.addEventListener("startGuide", handleStartGuide);
+    return () => {
+      window.removeEventListener("startGuide", handleStartGuide);
+    };
   }, []);
+
 
   const showWelcome = async () => {
     const result = await Swal.fire({
@@ -30,7 +39,7 @@ function NavBar() {
       text: "This short guide will help you navigate the main menu.",
       icon: "info",
       confirmButtonText: "Let's start!",
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#156299",
     });
 
     if (result.isConfirmed) {
@@ -51,7 +60,7 @@ function NavBar() {
         title: 'Good luck!',
         text: 'We wish you great success. Hope you enjoy GitLink and find it helpful!',
         confirmButtonText: 'Thanks!',
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#156299',
       });
     }
   };
@@ -80,23 +89,23 @@ function NavBar() {
     },
     {
       target: ".nav-link.home-link",
-      content: "Go back to the homepage at any time.",
+      content: "Here you can go back to the homepage at any time.",
     },
     {
       target: ".nav-link.developers-link",
-      content: "Explore the developer community.",
+      content: "Here you can find the developer community.",
     },
     {
       target: ".nav-link.projects-link",
-      content: "View or share projects with others.",
+      content: "Here you can view or find other people's projects.",
     },
     {
       target: ".nav-link.recruiters-link",
-      content: "Recruiters area – manage opportunities.",
+      content: "This is the recruiters area – manage opportunities.",
     },
     {
       target: ".nav-link.jobs-link",
-      content: "Find job opportunities tailored to you.",
+      content: "Find job opportunities for you.",
     },
     ...(currentUser ? [{
       target: ".logout-btn",

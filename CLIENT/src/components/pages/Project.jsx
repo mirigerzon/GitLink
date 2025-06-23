@@ -26,7 +26,7 @@ function Project({ projectData, setIsChange }) {
         confirmButtonText: 'Login',
         showCancelButton: true,
         cancelButtonText: 'Cancel',
-        confirmButtonColor: '#221089',
+        confirmButtonColor: '#156299',
         cancelButtonColor: '#aaa',
       }).then(result => {
         if (result.isConfirmed) {
@@ -41,7 +41,7 @@ function Project({ projectData, setIsChange }) {
         title: 'No Rating Selected',
         text: 'Please select a rating before submitting.',
         confirmButtonText: 'OK',
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#156299',
       });
       return;
     }
@@ -60,7 +60,7 @@ function Project({ projectData, setIsChange }) {
           title: 'Success',
           text: res.message,
           confirmButtonText: 'OK',
-          confirmButtonColor: '#3085d6',
+          confirmButtonColor: '#156299',
         });
         setSelectedRating(0);
       },

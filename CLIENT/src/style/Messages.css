@@ -18,6 +18,16 @@
     animation: slideInRight 1s ease-out 0.3s both;
 }
 
+/* Mobile adjustments for new message alert */
+@media (max-width: 768px) {
+    .new-message-alert {
+        padding: 8px;
+        font-size: 0.9rem;
+        height: 8vh;
+        top: 12vh;
+    }
+}
+
 .icon {
     position: relative;
     flex-shrink: 0;
@@ -49,6 +59,15 @@
     left: -1.3vw;
 }
 
+/* Mobile adjustments for messages button */
+@media (max-width: 768px) {
+    .messages-btn {
+        font-size: 1.1rem;
+        width: 8vw;
+        left: -2vw;
+    }
+}
+
 .messages-icon-btn {
     background: none;
     border: none;
@@ -61,12 +80,28 @@
     color: #444;
 }
 
+/* Mobile adjustments for messages icon */
+@media (max-width: 768px) {
+    .messages-icon {
+        font-size: 1.3rem;
+    }
+}
+
 .messages-badge {
     position: absolute;
     top: -4px;
     right: -4px;
     color: red;
     font-size: 1.2rem;
+}
+
+/* Mobile adjustments for badge */
+@media (max-width: 768px) {
+    .messages-badge {
+        font-size: 1rem;
+        top: -2px;
+        right: -2px;
+    }
 }
 
 .messages-panel {
@@ -81,6 +116,19 @@
     border-radius: 10px;
     z-index: 1000;
     padding: 1rem;
+}
+
+/* Mobile adjustments for messages panel */
+@media (max-width: 768px) {
+    .messages-panel {
+        top: 10vh;
+        right: 5px;
+        left: 5px;
+        width: auto;
+        max-height: 85vh;
+        border-radius: 8px;
+        padding: 0.8rem;
+    }
 }
 
 .messages-header {
@@ -98,6 +146,16 @@
     box-shadow: 0 2px 0px rgba(0, 0, 0, 0.1);
 }
 
+/* Mobile adjustments for messages header */
+@media (max-width: 768px) {
+    .messages-header {
+        height: 6vh;
+        padding: 2vh 2vw 1vh 2vw;
+        width: auto;
+        margin-bottom: 8px;
+    }
+}
+
 .mark-read-btn {
     background-color: #eee;
     border: none;
@@ -105,6 +163,15 @@
     cursor: pointer;
     border-radius: 5px;
     font-size: 0.9rem;
+}
+
+/* Mobile adjustments for mark read button */
+@media (max-width: 768px) {
+    .mark-read-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        border-radius: 4px;
+    }
 }
 
 .messages-list {
@@ -118,6 +185,15 @@
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+/* Mobile adjustments for message items */
+@media (max-width: 768px) {
+    .message-item {
+        padding: 12px;
+        margin-bottom: 8px;
+        border-radius: 6px;
+    }
 }
 
 .message-item.unread {
@@ -142,6 +218,19 @@
     padding-right: 0;
 }
 
+/* Mobile adjustments for messages popup */
+@media (max-width: 768px) {
+    .messages-popup {
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        padding: 2vh 1vw;
+        border-left: none;
+        backdrop-filter: blur(5px);
+    }
+}
+
 .messages-content {
     background-color: #fafafa;
     height: 89.3vh;
@@ -150,9 +239,79 @@
     scrollbar-width: none;
 }
 
+/* Mobile adjustments for messages content */
+@media (max-width: 768px) {
+    .messages-content {
+        height: 88vh;
+        padding: 0 2vw 2vw 2vw;
+        border-radius: 8px;
+    }
+}
+
 .close-messages-btn {
     bottom: 3.5vh;
     right: 1vh;
     position: absolute;
     background-color: rgba(233, 236, 249, 0.66);
+}
+
+/* Mobile adjustments for close button */
+@media (max-width: 768px) {
+    .close-messages-btn {
+        bottom: 2vh;
+        right: 2vw;
+        padding: 12px 16px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+    .new-message-alert {
+        font-size: 0.8rem;
+        padding: 6px;
+        height: 7vh;
+    }
+    
+    .messages-btn {
+        font-size: 1rem;
+        width: 10vw;
+    }
+    
+    .messages-icon {
+        font-size: 1.2rem;
+    }
+    
+    .messages-badge {
+        font-size: 0.9rem;
+    }
+    
+    .messages-panel {
+        top: 8vh;
+        right: 2px;
+        left: 2px;
+        border-radius: 6px;
+    }
+    
+    .messages-header {
+        height: 5vh;
+        padding: 1.5vh 3vw 0.5vh 3vw;
+    }
+    
+    .mark-read-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .message-item {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .messages-content {
+        padding: 0 3vw 3vw 3vw;
+    }
 }

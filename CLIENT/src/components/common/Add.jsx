@@ -136,7 +136,6 @@ function Add({
                 cancelButtonText: 'Cancel',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // navigate('/login'); // uncomment if you have navigate
                     window.location.href = '/login';
                 }
             });

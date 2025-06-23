@@ -16,7 +16,7 @@ const getUsers = async () => {
 const getUser = async (username) => {
     try {
         const user = await usersModels.getUser(username);
-        return user;
+        return usersModels.getUserWithRoleData(user.id, `${user.role}s`)
     } catch (error) {
         console.error('Error fetching user:', error);
         throw new Error('Failed to fetch user');

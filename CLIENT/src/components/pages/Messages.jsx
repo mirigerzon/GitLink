@@ -50,7 +50,7 @@ const Messages = () => {
                                     <div className="message-actions">
                                         {!msg.is_read && (
                                             <button onClick={() => markMessageAsRead(msg.id)} className="mark-btn">
-                                                MARK
+                                                read
                                             </button>
                                         )}
                                         <button onClick={() => deleteMessage(msg.id)} className="delete-btn">

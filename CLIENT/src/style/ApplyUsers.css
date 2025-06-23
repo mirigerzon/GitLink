@@ -196,23 +196,23 @@
 }
 
 .handleButton {
-  background-color: #e0f7fa;
-  color: #007b8f;
+  background-color: #ccd8dc;
+  color: #221089;
 }
 
 .rejectButton {
-  background-color: #fdecea;
-  color: #b02a37;
+  background-color: #ccd8dc;
+  color: #221089;
 }
 
 .pendingButton {
-  background-color: #fcf3d8;
-  color: #ffc107;
+  background-color: #ccd8dc;
+  color: #221089;
 }
 
 .emailButton {
-  background-color: #e2e3f3;
-  color: #3e3f8d;
+  background-color: #ccd8dc;
+  color: #221089;
 }
 
 .cvButton {

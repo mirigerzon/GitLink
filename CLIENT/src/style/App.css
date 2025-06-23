@@ -13,3 +13,11 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 600px) {
+    .controllers-section {
+        gap: 2vw;
+        padding: 10px;
+        flex-direction: column;
+    }
+}

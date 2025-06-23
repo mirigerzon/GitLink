@@ -57,7 +57,7 @@
 
 .mic-button {
   position: absolute;
-  right: 0.5vw; 
+  right: 0.5vw;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -82,13 +82,25 @@
   outline-offset: 2px;
 }
 
-/* Responsive Design */
-@media (max-width: 480px) {
+/* ✅ Responsive Design */
+@media (max-width: 600px) {
   .search-input-wrapper {
     max-width: 100%;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .search-input {
+    width: 100%;
+    padding: 1.2em 3em 1.2em 1em;
+    font-size: 0.7rem;
+  }
+
+  .mic-button,
+  .clear-button {
+    width: 24px;
+    height: 24px;
     font-size: 16px;
+    right: 10px;
   }
 }

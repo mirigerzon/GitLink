@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1vw;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .filter-group {
@@ -60,35 +61,41 @@
   border-color: #adb5bd;
 }
 
+/* ✅ Responsive Design */
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .filter-container {
     flex-direction: column;
     gap: 10px;
+    padding: 10px;
   }
 
   .filter-group {
     min-width: 100%;
   }
+
+  .filter-group select {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .filter-group input {
+    width: 100%;
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .filter-container {
-    padding: 10px;
-  }
-
   .filter-group select {
-    font-size: 16px;
-    /* Prevents zoom on iOS */
+    font-size: 0.6rem; 
+  }
+
+  .filter-group input {
+    font-size: 0.6rempx;
   }
 }
 
-/* Animation for smooth transitions */
-.filter-container {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
+/* 🔄 Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;

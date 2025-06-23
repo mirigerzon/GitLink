@@ -1,9 +1,28 @@
 .delete-btn{
-    width: 5vw;
-    height: 7vh;
-    background-color: rgb(254, 203, 203);
-    border: none;
+  border: none;
+  height: 5vh;
+  width: 5vw;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #ccd8dc;
 }
 .delete-btn:hover{
     border: none;
+}
+
+@media (max-width: 768px) {
+    .delete-btn {
+        width: 80px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .delete-btn {
+        width: 70px;
+        height: 30px;
+    }
 }

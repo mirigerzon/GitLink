@@ -225,6 +225,7 @@ export const useAuth = () => {
                         resetRegistrationForm();
                         navigate(getRedirectPath(enhancedUser));
                         localStorage.setItem("isNewUser", "true");
+                        window.dispatchEvent(new Event("startGuide"));
                     } else {
                         setMessage(MESSAGES.REGISTER_ERROR);
                     }
