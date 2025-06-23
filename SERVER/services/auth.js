@@ -1,5 +1,5 @@
-const generic = require('../models/generic.js');
-const userModel = require('../models/users.js')
+const generic = require('../repositories/generic.js');
+const userRepository = require('../repositories/users.js')
 const bcrypt = require('bcrypt');
 const { sendWelcomeEmail, sendPasswordResetEmail } = require('./emailService.js');
 const { generateUsername } = require('unique-username-generator');
@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const login = async (username, password) => {
     try {
-        const users = await userModel.getUser(username);
+        const users = await userRepository.getUser(username);
         if (!users) {
             throw new Error("Invalid credentials");
         }
@@ -78,7 +78,7 @@ const refreshToken = async (refreshTokenFromCookie, ip) => {
 
     try {
         const decoded = jwt.verify(refreshTokenFromCookie, process.env.REFRESH_SECRET);
-        const user = await userModel.getUser(decoded.username);
+        const user = await userRepository.getUser(decoded.username);
         if (!user) {
             const err = new Error('User not found');
             err.status = 403;
@@ -116,7 +116,7 @@ const checkUsername = async (username) => {
 
 const forgotPassword = async (username) => {
     try {
-        const user = await userModel.getUser(username);
+        const user = await userRepository.getUser(username);
         if (!user) {
             throw new Error("User not found");
         }
@@ -158,7 +158,7 @@ const generateRandomPassword = (length = 12) => {
 
 const isUsernameAvailable = async (username) => {
     try {
-        const user = await userModel.getUser(username);
+        const user = await userRepository.getUser(username);
         return user ? true : false;
     } catch (error) {
         console.error('Error checking username availability:', error);
@@ -168,7 +168,7 @@ const isUsernameAvailable = async (username) => {
 
 const getUserCV = async (username) => {
     try {
-        const user = await userModel.getUser(username);
+        const user = await userRepository.getUser(username);
         return user.cv_file;
     } catch (error) {
         console.error('Error fetching user:', error);

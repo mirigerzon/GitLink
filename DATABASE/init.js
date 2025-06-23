@@ -23,10 +23,10 @@ async function seedUsers(db) {
     INSERT INTO users (username, email, phone, role_id, about, profile_image, cv_file, status)
     VALUES
       ('admin', 'admin@example.com', 1234567890, 3, 'System administrator', 'profile_images/user.png', '', TRUE),
-      ('miri', 'a058328653@gmail.com', 583286530, 1, 'Full-stack developer passionate about scalable web apps.', 'https://github.com/mirigerzon.png', 'cv_files/mirigerzon-cv.pdf', TRUE),
-      ('sara', 'sara328062@gmail.com', 583280624, 1, 'Frontend developer who loves turning designs into reality.', 'https://github.com/sara6310472.png', 'cv_files/sara6310472-cv.pdf', TRUE),
-      ('miric', 'miricitron70@gmail.com', 583258704, 1, 'Junior developer eager to build impactful applications.', 'https://github.com/Miri0442.png', 'cv_files/Miri0442-cv.pdf', TRUE),
-      ('michal', 'm058321652@gmail.com', 583216525, 1, 'Backend developer with a love for APIs and databases.', 'https://github.com/michalMenda.png', 'cv_files/michalMenda-cv.pdf', TRUE),
+      ('miri', 'a0583286530@gmail.com', 583286530, 1, 'Full-stack developer passionate about scalable web apps.', 'https://github.com/mirigerzon.png', 'cv_files/mirigerzon-cv.pdf', TRUE),
+      ('sara', 'sara3280624@gmail.com', 583280624, 1, 'Frontend developer who loves turning designs into reality.', 'https://github.com/sara6310472.png', 'cv_files/sara6310472-cv.pdf', TRUE),
+      ('miric', 'miricitron704@gmail.com', 583258704, 1, 'Junior developer eager to build impactful applications.', 'https://github.com/Miri0442.png', 'cv_files/Miri0442-cv.pdf', TRUE),
+      ('michal', 'm0583216525@gmail.com', 583216525, 1, 'Backend developer with a love for APIs and databases.', 'https://github.com/michalMenda.png', 'cv_files/michalMenda-cv.pdf', TRUE),
       ('SmartHireHR', 'hr1@smarthire.com', 1234567891, 2, 'Recruiter at SmartHire Ltd', 'profile_images/user.png', '', TRUE),
       ('TechBloomHR', 'hr2@techbloom.com', 1234567892, 2, 'Recruiter at TechBloom', 'profile_images/user.png', '', TRUE),
       ('DevSparkHR', 'hr3@devspark.com', 1234567893, 2, 'Recruiter at DevSpark', 'profile_images/user.png', '', TRUE),

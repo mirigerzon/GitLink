@@ -37,16 +37,17 @@ function Job({ jobData, setIsChange }) {
       type: "job_applications",
       body: { user_id: currentUser.id, job_id: jobData.id, email: currentUser.email },
       onSuccess: () => {
-        // setCurrentUser(prevUser => ({
-        //   ...prevUser,
-        //   initiatedAction: true
-        // }));
+        Swal.fire({
+          title: 'Success',
+          text: 'Your application has been submitted successfully.',
+          icon: 'success',
+        });
       },
       onError: (err) => {
         console.error(`Failed to fetch developers: ${err}`);
         Swal.fire({
           title: 'Action failed',
-          text: typeof err === 'string' ? err : 'You might have already rated or registered.',
+          text: typeof err === 'string' ? err : 'You might have already applied or an error occurred.',
           icon: 'error',
         });
       },

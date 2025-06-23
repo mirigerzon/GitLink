@@ -1,8 +1,8 @@
-const usersModels = require('../models/users.js');
+const usersRepositories = require('../repositories/users.js');
 
 const getRecruiters = async () => {
     try {
-        const res = await usersModels.getUsersByRole('recruiter');
+        const res = await usersRepositories.getUsersByRole('recruiter');
         return res || null;
     } catch (error) {
         console.error('Error fetching recruiters:', error);
@@ -12,7 +12,7 @@ const getRecruiters = async () => {
 
 const getRecruiter = async (id) => {
     try {
-        const res = await usersModels.getUserWithRoleData(id, 'recruiter');
+        const res = await usersRepositories.getUserWithRoleData(id, 'recruiter');
         return res || null;
     } catch (error) {
         console.error('Error fetching recruiter:', error);

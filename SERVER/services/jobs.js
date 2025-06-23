@@ -1,7 +1,7 @@
-const jobsModel = require('../models/jobs');
+const jobsRepository = require('../repositories/jobs');
 
 const getJobsWithApplicantsCount = async () => {
-    return await jobsModel.getJobsWithApplicantsCount();
+    return await jobsRepository.getJobsWithApplicantsCount();
 };
 
 module.exports = {

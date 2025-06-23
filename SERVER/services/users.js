@@ -1,11 +1,11 @@
-const generic = require('../models/generic.js');
-const usersModels = require('../models/users.js');
+const generic = require('../repositories/generic.js');
+const usersRepositories = require('../repositories/users.js');
 const bcrypt = require('bcrypt');
 const { sendPasswordChangeWarningEmail } = require('../services/emailService.js');
 
 const getUsers = async () => {
     try {
-        const users = await usersModels.getUsers();
+        const users = await usersRepositories.getUsers();
         return users?.length > 0 ? users : null;
     } catch (error) {
         console.error('Error fetching users:', error);
@@ -15,8 +15,9 @@ const getUsers = async () => {
 
 const getUser = async (username) => {
     try {
-        const user = await usersModels.getUser(username);
-        return usersModels.getUserWithRoleData(user.id, `${user.role}s`)
+        const user = await usersRepositories.getUser(username);
+        if (user.role == 'admin') return user;
+        return usersRepositories.getUserWithRoleData(user.id, `${user.role}s`)
     } catch (error) {
         console.error('Error fetching user:', error);
         throw new Error('Failed to fetch user');
@@ -36,7 +37,7 @@ const updateUserStatus = async (table, body, conditions) => {
                 : `Your account has been reactivated...`
         };
 
-        await usersModels.updateAndInformUser(table, data, conditions, messageData);
+        await usersRepositories.updateAndInformUser(table, data, conditions, messageData);
     } catch (error) {
         console.error('Error updating user status:', error);
         throw new Error('Failed to update user status');

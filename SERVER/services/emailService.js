@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const messagesModel = require('../models/messages')
+const messagesRepository = require('../repositories/messages')
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async ({ user_id, email, title, content, dbContent, saveOnly = true }) => {
-    await messagesModel.createMessage({
+    await messagesRepository.createMessage({
         user_id,
         email,
         title,
@@ -111,4 +111,21 @@ const sendPasswordChangeWarningEmail = async (userId, email) => {
     });
 };
 
-module.exports = { sendEmail, sendWelcomeEmail, sendPasswordResetEmail, sendPasswordChangeWarningEmail };
+const sendApplicatEmail = (job_id) => {
+    return (
+        `
+        <div style="font-family: Arial, sans-serif;">
+            <h2>Application Received</h2>
+            <p>We have received your application for job #${job_id}. Our team will review it shortly.</p>
+            <p>Thank you for applying!</p>
+        </div>
+        `
+    )
+}
+module.exports = {
+    sendEmail,
+    sendWelcomeEmail,
+    sendPasswordResetEmail,
+    sendPasswordChangeWarningEmail,
+    sendApplicatEmail
+};

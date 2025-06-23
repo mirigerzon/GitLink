@@ -1,4 +1,4 @@
-const pool = require("../models/mysqlPool");
+const pool = require("../repositories/mysqlPool");
 
 const getJobsWithApplicantsCount = async () => {
     const sql = `

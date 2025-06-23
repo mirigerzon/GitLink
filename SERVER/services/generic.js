@@ -1,4 +1,4 @@
-const generic = require('../models/generic');
+const generic = require('../repositories/generic');
 
 const getItemByConditions = async (table, conditions = []) => {
   try {

@@ -1,5 +1,5 @@
 const { GET_WITH_JOINS } = require("./generic");
-const usersModel = require("./users");
+const usersRepository = require("./users");
 
 const getApplications = async (job_id) => {
     if (!job_id) throw new Error('Job ID is required');
@@ -16,7 +16,7 @@ const getApplications = async (job_id) => {
 };
 
 const rejectApplicant = async (job_id, developerId, messageData) => {
-    return await usersModel.updateAndInformUser(
+    return await usersRepository.updateAndInformUser(
         'job_applications',
         { is_treated: 'rejected' },
         [

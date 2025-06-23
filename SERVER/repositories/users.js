@@ -1,5 +1,5 @@
 const { GET_WITH_JOINS } = require("./generic");
-const pool = require('../models/mysqlPool');
+const pool = require('./mysqlPool');
 
 const getUsers = async () => {
     return await GET_WITH_JOINS(
@@ -28,7 +28,6 @@ const getUser = async (username) => {
 
 const getUserWithRoleData = async (userId, roleTable) => {
     if (!userId) throw new Error('User ID is required');
-
     const users = await GET_WITH_JOINS(
         ["users", roleTable, "passwords", "roles"],
         [

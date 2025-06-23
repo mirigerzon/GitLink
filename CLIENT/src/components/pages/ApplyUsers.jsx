@@ -64,9 +64,10 @@ function ApplyUsers() {
         try {
             await fetchData({
                 role: currentUser ? `/${currentUser.role}` : "/guest",
-                type: `job_applications/notify`,
+                type: `job_applications/${id}`,
                 method: 'PUT',
                 body: {
+                    action: 'notify',
                     user_id: selectedApplicant.id,
                     email: selectedApplicant.email,
                     title: emailSubject,
@@ -210,9 +211,13 @@ function ApplyUsers() {
         try {
             await fetchData({
                 role: currentUser ? `/${currentUser.role}` : "/guest",
-                type: `job_applications/reject/${id}`,
+                type: `job_applications/${id}`,
                 method: 'put',
-                body: { developerEmail: applicant.email, developerId: applicant.id },
+                body: {
+                    action: 'reject',
+                    developerEmail: applicant.email,
+                    developerId: applicant.id
+                },
                 onSuccess: (result) => {
                     setIsChange(1);
                 },

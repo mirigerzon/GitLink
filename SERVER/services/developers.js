@@ -1,8 +1,8 @@
-const usersModel = require('../models/users.js');
+const usersRepository = require('../repositories/users.js');
 
 const getDevelopers = async () => {
     try {
-        const res = await usersModel.getUsersByRole('developer');
+        const res = await usersRepository.getUsersByRole('developer');
         return res || null;
     } catch (error) {
         console.error('Error fetching developers:', error);
@@ -12,7 +12,7 @@ const getDevelopers = async () => {
 
 const getDeveloper = async (id) => {
     try {
-        const res = await usersModel.getUserWithRoleData(id, 'developer');
+        const res = await usersRepository.getUserWithRoleData(id, 'developer');
         return res || null;
     } catch (error) {
         console.error('Error fetching developer:', error);

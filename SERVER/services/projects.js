@@ -1,11 +1,11 @@
-const projectsModel = require('../models/projects');
-const generic = require('../models/generic')
+const projectsRepository = require('../repositories/projects');
+const generic = require('../repositories/generic')
 
 const rateProject = async (username, projectId, rating) => {
     try {
-        await projectsModel.rateProjectTransactional(username, projectId, rating);
+        await projectsRepository.rateProjectTransactional(username, projectId, rating);
 
-        const projectWithUser = await projectsModel.getProjectWithCreator(projectId);
+        const projectWithUser = await projectsRepository.getProjectWithCreator(projectId);
         if (!projectWithUser?.length) {
             throw new Error("Project or creator not found.");
         }

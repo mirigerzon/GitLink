@@ -40,18 +40,18 @@ router.delete('/:itemId', asyncHandler(async (req, res) => {
 }));
 
 // Generic PUT route for updating job applications
-router.put('/:job_application_id', asyncHandler(async (req, res) => {
+router.put('/:job_id', asyncHandler(async (req, res) => {
     const { action, ...data } = req.body;
 
     switch (action) {
         case 'notify':
             const notifyResult = await jobApplicationsService.notifyApplicant(data);
-            writeLog(`Sent notification for application id=${req.params.job_application_id}`, 'info');
+            writeLog(`Sent notification for application id=${req.params.job_id}`, 'info');
             return res.json({ message: 'Email sent successfully', result: notifyResult });
 
         case 'reject':
-            const rejectResult = await jobApplicationsService.rejectApplicant(data, Number(req.params.job_application_id));
-            writeLog(`Rejected application id=${req.params.job_application_id}`, 'info');
+            const rejectResult = await jobApplicationsService.rejectApplicant(data, Number(req.params.job_id));
+            writeLog(`Rejected application id=${req.params.job_id}`, 'info');
             return res.json({ message: 'Application rejected successfully', result: rejectResult });
 
         case 'update':
@@ -61,11 +61,11 @@ router.put('/:job_application_id', asyncHandler(async (req, res) => {
                 RESOURCE_NAME,
                 body,
                 [
-                    { field: 'job_id', value: Number(req.params.job_application_id) },
+                    { field: 'job_id', value: Number(req.params.job_id) },
                     { field: 'user_id', value: user_id }
                 ]
             );
-            writeLog(`Updated application id=${req.params.job_application_id}`, 'info');
+            writeLog(`Updated application id=${req.params.job_id}`, 'info');
             return res.json({ message: 'Application updated successfully', result: updateResult });
     }
 }));

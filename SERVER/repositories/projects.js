@@ -1,5 +1,5 @@
 const { GET_WITH_JOINS } = require("./generic");
-const pool = require("../models/mysqlPool");
+const pool = require("./mysqlPool");
 
 const getProjectWithCreator = async (projectId) => {
     if (!projectId) throw new Error('Project ID is required');
