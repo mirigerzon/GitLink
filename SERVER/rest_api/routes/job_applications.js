@@ -98,13 +98,6 @@ router.put('/:job_id', asyncHandler(async (req, res) => {
         throw error;
     }
 
-    if (!action) {
-        writeLog(`Job application update failed - no action specified for job: ${job_id} from IP: ${req.ip}`, 'warn');
-        const error = new Error('Action is required');
-        error.status = 400;
-        throw error;
-    }
-
     writeLog(`Processing job application action: ${action} for job: ${job_id} by user: ${req.user?.username} from IP: ${req.ip}`, 'info');
 
     try {

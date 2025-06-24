@@ -77,7 +77,7 @@
 
 .applicantsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -257,4 +257,123 @@ button:disabled {
   background-color: #f1f3f5;
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+  
+  .applicantsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .header {
+    padding: 15px 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+  
+  .title {
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  .jobActions {
+    justify-content: center;
+  }
+  
+  .applicantCard {
+    padding: 15px;
+  }
+  
+  .cardHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+  
+  .profileSection {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .profileImage {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .username {
+    font-size: 16px;
+  }
+  
+  .statusBadge {
+    align-self: center;
+  }
+  
+  .actionRow {
+    justify-content: center;
+  }
+  
+  .smallButton {
+    flex: 1;
+    min-width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .header {
+    padding: 12px 15px;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .applicantCard {
+    padding: 12px;
+  }
+  
+  .profileImage {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .actionRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .smallButton {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .skillsSection {
+    justify-content: center;
+  }
+  
+  .contactInfo {
+    text-align: center;
+    font-size: 13px;
+  }
 }
