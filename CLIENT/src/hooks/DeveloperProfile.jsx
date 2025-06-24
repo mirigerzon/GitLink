@@ -67,7 +67,6 @@ function DeveloperProfile({
                                                     git_name: userData.git_name,
                                                     username: userData.username,
                                                     name: repo.name,
-                                                    forks_count: repo.forks_count,
                                                     url: repo.html_url,
                                                     languages: repo.language || "",
                                                     details: repo.description || ""

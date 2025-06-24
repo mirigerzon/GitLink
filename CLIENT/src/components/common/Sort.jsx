@@ -43,16 +43,6 @@ function Sort({ setUserData, originalData, currentConfig }) {
         }
       }
 
-      if (field === "forks_count") {
-        const forks = Number(fieldValue);
-        switch (value) {
-          case "high": return forks >= 50;
-          case "medium": return forks >= 10 && forks < 50;
-          case "low": return forks < 10;
-          default: return true;
-        }
-      }
-
       return fieldValue &&
         fieldValue.toString().toLowerCase().includes(value.toLowerCase());
     });

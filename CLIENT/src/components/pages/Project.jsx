@@ -104,12 +104,6 @@ function Project({ projectData, setIsChange }) {
             <span className="stat-value">{projectData.rating}</span>
             <span className="stat-label"><FiStar /> Rating</span>
           </div>
-          <div className="stat">
-            <span className="stat-value">{projectData.forks_count}</span>
-            <span className="stat-label">
-              <FiGitBranch /> Forks
-            </span>
-          </div>
         </div>
       </div>
 
@@ -147,7 +141,7 @@ function Project({ projectData, setIsChange }) {
               setIsChange={setIsChange}
               inputs={["name", "url", "languages", "details"]}
               role={`/${currentUser.role}`}
-              initialData={projectData} 
+              initialData={projectData}
             />
             <Delete
               className="delete_btn"

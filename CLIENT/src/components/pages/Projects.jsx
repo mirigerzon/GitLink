@@ -41,44 +41,32 @@ function Projects() {
   return (
     <div className="projects-container">
       <h1>Projects community</h1>
-      {!id && (
-        <div className="controllers-section">
-          <Search
-            data={projects}
-            setFilteredData={setFilteredProjects}
-            searchFields={["git_name", "details", "name", "languages"]}
-            placeholder="Search by project name, GitHub name, details, or programming languages..."
-          />
-          <Sort
-            setUserData={setFilteredProjects}
-            originalData={projects}
-            currentConfig={[
-              {
-                label: "Filter by Rating:",
-                field: "rating",
-                options: [
-                  { value: "all", label: "All Ratings" },
-                  { value: "high", label: "High (4-5)" },
-                  { value: "medium", label: "Medium (2-3)" },
-                  { value: "low", label: "Low (0-1)" }
-                ]
-              },
-              {
-                label: "Filter by Forks:",
-                field: "forks_count",
-                options: [
-                  { value: "all", label: "All forks" },
-                  { value: "high", label: "High (50+)" },
-                  { value: "medium", label: "Medium (10-49)" },
-                  { value: "low", label: "Low (0-9)" }
-                ]
-              }
-            ]}
-          />
-          {ownProjects && username == null && <button onClick={() => navigate(`/${currentUser.username}/projects`)}>My Project</button>}
-          {ownProjects && username && <button onClick={() => navigate(`/projects`)}>All Project</button>}
-        </div>
-      )}
+      <div className="controllers-section">
+        <Search
+          data={projects}
+          setFilteredData={setFilteredProjects}
+          searchFields={["git_name", "details", "name", "languages"]}
+          placeholder="Search by project name, GitHub name, details, or programming languages..."
+        />
+        <Sort
+          setUserData={setFilteredProjects}
+          originalData={projects}
+          currentConfig={[
+            {
+              label: "Filter by Rating:",
+              field: "rating",
+              options: [
+                { value: "all", label: "All Ratings" },
+                { value: "high", label: "High (4-5)" },
+                { value: "medium", label: "Medium (2-3)" },
+                { value: "low", label: "Low (0-1)" }
+              ]
+            }
+          ]}
+        />
+        {ownProjects && username == null && <button onClick={() => navigate(`/${currentUser.username}/projects`)}>My Project</button>}
+        {ownProjects && username && <button onClick={() => navigate(`/projects`)}>All Project</button>}
+      </div>
 
       <div className="projects-grid">
         {filteredProjects.length > 0 ? filteredProjects.map((project) => (
