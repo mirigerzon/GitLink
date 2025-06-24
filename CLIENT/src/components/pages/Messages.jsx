@@ -43,7 +43,7 @@ const Messages = () => {
                     }}
                 >
                     <p>
-                        <FaBell style={{ color: '#221089', marginRight: '8px' }} />
+                        <FaBell className={'bell-icon'} />
                         You have a new message
                     </p>
                 </div>
@@ -53,10 +53,9 @@ const Messages = () => {
                 <div className="messages-popup" ref={messagesRef}>
                     <div className="messages-content">
                         <div className="messages-header">
-                            <h4>Messages</h4>
                             <button onClick={markAllAsRead} className="mark-read-btn">
                                 <MdMarkEmailRead />
-                                all read
+                                mark all as read
                             </button>
                             <button className="close-btn" onClick={() => setOpen(false)}>
                                 <FaTimes />
@@ -73,7 +72,6 @@ const Messages = () => {
                                     {!msg.is_read && (
                                         <div
                                             className="unread-indicator"
-                                            style={{ backgroundColor: '#221089' }}
                                         ></div>
                                     )}
 
