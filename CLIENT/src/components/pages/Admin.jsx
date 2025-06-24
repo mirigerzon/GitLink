@@ -125,7 +125,7 @@ function Admin() {
     if (user.profile_image.startsWith('https://github.com/')) {
       return user.profile_image;
     }
-    return `http://localhost:3001/uploads/${user.profile_image}`;
+    return `https://gitlink-cbqq.onrender.com/uploads/${user.profile_image}`;
   };
 
   return (

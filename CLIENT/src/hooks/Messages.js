@@ -4,7 +4,7 @@ import { useCurrentUser } from "../context.jsx";
 import { io } from "socket.io-client";
 import useSound from "use-sound";
 
-const SOCKET_URL = "http://localhost:3001";
+const SOCKET_URL = "https://gitlink-cbqq.onrender.com";
 
 export const useMessages = () => {
     const [messages, setMessages] = useState([]);

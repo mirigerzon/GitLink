@@ -24,7 +24,7 @@ function Developer({ developerData }) {
     if (developerData.profile_image.startsWith('https://github.com/')) {
       return developerData.profile_image;
     }
-    return `http://localhost:3001/uploads/${developerData.profile_image}`;
+    return `https://gitlink-cbqq.onrender.com/uploads/${developerData.profile_image}`;
   };
 
   const getExperienceLevel = (years) => {

@@ -65,12 +65,12 @@ function Profile() {
     if (userData.profile_image.startsWith('https://github.com/')) {
       return userData.profile_image;
     }
-    return `http://localhost:3001/uploads/${userData.profile_image}`;
+    return `https://gitlink-cbqq.onrender.com/uploads/${userData.profile_image}`;
   };
 
   const getCVUrl = () => {
     if (!userData?.cv_file) return null;
-    return `http://localhost:3001/uploads/${userData.cv_file}`;
+    return `https://gitlink-cbqq.onrender.com/uploads/${userData.cv_file}`;
   };
 
   const handleViewCV = () => {
@@ -82,7 +82,7 @@ function Profile() {
 
   const handleDownloadCV = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/cv/${userData.username}`, {
+      const response = await fetch(`https://gitlink-cbqq.onrender.com/cv/${userData.username}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`

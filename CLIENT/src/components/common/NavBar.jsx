@@ -69,7 +69,7 @@ function NavBar() {
     if (currentUser.profile_image.startsWith('https://github.com/')) {
       return currentUser.profile_image;
     }
-    return `http://localhost:3001/uploads/${currentUser.profile_image}`;
+    return `https://gitlink-cbqq.onrender.com/uploads/${currentUser.profile_image}`;
   };
 
   const toggleMobileMenu = () => {

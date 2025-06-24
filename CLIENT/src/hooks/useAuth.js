@@ -75,7 +75,7 @@ export const useAuth = () => {
         setUsernameStatus('checking');
 
         try {
-            const response = await fetch(`http://localhost:3001/check-username/${username}`);
+            const response = await fetch(`https://gitlink-cbqq.onrender.com/check-username/${username}`);
             const data = await response.json();
 
             if (data.available) {

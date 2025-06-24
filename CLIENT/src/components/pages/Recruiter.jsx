@@ -10,9 +10,9 @@ function Recruiter({ recruiterData }) {
     if (recruiterData.profile_image.startsWith('https://github.com/')) {
       return recruiterData.profile_image;
     }
-    return `http://localhost:3001/uploads/${recruiterData.profile_image}`;
+    return `https://gitlink-cbqq.onrender.com/uploads/${recruiterData.profile_image}`;
   };
-  
+
   return (
     <div className="recruiter-card">
       <div className="recruiter-header">
