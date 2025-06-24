@@ -1,16 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCurrentUser } from "../../context.jsx";
 import { useMessages } from "../../hooks/Messages";
 import useSound from 'use-sound';
 import { BsChatDots } from "react-icons/bs";
+import { FaTrash, FaCheck, FaTimes, FaBell } from "react-icons/fa";
+import { MdMarkEmailRead } from "react-icons/md";
 import '../../style/Messages.css';
+import Delete from '../common/Delete.jsx'
 
 const Messages = () => {
     const { currentUser } = useCurrentUser();
-    const { messages, hasUnread, markAllAsRead, markMessageAsRead, deleteMessage } = useMessages();
+    const { messages, hasUnread, markAllAsRead, markMessageAsRead, setIsChange } = useMessages();
     const [open, setOpen] = useState(false);
     const [newMessageAlert, setNewMessageAlert] = useState(false);
     const [play] = useSound('/sounds/notification.mp3');
+    const messagesRef = useRef(null);
 
     const toggleOpen = () => setOpen(prev => !prev);
 
@@ -19,7 +23,7 @@ const Messages = () => {
             setNewMessageAlert(true);
             play();
         }
-    }, [currentUser?.initiatedAction]);
+    }, [currentUser?.initiatedAction, play]);
 
     return (
         <>
@@ -29,38 +33,75 @@ const Messages = () => {
                     {hasUnread && <span className="new-messages"></span>}
                 </button>
             </div>
+
             {newMessageAlert && hasUnread && !open && (
-                <div className="new-message-alert" onClick={() => { setNewMessageAlert(false); setOpen(true); }}>
-                    <p>🔵 You have a new message</p>
+                <div
+                    className="new-message-alert"
+                    onClick={() => {
+                        setNewMessageAlert(false);
+                        setOpen(true);
+                    }}
+                >
+                    <p>
+                        <FaBell style={{ color: '#221089', marginRight: '8px' }} />
+                        You have a new message
+                    </p>
                 </div>
             )}
+
             {open && (
-                <div className="messages-popup">
+                <div className="messages-popup" ref={messagesRef}>
                     <div className="messages-content">
                         <div className="messages-header">
                             <h4>Messages</h4>
-                            <button onClick={markAllAsRead} className="mark-read-btn">Mark all as read</button>
+                            <button onClick={markAllAsRead} className="mark-read-btn">
+                                <MdMarkEmailRead />
+                                all read
+                            </button>
+                            <button className="close-btn" onClick={() => setOpen(false)}>
+                                <FaTimes />
+                            </button>
                         </div>
+
                         <ul className="messages-list">
                             {messages.slice().reverse().map(msg => (
-                                <li key={msg.id} className={`message-item ${msg.is_read ? '' : 'unread'}`}>
+                                <li
+                                    key={msg.id}
+                                    className={`message-item ${msg.is_read ? 'read' : 'unread'}`}
+                                    style={!msg.is_read ? { '--unread-color': '#221089' } : {}}
+                                >
+                                    {!msg.is_read && (
+                                        <div
+                                            className="unread-indicator"
+                                            style={{ backgroundColor: '#221089' }}
+                                        ></div>
+                                    )}
+
                                     <strong>{msg.title}</strong>
                                     <p>date: {msg.created_at}</p>
                                     <p>{msg.content}</p>
+
                                     <div className="message-actions">
+                                        <Delete
+                                            className="action-btn delete-btn"
+                                            type="messages"
+                                            itemId={msg.id}
+                                            setIsChange={setIsChange}
+                                            role={currentUser ? `/${currentUser.role}` : null}
+                                        />
                                         {!msg.is_read && (
-                                            <button onClick={() => markMessageAsRead(msg.id)} className="mark-btn">
-                                                read
+                                            <button
+                                                onClick={() => markMessageAsRead(msg.id)}
+                                                className="action-btn mark-btn"
+                                                title="Mark as read"
+                                            >
+                                                <FaCheck />
                                             </button>
                                         )}
-                                        <button onClick={() => deleteMessage(msg.id)} className="delete-btn">
-                                            delete
-                                        </button>
                                     </div>
                                 </li>
                             ))}
                         </ul>
-                        <button className="close-messages-btn" onClick={() => setOpen(false)}>Close</button>
                     </div>
                 </div>
             )}

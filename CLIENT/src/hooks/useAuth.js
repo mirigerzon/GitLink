@@ -83,10 +83,7 @@ export const useAuth = () => {
                 setSuggestedUsernames([]);
             } else {
                 setUsernameStatus('taken');
-                const suggestions = Object.keys(data)
-                    .filter(key => !isNaN(key))
-                    .map(key => data[key]);
-                setSuggestedUsernames(suggestions);
+                setSuggestedUsernames(data.suggestions);
             }
         } catch (error) {
             console.error('Error checking username:', error);

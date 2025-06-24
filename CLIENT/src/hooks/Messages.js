@@ -137,5 +137,6 @@ export const useMessages = () => {
         isVisible,
         setIsVisible,
         deleteMessage,
+        setIsChange
     };
 };
