@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFetchData } from "../../hooks/fetchData.js";
 import { useLogout } from "../../hooks/LogOut.js";
 import { FiTrash, FiLoader } from "react-icons/fi";
+import Swal from "sweetalert2";
 import Modal from "../common/Modal.jsx";
 import '../../style/Delete.css';
 
@@ -32,28 +33,53 @@ function Delete({ type, itemId, setIsChange, role = null, confirmMessage = null 
         method: "DELETE",
         role: role,
         onSuccess: (result) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Deleted!',
+            text: `${type} has been deleted.`
+          });
           setIsChange(prev => prev + 1);
         },
         onError: (error) => {
           console.error(`Failed to delete ${type} with ID ${itemId}:`, error);
 
           if (error.status === 401) {
-            alert("Authentication failed. Please log in again.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Unauthorized',
+              text: 'Authentication failed. Please log in again.'
+            });
             logOut();
           } else if (error.status === 403) {
-            alert("You don't have permission to delete this item.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Forbidden',
+              text: "You don't have permission to delete this item."
+            });
           } else if (error.status === 404) {
-            alert("Item not found. It may have already been deleted.");
+            Swal.fire({
+              icon: 'warning',
+              title: 'Not Found',
+              text: 'Item not found. It may have already been deleted.'
+            });
             setIsChange(prev => prev + 1); // Refresh the list
           } else {
-            alert("Failed to delete the item. Please try again.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Failed to delete the item. Please try again.'
+            });
           }
         },
         logOut,
       });
     } catch (error) {
       console.error("Unexpected error:", error);
-      alert("An unexpected error occurred. Please try again.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Unexpected Error',
+        text: 'An unexpected error occurred. Please try again.'
+      });
     } finally {
       setIsDeleting(false);
     }

@@ -177,13 +177,6 @@ router.put('/status/:username', asyncHandler(async (req, res) => {
             [{ field: 'username', value: username }]
         );
 
-        if (!result) {
-            writeLog(`User not found for status update - username: ${username} from IP: ${req.ip}`, 'warn');
-            const error = new Error('User not found');
-            error.status = 404;
-            throw error;
-        }
-
         writeLog(`User status updated successfully for username: ${username} by user: ${req.user?.username} from IP: ${req.ip}`, 'info');
         res.json({
             message: 'User status updated successfully',

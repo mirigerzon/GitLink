@@ -5,7 +5,6 @@ const ALLOWED_TABLES = [
   'projects', 'job_applications', 'project_ratings', 'messages', 'jobs'
 ];
 
-// האם זה צריך להיות פה?
 const validateTable = (table) => {
   if (!table) {
     throw new Error('Table name is required');
@@ -67,7 +66,7 @@ const GET = async (table, conditions = []) => {
   }
 };
 
-const GET_WITH_JOINS = async (tables = [], joins = [], conditions = []) => {
+const GET_WITH_JOINS = async (tables = [], joins = [], conditions = [], check_status = true) => {
   try {
     validateTables(tables);
     validateConditions(conditions);
@@ -88,12 +87,19 @@ const GET_WITH_JOINS = async (tables = [], joins = [], conditions = []) => {
     const values = [];
     const whereClauses = [`\`${tables[0]}\`.is_active = 1`];
 
+    if (check_status) {
+      whereClauses.push(`\`${tables[0]}\`.status = 1`);
+    }
+
     conditions.forEach(cond => {
       whereClauses.push(`\`${cond.field}\` = ?`);
       values.push(cond.value);
     });
 
-    query += ` WHERE ${whereClauses.join(" AND ")}`;
+    if (whereClauses.length > 0) {
+      query += ` WHERE ${whereClauses.join(" AND ")}`;
+    }
+
 
     const [results] = await pool.query(query, values);
     return results;

@@ -11,22 +11,30 @@ const { writeLog } = require('../../common/logger.js');
 const {
     createConditions,
     addUserIdCondition,
-    handleError,
-    validateRequiredFields
 } = require('../utils/routerHelpers.js');
 const asyncHandler = require('../middlewares/asyncHandler');
-
 const RESOURCE_NAME = 'projects';
 
 router.get('/', asyncHandler(async (req, res) => {
+    const { username } = req.query;
     writeLog(`Fetching projects from IP: ${req.ip}`, 'info');
 
     try {
         const conditions = createConditions(req);
+        if (username)
+            conditions.push({ field: 'username', value: username });
+
         const data = await getItemByConditions(
             RESOURCE_NAME,
             conditions.length ? conditions : undefined
         );
+
+        if (!data) {
+            writeLog(`project not found for username: ${username} from IP: ${req.ip}`, 'warn');
+            const error = new Error('Job not found');
+            error.status = 404;
+            throw error;
+        }
 
         writeLog(`Successfully fetched ${data.length} projects from IP: ${req.ip}`, 'info');
         res.json(data);

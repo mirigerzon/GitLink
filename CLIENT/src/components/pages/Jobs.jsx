@@ -25,8 +25,8 @@ function Jobs() {
       role: currentUser ? `/${currentUser.role}` : "/guest",
       type: "jobs",
       params: {
-        ...(username && { username: username }),
-        ...(id && { id: id }),
+        ...(username && { username }),
+        ...(id && { id }),
       },
       method: "GET",
       onSuccess: (data) => {
@@ -79,7 +79,7 @@ function Jobs() {
         {filteredJobs.length > 0 &&
           filteredJobs.map((job) => <Job key={job.id} jobData={job} setIsChange={setIsChange} />)}
       </div>
-      <Outlet />
+      {/* <Outlet /> */}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import "../../style/Search.css";
 import { FiMic } from 'react-icons/fi';
 import { useRef } from "react";
+import Swal from "sweetalert2";
 
 const Search = ({
   data,
@@ -40,7 +41,11 @@ const Search = ({
 
   const startListening = () => {
     if (!('webkitSpeechRecognition' in window)) {
-      alert("Your browser does not support speech recognition");
+      Swal.fire({
+        icon: 'error',
+        title: 'Speech Recognition Not Supported',
+        text: 'Your browser does not support speech recognition',
+      });
       return;
     }
 

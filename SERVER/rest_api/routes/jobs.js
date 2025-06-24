@@ -4,51 +4,46 @@ const asyncHandler = require('../middlewares/asyncHandler');
 const { getItemByConditions, createItem, deleteItem, updateItem } = require('../../services/generic.js');
 const jobsService = require('../../services/jobs.js');
 const { writeLog } = require('../../common/logger.js');
-const { addUserIdCondition } = require('../utils/routerHelpers.js');
+const { addUserIdCondition, createConditions } = require('../utils/routerHelpers.js');
 const RESOURCE_NAME = 'jobs';
 
 router.get('/', asyncHandler(async (req, res) => {
-    writeLog(`Fetching all jobs with applicants count from IP: ${req.ip}`, 'info');
-
+    const { username } = req.query;
+    writeLog(`Fetching job data for username: ${username} from IP: ${req.ip}`, 'info');
     try {
-        const data = await jobsService.getJobsWithApplicantsCount();
-        writeLog(`Successfully fetched ${data.length} jobs from IP: ${req.ip}`, 'info');
-        res.json(data);
-    } catch (error) {
-        writeLog(`Failed to fetch jobs from IP: ${req.ip} - Error: ${error.message}`, 'error');
-        throw error;
-    }
-}));
+        const conditions = createConditions(req);
+        if (username)
+            conditions.push({ field: 'username', value: username });
 
-router.get('/:id', asyncHandler(async (req, res) => {
-    const { id } = req.params;
+        const data = await getItemByConditions('jobs', conditions.length ? conditions : undefined);
 
-    if (!id) {
-        writeLog(`Job fetch failed - no job ID provided from IP: ${req.ip}`, 'warn');
-        const error = new Error('Job ID is required');
-        error.status = 400;
-        throw error;
-    }
-
-    writeLog(`Fetching job data for id: ${id} from IP: ${req.ip}`, 'info');
-
-    try {
-        const data = await getItemByConditions('jobs', [{ field: 'id', value: Number(id) }]);
-
-        if (!data || data.length === 0) {
-            writeLog(`Job not found for id: ${id} from IP: ${req.ip}`, 'warn');
+        if (!data) {
+            writeLog(`Job not found for username: ${username} from IP: ${req.ip}`, 'warn');
             const error = new Error('Job not found');
             error.status = 404;
             throw error;
         }
 
-        writeLog(`Successfully fetched job data for id: ${id} from IP: ${req.ip}`, 'info');
-        res.json(data[0]);
+        writeLog(`Successfully fetched job data for username: ${username} from IP: ${req.ip}`, 'info');
+        res.json(data);
     } catch (error) {
-        writeLog(`Failed to fetch job data for id: ${id} from IP: ${req.ip} - Error: ${error.message}`, 'error');
+        writeLog(`Failed to fetch job data for username: ${username} from IP: ${req.ip} - Error: ${error.message}`, 'error');
         throw error;
     }
 }));
+
+// router.get('/', asyncHandler(async (req, res) => {
+//     writeLog(`Fetching all jobs with applicants count from IP: ${req.ip}`, 'info');
+
+//     try {
+//         const data = await jobsService.getJobsWithApplicantsCount();
+//         writeLog(`Successfully fetched ${data.length} jobs from IP: ${req.ip}`, 'info');
+//         res.json(data);
+//     } catch (error) {
+//         writeLog(`Failed to fetch jobs from IP: ${req.ip} - Error: ${error.message}`, 'error');
+//         throw error;
+//     }
+// }));
 
 router.post('/', asyncHandler(async (req, res) => {
     if (!req.user?.id) {
@@ -113,6 +108,7 @@ router.delete('/:itemId', asyncHandler(async (req, res) => {
 
 router.put('/:id', asyncHandler(async (req, res) => {
     const { id } = req.params;
+    const { applicants_count, ...rest } = req.body;
 
     if (!id) {
         writeLog(`Job update failed - no job ID provided from IP: ${req.ip}`, 'warn');
@@ -124,7 +120,7 @@ router.put('/:id', asyncHandler(async (req, res) => {
     writeLog(`Updating job id: ${id} by user: ${req.user?.username} from IP: ${req.ip}`, 'info');
 
     try {
-        const result = await updateItem(RESOURCE_NAME, req.body, [{ field: 'id', value: id }]);
+        const result = await updateItem(RESOURCE_NAME, rest, [{ field: 'id', value: id }]);
 
         if (!result) {
             writeLog(`Job not found for update - id: ${id} from IP: ${req.ip}`, 'warn');

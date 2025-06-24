@@ -94,7 +94,11 @@ function ApplyUsers() {
                 }
             });
         } catch (error) {
-            alert("Error sending email");
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error sending email'
+            });
         }
     };
 
@@ -128,12 +132,14 @@ function ApplyUsers() {
                 onSuccess: (result) => {
                     setIsChange(1);
                 },
-                onError: (error) => {
-
-                }
+                onError: (error) => { }
             });
         } catch (error) {
-            alert(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error?.message || 'An error occurred'
+            });
         }
     };
 
@@ -158,20 +164,18 @@ function ApplyUsers() {
                     onSuccess: (result) => {
                         navigate('/home')
                     },
-                    onError: (error) => {
-                    }
+                    onError: (error) => { }
                 });
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Deleted faild!',
-                    text: 'The job has been not deleted.',
+                    title: 'Deleted failed!',
+                    text: 'The job has not been deleted.',
                     timer: 2000,
                     showConfirmButton: false
                 });
             }
         };
-
     };
 
     const handleMarkAsFilled = async () => {
@@ -197,14 +201,10 @@ function ApplyUsers() {
                         setIs_seized((prev) => !prev)
                         setIsChange(1);
                     },
-                    onError: (error) => {
-                    }
+                    onError: (error) => { }
                 });
-            } catch (error) {
-                // 
-            }
+            } catch (error) { }
         };
-
     };
 
     const handleReject = async (applicant) => {
@@ -221,11 +221,14 @@ function ApplyUsers() {
                 onSuccess: (result) => {
                     setIsChange(1);
                 },
-                onError: (error) => {
-                }
+                onError: (error) => { }
             });
         } catch (error) {
-            alert(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error?.message || 'An error occurred'
+            });
         }
     }
 
@@ -239,11 +242,14 @@ function ApplyUsers() {
                 onSuccess: (result) => {
                     setIsChange(1);
                 },
-                onError: (error) => {
-                }
+                onError: (error) => { }
             });
         } catch (error) {
-            alert(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error?.message || 'An error occurred'
+            });
         }
     }
 
@@ -261,7 +267,9 @@ function ApplyUsers() {
                         role={`/${currentUser.role}`}
                         initialData={jobData}
                     />
-                    <button className="button filledButton" onClick={handleMarkAsFilled}>{is_seized ? 'Mark as not caught' : 'Mark as caught'}</button>
+                    <button className="button filledButton" onClick={handleMarkAsFilled}>
+                        {is_seized ? 'Mark as not caught' : 'Mark as caught'}
+                    </button>
                     <button className="button deleteButton" onClick={handleDeleteJob}>Delete Job</button>
                 </div>
             </div>
@@ -356,7 +364,6 @@ function ApplyUsers() {
                     </div>
                 </Modal>
             )}
-
         </div>
     )
 }

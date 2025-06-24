@@ -1,0 +1,3 @@
+CREATE EVENT IF NOT EXISTS monthly_hard_delete ON SCHEDULE EVERY 1 MONTH DO
+DELETE FROM users
+WHERE is_active = 0;

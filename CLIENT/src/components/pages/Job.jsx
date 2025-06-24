@@ -70,7 +70,6 @@ function Job({ jobData, setIsChange }) {
                 inputs={["title", "company_name", "details", "requirements", "experience", "languages"]}
                 role={`/${currentUser.role}`}
                 initialData={jobData}
-
               />
               <Delete
                 className="delete-job-btn"
@@ -107,7 +106,7 @@ function Job({ jobData, setIsChange }) {
                 </span>
               ))}
           </div>
-          <div>applicants count: {jobData.applicants_count}</div>
+          <div className="applicants-count">applicants count: {jobData.applicants_count}</div>
         </div>
 
         <div className="job-actions">

@@ -20,7 +20,7 @@ const getUsers = async () => {
             [
                 'users.id = passwords.user_id',
                 `users.role_id = roles.role_id AND roles.role != 'admin'`
-            ]
+            ], [], false
         );
 
         return users;

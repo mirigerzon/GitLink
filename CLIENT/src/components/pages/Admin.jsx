@@ -9,7 +9,6 @@ import Sort from "../common/Sort.jsx";
 import "../../style/Admin.css";
 import Modal from "../common/Modal.jsx";
 
-
 function Admin() {
   const { currentUser } = useCurrentUser();
   const logOut = useLogout();
@@ -54,11 +53,19 @@ function Admin() {
         method: "PUT",
         body: { status: user.status ? 0 : 1, email: user.email, id: user.id },
         onSuccess: () => {
-          alert("User status updated successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'User status updated successfully!'
+          });
           setIsChange(1);
         },
         onError: (error) => {
-          alert(`Error updating status: ${error}`);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `Error updating status: ${error}`
+          });
         },
       });
     } catch (error) {
@@ -87,19 +94,29 @@ function Admin() {
         method: "PUT",
         body: {
           role_id: 3,
-          // email: user.email,
-          // id: user.id,
         },
         onSuccess: () => {
-          alert("User has been promoted to admin successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'User has been promoted to admin successfully!'
+          });
           setIsChange(1);
         },
         onError: (error) => {
-          alert(`Error updating role: ${error}`);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `Error updating role: ${error}`
+          });
         },
       });
     } catch (error) {
-      alert("Unexpected error occurred");
+      Swal.fire({
+        icon: 'error',
+        title: 'Unexpected Error',
+        text: 'Unexpected error occurred'
+      });
     }
   };
 
@@ -153,7 +170,7 @@ function Admin() {
             <table className="admin-table">
               <thead>
                 <tr>
-                  {['ID', 'Username', 'Email', 'Phone', 'Role', 'About', 'Image', 'Role', 'Active', 'Actions'].map((head) => (
+                  {["ID", "Username", "Email", "Phone", "Role", "About", "Image", "Role", "Active", "Actions"].map((head) => (
                     <th key={head}>{head}</th>
                   ))}
                 </tr>
@@ -206,71 +223,6 @@ function Admin() {
           </div>
         </div>
       )}
-
-      <div className="mobile-cards-container">
-        {filteredUsers.map((user) => (
-          <div key={user.id} className="user-card">
-            <div className="user-card-header">
-              <div className="user-basic-info">
-                {user.profile_image ? (
-                  <img src={getImageUrl(user)} alt="Profile" className="admin-avatar" />
-                ) : (
-                  <div className="admin-avatar" style={{ backgroundColor: '#ddd', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#666' }}>
-                    {user.username.charAt(0).toUpperCase()}
-                  </div>
-                )}
-                <div className="user-details">
-                  <h3>{user.username}</h3>
-                  <p className="email">{user.email}</p>
-                  {user.phone && <p className="phone">{user.phone}</p>}
-                </div>
-              </div>
-              <div className={`user-status-badge ${user.status ? 'status-active' : 'status-blocked'}`}>
-                {user.status ? "Active" : "Blocked"}
-              </div>
-            </div>
-
-            <div className="user-meta-grid">
-              <div className="meta-item">
-                <span className="meta-label">ID</span>
-                <span className="meta-value">#{user.id}</span>
-              </div>
-              <div className="meta-item">
-                <span className="meta-label">Role</span>
-                <span className="meta-value">{user.role}</span>
-              </div>
-            </div>
-
-            {user.about && (
-              <div className="user-about">
-                {user.about.split(" ").slice(0, 15).join(" ")}
-                {user.about.split(" ").length > 15 ? "..." : ""}
-              </div>
-            )}
-
-            <div className="user-actions">
-              <button
-                onClick={() => navigate(`/${user.username}/profile`)}
-                className="card-btn btn-view"
-              >
-                View Profile
-              </button>
-              <button
-                onClick={() => handleBlockUser(user)}
-                className={`card-btn ${user.status ? "btn-block" : "btn-unblock"}`}
-              >
-                {user.status ? "Block User" : "Unblock User"}
-              </button>
-              <button
-                onClick={() => setUserAsAdminBtn(user)}
-                className="card-btn btn-admin"
-              >
-                Make Admin
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
 
       {modalData && (
         <Modal onClose={() => setModalData(null)}>

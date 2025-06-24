@@ -75,7 +75,6 @@
 
 .job-content {
   margin-bottom: 1.5rem;
-  /* זה יגרום לתוכן להתרחב וידחף את הכפתורים למטה */
   flex-grow: 1;
 }
 
@@ -98,6 +97,10 @@
 .job-requirements::-webkit-scrollbar-thumb {
   background-color: rgba(100, 100, 100, 0.4);
   border-radius: 10px;
+}
+
+.applicants-count{
+  margin-bottom: 1.5vh;
 }
 
 .job-requirements p {

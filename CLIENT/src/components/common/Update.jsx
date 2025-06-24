@@ -3,6 +3,7 @@ import { useFetchData } from "../../hooks/fetchData.js";
 import Modal from "./Modal.jsx";
 import { useLogout } from "../../hooks/LogOut.js";
 import "../../style/Update.css";
+import Swal from 'sweetalert2';
 
 function Update({ type, itemId, setIsChange, inputs, role = null, initialData = {} }) {
   const logOut = useLogout();
@@ -32,12 +33,22 @@ function Update({ type, itemId, setIsChange, inputs, role = null, initialData = 
         method: "PUT",
         body: formData,
         role: role,
-        onSuccess: (result) => {
-          console.log("Update successful:", result);
+        onSuccess: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Update completed successfully.',
+            timer: 2000,
+            showConfirmButton: false,
+          });
           setIsChange((prev) => prev + 1);
         },
-        onError: (error) => {
-          console.log("Update was unsuccessful:", error);
+        onError: () => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Update failed. Please try again.',
+          });
         },
         logOut,
       });

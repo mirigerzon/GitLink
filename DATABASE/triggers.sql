@@ -54,19 +54,20 @@ AFTER DELETE ON projects FOR EACH ROW BEGIN
 DELETE FROM project_ratings
 WHERE project_id = OLD.id;
 END $ DELIMITER;
--- קשה
--- DELIMITER $$
--- CREATE TRIGGER tr_user_hard_delete
--- AFTER DELETE ON users
--- FOR EACH ROW
--- BEGIN    
---     DELETE FROM developers WHERE user_id = OLD.id;
---     DELETE FROM recruiters WHERE user_id = OLD.id;
---     DELETE FROM passwords WHERE user_id = OLD.id;
---     DELETE FROM job_applications WHERE user_id = OLD.id;
---     DELETE FROM messages WHERE user_id = OLD.id;
---     DELETE FROM jobs WHERE username = OLD.username;
---     DELETE FROM projects WHERE username = OLD.username;
---     DELETE FROM project_ratings WHERE username = OLD.username;
--- END$$
--- DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER tr_user_hard_delete
+AFTER DELETE ON users
+FOR EACH ROW
+BEGIN    
+    DELETE FROM developers WHERE user_id = OLD.id;
+    DELETE FROM recruiters WHERE user_id = OLD.id;
+    DELETE FROM passwords WHERE user_id = OLD.id;
+    DELETE FROM job_applications WHERE user_id = OLD.id;
+    DELETE FROM messages WHERE user_id = OLD.id;
+    DELETE FROM jobs WHERE username = OLD.username;
+    DELETE FROM projects WHERE username = OLD.username;
+    DELETE FROM project_ratings WHERE username = OLD.username;
+END$$
+DELIMITER ;
