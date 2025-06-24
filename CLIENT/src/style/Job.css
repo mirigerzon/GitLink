@@ -51,6 +51,7 @@
 
 .job-title-section {
   flex: 1;
+  height: 5vh;
   display: flex;
   justify-content: space-between;
 }
