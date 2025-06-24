@@ -19,7 +19,7 @@ const jobsRoutes = require("./rest_api/routes/jobs.js");
 const job_applicationsRoutes = require("./rest_api/routes/job_applications.js");
 const usersRoutes = require("./rest_api/routes/users.js");
 const corsOptions = {
-    origin: ["http://localhost:5173", "http://localhost:5174", "https://gitlink-client.onrender.com"],
+    origin: true,
     credentials: true,
 };
 
