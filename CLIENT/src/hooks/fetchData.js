@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import Cookies from 'js-cookie';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://gitlink-cbqq.onrender.com';
 
 export function useFetchData() {
     const fetchData = useCallback(async ({
