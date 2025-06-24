@@ -10,7 +10,8 @@ const getProjectWithCreator = async (projectId) => {
         const projects = await GET_WITH_JOINS(
             ["projects", "developers"],
             ["projects.git_name = developers.git_name"],
-            [{ field: "id", value: projectId }]
+            [{ field: "id", value: projectId }],
+            false
         );
 
         return projects;
@@ -40,16 +41,13 @@ const rateProjectTransactional = async (username, projectId, rating) => {
         );
 
         if (existingRating.length > 0) {
-            await connection.query(
-                'UPDATE project_ratings SET rating = ? WHERE username = ? AND project_id = ?',
-                [rating, username, projectId]
-            );
-        } else {
-            await connection.query(
-                'INSERT INTO project_ratings (username, project_id, rating) VALUES (?, ?, ?)',
-                [username, projectId, rating]
-            );
+            throw new Error('User has already rated this project');
         }
+
+        await connection.query(
+            'INSERT INTO project_ratings (username, project_id, rating) VALUES (?, ?, ?)',
+            [username, projectId, rating]
+        );
 
         await connection.query(`
             UPDATE projects
