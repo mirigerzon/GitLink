@@ -75,7 +75,36 @@ const rateProjectTransactional = async (username, projectId, rating) => {
     }
 };
 
+const updateDeveloperRating = async (gitName) => {
+    if (!gitName) {
+        throw new Error('Git name is required');
+    }
+
+    try {
+        const sql = `
+            UPDATE developers 
+            SET rating = (
+                SELECT ROUND(
+                    SUM(p.rating * p.rating_count) / SUM(p.rating_count), 2
+                )
+                FROM projects p 
+                WHERE p.git_name = ? 
+                AND p.rating_count > 0
+                AND p.is_active = 1
+            )
+            WHERE git_name = ?
+        `;
+
+        const [result] = await pool.query(sql, [gitName, gitName]);
+        return result;
+    } catch (error) {
+        console.error('Error updating developer rating:', error.message);
+        throw new Error(`Failed to update developer rating: ${error.message}`);
+    }
+};
+
 module.exports = {
     getProjectWithCreator,
-    rateProjectTransactional
+    rateProjectTransactional,
+    updateDeveloperRating
 };
